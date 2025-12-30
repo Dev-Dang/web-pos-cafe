@@ -86,6 +86,9 @@ public class LoginServlet extends HttpServlet {
         // Create session and persist authentication context
         sessionManager.startSession(req, resp, context);
 
+        // Set flag to trigger cart merge on next page load
+        req.getSession().setAttribute("needsCartMerge", Boolean.TRUE);
+
         // Show success message
         Flash flash = new Flash(req);
         flash.success("message.login_success").send();

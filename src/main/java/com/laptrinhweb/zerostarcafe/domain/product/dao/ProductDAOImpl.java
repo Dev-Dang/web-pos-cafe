@@ -274,6 +274,93 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     // ==========================================================
+    // SINGLE ITEM LOOKUPS (FOR CART VALIDATION)
+    // ==========================================================
+
+    @Override
+    public Optional<CatalogItem> findCatalogItemByIdAndStoreId(long productId, long storeId) throws SQLException {
+        String sql = """
+                SELECT 
+                    mi.id, mi.category_id, mi.name, mi.slug, mi.image_url, mi.description,
+                    mi.base_price, mi.unit, mi.is_active,
+                    c.slug AS category_slug,
+                    smi.in_menu, smi.availability_status, smi.sold_out_until, smi.sold_out_note,
+                    COALESCE(sips.price, mi.base_price) AS resolved_price,
+                    (SELECT COUNT(*) FROM item_option_groups iog WHERE iog.menu_item_id = mi.id) AS has_options
+                FROM menu_items mi
+                INNER JOIN categories c ON mi.category_id = c.id
+                INNER JOIN store_menu_items smi ON mi.id = smi.menu_item_id
+                LEFT JOIN store_item_price_schedules sips 
+                    ON smi.store_id = sips.store_id 
+                    AND smi.menu_item_id = sips.menu_item_id
+                    AND NOW() BETWEEN sips.valid_from AND sips.valid_to
+                WHERE mi.id = ?
+                  AND smi.store_id = ?
+                  AND mi.is_active = 1
+                """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, productId);
+            ps.setLong(2, storeId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(mapCatalogItem(rs));
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<OptionValue> findOptionValueById(long optionValueId) throws SQLException {
+        String sql = """
+                SELECT 
+                    ov.id, ov.option_group_id, ov.name, ov.price_delta, ov.is_active,
+                    NULL AS availability_status, NULL AS sold_out_until, NULL AS note
+                FROM option_values ov
+                WHERE ov.id = ?
+                  AND ov.is_active = 1
+                """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, optionValueId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(mapOptionValue(rs));
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<OptionGroup> findOptionGroupByOptionValueId(long optionValueId) throws SQLException {
+        String sql = """
+                SELECT 
+                    og.id, og.name, og.type, og.is_required, og.min_select, og.max_select
+                FROM option_groups og
+                INNER JOIN option_values ov ON og.id = ov.option_group_id
+                WHERE ov.id = ?
+                """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, optionValueId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(mapOptionGroup(rs));
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    // ==========================================================
     // MAPPING UTILITIES
     // ==========================================================
 

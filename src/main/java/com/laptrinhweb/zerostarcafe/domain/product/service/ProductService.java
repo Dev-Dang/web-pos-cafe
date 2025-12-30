@@ -6,6 +6,8 @@ import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.domain.product.dao.ProductDAO;
 import com.laptrinhweb.zerostarcafe.domain.product.dao.ProductDAOImpl;
 import com.laptrinhweb.zerostarcafe.domain.product.model.CatalogItem;
+import com.laptrinhweb.zerostarcafe.domain.product.model.OptionGroup;
+import com.laptrinhweb.zerostarcafe.domain.product.model.OptionValue;
 import com.laptrinhweb.zerostarcafe.domain.product.model.ProductDetail;
 import lombok.NonNull;
 
@@ -112,6 +114,91 @@ public final class ProductService {
             LoggerUtil.error(ProductService.class,
                     "Failed to search products for storeId=" + storeId + ", searchTerm=" + searchTerm, e);
             return List.of();
+        }
+    }
+
+    /**
+     * Retrieves a catalog item by product ID for a specific store.
+     * Used for price validation when adding items to cart.
+     *
+     * @param productId the menu item ID
+     * @param storeId   the store ID
+     * @return the catalog item, or null if not found or error occurs
+     */
+    public CatalogItem getCatalogItemByIdAndStoreId(@NonNull Long productId, @NonNull Long storeId) {
+        try (Connection conn = DBConnection.getConnection()) {
+            ProductDAO productDAO = new ProductDAOImpl(conn);
+            return productDAO.findCatalogItemByIdAndStoreId(productId, storeId).orElse(null);
+        } catch (SQLException e) {
+            LoggerUtil.error(ProductService.class,
+                    "Failed to get catalog item by id=" + productId + ", storeId=" + storeId, e);
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves complete product detail by product ID for a specific store.
+     * Includes option groups and their values.
+     *
+     * @param productId the menu item ID
+     * @param storeId   the store ID
+     * @return the product detail, or null if not found or error occurs
+     */
+    public ProductDetail getProductDetailByIdAndStoreId(@NonNull Long productId, @NonNull Long storeId) {
+        try (Connection conn = DBConnection.getConnection()) {
+            ProductDAO productDAO = new ProductDAOImpl(conn);
+            
+            CatalogItem item = productDAO.findCatalogItemByIdAndStoreId(productId, storeId).orElse(null);
+            if (item == null) {
+                return null;
+            }
+            
+            List<OptionGroup> optionGroups = productDAO.findOptionGroupsByProductIdAndStoreId(productId, storeId);
+            
+            ProductDetail detail = new ProductDetail();
+            detail.setItem(item);
+            detail.setOptionGroups(optionGroups);
+            
+            return detail;
+        } catch (SQLException e) {
+            LoggerUtil.error(ProductService.class,
+                    "Failed to get product detail by id=" + productId + ", storeId=" + storeId, e);
+            return null;
+        }
+    }
+
+    /**
+     * Validates an option value and returns its details.
+     * Used for cart item validation.
+     *
+     * @param optionValueId the option value ID
+     * @return the option value, or null if not found
+     */
+    public OptionValue getOptionValueById(@NonNull Long optionValueId) {
+        try (Connection conn = DBConnection.getConnection()) {
+            ProductDAO productDAO = new ProductDAOImpl(conn);
+            return productDAO.findOptionValueById(optionValueId).orElse(null);
+        } catch (SQLException e) {
+            LoggerUtil.error(ProductService.class,
+                    "Failed to get option value by id=" + optionValueId, e);
+            return null;
+        }
+    }
+
+    /**
+     * Gets the option group containing a specific option value.
+     *
+     * @param optionValueId the option value ID
+     * @return the option group, or null if not found
+     */
+    public OptionGroup getOptionGroupByOptionValueId(@NonNull Long optionValueId) {
+        try (Connection conn = DBConnection.getConnection()) {
+            ProductDAO productDAO = new ProductDAOImpl(conn);
+            return productDAO.findOptionGroupByOptionValueId(optionValueId).orElse(null);
+        } catch (SQLException e) {
+            LoggerUtil.error(ProductService.class,
+                    "Failed to get option group by optionValueId=" + optionValueId, e);
+            return null;
         }
     }
 }

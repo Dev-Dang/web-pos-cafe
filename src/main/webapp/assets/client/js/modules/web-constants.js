@@ -10,17 +10,17 @@
  * import { StoreWebConstants } from './web-constants.js';
  * fetch(StoreWebConstants.Endpoint.STORE_DETECT)
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
- * @lastModified 12/26/2025
+ * @lastModified 30/12/2025
  * @module web-constants
  * @author Dang Van Trung
  */
 export const StoreWebConstants = {
 
     Endpoint: {
-        STORE_DETECT: "/zero_star_cafe/store-detect",
-        GET_PRODUCTS: "/zero_star_cafe/api/products"
+        STORE_DETECT: "store-detect",
+        GET_PRODUCTS: "api/products"
     },
 
     Cookie: {
@@ -31,8 +31,26 @@ export const StoreWebConstants = {
 
 export const ProductWebConstants = {
     Endpoint: {
-        PRODUCT_MODAL: "/zero_star_cafe/api/products",
-        PRODUCTS_BY_CATEGORY: "/zero_star_cafe/api/products/category",
-        PRODUCT_SEARCH: "/zero_star_cafe/api/products/search"
+        PRODUCT_MODAL: "api/products",
+        PRODUCTS_BY_CATEGORY: "api/products/category",
+        PRODUCT_SEARCH: "api/products/search"
+    }
+};
+
+export const CartWebConstants = {
+    Endpoint: {
+        CART_GET: "cart",
+        CART_ADD: "cart/add",
+        CART_UPDATE: "cart/update",
+        CART_REMOVE: "cart/remove",
+        CART_CLEAR: "cart/clear",
+        CART_MERGE: "cart/merge",
+        CHECKOUT: "checkout",
+        INVOICE: "invoice"
+    },
+
+    LocalStorage: {
+        GUEST_CART_PREFIX: "cart_",
+        USER_CART_BACKUP_PREFIX: "user_cart_"
     }
 };

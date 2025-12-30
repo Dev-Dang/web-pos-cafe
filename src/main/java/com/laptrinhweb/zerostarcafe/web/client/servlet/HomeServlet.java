@@ -1,5 +1,8 @@
 package com.laptrinhweb.zerostarcafe.web.client.servlet;
 
+import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
+import com.laptrinhweb.zerostarcafe.domain.cart.model.Cart;
+import com.laptrinhweb.zerostarcafe.domain.cart.service.CartCacheService;
 import com.laptrinhweb.zerostarcafe.domain.category.Category;
 import com.laptrinhweb.zerostarcafe.domain.category.CategoryService;
 import com.laptrinhweb.zerostarcafe.domain.product.model.CatalogItem;
@@ -9,6 +12,7 @@ import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.domain.store.service.StoreService;
+import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletException;
@@ -45,6 +49,7 @@ public class HomeServlet extends HttpServlet {
     private static final StoreService storeService = new StoreService();
     private static final CategoryService categoryService = new CategoryService();
     private static final ProductService productService = new ProductService();
+    private static final CartCacheService cartCacheService = CartCacheService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -76,6 +81,20 @@ public class HomeServlet extends HttpServlet {
                     featuredCategory.getId()
             );
             req.setAttribute(ProductConstants.Request.CATALOG_ITEMS, catalogItems);
+        }
+
+        // Load cart for logged-in users (SSR)
+        AuthSessionManager sessionManager = (AuthSessionManager) getServletContext()
+                .getAttribute("authSessionManager");
+        if (sessionManager != null) {
+            AuthContext authCtx = sessionManager.getContext(req);
+            if (authCtx != null && authCtx.isValid()) {
+                Cart cart = cartCacheService.getCart(
+                        authCtx.getAuthUser().getId(),
+                        storeCtx.getStoreId()
+                );
+                req.setAttribute("cart", cart);
+            }
         }
 
         View.render(ViewMap.Client.HOME, req, resp);

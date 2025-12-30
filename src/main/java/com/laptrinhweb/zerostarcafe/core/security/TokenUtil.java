@@ -10,6 +10,7 @@ import java.util.Base64;
  * <h2>Description:</h2>
  * <p>
  * TokenUtil provides simple methods to generate, hash, and verify tokens.
+ * The hashToken method can also be used for general-purpose SHA-256 hashing.
  * </p>
  *
  * <h2>Example Usage:</h2>
@@ -18,12 +19,15 @@ import java.util.Base64;
  * String raw = TokenUtil.generateToken();
  * String hash = TokenUtil.hashToken(raw);
  * boolean ok  = TokenUtil.verifyToken(raw, hash);
+ * 
+ * // General SHA-256 hashing (reuse hashToken)
+ * String itemHash = TokenUtil.hashToken("10|16,20|some note");
  * }
  * </pre>
  *
  * @author Dang Van Trung
  * @version 1.0.0
- * @lastModified 11/11/2025
+ * @lastModified 29/12/2025
  * @since 1.0.0
  */
 public final class TokenUtil {
@@ -53,21 +57,24 @@ public final class TokenUtil {
     }
 
     /**
-     * Hashes a token using SHA-256 and returns a hex string
-     * suitable for storing in the database.
+     * Hashes a string using SHA-256 and returns a hex string.
+     * Can be used for tokens (stored in DB) or general-purpose hashing
+     * (e.g., item hash for cart deduplication).
      *
-     * @param token raw token from {@link #generateToken()}
-     * @return hex-encoded SHA-256 hash
+     * @param input string to hash (if null, treated as empty string)
+     * @return hex-encoded SHA-256 hash (64 characters)
      */
-    public static String hashToken(String token) {
+    public static String hashToken(String input) {
+        if (input == null) {
+            input = "";
+        }
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256"); // hashing algorithm
-            byte[] hashed = digest.digest(token.getBytes(StandardCharsets.UTF_8)); // convert string → bytes → hash
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashed = digest.digest(input.getBytes(StandardCharsets.UTF_8));
 
             // Convert bytes to hex string
             StringBuilder hex = new StringBuilder(hashed.length * 2);
             for (byte b : hashed) {
-                // %02x = 2-digit hex, zero-padded if needed
                 hex.append(String.format("%02x", b));
             }
 

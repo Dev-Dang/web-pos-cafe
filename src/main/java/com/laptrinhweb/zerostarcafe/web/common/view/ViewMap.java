@@ -31,6 +31,8 @@ public final class ViewMap {
 
     public static class Client {
         public static final View HOME = View.client("/home");
+        public static final View CHECKOUT = View.client("/checkout");
+        public static final View INVOICE = View.client("/invoice");
     }
 
     public static class Admin {

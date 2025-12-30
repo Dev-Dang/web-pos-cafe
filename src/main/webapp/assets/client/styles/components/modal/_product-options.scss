@@ -1,0 +1,194 @@
+// Body sections for options - scrolling handled by layout variants
+.product-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+  overflow: visible;
+}
+
+.product-modal__body-single {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  overflow: visible;
+}
+
+.product-modal__body-multi {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  overflow: visible;
+}
+
+.product-modal__section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  width: 100%;
+}
+
+.product-modal__section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  font-size: $font-size-md;
+  line-height: $line-height-md;
+  color: $text-body-color;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  flex-wrap: wrap;
+}
+
+.product-modal__section-sub {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  font-size: $font-size-base;
+  line-height: $line-height-sm-md;
+  color: $text-label-color;
+  font-weight: $font-weight-base;
+  white-space: nowrap;
+}
+
+.option-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  align-items: flex-start;
+}
+
+.option-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: $spacing-2xl + $spacing-xs;
+  min-width: $size-option-min-width;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  border: $border-width-thin solid #d6d3d1;
+  background: $color-white;
+  color: $text-label-color;
+  font-size: $font-size-base;
+  line-height: $line-height-sm-md;
+  font-weight: $font-weight-base;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: $primary;
+    background: rgba($primary, 0.05);
+    box-shadow: 0 2px 8px rgba($primary, 0.15);
+    transform: translateY(-1px);
+  }
+
+  &.active,
+  &.is-active {
+    background: $primary;
+    border-color: $primary;
+    color: $color-white;
+    box-shadow: 0 2px 8px rgba($primary, 0.2);
+  }
+
+  &:focus-visible {
+    outline: $border-width-thick solid $primary;
+    outline-offset: $spacing-2xs;
+  }
+}
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1xl;
+  font-size: $font-size-base;
+  line-height: $line-height-sm-md;
+  color: $text-label-color;
+  padding: $spacing-sm $spacing-xs;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: $radius-sm;
+
+  &:hover {
+    background-color: rgba($primary, 0.06);
+    transform: translateX(2px);
+  }
+  
+  &.is-selected {
+    color: $primary;
+    
+    .option-row__check {
+      background-color: $primary;
+      border-color: $primary;
+      
+      i {
+        display: inline-block;
+      }
+    }
+  }
+  
+  // Disabled state when max reached
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+    color: $text-disabled-color;
+    pointer-events: none;
+    
+    &:hover {
+      background-color: transparent;
+      transform: none;
+    }
+  }
+}
+
+.option-row__check {
+  width: $spacing-2lg;
+  height: $spacing-2lg;
+  border: $border-width-thin solid #d6d3d1;
+  border-radius: $radius-sm;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: $color-white;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  i {
+    font-size: $font-size-sm;
+    color: $color-white;
+    display: none;
+  }
+}
+
+.option-row__check.is-active {
+  background: $primary;
+  border-color: $primary;
+
+  i {
+    display: inline-block;
+  }
+}
+
+@keyframes flashHighlight {
+  0%,
+  100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(255, 165, 0, 0.2);
+  }
+}
+
+.flash-highlight {
+  animation: flashHighlight 0.6s ease-in-out 3;
+  border-radius: 8px;
+}
+

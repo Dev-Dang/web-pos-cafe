@@ -2,6 +2,7 @@ package com.laptrinhweb.zerostarcafe.domain.product.dao;
 
 import com.laptrinhweb.zerostarcafe.domain.product.model.CatalogItem;
 import com.laptrinhweb.zerostarcafe.domain.product.model.OptionGroup;
+import com.laptrinhweb.zerostarcafe.domain.product.model.OptionValue;
 import com.laptrinhweb.zerostarcafe.domain.product.model.Product;
 import com.laptrinhweb.zerostarcafe.domain.product.model.ProductDetail;
 
@@ -92,5 +93,34 @@ public interface ProductDAO {
      * @throws SQLException if a database access error occurs
      */
     List<CatalogItem> searchCatalogItemsByNameAndStoreId(long storeId, String searchTerm) throws SQLException;
+
+    /**
+     * Finds a catalog item by product ID and store ID.
+     * Used for price validation when adding to cart.
+     *
+     * @param productId the menu item ID
+     * @param storeId   the store ID
+     * @return the catalog item if found
+     * @throws SQLException if a database access error occurs
+     */
+    Optional<CatalogItem> findCatalogItemByIdAndStoreId(long productId, long storeId) throws SQLException;
+
+    /**
+     * Finds an option value by its ID for validation.
+     *
+     * @param optionValueId the option value ID
+     * @return the option value if found
+     * @throws SQLException if a database access error occurs
+     */
+    Optional<OptionValue> findOptionValueById(long optionValueId) throws SQLException;
+
+    /**
+     * Finds the option group containing a specific option value.
+     *
+     * @param optionValueId the option value ID
+     * @return the option group if found
+     * @throws SQLException if a database access error occurs
+     */
+    Optional<OptionGroup> findOptionGroupByOptionValueId(long optionValueId) throws SQLException;
 }
 

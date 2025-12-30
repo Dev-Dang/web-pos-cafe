@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="assets/shared/styles/base.css"/>
     <link rel="stylesheet" href="assets/client/styles/app.css"/>
 </head>
-<body class="scroll-hidden">
+<body class="scroll-hidden"<c:if test="${not empty sessionScope.authUser}"> data-user-authenticated</c:if><c:if test="${not empty sessionScope.SESSION_STORE_CONTEXT}"> data-store-id="${sessionScope.SESSION_STORE_CONTEXT.storeId}"</c:if><c:if test="${sessionScope.needsCartMerge}"> data-needs-cart-merge</c:if>>
     <%-- Including the header component --%>
     <jsp:include page="/WEB-INF/views/client/layouts/header.jsp"/>
 
@@ -73,6 +73,11 @@
 
     <%-- Script --%>
     <script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        // Load Toast module globally
+        import { Toast } from './assets/shared/js/modules/toast.js';
+        window.Toast = Toast;
+    </script>
     <script type="module" src="assets/shared/js/base.js"></script>
     <script type="module" src="assets/client/js/main.js"></script>
     <script type="module" src="assets/client/js/modules/mobile-nav.js"></script>

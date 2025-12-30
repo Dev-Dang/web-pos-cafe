@@ -17,7 +17,7 @@
  */
 import { initStoreDetection } from "./modules/store-detect.js";
 import { initCategorySlider } from "./modules/swiper.js";
-import { initCartInteractions } from "./modules/cart.js";
+import { initCart } from "./modules/cart.js";
 import { initProductModal } from "./modules/product-modal.js";
 import { initProductCards } from "./modules/product-card.js";
 import { initPasswordToggle, initFormValidation } from "./modules/form.js";
@@ -30,7 +30,7 @@ initFormValidation();
 
 document.addEventListener("DOMContentLoaded", () => {
   initCategorySlider();
-  initCartInteractions();
+  initCart();
   initProductModal();
   initProductCards();
   initCatalogSwitcher();

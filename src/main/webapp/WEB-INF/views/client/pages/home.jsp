@@ -227,22 +227,90 @@
                 <aside class="cart-panel">
                     <h5 class="cart-title mb-3">
                         Giỏ hàng
-                        <span class="cart-count" data-cart-count>0</span>
+                        <span class="cart-count" data-cart-count><c:out value="${cart.totalQty}" default="0"/></span>
                     </h5>
                     <div class="cart-list" data-cart-list>
-                        <!-- Cart items loaded from localStorage -->
+                        <%-- Server-rendered cart items for logged-in users --%>
+                        <c:choose>
+                            <c:when test="${not empty cart and not empty cart.items}">
+                                <c:forEach var="item" items="${cart.items}">
+                                    <div class="cart-item" 
+                                         data-cart-item 
+                                         data-item-id="${item.id}"
+                                         data-menu-item-id="${item.menuItemId}">
+                                        <div class="cart-item__info">
+                                            <div class="cart-item__name">${item.itemNameSnapshot}</div>
+                                            <c:if test="${not empty item.options}">
+                                                <div class="cart-item__options">
+                                                    <c:forEach var="option" items="${item.options}" varStatus="status">
+                                                        <span class="cart-item__option">
+                                                            ${option.optionValueNameSnapshot}<c:if test="${!status.last}">, </c:if>
+                                                        </span>
+                                                    </c:forEach>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${not empty item.note}">
+                                                <div class="cart-item__note">
+                                                    <i class="fi fi-rr-comment-alt icon-base"></i>
+                                                    <span>${item.note}</span>
+                                                </div>
+                                            </c:if>
+                                            <div class="cart-item__price">
+                                                <fmt:formatNumber value="${item.unitPriceWithOptions}" type="number" groupingUsed="true"/>đ
+                                            </div>
+                                        </div>
+                                        <div class="cart-item__controls">
+                                            <div class="cart-item__qty-controls">
+                                                <button type="button" 
+                                                        class="cart-item__qty-btn" 
+                                                        data-qty-action="decrease"
+                                                        data-item-id="${item.id}">
+                                                    <i class="fi fi-rr-minus icon-base"></i>
+                                                </button>
+                                                <span class="cart-item__qty" data-item-qty>${item.qty}</span>
+                                                <button type="button" 
+                                                        class="cart-item__qty-btn" 
+                                                        data-qty-action="increase"
+                                                        data-item-id="${item.id}">
+                                                    <i class="fi fi-rr-plus icon-base"></i>
+                                                </button>
+                                            </div>
+                                            <div class="cart-item__line-total">
+                                                <fmt:formatNumber value="${item.lineTotal}" type="number" groupingUsed="true"/>đ
+                                            </div>
+                                            <button type="button" 
+                                                    class="cart-item__remove" 
+                                                    data-remove-item
+                                                    data-item-id="${item.id}"
+                                                    title="Xóa">
+                                                <i class="fi fi-rr-trash icon-base"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:when test="${not empty sessionScope.authUser}">
+                                <%-- Logged-in but empty cart --%>
+                                <div class="cart-empty">
+                                    <div class="cart-empty__icon">
+                                        <i class="fi fi-rr-shopping-cart icon-base"></i>
+                                    </div>
+                                    <p class="cart-empty__text">Giỏ hàng trống</p>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <%-- Guest users: JS will render from localStorage --%>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="cart-summary">
                         <div class="cart-summary__row total">
                             <span>Tổng cộng</span>
-                            <span data-cart-total>0 Đ</span>
+                            <span data-cart-total><c:choose><c:when test="${not empty cart}"><fmt:formatNumber value="${cart.totalPrice}" type="number" groupingUsed="true"/>đ</c:when><c:otherwise>0 Đ</c:otherwise></c:choose></span>
                         </div>
                     </div>
-                    <button
-                            class="btn btn-lg btn-primary--filled w-100"
-                            data-view-cart
-                    >
-                        Xem giỏ hàng
+                    <button class="btn btn-lg btn-primary--filled w-100" data-checkout-btn>
+                        Thanh toán
                     </button>
                 </aside>
             </div>
@@ -299,8 +367,8 @@
                     <span data-cart-total>0 Đ</span>
                 </div>
             </div>
-            <button class="btn btn-lg btn-primary--filled w-100" data-view-cart>
-                Xem giỏ hàng
+            <button class="btn btn-lg btn-primary--filled w-100" data-checkout-btn>
+                Thanh toán
             </button>
         </div>
     </div>

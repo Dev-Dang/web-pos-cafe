@@ -14,7 +14,7 @@
 --%>
 <c:set var="layoutType" value="${optionGroupCount <= 1 ? 'compact' : 'full'}"/>
 
-<div class="modal product-modal" tabindex="-1">
+<div class="modal product-modal" tabindex="-1" data-menu-item-id="${item.id}" data-product-slug="${item.slug}">
     <div class="modal-dialog modal-lg product-modal__dialog">
         <div class="modal-content">
             <%-- Mobile Header --%>
@@ -107,6 +107,7 @@
                                                                 data-option-group="${optionGroup.name}"
                                                                 data-option-type="single"
                                                                 data-option-value="${value.name}"
+                                                                data-option-value-id="${value.id}"
                                                                 data-option-price="${value.priceDelta}">
                                                                 ${value.name}
                                                             <c:if test="${value.priceDelta > 0}">
@@ -125,6 +126,7 @@
                                                              data-option-group="${optionGroup.name}"
                                                              data-option-type="multi"
                                                              data-option-value="${value.name}"
+                                                             data-option-value-id="${value.id}"
                                                              data-option-price="${value.priceDelta}">
                                                             <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
                                                             <span>
@@ -238,6 +240,7 @@
                                                                 data-option-group="${optionGroup.name}"
                                                                 data-option-type="single"
                                                                 data-option-value="${value.name}"
+                                                                data-option-value-id="${value.id}"
                                                                 data-option-price="${value.priceDelta}">
                                                                 ${value.name}
                                                             <c:if test="${value.priceDelta > 0}">
@@ -256,6 +259,7 @@
                                                              data-option-group="${optionGroup.name}"
                                                              data-option-type="multi"
                                                              data-option-value="${value.name}"
+                                                             data-option-value-id="${value.id}"
                                                              data-option-price="${value.priceDelta}">
                                                             <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
                                                             <span>

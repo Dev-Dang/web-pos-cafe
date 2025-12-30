@@ -4,6 +4,9 @@ import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.ContextUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthService;
+import com.laptrinhweb.zerostarcafe.domain.cart.service.CartCacheService;
+import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
+import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import jakarta.servlet.ServletConfig;
@@ -13,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -46,8 +50,10 @@ public class LogoutServlet extends HttpServlet {
         // Read current auth context from HttpSession (if present)
         AuthContext context = sessionManager.getContext(req);
 
-        // If a token exists, revoke/clear auth state on server side
+        // Persist and evict cart from cache before clearing session
         if (context != null && context.isValid()) {
+            evictCartFromCache(req, context.getAuthUser().getId());
+
             String authToken = context.getTokenValue(SecurityKeys.TOKEN_AUTH);
             if (authToken != null && !authToken.isBlank()) {
                 authService.clearAuthState(authToken);
@@ -59,5 +65,24 @@ public class LogoutServlet extends HttpServlet {
 
         // Redirect user to safe default page
         AppRoute.HOME.redirect(req, resp);
+    }
+
+    /**
+     * Persists cart to DB and evicts from cache before logout.
+     */
+    private void evictCartFromCache(HttpServletRequest req, long userId) {
+        try {
+            HttpSession session = req.getSession(false);
+            if (session == null) return;
+
+            StoreContext storeCtx = (StoreContext) session.getAttribute(
+                    StoreConstants.Session.CURRENT_STORE_CTX);
+
+            if (storeCtx != null) {
+                CartCacheService.getInstance().evictFromCache(userId, storeCtx.getStoreId());
+            }
+        } catch (Exception e) {
+            // Log but don't fail logout
+        }
     }
 }

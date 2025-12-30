@@ -14,7 +14,7 @@
  */
 
 import { ProductWebConstants } from "./web-constants.js";
-import { CART_KEY, formatPrice } from "./cart.js";
+import { addToCart, isLoggedIn, getGuestCart, formatPrice } from "./cart.js";
 
 const parsePrice = (value) => {
   const numeric = (value || "").toString().replace(/[^\d]/g, "");
@@ -255,41 +255,63 @@ function validateRequired(modalEl) {
  * Builds cart item object from modal state
  */
 function buildCartItem(modalEl, basePrice) {
+  const menuItemId = modalEl.dataset.menuItemId;
+  const productSlug = modalEl.dataset.productSlug;
   const nameEl = modalEl.querySelector("[data-modal-name]");
   const imageEl = modalEl.querySelector("[data-modal-image]");
   const qtyEl = modalEl.querySelector("[data-modal-qty]");
   const noteEl = modalEl.querySelector("[data-modal-note]");
 
   const qty = parseInt(qtyEl?.textContent || "1");
-  const options = getSelectedOptions(modalEl);
-  const optionsPrice = sumOptionPrices(options);
+  const optionsData = getSelectedOptions(modalEl);
+  const optionsPrice = sumOptionPrices(optionsData.options);
   const total = (basePrice + optionsPrice) * qty;
 
   return {
-    name: nameEl?.textContent || "",
+    menuItemId: parseInt(menuItemId, 10) || 0,
+    slug: productSlug || "",
+    name: nameEl?.textContent?.trim() || "",
     image: imageEl?.src || "",
     qty,
-    note: noteEl?.value || "",
+    note: noteEl?.value?.trim() || "",
     basePrice,
     optionsPrice,
     total,
-    options
+    options: optionsData.options,
+    optionValueIds: optionsData.optionValueIds,
+    optionLabels: optionsData.optionLabels
   };
 }
 
 /**
  * Gets selected options from modal
+ * Returns options object, optionValueIds array, and optionLabels map
  */
 function getSelectedOptions(modalEl) {
   const options = { single: {}, multi: {} };
+  const optionValueIds = [];
+  const optionLabels = {};
   const items = modalEl.querySelectorAll("[data-option-item].is-active");
 
   items.forEach((item) => {
     const group = item.dataset.optionGroup;
     const type = item.dataset.optionType;
     const value = item.dataset.optionValue;
+    const valueId = item.dataset.optionValueId;
     const price = parsePrice(item.dataset.optionPrice);
 
+    // Collect option value ID for server
+    if (valueId) {
+      optionValueIds.push(parseInt(valueId, 10));
+    }
+
+    // Collect labels for display
+    if (!optionLabels[group]) {
+      optionLabels[group] = [];
+    }
+    optionLabels[group].push(value);
+
+    // Build options structure for display
     if (type === "single") {
       options.single[group] = { label: value, price };
     } else if (type === "multi") {
@@ -298,18 +320,30 @@ function getSelectedOptions(modalEl) {
     }
   });
 
-  return options;
+  return { options, optionValueIds, optionLabels };
 }
 
 /**
  * Sums all option prices
+ * @param {Object} options - The options object with single and multi properties
  */
 function sumOptionPrices(options) {
   let total = 0;
-  Object.values(options.single).forEach(opt => total += opt.price || 0);
-  Object.values(options.multi).forEach(arr => 
-    arr.forEach(opt => total += opt.price || 0)
-  );
+  
+  // Sum single-choice option prices
+  for (const key in options.single) {
+    const opt = options.single[key];
+    total += opt.price || 0;
+  }
+  
+  // Sum multi-choice option prices
+  for (const key in options.multi) {
+    const arr = options.multi[key];
+    for (let i = 0; i < arr.length; i++) {
+      total += arr[i].price || 0;
+    }
+  }
+  
   return total;
 }
 
@@ -390,20 +424,24 @@ function highlightSection(modalEl, sectionName) {
 }
 
 /**
- * Saves item to localStorage cart
+ * Saves item to cart (guest localStorage or server for logged-in users)
  */
 async function saveToCart(item) {
-  const cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-  cart.push(item);
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-
-  // Reload cart display
-  const { loadCartFromStorage } = await import("./cart.js");
-  loadCartFromStorage?.();
-
-  // Show success toast
-  const { Toast } = await import("../../../shared/js/modules/toast.js");
-  Toast.success("Đã thêm sản phẩm vào giỏ hàng");
+  try {
+    // Use unified cart API from cart-new.js
+    const result = await addToCart(item);
+    
+    if (result) {
+      // Show success toast
+      const { Toast } = await import("../../../shared/js/modules/toast.js");
+      Toast.success("Đã thêm sản phẩm vào giỏ hàng");
+    } else {
+      throw new Error("Failed to add item to cart");
+    }
+  } catch (e) {
+    console.error("Error saving to cart:", e);
+    showError("Không thể thêm sản phẩm vào giỏ hàng");
+  }
 }
 
 /**
@@ -416,4 +454,187 @@ async function showError(message) {
   } catch (e) {
     alert(message);
   }
+}
+
+/**
+ * Opens product modal for editing an existing cart item
+ * @param {Object} cartItem - The cart item to edit
+ * @param {number} cartIndex - The index of the item in cart array
+ */
+export async function openProductModalForEdit(cartItem, cartIndex) {
+  if (!cartItem || !cartItem.name) {
+    console.error("Invalid cart item for edit");
+    return;
+  }
+
+  try {
+    // Build slug from product name (simplified - ideally store slug in cart item)
+    const productSlug = cartItem.slug || cartItem.name.toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+
+    // Fetch modal HTML from server
+    const response = await fetch(productModalUrl(productSlug), {
+      headers: { "Accept": "text/html" }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const modalHTML = await response.text();
+
+    // Inject modal into container
+    const container = document.querySelector("#modal-container");
+    if (!container) {
+      console.error("Modal container not found");
+      return;
+    }
+
+    container.innerHTML = modalHTML;
+    const modalEl = container.querySelector(".modal");
+    if (!modalEl) {
+      console.error("Modal element not found in response");
+      return;
+    }
+
+    // Get base price
+    const priceEl = modalEl.querySelector("[data-modal-price]");
+    const basePrice = parsePrice(priceEl?.textContent || "0");
+
+    // Setup modal handlers
+    setupModalHandlers(modalEl, basePrice);
+
+    // Restore cart item state to modal
+    restoreCartItemToModal(modalEl, cartItem);
+
+    // Change action button to "Update" mode
+    const actionBtn = modalEl.querySelector("[data-modal-action]");
+    if (actionBtn) {
+      actionBtn.textContent = "Cập nhật";
+      
+      // Remove existing click handler and add update handler
+      const newActionBtn = actionBtn.cloneNode(true);
+      actionBtn.parentNode.replaceChild(newActionBtn, actionBtn);
+      
+      newActionBtn.addEventListener("click", async () => {
+        // Validate required options
+        const validation = validateRequired(modalEl);
+        if (!validation.valid) {
+          showError(`Vui lòng chọn ${validation.missing}`);
+          highlightSection(modalEl, validation.missing);
+          return;
+        }
+
+        // Build updated cart item
+        const updatedItem = buildCartItem(modalEl, basePrice);
+        // Preserve the slug for future edits
+        updatedItem.slug = cartItem.slug || productSlug;
+
+        // For guest users, update localStorage directly
+        // For logged-in users, this will need server-side update
+        if (!isLoggedIn()) {
+          const guestCart = getGuestCart();
+          if (cartIndex >= 0 && cartIndex < guestCart.length) {
+            guestCart[cartIndex] = updatedItem;
+            // Re-save to localStorage via cart-new.js
+            const { addToGuestCart } = await import("./cart-new.js");
+            // Remove old item and add updated one
+            guestCart.splice(cartIndex, 1, updatedItem);
+            localStorage.setItem("cart_" + (document.body.getAttribute("data-store-id") || "default"), JSON.stringify(guestCart));
+          }
+        }
+
+        // Close modal
+        bootstrap.Modal.getInstance(modalEl)?.hide();
+
+        // Reload cart display - trigger custom event
+        window.dispatchEvent(new CustomEvent("cart:updated"));
+
+        // Show success toast
+        const { Toast } = await import("../../../shared/js/modules/toast.js");
+        Toast.success("Đã cập nhật sản phẩm");
+      });
+    }
+
+    // Update totals with restored values
+    updateTotals(modalEl, basePrice);
+
+    // Show modal
+    const bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    bsModal.show();
+
+    // Cleanup on hide
+    modalEl.addEventListener("hidden.bs.modal", () => {
+      resetModalState(modalEl);
+      modalEl.remove();
+    }, { once: true });
+
+  } catch (error) {
+    console.error("Failed to open product modal for edit:", error);
+    showError("Không thể tải thông tin sản phẩm để chỉnh sửa");
+  }
+}
+
+/**
+ * Restores cart item state to modal (quantity, options, note)
+ */
+function restoreCartItemToModal(modalEl, cartItem) {
+  // Restore quantity
+  const qtyEl = modalEl.querySelector("[data-modal-qty]");
+  if (qtyEl && cartItem.qty) {
+    qtyEl.textContent = cartItem.qty.toString();
+  }
+
+  // Restore note
+  const noteEl = modalEl.querySelector("[data-modal-note]");
+  if (noteEl && cartItem.note) {
+    noteEl.value = cartItem.note;
+  }
+
+  // Restore options
+  if (cartItem.options) {
+    // Restore single-choice options
+    if (cartItem.options.single) {
+      for (const group in cartItem.options.single) {
+        const optionData = cartItem.options.single[group];
+        const label = typeof optionData === "object" ? optionData.label : optionData;
+        
+        const items = modalEl.querySelectorAll(`[data-option-group="${group}"]`);
+        items.forEach(item => {
+          if (item.dataset.optionValue === label) {
+            item.classList.add("is-active");
+            const check = item.querySelector(".option-row__check");
+            if (check) check.classList.add("is-active");
+          }
+        });
+      }
+    }
+
+    // Restore multi-choice options
+    if (cartItem.options.multi) {
+      for (const group in cartItem.options.multi) {
+        const values = cartItem.options.multi[group];
+        if (!Array.isArray(values)) continue;
+
+        const items = modalEl.querySelectorAll(`[data-option-group="${group}"]`);
+        items.forEach(item => {
+          const matchValue = values.some(v => {
+            const label = typeof v === "object" ? v.label : v;
+            return item.dataset.optionValue === label;
+          });
+          
+          if (matchValue) {
+            item.classList.add("is-active");
+            const check = item.querySelector(".option-row__check");
+            if (check) check.classList.add("is-active");
+          }
+        });
+      }
+    }
+  }
+
+  // Update section badges for restored options
+  const sections = modalEl.querySelectorAll(".product-modal__section");
+  sections.forEach(section => updateSectionBadge(section));
 }
