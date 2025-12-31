@@ -95,4 +95,8 @@ public enum AppRoute {
     public String getUrl(HttpServletRequest req) {
         return req.getContextPath() + this.path;
     }
+
+    public String getPath() {
+        return this.path;
+    }
 }

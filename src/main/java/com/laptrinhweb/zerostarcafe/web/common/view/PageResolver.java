@@ -13,11 +13,11 @@ import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
  * <pre>
  * {@code
  * ViewArea area = ViewArea.detectArea("/admin/users");
- * View view    = ViewResolver.resolve(area, "/admin/users");
+ * View view    = PageResolver.resolve(area, "/admin/users");
  * // Produces:
  * //   -> area: ADMIN
  * //   -> pagePath:  /WEB-INF/views/admin/pages/users.jsp
- * //   -> layoutPath: /WEB-INF/views/admin/layouts/main-layout.jsp
+ * //   -> layoutPath: /WEB-INF/views/admin/layouts/_main-layout.jsp
  * }
  * </pre>
  *
@@ -26,13 +26,13 @@ import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
  * @lastModified 10/12/2025
  * @since 1.0.0
  */
-public final class ViewResolver {
+public final class PageResolver {
 
     private static final String PAGE_TITLE_PREFIX = "general.";
     private static final String ERROR_VIEW_PATH = PathUtil.Shared.page("error");
     private static final String ERROR_PAGE_TITLE = "general.page.error";
 
-    private ViewResolver() {
+    private PageResolver() {
     }
 
     /**
@@ -59,6 +59,7 @@ public final class ViewResolver {
 
         return new View(
                 area,
+                View.Type.PAGE,
                 resolvePageTitle(area, viewPath),
                 resolvePagePath(area, viewPath),
                 resolveLayoutPath(area)
@@ -74,6 +75,7 @@ public final class ViewResolver {
     public static View resolveError(ViewArea area) {
         return new View(
                 area,
+                View.Type.PAGE,
                 ERROR_PAGE_TITLE,
                 ERROR_VIEW_PATH,
                 resolveLayoutPath(area)

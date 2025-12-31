@@ -54,3 +54,15 @@ export const CartWebConstants = {
         USER_CART_BACKUP_PREFIX: "user_cart_"
     }
 };
+
+export const ModalWebConstants = {
+    Endpoint: {
+        BASE_MODAL: "auth", // Base endpoint for modals
+        LEGACY_MODAL: "modals" // Fallback for other modals
+    },
+    
+    Selector: {
+        TRIGGER: ".btn-open-modal",
+        CONTAINER: "#modal-container"
+    }
+};

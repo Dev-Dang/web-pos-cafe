@@ -3,9 +3,10 @@
   Author: Dang Van Trung
   Date: 28/12/2025
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%-- ========= LOGIN MODAL ========= --%>
+<jsp:include page="/WEB-INF/views/client/fragments/_flash-data.jsp"/>
 <div
         class="modal fade"
         id="loginModal"
@@ -67,12 +68,15 @@
                 </div>
 
                 <%-- Login Form --%>
-                <form
-                        id="loginForm"
-                        class="auth-modal__form"
-                        novalidate
-                        method="post"
-                        action="auth/login"
+                <div id="loginFormContainer">
+                <form id="loginForm"
+                      class="auth-modal__form"
+                      novalidate
+                      method="post"
+                      action="auth/login"
+                      up-submit
+                      up-target="#loginFormContainer, #flash-data"
+                      up-fail-target="#loginFormContainer, #flash-data"
                 >
                     <div class="auth-modal__fields">
                         <div class="form-floating">
@@ -121,12 +125,13 @@
                         <button
                                 type="button"
                                 class="auth-modal__forgot-link btn-open-modal"
-                                data-type="forgot-password"
+                                data-type="_forgot-password"
                         >
                             ${i18n.trans("form.forgotPassword")}
                         </button>
                     </div>
                 </form>
+                </div>
 
                 <%-- Footer Section --%>
                 <div class="auth-modal__footer">
@@ -136,7 +141,7 @@
                     <button
                             type="button"
                             class="auth-modal__footer-link btn-open-modal"
-                            data-type="register"
+                            data-type="_register"
                     >
                         ${i18n.trans("form.button.register")}
                     </button>

@@ -27,6 +27,8 @@
  * @author Dang Van Trung
  */
 
+console.log('Modal.js module loading...');
+
 import { getOrCreateContainer } from "./utils.js";
 
 const CONFIG = {
@@ -41,10 +43,20 @@ const CONTAINER_EL = getOrCreateContainer(CONFIG.CONTAINER_SELECTOR);
 
 /**
  * Builds the fetch URL for a modal file based on its name.
- * @param {string} name - The short name of the modal (e.g., 'login').
+ * @param {string} name - The short name of the modal (e.g., '_login').
  * @returns {string} The encoded URL to the modal resource.
  */
 function modalUrl(name) {
+  // Remove underscore prefix if present and map to auth endpoints
+  const cleanName = name.startsWith('_') ? name.substring(1) : name;
+  
+  // Auth modals use servlet endpoints
+  const authModals = ['login', 'register', 'forgot-password', 'reset-password'];
+  if (authModals.includes(cleanName)) {
+    return `./auth/${cleanName}`;
+  }
+  
+  // Fallback to legacy modals endpoint
   return `./modals?name=${encodeURIComponent(name)}`;
 }
 
@@ -83,10 +95,28 @@ function sanitizeModal(modalEl) {
  * @returns {void}
  */
 function injectAndShow(modalHTML, name) {
+  console.log('injectAndShow called for:', name);
   CONTAINER_EL.innerHTML = modalHTML;
   const modalEl = CONTAINER_EL.querySelector(MODAL_SELECTOR);
   if (!modalEl)
     return console.error(`ModalManager - No ${MODAL_SELECTOR} found`);
+
+  // Debug: Check if Unpoly exists
+  console.log('Unpoly exists:', typeof up !== 'undefined');
+  
+  // Tell Unpoly to observe the new modal content for up-* attributes
+  if (typeof up !== 'undefined' && up.hello) {
+    console.log('Calling up.hello on modal element');
+    up.hello(modalEl);
+    
+    // Debug: Check if form has up-submit
+    const form = modalEl.querySelector('form[up-submit]');
+    console.log('Form with up-submit found:', !!form);
+    if (form) {
+      console.log('Form action:', form.action);
+      console.log('Form up-target:', form.getAttribute('up-target'));
+    }
+  }
 
   modalEl.addEventListener(
     "hidden.bs.modal",
@@ -99,6 +129,7 @@ function injectAndShow(modalHTML, name) {
   );
 
   bootstrap.Modal.getOrCreateInstance(modalEl).show();
+  console.log('Modal shown');
 }
 
 /**
@@ -157,11 +188,14 @@ async function preload(names = []) {
  * @returns {void}
  */
 async function open(name) {
+  console.log('Modal.open called with:', name);
   if (!name) return;
   const current = document.querySelector(VISIBLE_MODAL_SELECTOR);
 
   async function loadAndShow() {
+    console.log('loadAndShow called for:', name);
     const modalHTML = CACHE[name] || (await fetchModal(name));
+    console.log('modalHTML loaded:', !!modalHTML);
     if (modalHTML) injectAndShow(modalHTML, name);
   }
 
@@ -231,6 +265,7 @@ async function init({
   preloadList = [],
   onReady,
 } = {}) {
+  console.log('Modal.init called');
   if (CONTAINER_SELECTOR) CONFIG.CONTAINER_SELECTOR = CONTAINER_SELECTOR;
   if (TRIGGER_SELECTOR) CONFIG.TRIGGER_SELECTOR = TRIGGER_SELECTOR;
 
@@ -243,10 +278,13 @@ async function init({
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(CONFIG.TRIGGER_SELECTOR);
     if (!btn) return;
+    console.log('Modal trigger clicked:', btn.dataset.type);
     e.preventDefault();
     const name = btn.dataset.type;
     if (name) open(name);
   });
+  
+  console.log('Modal.init complete, listening for clicks on:', CONFIG.TRIGGER_SELECTOR);
 }
 
 export const Modal = {

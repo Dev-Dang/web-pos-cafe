@@ -1,8 +1,8 @@
 package com.laptrinhweb.zerostarcafe.web.common.servlet;
 
+import com.laptrinhweb.zerostarcafe.web.common.view.PageResolver;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewArea;
-import com.laptrinhweb.zerostarcafe.web.common.view.ViewResolver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,7 +27,7 @@ public class ErrorServlet extends HttpServlet {
             throws ServletException, IOException {
 
         ViewArea area = (ViewArea) req.getAttribute(View.AREA_KEY);
-        View view = ViewResolver.resolveError(
+        View view = PageResolver.resolveError(
                 area != null ? area : ViewArea.CLIENT
         );
 

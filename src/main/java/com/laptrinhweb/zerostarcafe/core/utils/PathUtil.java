@@ -25,14 +25,37 @@ public final class PathUtil {
     }
 
     // ============================
+    // Utils
+    // ============================
+    private static String jsp(String dir, String name) {
+        String n = normalize(name);
+        return dir + "/" + n + ".jsp";
+    }
+
+    private static String normalize(String name) {
+        if (name == null || name.isBlank())
+            throw new IllegalArgumentException("View name must not be blank");
+
+        String normalized = name.trim();
+
+        if (normalized.startsWith("/"))
+            normalized = normalized.substring(1);
+
+        if (normalized.endsWith(".jsp"))
+            normalized = normalized.substring(0, normalized.length() - 4);
+
+        return normalized;
+    }
+
+    // ============================
     // Shared Area
     // ============================
     public static final class Shared {
         private static final String BASE = "/WEB-INF/views/shared";
         private static final String PAGES = BASE + "/pages";
 
-        public static String page(String viewPath) {
-            return PAGES + "/" + viewPath + ".jsp";
+        public static String page(String name) {
+            return jsp(PAGES, name);
         }
     }
 
@@ -42,19 +65,24 @@ public final class PathUtil {
     public static final class Client {
         private static final String BASE = "/WEB-INF/views/client";
         private static final String FRAGMENTS = BASE + "/fragments";
+        private static final String FORMS = BASE + "/forms";
         private static final String PAGES = BASE + "/pages";
         private static final String LAYOUTS = BASE + "/layouts";
 
-        public static String fragment(String fragmentName) {
-            return FRAGMENTS + "/" + fragmentName + ".jsp";
+        public static String fragment(String name) {
+            return jsp(FRAGMENTS, name);
         }
 
-        public static String page(String viewPath) {
-            return PAGES + "/" + viewPath + ".jsp";
+        public static String form(String name) {
+            return jsp(FORMS, name);
+        }
+
+        public static String page(String name) {
+            return jsp(PAGES, name);
         }
 
         public static String layoutMain() {
-            return LAYOUTS + "/main-layout.jsp";
+            return jsp(LAYOUTS, "_main-layout");
         }
     }
 
@@ -66,12 +94,12 @@ public final class PathUtil {
         private static final String PAGES = BASE + "/pages";
         private static final String LAYOUTS = BASE + "/layouts";
 
-        public static String page(String viewPath) {
-            return PAGES + "/" + viewPath + ".jsp";
+        public static String page(String name) {
+            return jsp(PAGES, name);
         }
 
         public static String layoutMain() {
-            return LAYOUTS + "/admin-layout.jsp";
+            return jsp(LAYOUTS, "admin-layout");
         }
     }
 

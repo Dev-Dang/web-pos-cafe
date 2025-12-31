@@ -68,7 +68,7 @@
                     <c:when test="${empty sessionScope.authUser}">
                         <button type="button"
                                 class="btn btn-md btn-primary--filled btn-open-modal"
-                                data-type="login">
+                                data-type="_login">
                             <span class="icon-base">
                                 <i class="fi fi-rr-user"></i>
                             </span>

@@ -1,9 +1,9 @@
 package com.laptrinhweb.zerostarcafe.web.common.servlet;
 
 import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
+import com.laptrinhweb.zerostarcafe.web.common.view.PageResolver;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewArea;
-import com.laptrinhweb.zerostarcafe.web.common.view.ViewResolver;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,16 +43,7 @@ public class BaseServlet extends HttpServlet {
 
         // ==== View resolution and rendering ====
         ViewArea area = ViewArea.detectArea(path);
-        View view = ViewResolver.resolve(area, path);
-
-        if (view.isDefault()) {
-            switch (area) {
-                case ADMIN -> resp.sendRedirect(ctx + "/admin/dashboard");
-                default -> resp.sendRedirect(ctx + "/home");
-            }
-            return;
-        }
-
+        View view = PageResolver.resolve(area, path);
         View.render(view, req, resp);
     }
 }

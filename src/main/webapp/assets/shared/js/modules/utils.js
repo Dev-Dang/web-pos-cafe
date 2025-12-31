@@ -123,13 +123,14 @@ export function getFlashMessages() {
         const msg = p.dataset.message;
         if (Toast[type]) Toast[type](msg);
         else Toast.normal('', msg);
+        p.remove();
     });
 }
 
 /**
  * Stores modal state globally for reopening after server responses.
  * This allows server-side form responses to trigger modal reopening.
- * 
+ *
  * @type {string|null}
  * @private
  */
@@ -162,13 +163,13 @@ export function getReopenModal() {
         pendingModalToOpen = null;
         return modalToOpen;
     }
-    
+
     // Second priority: DOM flash data (from server-side SSR on page load)
     const flashData = document.querySelector('#flash-data');
     if (flashData && flashData.dataset.openModal) {
         return flashData.dataset.openModal;
     }
-    
+
     return null;
 }
 
@@ -176,7 +177,7 @@ export function getReopenModal() {
  * Refills form fields with values from server flash data.
  * Used to restore form state when modal reopens after failed submission.
  * Should be called AFTER modal HTML is rendered in the DOM.
- * 
+ *
  * @returns {void}
  */
 export function refillFormData() {
@@ -185,17 +186,17 @@ export function refillFormData() {
         console.debug('No #flash-data found');
         return;
     }
-    
+
     // Get all hidden inputs with form data
     const inputs = flashData.querySelectorAll('input[type="hidden"][name]');
     console.debug(`Found ${inputs.length} form data inputs to refill`);
-    
+
     inputs.forEach(input => {
         const fieldName = input.name;
         const fieldValue = input.value;
-        
+
         console.debug(`Refilling field: ${fieldName} = ${fieldValue}`);
-        
+
         // Find form field in all forms and set value
         // Try by: name attribute, id, or constructed id pattern
         const selectors = [
@@ -204,7 +205,7 @@ export function refillFormData() {
             `select[name="${fieldName}"]`,
             `#${fieldName}`,
         ];
-        
+
         let found = false;
         selectors.forEach(selector => {
             const field = document.querySelector(selector);
@@ -214,7 +215,7 @@ export function refillFormData() {
                 console.debug(`  ✓ Set via selector: ${selector}`);
             }
         });
-        
+
         if (!found) {
             console.debug(`  ✗ Field "${fieldName}" not found in DOM`);
         }
@@ -229,7 +230,7 @@ export function refillFormData() {
  * @returns {void}
  */
 export function initResponseHandler() {
-    window.__handleFormResponse__ = function(responseData) {
+    window.__handleFormResponse__ = function (responseData) {
         if (!responseData || typeof responseData !== 'object') return;
         if (responseData.openModal) {
             setPendingModal(responseData.openModal);

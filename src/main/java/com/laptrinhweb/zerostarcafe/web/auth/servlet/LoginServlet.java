@@ -3,6 +3,7 @@ package com.laptrinhweb.zerostarcafe.web.auth.servlet;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.ContextUtil;
 import com.laptrinhweb.zerostarcafe.core.utils.Flash;
+import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.core.validation.ValidationResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
@@ -14,6 +15,8 @@ import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.view.View;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -23,6 +26,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,16 +53,25 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        // Serve the login form (for modals and direct access)
+        View.render(ViewMap.Client.Form.LOGIN, req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         // Read login form data
         LoginDTO form = AuthWebMapper.toLoginDTO(req);
 
-        // Validate input
+        // Validate input - always validate first
         ValidationResult validation = form.validate();
         if (!validation.valid()) {
-            failedLogin(req, resp, form);
+            LoggerUtil.info(getClass(), "Validation failed: " + validation.fieldErrors());
+            failedLogin(req, resp, form, validation);
             return;
         }
 
@@ -71,17 +84,25 @@ public class LoginServlet extends HttpServlet {
 
         AuthContext context = result.getData();
         if (context == null || !result.isSuccess()) {
-            failedLogin(req, resp, form);
+            LoggerUtil.info(getClass(), "Authentication failed");
+            // Create a fake validation error for authentication failure
+            ValidationResult authValidation = ValidationResult.fail("email", "message.invalid_credentials");
+            failedLogin(req, resp, form, authValidation);
             return;
         }
 
         // Authentication successful → create session and redirect
+        LoggerUtil.info(getClass(), "Authentication successful");
         successLogin(req, resp, context);
+    }
+
+    private boolean isUnpoly(HttpServletRequest req) {
+        return req.getHeader("X-Up-Version") != null;
     }
 
     private void successLogin(HttpServletRequest req,
                               HttpServletResponse resp,
-                              AuthContext context) throws IOException {
+                              AuthContext context) throws IOException, ServletException {
 
         // Create session and persist authentication context
         sessionManager.startSession(req, resp, context);
@@ -89,7 +110,22 @@ public class LoginServlet extends HttpServlet {
         // Set flag to trigger cart merge on next page load
         req.getSession().setAttribute("needsCartMerge", Boolean.TRUE);
 
-        // Show success message
+        if (isUnpoly(req)) {
+            // For Unpoly: close modal and redirect
+            // Use X-Up-Location to tell Unpoly where to navigate after success
+            resp.setHeader("X-Up-Location", AppRoute.HOME.getUrl(req));
+            
+            // Add translated success message to request scope
+            req.setAttribute("messages", List.of(
+                    new Flash.Message(Flash.MsgType.success, "message.login_success")
+            ));
+
+            // Return flash-data fragment with translated messages
+            View.render(ViewMap.Client.Fragment.FLASH_CONTAINER, req, resp);
+            return;
+        }
+
+        // Traditional flow: use Flash and redirect
         Flash flash = new Flash(req);
         flash.success("message.login_success").send();
 
@@ -101,15 +137,44 @@ public class LoginServlet extends HttpServlet {
 
     private void failedLogin(HttpServletRequest req,
                              HttpServletResponse resp,
-                             LoginDTO form) throws IOException {
-        // Show fail message
+                             LoginDTO form,
+                             ValidationResult validation) throws IOException, ServletException {
+
+        LoggerUtil.info(getClass(), "failedLogin called, X-Up-Version header: " + req.getHeader("X-Up-Version"));
+        LoggerUtil.info(getClass(), "isUnpoly: " + isUnpoly(req));
+
+        if (isUnpoly(req)) {
+            LoggerUtil.info(getClass(), "Handling Unpoly request - returning 422 with form");
+            // For Unpoly: return updated form with errors (422 status)
+            resp.setStatus(HttpServletResponse.SC_UNPROCESSABLE_CONTENT);
+
+            // Add form data for refill (as Map for JSP iteration)
+            req.setAttribute("formData", form.formState());
+
+            // Add validation errors
+            if (validation != null && !validation.valid()) {
+                req.setAttribute("formErrors", validation.fieldErrors());
+                LoggerUtil.info(getClass(), "Validation errors: " + validation.fieldErrors());
+            }
+
+            // Add error message
+            req.setAttribute("messages", List.of(
+                    new Flash.Message(Flash.MsgType.error, "message.login_failed")
+            ));
+
+            // Return the complete login form
+            View.render(ViewMap.Client.Form.LOGIN, req, resp);
+            return;
+        }
+
+        LoggerUtil.info(getClass(), "Handling non-Unpoly request - PRG flow");
+        // Traditional PRG flow
         Flash flash = new Flash(req);
         flash.error("message.login_failed")
-                .formResponse(form.formState(), Map.of())
-                .set("openModal", "login")
+                .formResponse(form.formState(), validation != null ? validation.fieldErrors() : Map.of())
+                .set("openModal", "_login")
                 .send();
 
-        // Always redirect to the client home page for safe
         AppRoute.HOME.redirect(req, resp);
     }
 

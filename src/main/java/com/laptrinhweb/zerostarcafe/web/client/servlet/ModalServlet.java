@@ -32,7 +32,7 @@ public class ModalServlet extends HttpServlet {
             return;
         }
 
-        String jspPath = PathUtil.Client.fragment(modalName);
+        String jspPath = PathUtil.Client.form(modalName);
         if (req.getServletContext().getResource(jspPath) == null) {
             AppRoute.sendError(HttpServletResponse.SC_NOT_FOUND,
                     "Modal not found, path=" + jspPath, resp);

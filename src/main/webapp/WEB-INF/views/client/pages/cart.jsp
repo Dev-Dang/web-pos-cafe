@@ -9,4 +9,4 @@
 
 <c:set var="pageTitle" value="Giỏ hàng" scope="request"/>
 <c:set var="pageContent" value="/WEB-INF/views/client/pages/cart-content.jsp" scope="request"/>
-<jsp:include page="/WEB-INF/views/client/layouts/main-layout.jsp"/>
+<jsp:include page="/WEB-INF/views/client/layouts/_main-layout.jsp"/>
