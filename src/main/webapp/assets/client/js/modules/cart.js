@@ -129,8 +129,6 @@ function showToast(message, type = 'info') {
         }
     } else {
         // Fallback to console and simple DOM toast
-        console.log(`[Cart Toast ${type.toUpperCase()}]`, message);
-        
         const toast = document.createElement('div');
         toast.className = `cart-toast cart-toast--${type}`;
         toast.style.cssText = `
@@ -310,8 +308,6 @@ function removeFromGuestCart(index) {
  * Uses URL-encoded form data (not multipart) for simplicity.
  */
 async function postToCart(endpoint, params) {
-    console.log('[Cart] API Request:', endpoint, params);
-    
     try {
         // Convert params object to URL-encoded string
         const body = new URLSearchParams(params).toString();
@@ -325,11 +321,8 @@ async function postToCart(endpoint, params) {
             body: body
         });
 
-        console.log('[Cart] API Response status:', response.status);
-
         if (response.status === 401) {
             // Session expired, reload page to redirect to login
-            console.warn('[Cart] Session expired, reloading page');
             window.location.reload();
             return null;
         }
@@ -358,12 +351,6 @@ async function postToCart(endpoint, params) {
             cartCount: cartCount ? parseInt(cartCount, 10) : 0,
             cartTotal: cartTotal ? parseInt(cartTotal, 10) : 0
         };
-
-        console.log('[Cart] API Success:', {
-            endpoint: endpoint,
-            cartCount: result.cartCount,
-            cartTotal: result.cartTotal
-        });
 
         return result;
     } catch (e) {
@@ -582,16 +569,8 @@ function formatPrice(value) {
  */
 function updateCartUI(response) {
     if (!response) {
-        console.warn('[Cart] updateCartUI: response is null');
         return;
     }
-
-    console.log('[Cart] updateCartUI called', {
-        hasHtml: !!response.html,
-        htmlLength: response.html ? response.html.length : 0,
-        cartCount: response.cartCount,
-        cartTotal: response.cartTotal
-    });
 
     // Parse the response HTML
     var temp = document.createElement('div');
@@ -600,11 +579,6 @@ function updateCartUI(response) {
     // Try to find the items container or empty state
     var serverItems = temp.querySelector('[data-cart-items]');
     var serverBody = temp.querySelector('.cart-sidebar__body');
-    
-    console.log('[Cart] Parsed response:', {
-        hasServerItems: !!serverItems,
-        hasServerBody: !!serverBody
-    });
     
     // Get the content to inject into cart list containers
     var contentHtml = '';
@@ -619,11 +593,8 @@ function updateCartUI(response) {
         contentHtml = response.html;
     }
 
-    console.log('[Cart] Content to inject:', contentHtml.substring(0, 200));
-
     // Update all cart list containers (home.jsp uses data-cart-list)
     var cartLists = document.querySelectorAll('[data-cart-list]');
-    console.log('[Cart] Found cart-list containers:', cartLists.length);
     for (var i = 0; i < cartLists.length; i++) {
         cartLists[i].innerHTML = contentHtml;
     }
@@ -784,7 +755,6 @@ async function handleQtyButtonClick(e) {
 
     // Validate quantity
     if (newQty < 0) {
-        console.warn('[Cart] Invalid quantity:', newQty);
         return;
     }
 
@@ -912,19 +882,10 @@ async function handleCheckoutClick(e) {
  * - Triggers merge if user just logged in
  */
 export async function initCart() {
-    console.log('[Cart] Initializing cart module');
-    console.log('[Cart] User logged in:', isLoggedIn());
-    
     // Debug: Check existing cart items in DOM
     const existingCartItems = document.querySelectorAll('[data-cart-item]');
-    console.log('[Cart] Found cart items in DOM:', existingCartItems.length);
     existingCartItems.forEach((item, index) => {
-        console.log(`[Cart] Item ${index}:`, {
-            'data-item-id': item.getAttribute('data-item-id'),
-            'data-item-index': item.getAttribute('data-item-index'),
-            element: item
         });
-    });
 
     // Check if merge is needed (flag set by server after login)
     const needsMerge = document.body.hasAttribute('data-needs-cart-merge');
@@ -970,3 +931,4 @@ export {
     addToGuestCart,
     formatPrice
 };
+

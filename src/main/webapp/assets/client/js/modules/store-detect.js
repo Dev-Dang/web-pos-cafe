@@ -52,7 +52,6 @@ export function initStoreDetection() {
         },
 
         (err) => {
-            console.warn('Geolocation failed:', err.message);
             if (err.code === 1) {
                 localStorage.setItem(GEO_DENIED_KEY, Date.now().toString());
             }

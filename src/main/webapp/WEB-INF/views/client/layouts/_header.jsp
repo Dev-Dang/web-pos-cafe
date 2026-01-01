@@ -67,8 +67,13 @@
                 <c:choose>
                     <c:when test="${empty sessionScope.authUser}">
                         <button type="button"
-                                class="btn btn-md btn-primary--filled btn-open-modal"
-                                data-type="_login">
+                                class="btn btn-md btn-primary--filled"
+                                up-follow
+                                up-href="auth/login"
+                                up-layer="new"
+                                up-mode="modal"
+                                up-target="[up-main~=modal]"
+                                up-history="false">
                             <span class="icon-base">
                                 <i class="fi fi-rr-user"></i>
                             </span>

@@ -50,7 +50,6 @@ export function initCategorySlider() {
       if (title) title.textContent = name;
       if (meta) meta.textContent = `Dang xem: ${name}`;
 
-      console.log('Category:', name);
     });
   });
 }

@@ -6,21 +6,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%-- ========= REGISTER MODAL ========= --%>
+<jsp:include page="/WEB-INF/views/client/fragments/_flash-data.jsp"/>
 <div
-        class="modal fade"
+        class="auth-modal"
         id="registerModal"
         tabindex="-1"
+        role="dialog"
+        aria-modal="true"
         aria-labelledby="registerModalLabel"
-        aria-hidden="true"
+        up-main="modal"
 >
-    <div class="modal-dialog modal-dialog-centered auth-modal">
-        <div class="modal-content auth-modal__content">
+    <div class="auth-modal__content">
             <%-- Mobile Header --%>
             <div class="modal-mobile-header">
                 <button
                         type="button"
                         class="modal-mobile-header__back"
-                        data-bs-dismiss="modal"
+                        up-dismiss
                         aria-label="Close"
                 >
                     <i class="fi fi-rr-angle-small-left"></i>
@@ -69,12 +71,17 @@
                 </div>
 
                 <%-- Register Form --%>
+                <div id="registerFormContainer">
                 <form
                         id="registerForm"
                         class="auth-modal__form"
                         novalidate
                         method="post"
                         action="auth/register"
+                        up-submit
+                        up-target="#registerModal"
+                        up-fail-target="#registerModal"
+                        up-history="false"
                 >
                     <div class="auth-modal__fields">
                         <div class="form-floating">
@@ -165,6 +172,7 @@
                         </button>
                     </div>
                 </form>
+                </div>
 
                 <%-- Footer Section --%>
                 <div class="auth-modal__footer">
@@ -173,13 +181,16 @@
                     </span>
                     <button
                             type="button"
-                            class="auth-modal__footer-link btn-open-modal"
-                            data-type="login"
+                            class="auth-modal__footer-link"
+                            up-follow
+                            up-href="auth/login"
+                            up-layer="current"
+                            up-target="[up-main~=modal]"
+                            up-history="false"
                     >
                         ${i18n.trans("form.button.login")}
                     </button>
                 </div>
             </div>
-        </div>
     </div>
 </div>

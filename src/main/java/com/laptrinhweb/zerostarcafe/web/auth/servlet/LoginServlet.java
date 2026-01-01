@@ -2,7 +2,7 @@ package com.laptrinhweb.zerostarcafe.web.auth.servlet;
 
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.ContextUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.Flash;
+import com.laptrinhweb.zerostarcafe.core.utils.Message;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.core.validation.ValidationResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
@@ -15,7 +15,9 @@ import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.filters.UnpolyFilter;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewArea;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
@@ -26,7 +28,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,7 +57,17 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Serve the login form (for modals and direct access)
+        // If this is a direct browser access (not Unpoly), render full page with modal
+        // This handles the case where user reloads on the modal fragment URL
+        if (!isUnpoly(req)) {
+            // Render as full page with modal pre-opened
+            req.setAttribute("openModal", "_login");
+            View homeView = View.getPage(ViewArea.CLIENT, "/home");
+            View.render(homeView, req, resp);
+            return;
+        }
+
+        // For Unpoly requests, serve only the login form fragment
         View.render(ViewMap.Client.Form.LOGIN, req, resp);
     }
 
@@ -97,7 +108,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     private boolean isUnpoly(HttpServletRequest req) {
-        return req.getHeader("X-Up-Version") != null;
+        return UnpolyFilter.isUnpoly(req);
     }
 
     private void successLogin(HttpServletRequest req,
@@ -110,28 +121,22 @@ public class LoginServlet extends HttpServlet {
         // Set flag to trigger cart merge on next page load
         req.getSession().setAttribute("needsCartMerge", Boolean.TRUE);
 
-        if (isUnpoly(req)) {
-            // For Unpoly: close modal and redirect
-            // Use X-Up-Location to tell Unpoly where to navigate after success
-            resp.setHeader("X-Up-Location", AppRoute.HOME.getUrl(req));
-            
-            // Add translated success message to request scope
-            req.setAttribute("messages", List.of(
-                    new Flash.Message(Flash.MsgType.success, "message.login_success")
-            ));
+        String fallback = AppRoute.HOME.getUrl(req);
+        String target = getRedirectPath(context, req, fallback);
 
-            // Return flash-data fragment with translated messages
-            View.render(ViewMap.Client.Fragment.FLASH_CONTAINER, req, resp);
+        if (isUnpoly(req)) {
+            // For Unpoly: return redirect header to navigate to home
+            // Unpoly will handle modal closure and navigation
+            resp.setHeader("X-Up-Location", target);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("text/html; charset=UTF-8");
+            
+            // Send empty response body - X-Up-Location header handles navigation
+            resp.getWriter().write("");
             return;
         }
 
-        // Traditional flow: use Flash and redirect
-        Flash flash = new Flash(req);
-        flash.success("message.login_success").send();
-
-        // Redirect user to appropriate page
-        String fallback = AppRoute.HOME.getUrl(req);
-        String target = getRedirectPath(context, req, fallback);
+        // Traditional flow: just redirect
         resp.sendRedirect(target);
     }
 
@@ -157,24 +162,16 @@ public class LoginServlet extends HttpServlet {
                 LoggerUtil.info(getClass(), "Validation errors: " + validation.fieldErrors());
             }
 
-            // Add error message
-            req.setAttribute("messages", List.of(
-                    new Flash.Message(Flash.MsgType.error, "message.login_failed")
-            ));
+            // Add error message using simple Message system
+            Message.error(req, "message.login_failed");
 
             // Return the complete login form
             View.render(ViewMap.Client.Form.LOGIN, req, resp);
             return;
         }
 
-        LoggerUtil.info(getClass(), "Handling non-Unpoly request - PRG flow");
-        // Traditional PRG flow
-        Flash flash = new Flash(req);
-        flash.error("message.login_failed")
-                .formResponse(form.formState(), validation != null ? validation.fieldErrors() : Map.of())
-                .set("openModal", "_login")
-                .send();
-
+        LoggerUtil.info(getClass(), "Handling non-Unpoly request - redirecting to home");
+        // Traditional non-Unpoly flow: just redirect (no Flash/PRG)
         AppRoute.HOME.redirect(req, resp);
     }
 

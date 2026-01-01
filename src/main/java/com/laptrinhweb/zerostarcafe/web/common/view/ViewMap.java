@@ -39,6 +39,7 @@ public final class ViewMap {
 
         public static class Form {
             public static final View LOGIN = ClientComp(PathUtil.Client.form("_login"));
+            public static final View REGISTER = ClientComp(PathUtil.Client.form("_register"));
         }
 
         public static class Fragment {

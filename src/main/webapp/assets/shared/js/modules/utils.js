@@ -62,7 +62,7 @@ export function setupLogging() {
     const original = Object.assign({}, console);
 
     if (!isDev) {
-        // Production mode → disable all console outputs.
+        // Production mode - disable all console outputs.
         console.log = console.info = console.warn = console.debug = () => {
         };
         console.error = () => {
@@ -114,16 +114,39 @@ export function setupLogging() {
  *
  * @returns {void}
  */
-export function getFlashMessages() {
-    const flashData = document.querySelector('#flash-data');
-    if (!flashData) return;
+export function getFlashMessages(root = document) {
+    const scope = root instanceof Element ? root : document;
+    const nodes = new Set();
 
-    flashData.querySelectorAll('p[data-type][data-message]').forEach(p => {
-        const type = p.dataset.type;
-        const msg = p.dataset.message;
-        if (Toast[type]) Toast[type](msg);
-        else Toast.normal('', msg);
-        p.remove();
+    // If the root itself is flash-data, process it
+    if (scope.id === 'flash-data') {
+        nodes.add(scope);
+    } else {
+        // Search for flash-data within the scope
+        scope.querySelectorAll('#flash-data').forEach(node => {
+            nodes.add(node);
+        });
+    }
+    
+    if (nodes.size === 0) {
+        return;
+    }
+
+    nodes.forEach((flashData) => {
+        const messages = flashData.querySelectorAll('p[data-type][data-message]');
+        
+        messages.forEach((p) => {
+            const type = p.dataset.type;
+            const msg = p.dataset.message;
+            
+            if (Toast[type]) {
+                Toast[type](msg);
+            } else {
+                Toast.normal('', msg);
+            }
+            
+            p.remove();
+        });
     });
 }
 
@@ -183,19 +206,16 @@ export function getReopenModal() {
 export function refillFormData() {
     const flashData = document.querySelector('#flash-data');
     if (!flashData) {
-        console.debug('No #flash-data found');
         return;
     }
 
     // Get all hidden inputs with form data
     const inputs = flashData.querySelectorAll('input[type="hidden"][name]');
-    console.debug(`Found ${inputs.length} form data inputs to refill`);
 
     inputs.forEach(input => {
         const fieldName = input.name;
         const fieldValue = input.value;
 
-        console.debug(`Refilling field: ${fieldName} = ${fieldValue}`);
 
         // Find form field in all forms and set value
         // Try by: name attribute, id, or constructed id pattern
@@ -206,19 +226,12 @@ export function refillFormData() {
             `#${fieldName}`,
         ];
 
-        let found = false;
         selectors.forEach(selector => {
             const field = document.querySelector(selector);
             if (field && !field.closest('#flash-data')) {
                 field.value = fieldValue;
-                found = true;
-                console.debug(`  ✓ Set via selector: ${selector}`);
             }
         });
-
-        if (!found) {
-            console.debug(`  ✗ Field "${fieldName}" not found in DOM`);
-        }
     });
 }
 
@@ -237,3 +250,4 @@ export function initResponseHandler() {
         }
     };
 }
+

@@ -6,21 +6,23 @@ LastModified: 28/12/2025
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%-- ========= FORGOT PASSWORD MODAL ========= --%>
+<jsp:include page="/WEB-INF/views/client/fragments/_flash-data.jsp"/>
 <div
-        class="modal fade"
+        class="auth-modal"
         id="forgotPasswordModal"
         tabindex="-1"
+        role="dialog"
+        aria-modal="true"
         aria-labelledby="forgotPasswordModalLabel"
-        aria-hidden="true"
+        up-main="modal"
 >
-    <div class="modal-dialog modal-dialog-centered auth-modal">
-        <div class="modal-content auth-modal__content">
+    <div class="auth-modal__content">
             <%-- Mobile Header --%>
             <div class="modal-mobile-header">
                 <button
                         type="button"
                         class="modal-mobile-header__back"
-                        data-bs-dismiss="modal"
+                        up-dismiss
                         aria-label="Close"
                 >
                     <i class="fi fi-rr-angle-small-left"></i>
@@ -83,13 +85,15 @@ LastModified: 28/12/2025
                     </span>
                     <button
                             type="button"
-                            class="auth-modal__footer-link btn-open-modal"
-                            data-type="login"
+                            class="auth-modal__footer-link"
+                            up-follow
+                            up-href="auth/login"
+                            up-layer="current"
+                            up-target="[up-main~=modal]"
                     >
                         ${i18n.trans("form.button.backToLogin")}
                     </button>
                 </div>
             </div>
-        </div>
     </div>
 </div>

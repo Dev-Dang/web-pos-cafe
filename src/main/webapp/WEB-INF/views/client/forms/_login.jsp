@@ -5,23 +5,45 @@
 --%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
+<%-- Flash data container for Unpoly messages --%>
+<div id="flash-data"
+     data-open-modal="${requestScope.openModal}"
+     data-messages='${requestScope.messages != null ? "true" : "false"}'>
+
+    <c:if test="${not empty requestScope.messages}">
+        <%-- Toast messages --%>
+        <c:forEach var="msg" items="${requestScope.messages}">
+            <p data-type="${msg.type}"
+               data-message="${sessionScope.i18n.trans(msg.msgKey)}">
+            </p>
+        </c:forEach>
+    </c:if>
+
+    <c:if test="${not empty requestScope.formData}">
+        <%-- Form refill data --%>
+        <c:forEach var="entry" items="${requestScope.formData}">
+            <input type="hidden" name="${entry.key}" value="${entry.value}"/>
+        </c:forEach>
+    </c:if>
+</div>
+
 <%-- ========= LOGIN MODAL ========= --%>
-<jsp:include page="/WEB-INF/views/client/fragments/_flash-data.jsp"/>
 <div
-        class="modal fade"
+        class="auth-modal"
         id="loginModal"
         tabindex="-1"
+        role="dialog"
+        aria-modal="true"
         aria-labelledby="loginModalLabel"
-        aria-hidden="true"
+        up-main="modal"
 >
-    <div class="modal-dialog modal-dialog-centered auth-modal">
-        <div class="modal-content auth-modal__content">
+    <div class="auth-modal__content">
             <%-- Mobile Header --%>
             <div class="modal-mobile-header">
                 <button
                         type="button"
                         class="modal-mobile-header__back"
-                        data-bs-dismiss="modal"
+                        up-dismiss
                         aria-label="Close"
                 >
                     <i class="fi fi-rr-angle-small-left"></i>
@@ -75,8 +97,9 @@
                       method="post"
                       action="auth/login"
                       up-submit
-                      up-target="#loginFormContainer, #flash-data"
-                      up-fail-target="#loginFormContainer, #flash-data"
+                      up-target="#loginModal"
+                      up-fail-target="#loginModal"
+                      up-history="false"
                 >
                     <div class="auth-modal__fields">
                         <div class="form-floating">
@@ -124,8 +147,12 @@
                         </button>
                         <button
                                 type="button"
-                                class="auth-modal__forgot-link btn-open-modal"
-                                data-type="_forgot-password"
+                                class="auth-modal__forgot-link"
+                                up-follow
+                                up-href="auth/forgot-password"
+                                up-layer="current"
+                                up-target="[up-main~=modal]"
+                                up-history="false"
                         >
                             ${i18n.trans("form.forgotPassword")}
                         </button>
@@ -140,13 +167,16 @@
                     </span>
                     <button
                             type="button"
-                            class="auth-modal__footer-link btn-open-modal"
-                            data-type="_register"
+                            class="auth-modal__footer-link"
+                            up-follow
+                            up-href="auth/register"
+                            up-layer="current"
+                            up-target="[up-main~=modal]"
+                            up-history="false"
                     >
                         ${i18n.trans("form.button.register")}
                     </button>
                 </div>
             </div>
-        </div>
     </div>
 </div>

@@ -29,8 +29,7 @@ try {
     currentLocale = localeCookie;
   }
 } catch (error) {
-  console.warn("Failed to read locale cookie, using Vietnamese:", error);
-}
+  }
 
 // Get validation messages for current locale
 const messages = getValidationMessages(currentLocale);
@@ -401,3 +400,4 @@ function clearError(input) {
     feedback.textContent = "";
   }
 }
+

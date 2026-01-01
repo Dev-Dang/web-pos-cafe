@@ -1,7 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.auth.filter;
 
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
-import com.laptrinhweb.zerostarcafe.core.utils.Flash;
+import com.laptrinhweb.zerostarcafe.core.utils.Message;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
@@ -50,11 +50,9 @@ public class RoleFilter implements Filter {
         AuthUser user = (AuthUser) request.getSession(false)
                 .getAttribute(SecurityKeys.SESSION_AUTH_USER);
 
-        Flash flash = new Flash(request);
-
         // User not logged in -> redirect to home
         if (user == null) {
-            flash.error("general.error.userNotLoggedIn").send();
+            Message.error(request, "general.error.userNotLoggedIn");
             AppRoute.HOME.redirect(request, response);
             return;
         }

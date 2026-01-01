@@ -44,7 +44,7 @@
     <jsp:include page="/WEB-INF/views/client/layouts/_footer.jsp"/>
 
     <%-- Modal container --%>
-    <div id="modal-container"></div>
+    <div id="modal-container" up-main="modal"></div>
 
     <%-- Full page loading overlay --%>
     <jsp:include page="/WEB-INF/views/client/fragments/_page-loader.jsp"/>
