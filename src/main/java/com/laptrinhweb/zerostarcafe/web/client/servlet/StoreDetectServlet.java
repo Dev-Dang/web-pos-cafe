@@ -4,9 +4,10 @@ import com.laptrinhweb.zerostarcafe.core.location.Location;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.domain.store.service.StoreService;
+import com.laptrinhweb.zerostarcafe.web.client.mapper.LocationMapper;
 import com.laptrinhweb.zerostarcafe.web.client.utils.StoreContextUtil;
-import com.laptrinhweb.zerostarcafe.web.common.mapper.LocationMapper;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,7 +45,7 @@ public class StoreDetectServlet extends HttpServlet {
 
         Location clientLoc = LocationMapper.from(req);
         if (clientLoc == null) {
-            AppRoute.HOME.redirect(req, resp);
+            AppRoute.redirect(RouteMap.HOME, req, resp);
             return;
         }
 
@@ -54,6 +55,6 @@ public class StoreDetectServlet extends HttpServlet {
             StoreContextUtil.persist(req, resp, storeCtx);
         }
 
-        AppRoute.HOME.redirect(req, resp);
+        AppRoute.redirect(RouteMap.HOME, req, resp);
     }
 }

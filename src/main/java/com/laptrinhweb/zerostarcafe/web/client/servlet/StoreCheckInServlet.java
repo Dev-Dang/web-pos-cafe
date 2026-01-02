@@ -6,6 +6,7 @@ import com.laptrinhweb.zerostarcafe.domain.store.service.StoreService;
 import com.laptrinhweb.zerostarcafe.web.client.mapper.ClientWebMapper;
 import com.laptrinhweb.zerostarcafe.web.client.utils.StoreContextUtil;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -54,6 +55,6 @@ public class StoreCheckInServlet extends HttpServlet {
         }
 
         StoreContextUtil.persist(req, resp, storeCtx);
-        AppRoute.HOME.redirect(req, resp);
+        AppRoute.redirect(RouteMap.HOME, req, resp);
     }
 }

@@ -2,8 +2,8 @@ package com.laptrinhweb.zerostarcafe.web.auth.servlet;
 
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.ContextUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.Message;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
+import com.laptrinhweb.zerostarcafe.core.utils.Message;
 import com.laptrinhweb.zerostarcafe.core.validation.ValidationResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
@@ -15,9 +15,8 @@ import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
-import com.laptrinhweb.zerostarcafe.web.common.filters.UnpolyFilter;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
-import com.laptrinhweb.zerostarcafe.web.common.view.ViewArea;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
@@ -28,14 +27,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Handles user login: validate → authenticate → create session → issue cookies.
  *
  * @author Dang Van Trung
- * @version 1.0.3
- * @lastModified 28/12/2025
+ * @version 2.0.0
+ * @lastModified 02/01/2026
  * @since 1.0.0
  */
 @WebServlet(name = "LoginServlet", urlPatterns = "/auth/login")
@@ -53,23 +51,7 @@ public class LoginServlet extends HttpServlet {
                 ctx, SecurityKeys.CTX_AUTH_SESSION_MANAGER, AuthSessionManager.class);
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
-        // If this is a direct browser access (not Unpoly), render full page with modal
-        // This handles the case where user reloads on the modal fragment URL
-        if (!isUnpoly(req)) {
-            // Render as full page with modal pre-opened
-            req.setAttribute("openModal", "_login");
-            View homeView = View.getPage(ViewArea.CLIENT, "/home");
-            View.render(homeView, req, resp);
-            return;
-        }
-
-        // For Unpoly requests, serve only the login form fragment
-        View.render(ViewMap.Client.Form.LOGIN, req, resp);
-    }
+    // Note: doGet() removed - use PartialServlet at /partial/login-form instead
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -107,10 +89,6 @@ public class LoginServlet extends HttpServlet {
         successLogin(req, resp, context);
     }
 
-    private boolean isUnpoly(HttpServletRequest req) {
-        return UnpolyFilter.isUnpoly(req);
-    }
-
     private void successLogin(HttpServletRequest req,
                               HttpServletResponse resp,
                               AuthContext context) throws IOException, ServletException {
@@ -121,23 +99,11 @@ public class LoginServlet extends HttpServlet {
         // Set flag to trigger cart merge on next page load
         req.getSession().setAttribute("needsCartMerge", Boolean.TRUE);
 
-        String fallback = AppRoute.HOME.getUrl(req);
+        String fallback = AppRoute.getUrl(RouteMap.HOME, req);
         String target = getRedirectPath(context, req, fallback);
 
-        if (isUnpoly(req)) {
-            // For Unpoly: return redirect header to navigate to home
-            // Unpoly will handle modal closure and navigation
-            resp.setHeader("X-Up-Location", target);
-            resp.setStatus(HttpServletResponse.SC_OK);
-            resp.setContentType("text/html; charset=UTF-8");
-            
-            // Send empty response body - X-Up-Location header handles navigation
-            resp.getWriter().write("");
-            return;
-        }
-
-        // Traditional flow: just redirect
-        resp.sendRedirect(target);
+        // Smart redirect - handles both partial and normal requests
+        AppRoute.redirect(target, req, resp);
     }
 
     private void failedLogin(HttpServletRequest req,
@@ -145,34 +111,25 @@ public class LoginServlet extends HttpServlet {
                              LoginDTO form,
                              ValidationResult validation) throws IOException, ServletException {
 
-        LoggerUtil.info(getClass(), "failedLogin called, X-Up-Version header: " + req.getHeader("X-Up-Version"));
-        LoggerUtil.info(getClass(), "isUnpoly: " + isUnpoly(req));
+        LoggerUtil.info(getClass(), "failedLogin - returning form with errors");
 
-        if (isUnpoly(req)) {
-            LoggerUtil.info(getClass(), "Handling Unpoly request - returning 422 with form");
-            // For Unpoly: return updated form with errors (422 status)
-            resp.setStatus(HttpServletResponse.SC_UNPROCESSABLE_CONTENT);
+        // Return updated form with errors (422 status)
+        resp.setStatus(HttpServletResponse.SC_UNPROCESSABLE_CONTENT);
 
-            // Add form data for refill (as Map for JSP iteration)
-            req.setAttribute("formData", form.formState());
+        // Add form data for refill
+        req.setAttribute("formData", form.formState());
 
-            // Add validation errors
-            if (validation != null && !validation.valid()) {
-                req.setAttribute("formErrors", validation.fieldErrors());
-                LoggerUtil.info(getClass(), "Validation errors: " + validation.fieldErrors());
-            }
-
-            // Add error message using simple Message system
-            Message.error(req, "message.login_failed");
-
-            // Return the complete login form
-            View.render(ViewMap.Client.Form.LOGIN, req, resp);
-            return;
+        // Add validation errors
+        if (validation != null && !validation.valid()) {
+            req.setAttribute("formErrors", validation.fieldErrors());
+            LoggerUtil.info(getClass(), "Validation errors: " + validation.fieldErrors());
         }
 
-        LoggerUtil.info(getClass(), "Handling non-Unpoly request - redirecting to home");
-        // Traditional non-Unpoly flow: just redirect (no Flash/PRG)
-        AppRoute.HOME.redirect(req, resp);
+        // Add error message
+        Message.error(req, "message.login_failed");
+
+        // Return the complete login form
+        View.render(ViewMap.Client.LOGIN_FORM, req, resp);
     }
 
     private String getRedirectPath(AuthContext ctx,
@@ -184,7 +141,7 @@ public class LoginServlet extends HttpServlet {
 
         var user = ctx.getAuthUser();
         if (user.hasRole(UserRole.SUPER_ADMIN) || user.hasRole(UserRole.STORE_MANAGER))
-            return AppRoute.DASHBOARD.getUrl(req);
+            return AppRoute.getUrl(RouteMap.DASHBOARD, req);
 
         // Normal user
         return fallback;

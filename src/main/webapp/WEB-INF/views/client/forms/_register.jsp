@@ -1,12 +1,11 @@
 <%--
   Description: Registration modal for customers (regEmail, regUsername, regPassword)
   Author: Dang Van Trung
-  LastModified: 28/12/2025
+  LastModified: 02/01/2026
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%-- ========= REGISTER MODAL ========= --%>
-<jsp:include page="/WEB-INF/views/client/fragments/_flash-data.jsp"/>
 <div
         class="auth-modal"
         id="registerModal"
@@ -15,6 +14,7 @@
         aria-modal="true"
         aria-labelledby="registerModalLabel"
         up-main="modal"
+        up-accept-location="${deeplinkRoot}"
 >
     <div class="auth-modal__content">
             <%-- Mobile Header --%>
@@ -183,7 +183,7 @@
                             type="button"
                             class="auth-modal__footer-link"
                             up-follow
-                            up-href="auth/login"
+                            up-href="partial/login-form"
                             up-layer="current"
                             up-target="[up-main~=modal]"
                             up-history="false"

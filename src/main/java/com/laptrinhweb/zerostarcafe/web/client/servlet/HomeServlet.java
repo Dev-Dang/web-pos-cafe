@@ -97,6 +97,6 @@ public class HomeServlet extends HttpServlet {
             }
         }
 
-        View.render(ViewMap.Client.Page.HOME, req, resp);
+        View.render(ViewMap.Client.HOME, req, resp);
     }
 }

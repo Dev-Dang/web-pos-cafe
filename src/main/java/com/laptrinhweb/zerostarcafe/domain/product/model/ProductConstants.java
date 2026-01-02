@@ -1,7 +1,5 @@
 package com.laptrinhweb.zerostarcafe.domain.product.model;
 
-import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
-
 /**
  * <h2>Description:</h2>
  * <p>
@@ -29,11 +27,6 @@ public final class ProductConstants {
         public static final String PRODUCT = "product";
         public static final String PRODUCT_DETAIL = "productDetail";
         public static final String CATALOG_ITEMS = "catalogItems";
-    }
-
-    public static final class Fragment {
-        public static final String PRODUCT_DETAIL = PathUtil.Client.fragment("product-detail");
-        public static final String CATALOG_ITEMS = PathUtil.Client.fragment("product-catalog");
     }
 
     public static final class Session {

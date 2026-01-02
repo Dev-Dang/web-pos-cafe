@@ -1,4 +1,4 @@
-package com.laptrinhweb.zerostarcafe.web.common.mapper;
+package com.laptrinhweb.zerostarcafe.web.client.mapper;
 
 import com.laptrinhweb.zerostarcafe.core.location.Location;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;

@@ -5,6 +5,8 @@ import com.laptrinhweb.zerostarcafe.domain.product.model.ProductConstants;
 import com.laptrinhweb.zerostarcafe.domain.product.service.ProductService;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
+import com.laptrinhweb.zerostarcafe.web.common.view.View;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -81,8 +83,7 @@ public class ProductSearchServlet extends HttpServlet {
 
             // Set attribute and render fragment
             req.setAttribute(ProductConstants.Request.CATALOG_ITEMS, catalogItems);
-            req.getRequestDispatcher(ProductConstants.Fragment.CATALOG_ITEMS)
-                    .forward(req, resp);
+            View.render(ViewMap.Client.PRODUCT_CATALOG, req, resp);
 
         } catch (Exception e) {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Search failed: " + e.getMessage());

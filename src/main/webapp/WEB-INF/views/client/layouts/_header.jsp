@@ -69,7 +69,7 @@
                         <button type="button"
                                 class="btn btn-md btn-primary--filled"
                                 up-follow
-                                up-href="auth/login"
+                                up-href="partial/login-form"
                                 up-layer="new"
                                 up-mode="modal"
                                 up-target="[up-main~=modal]"

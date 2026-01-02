@@ -1,12 +1,11 @@
 <%--
 Description: Reset password modal with new password and confirmation
 Author: Dang Van Trung
-LastModified: 28/12/2025
+LastModified: 02/01/2026
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%-- ========= RESET PASSWORD MODAL ========= --%>
-<jsp:include page="/WEB-INF/views/client/fragments/_flash-data.jsp"/>
 <div
         class="auth-modal"
         id="resetPasswordModal"
@@ -15,6 +14,7 @@ LastModified: 28/12/2025
         aria-modal="true"
         aria-labelledby="resetPasswordModalLabel"
         up-main="modal"
+        up-accept-location="${deeplinkRoot}"
 >
     <div class="auth-modal__content">
             <%-- Mobile Header --%>
@@ -124,7 +124,7 @@ LastModified: 28/12/2025
                             type="button"
                             class="auth-modal__footer-link"
                             up-follow
-                            up-href="auth/login"
+                            up-href="partial/login-form"
                             up-layer="current"
                             up-target="[up-main~=modal]"
                     >

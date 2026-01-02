@@ -5,6 +5,7 @@ import com.laptrinhweb.zerostarcafe.core.utils.Message;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,7 +54,7 @@ public class RoleFilter implements Filter {
         // User not logged in -> redirect to home
         if (user == null) {
             Message.error(request, "general.error.userNotLoggedIn");
-            AppRoute.HOME.redirect(request, response);
+            AppRoute.redirect(RouteMap.HOME, request, response);
             return;
         }
 

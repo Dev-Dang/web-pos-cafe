@@ -1,31 +1,9 @@
 <%--
   Description: login form with (loginUsername, loginPassword)
   Author: Dang Van Trung
-  Date: 28/12/2025
+  Date: 02/01/2026
 --%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
-<%-- Flash data container for Unpoly messages --%>
-<div id="flash-data"
-     data-open-modal="${requestScope.openModal}"
-     data-messages='${requestScope.messages != null ? "true" : "false"}'>
-
-    <c:if test="${not empty requestScope.messages}">
-        <%-- Toast messages --%>
-        <c:forEach var="msg" items="${requestScope.messages}">
-            <p data-type="${msg.type}"
-               data-message="${sessionScope.i18n.trans(msg.msgKey)}">
-            </p>
-        </c:forEach>
-    </c:if>
-
-    <c:if test="${not empty requestScope.formData}">
-        <%-- Form refill data --%>
-        <c:forEach var="entry" items="${requestScope.formData}">
-            <input type="hidden" name="${entry.key}" value="${entry.value}"/>
-        </c:forEach>
-    </c:if>
-</div>
 
 <%-- ========= LOGIN MODAL ========= --%>
 <div
@@ -36,61 +14,62 @@
         aria-modal="true"
         aria-labelledby="loginModalLabel"
         up-main="modal"
+        up-accept-location="${deeplinkRoot}"
 >
     <div class="auth-modal__content">
-            <%-- Mobile Header --%>
-            <div class="modal-mobile-header">
-                <button
-                        type="button"
-                        class="modal-mobile-header__back"
-                        up-dismiss
-                        aria-label="Close"
-                >
-                    <i class="fi fi-rr-angle-small-left"></i>
-                </button>
-                <h3 class="modal-mobile-header__title"></h3>
-                <div class="modal-mobile-header__spacer"></div>
+        <%-- Mobile Header --%>
+        <div class="modal-mobile-header">
+            <button
+                    type="button"
+                    class="modal-mobile-header__back"
+                    up-dismiss
+                    aria-label="Close"
+            >
+                <i class="fi fi-rr-angle-small-left"></i>
+            </button>
+            <h3 class="modal-mobile-header__title"></h3>
+            <div class="modal-mobile-header__spacer"></div>
+        </div>
+
+        <div class="modal-body auth-modal__body">
+            <%-- Header Section with Title and Social Button --%>
+            <div class="auth-modal__header-section">
+                <div class="auth-modal__header">
+                    <h2 class="auth-modal__title" id="loginModalLabel">
+                        ${i18n.trans("form.title.login")}
+                    </h2>
+                    <p class="auth-modal__subtitle">${i18n.trans("form.login.desc")}</p>
+                </div>
+
+                <%-- Social Login Section --%>
+                <div class="auth-modal__social">
+                    <button
+                            type="button"
+                            class="btn btn-lg btn-neutral--outlined btn-full auth-modal__social-btn"
+                    >
+                        <span class="auth-modal__social-icon">
+                            <img
+                                    src="${pageContext.request.contextPath}/assets/client/img/icons/google.svg"
+                                    alt="Google"
+                                    class="auth-modal__social-img"
+                            />
+                        </span>
+                        <span class="auth-modal__social-text">
+                            ${i18n.trans("form.useGoogleAccount")}
+                        </span>
+                    </button>
+                </div>
             </div>
 
-            <div class="modal-body auth-modal__body">
-                <%-- Header Section with Title and Social Button --%>
-                <div class="auth-modal__header-section">
-                    <div class="auth-modal__header">
-                        <h2 class="auth-modal__title" id="loginModalLabel">
-                            ${i18n.trans("form.title.login")}
-                        </h2>
-                        <p class="auth-modal__subtitle">${i18n.trans("form.login.desc")}</p>
-                    </div>
+            <%-- Divider --%>
+            <div class="auth-modal__divider" role="separator">
+                <span class="auth-modal__divider-text">
+                    ${i18n.trans("form.or")}
+                </span>
+            </div>
 
-                    <%-- Social Login Section --%>
-                    <div class="auth-modal__social">
-                        <button
-                                type="button"
-                                class="btn btn-lg btn-neutral--outlined btn-full auth-modal__social-btn"
-                        >
-                            <span class="auth-modal__social-icon">
-                                <img
-                                        src="${pageContext.request.contextPath}/assets/client/img/icons/google.svg"
-                                        alt="Google"
-                                        class="auth-modal__social-img"
-                                />
-                            </span>
-                            <span class="auth-modal__social-text">
-                                ${i18n.trans("form.useGoogleAccount")}
-                            </span>
-                        </button>
-                    </div>
-                </div>
-
-                <%-- Divider --%>
-                <div class="auth-modal__divider" role="separator">
-                    <span class="auth-modal__divider-text">
-                        ${i18n.trans("form.or")}
-                    </span>
-                </div>
-
-                <%-- Login Form --%>
-                <div id="loginFormContainer">
+            <%-- Login Form --%>
+            <div id="loginFormContainer">
                 <form id="loginForm"
                       class="auth-modal__form"
                       novalidate
@@ -149,7 +128,7 @@
                                 type="button"
                                 class="auth-modal__forgot-link"
                                 up-follow
-                                up-href="auth/forgot-password"
+                                up-href="partial/forgot-password-form"
                                 up-layer="current"
                                 up-target="[up-main~=modal]"
                                 up-history="false"
@@ -158,25 +137,25 @@
                         </button>
                     </div>
                 </form>
-                </div>
-
-                <%-- Footer Section --%>
-                <div class="auth-modal__footer">
-                    <span class="auth-modal__footer-text">
-                        ${i18n.trans("form.dontHaveAnAccount")}
-                    </span>
-                    <button
-                            type="button"
-                            class="auth-modal__footer-link"
-                            up-follow
-                            up-href="auth/register"
-                            up-layer="current"
-                            up-target="[up-main~=modal]"
-                            up-history="false"
-                    >
-                        ${i18n.trans("form.button.register")}
-                    </button>
-                </div>
             </div>
+
+            <%-- Footer Section --%>
+            <div class="auth-modal__footer">
+                <span class="auth-modal__footer-text">
+                    ${i18n.trans("form.dontHaveAnAccount")}
+                </span>
+                <button
+                        type="button"
+                        class="auth-modal__footer-link"
+                        up-follow
+                        up-href="partial/register-form"
+                        up-layer="current"
+                        up-target="[up-main~=modal]"
+                        up-history="false"
+                >
+                    ${i18n.trans("form.button.register")}
+                </button>
+            </div>
+        </div>
     </div>
 </div>

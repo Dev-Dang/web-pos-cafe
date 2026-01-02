@@ -33,6 +33,7 @@
             data-store-id="${sessionScope.SESSION_STORE_CONTEXT.storeId}"
         </c:if>
         <c:if test="${sessionScope.needsCartMerge}"> data-needs-cart-merge </c:if>
+        <c:if test="${not empty requestScope.embeddedPartial}"> data-has-embedded-partial </c:if>
 >
     <%-- Including the header component --%>
     <jsp:include page="/WEB-INF/views/client/layouts/_header.jsp"/>
@@ -43,14 +44,15 @@
     <%-- Including the footer component --%>
     <jsp:include page="/WEB-INF/views/client/layouts/_footer.jsp"/>
 
-    <%-- Modal container --%>
-    <div id="modal-container" up-main="modal"></div>
+    <%-- Including the response context (flash message, ...) --%>
+    <jsp:include page="/WEB-INF/views/shared/layouts/_response-context.jsp"/>
 
-    <%-- Full page loading overlay --%>
-    <jsp:include page="/WEB-INF/views/client/fragments/_page-loader.jsp"/>
-
-    <%-- Flash data --%>
-    <jsp:include page="/WEB-INF/views/client/fragments/_flash-data.jsp"/>
+    <%-- Embedded partial for deeplink restoration --%>
+    <c:if test="${not empty requestScope.embeddedPartial}">
+        <div id="embedded-partial" style="display: none;" data-partial-path="${requestScope.embeddedPartial}">
+            <jsp:include page="${requestScope.embeddedPartial}"/>
+        </div>
+    </c:if>
 
     <%-- Script --%>
     <script src="assets/client/unpoly/unpoly.min.js"></script>

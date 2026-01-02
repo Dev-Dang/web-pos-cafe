@@ -1,15 +1,13 @@
 <%--
-  Description: Flash data (messages for toasts, and form state for modal reopening)
+  Description: Response context with flash messages and form data
   Author: Dang Van Trung
-  Date: 31/12/2025
+  Date: 02/01/2026
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<div id="flash-data"
-     data-open-modal="${requestScope.openModal}"
-     data-messages='${requestScope.messages != null ? "true" : "false"}'>
-
+<%-- Flash messages for Unpoly - rendered into [up-flashes] target --%>
+<div up-flashes>
     <c:if test="${not empty requestScope.messages}">
         <%-- Toast messages --%>
         <c:forEach var="msg" items="${requestScope.messages}">
@@ -18,11 +16,13 @@
             </p>
         </c:forEach>
     </c:if>
+</div>
 
-    <c:if test="${not empty requestScope.formData}">
-        <%-- Form refill data --%>
+<%-- Form refill data for modal error handling --%>
+<c:if test="${not empty requestScope.formData}">
+    <div id="flash-data" style="display: none;">
         <c:forEach var="entry" items="${requestScope.formData}">
             <input type="hidden" name="${entry.key}" value="${entry.value}"/>
         </c:forEach>
-    </c:if>
-</div>
+    </div>
+</c:if>

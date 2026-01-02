@@ -3,31 +3,29 @@ package com.laptrinhweb.zerostarcafe.web.common.utils;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * <h2>Description:</h2>
- * <p>
- * Utility class for extracting path parameters from servlet requests.
- * Supports RESTful URL patterns like /api/resource/{id} or /api/resource/{slug}.
- * </p>
- *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * // URL: /api/products/123
- * Long productId = PathParamUtil.extractLongParam(req, "Product ID");
- * 
- * // URL: /api/products/category/ca-phe-phin
- * String categorySlug = PathParamUtil.extractStringParam(req, "Category slug");
- * }
- * </pre>
+ * Utilities for HTTP request and response handling.
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 28/12/2025
+ * @version 2.0.0
+ * @lastModified 02/01/2026
  * @since 1.0.0
  */
-public final class PathParamUtil {
-    private PathParamUtil() {}
-    
+public final class RequestUtils {
+
+    private RequestUtils() {}
+
+    /**
+     * Check if request is a partial request (e.g., from Unpoly).
+     * Detects X-Up-Version header sent by partial request frameworks.
+     *
+     * @param req HTTP request
+     * @return true if this is a partial request
+     */
+    public static boolean isPartialRequest(HttpServletRequest req) {
+        if (req == null) return false;
+        return req.getHeader(WebConstants.Header.UP_VERSION) != null;
+    }
+
     /**
      * Extracts a single path parameter and converts it to Long.
      * Use when URL pattern is /resource/{id}
@@ -52,7 +50,7 @@ public final class PathParamUtil {
             throw new IllegalArgumentException("Invalid " + paramName + ": " + param, e);
         }
     }
-    
+
     /**
      * Extracts a single path parameter as String.
      * Use when parameter is not numeric (e.g., slug).

@@ -1,9 +1,12 @@
 package com.laptrinhweb.zerostarcafe.web.common.servlet;
 
 import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
-import com.laptrinhweb.zerostarcafe.web.common.view.PageResolver;
+import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewArea;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewResolver;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,7 +46,18 @@ public class BaseServlet extends HttpServlet {
 
         // ==== View resolution and rendering ====
         ViewArea area = ViewArea.detectArea(path);
-        View view = PageResolver.resolve(area, path);
+        View view = ViewResolver.resolve(area, path);
+
+        // If view matches default for area, redirect to proper route
+        View defaultView = ViewMap.getDefaultFor(area);
+        if (view.equals(defaultView)) {
+            switch (area) {
+                case ADMIN -> AppRoute.redirect(RouteMap.DASHBOARD, req, resp);
+                default -> AppRoute.redirect(RouteMap.HOME, req, resp);
+            }
+            return;
+        }
+
         View.render(view, req, resp);
     }
 }

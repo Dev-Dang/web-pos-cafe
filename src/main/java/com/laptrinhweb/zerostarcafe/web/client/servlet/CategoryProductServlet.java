@@ -7,7 +7,9 @@ import com.laptrinhweb.zerostarcafe.domain.product.model.ProductConstants;
 import com.laptrinhweb.zerostarcafe.domain.product.service.ProductService;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
-import com.laptrinhweb.zerostarcafe.web.common.utils.PathParamUtil;
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
+import com.laptrinhweb.zerostarcafe.web.common.view.View;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -56,7 +58,7 @@ public class CategoryProductServlet extends HttpServlet {
 
         try {
             // Extract category SLUG from path (SEO-friendly)
-            String categorySlug = PathParamUtil.extractStringParam(req, "Category slug");
+            String categorySlug = RequestUtils.extractStringParam(req, "Category slug");
 
             // Get category by slug
             Category category = categoryService.getCategoryBySlug(categorySlug);
@@ -86,8 +88,7 @@ public class CategoryProductServlet extends HttpServlet {
 
             // Set attribute and render fragment
             req.setAttribute(ProductConstants.Request.CATALOG_ITEMS, catalogItems);
-            req.getRequestDispatcher(ProductConstants.Fragment.CATALOG_ITEMS)
-                    .forward(req, resp);
+            View.render(ViewMap.Client.PRODUCT_CATALOG, req, resp);
 
         } catch (IllegalArgumentException e) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

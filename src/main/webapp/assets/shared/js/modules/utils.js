@@ -112,28 +112,38 @@ export function setupLogging() {
  * - If the message type is supported by the Toast system, it is displayed.
  * - Otherwise, a generic "normal" toast is shown.
  *
+ * @param {Element|Document} root - The root element to search for flash messages
  * @returns {void}
  */
 export function getFlashMessages(root = document) {
     const scope = root instanceof Element ? root : document;
-    const nodes = new Set();
+    const flashContainers = new Set();
 
-    // If the root itself is flash-data, process it
+    // If the root itself has [up-flashes], process it
+    if (scope.hasAttribute && scope.hasAttribute('up-flashes')) {
+        flashContainers.add(scope);
+    }
+    
+    // Also search for [up-flashes] within the scope
+    scope.querySelectorAll('[up-flashes]').forEach(node => {
+        flashContainers.add(node);
+    });
+    
+    // Also check for legacy #flash-data
     if (scope.id === 'flash-data') {
-        nodes.add(scope);
+        flashContainers.add(scope);
     } else {
-        // Search for flash-data within the scope
         scope.querySelectorAll('#flash-data').forEach(node => {
-            nodes.add(node);
+            flashContainers.add(node);
         });
     }
     
-    if (nodes.size === 0) {
+    if (flashContainers.size === 0) {
         return;
     }
 
-    nodes.forEach((flashData) => {
-        const messages = flashData.querySelectorAll('p[data-type][data-message]');
+    flashContainers.forEach((container) => {
+        const messages = container.querySelectorAll('p[data-type][data-message]');
         
         messages.forEach((p) => {
             const type = p.dataset.type;
@@ -145,55 +155,10 @@ export function getFlashMessages(root = document) {
                 Toast.normal('', msg);
             }
             
+            // Remove the message element after showing
             p.remove();
         });
     });
-}
-
-/**
- * Stores modal state globally for reopening after server responses.
- * This allows server-side form responses to trigger modal reopening.
- *
- * @type {string|null}
- * @private
- */
-let pendingModalToOpen = null;
-
-/**
- * Sets the modal that should be reopened from server response.
- * Called by response handlers when .set("openModal", "modalName") is used.
- *
- * @param {string|null} modalName - The modal name to open, or null to clear.
- * @returns {void}
- */
-export function setPendingModal(modalName) {
-    pendingModalToOpen = modalName;
-}
-
-/**
- * Gets the pending modal name and clears the stored value.
- * Returns which modal (if any) should be reopened automatically.
- * Checks two sources:
- * 1. Runtime variable (from form response handler)
- * 2. DOM data attribute (from server-side flash on page load)
- *
- * @returns {string|null} The modal name to reopen, or null if none pending.
- */
-export function getReopenModal() {
-    // First priority: runtime pending modal (from form response)
-    if (pendingModalToOpen) {
-        const modalToOpen = pendingModalToOpen;
-        pendingModalToOpen = null;
-        return modalToOpen;
-    }
-
-    // Second priority: DOM flash data (from server-side SSR on page load)
-    const flashData = document.querySelector('#flash-data');
-    if (flashData && flashData.dataset.openModal) {
-        return flashData.dataset.openModal;
-    }
-
-    return null;
 }
 
 /**
@@ -233,21 +198,5 @@ export function refillFormData() {
             }
         });
     });
-}
-
-/**
- * Registers the global response handler.
- * Processes server response data including modal reopening.
- * Call this once during app initialization.
- *
- * @returns {void}
- */
-export function initResponseHandler() {
-    window.__handleFormResponse__ = function (responseData) {
-        if (!responseData || typeof responseData !== 'object') return;
-        if (responseData.openModal) {
-            setPendingModal(responseData.openModal);
-        }
-    };
 }
 

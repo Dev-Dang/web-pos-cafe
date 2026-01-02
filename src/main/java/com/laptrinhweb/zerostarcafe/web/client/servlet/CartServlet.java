@@ -9,8 +9,10 @@ import com.laptrinhweb.zerostarcafe.domain.cart.service.CartValidationService;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.client.mapper.CartWebMapper;
-import com.laptrinhweb.zerostarcafe.web.client.utils.StoreContextUtil;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
+import com.laptrinhweb.zerostarcafe.web.common.view.View;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -58,10 +60,6 @@ import java.util.List;
 })
 public class CartServlet extends HttpServlet {
 
-    private static final String FRAGMENT_CART_SIDEBAR = "/WEB-INF/views/client/fragments/cart-sidebar.jsp";
-    private static final String FRAGMENT_CART_ITEM = "/WEB-INF/views/client/fragments/cart-item.jsp";
-    private static final String PAGE_CART = "/WEB-INF/views/client/pages/cart.jsp";
-
     private final CartCacheService cartCacheService = CartCacheService.getInstance();
     private final CartValidationService cartValidationService = new CartValidationService();
 
@@ -83,9 +81,9 @@ public class CartServlet extends HttpServlet {
 
         if (isAjaxRequest(req)) {
             resp.setContentType("text/html;charset=UTF-8");
-            req.getRequestDispatcher(FRAGMENT_CART_SIDEBAR).forward(req, resp);
+            View.render(ViewMap.Client.CART_SIDEBAR, req, resp);
         } else {
-            req.getRequestDispatcher(PAGE_CART).forward(req, resp);
+            View.render(ViewMap.Client.CART, req, resp);
         }
     }
 
@@ -284,9 +282,9 @@ public class CartServlet extends HttpServlet {
 
         if (isAjaxRequest(req)) {
             resp.setContentType("text/html;charset=UTF-8");
-            req.getRequestDispatcher(FRAGMENT_CART_SIDEBAR).forward(req, resp);
+            View.render(ViewMap.Client.CART_SIDEBAR, req, resp);
         } else {
-            AppRoute.HOME.redirect(req, resp);
+            AppRoute.redirect(RouteMap.HOME, req, resp);
         }
     }
 
@@ -304,7 +302,8 @@ public class CartServlet extends HttpServlet {
         if (isAjaxRequest(req)) {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
-            AppRoute.LOGIN.redirect(req, resp);
+            // Redirect to login - will render home page with login modal
+            AppRoute.redirect(RouteMap.LOGIN, req, resp);
         }
     }
 

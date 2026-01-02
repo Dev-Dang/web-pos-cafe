@@ -9,6 +9,7 @@ import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -64,7 +65,7 @@ public class LogoutServlet extends HttpServlet {
         sessionManager.endSession(req, resp);
 
         // Redirect user to safe default page
-        AppRoute.HOME.redirect(req, resp);
+        AppRoute.redirect(RouteMap.HOME, req, resp);
     }
 
     /**

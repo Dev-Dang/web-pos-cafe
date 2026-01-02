@@ -12,6 +12,9 @@ import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
+import com.laptrinhweb.zerostarcafe.web.common.view.View;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,9 +47,6 @@ import java.io.IOException;
         "/invoice/*"
 })
 public class CheckoutServlet extends HttpServlet {
-
-    private static final String PAGE_CHECKOUT = "/WEB-INF/views/client/pages/checkout.jsp";
-    private static final String PAGE_INVOICE = "/WEB-INF/views/client/pages/invoice.jsp";
 
     private final CartCacheService cartCacheService = CartCacheService.getInstance();
     private final OrderService orderService = new OrderService();
@@ -90,7 +90,7 @@ public class CheckoutServlet extends HttpServlet {
         StoreContext storeCtx = getStoreContext(req);
 
         if (user == null || storeCtx == null) {
-            AppRoute.LOGIN.redirect(req, resp);
+            AppRoute.redirect(RouteMap.LOGIN, req, resp);
             return;
         }
 
@@ -98,12 +98,12 @@ public class CheckoutServlet extends HttpServlet {
 
         if (cart == null || cart.getItems() == null || cart.getItems().isEmpty()) {
             // Empty cart - redirect to home
-            AppRoute.HOME.redirect(req, resp);
+            AppRoute.redirect(RouteMap.HOME, req, resp);
             return;
         }
 
         req.setAttribute("cart", cart);
-        req.getRequestDispatcher(PAGE_CHECKOUT).forward(req, resp);
+        View.render(ViewMap.Client.CHECKOUT, req, resp);
     }
 
     /**
@@ -116,14 +116,14 @@ public class CheckoutServlet extends HttpServlet {
         StoreContext storeCtx = getStoreContext(req);
 
         if (user == null || storeCtx == null) {
-            AppRoute.LOGIN.redirect(req, resp);
+            AppRoute.redirect(RouteMap.LOGIN, req, resp);
             return;
         }
 
         Cart cart = cartCacheService.getCart(user.getId(), storeCtx.getStoreId());
 
         if (cart == null || cart.getItems() == null || cart.getItems().isEmpty()) {
-            AppRoute.HOME.redirect(req, resp);
+            AppRoute.redirect(RouteMap.HOME, req, resp);
             return;
         }
 
@@ -138,7 +138,7 @@ public class CheckoutServlet extends HttpServlet {
             } else {
                 req.setAttribute("error", "Không thể tạo đơn hàng. Vui lòng thử lại.");
                 req.setAttribute("cart", cart);
-                req.getRequestDispatcher(PAGE_CHECKOUT).forward(req, resp);
+                View.render(ViewMap.Client.CHECKOUT, req, resp);
             }
             return;
         }
@@ -212,7 +212,7 @@ public class CheckoutServlet extends HttpServlet {
             req.setAttribute("invoice", invoice);
         }
 
-        req.getRequestDispatcher(PAGE_INVOICE).forward(req, resp);
+        View.render(ViewMap.Client.INVOICE, req, resp);
     }
 
     private boolean isAjaxRequest(HttpServletRequest req) {

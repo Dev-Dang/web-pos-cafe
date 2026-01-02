@@ -1,77 +1,70 @@
 package com.laptrinhweb.zerostarcafe.web.common.view;
 
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <h2>Description:</h2>
  * <p>
- * Represents a resolved view, including its layout, page path, title key,
- * and UI area (client/admin). Instances are typically created through
- * {@link PageResolver} using semantic URLs rather than direct JSP paths.
+ * Represents a view (JSP) with optional metadata.
+ * All JSPs are views - either full pages or partials for Unpoly.
  * </p>
  *
  * <h2>Example Usage:</h2>
  * <pre>
  * {@code
- * View view = View.client("/home");
+ * View view = View.page(ViewArea.CLIENT, "/WEB-INF/views/client/pages/home.jsp", "general.client.home");
  * View.render(view, req, resp);
+ * 
+ * // With metadata
+ * View modal = View.partial(ViewArea.CLIENT, "/WEB-INF/views/client/forms/_login.jsp")
+ *     .withMeta("modal", true)
+ *     .build();
  * }
  * </pre>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 09/12/2025
+ * @version 2.0.0
+ * @lastModified 02/01/2026
  * @since 1.0.0
  */
 public record View(
         ViewArea area,
-        Type type,
-
-        String title,
+        String titleKey,
         String viewPath,
-        String layoutPath
+        Map<String, Object> metadata
 ) {
     public static final String AREA_KEY = "area";
     public static final String PAGE_TITLE = "pageTitle";
     public static final String PAGE_CONTENT = "pageContent";
+    public static final String VIEW_META = "viewMeta";
 
-    public enum Type {
-        PAGE,
-        COMPONENT;
-    }
-
-    public static View getPage(ViewArea area, String viewPath) {
-        return PageResolver.resolve(area, viewPath);
-    }
-
-    public static View getComponent(ViewArea area, String viewPath) {
-        return new View(area, Type.COMPONENT, null, viewPath, null);
-    }
-
-    public boolean isDefault() {
-        View defaultView = ViewMap.getDefaultFor(this.area);
-        return this.equals(defaultView);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass())
-            return false;
-        View view = (View) o;
-        return type == view.type
-                && Objects.equals(title, view.title)
-                && area == view.area
-                && Objects.equals(viewPath, view.viewPath)
-                && Objects.equals(layoutPath, view.layoutPath);
+    public View {
+        metadata = metadata == null ? Map.of() : Map.copyOf(metadata);
     }
 
     /**
-     * Renders the given view by forwarding the request to its layout JSP. </br>
+     * Create a full page view with title.
+     */
+    public static View page(ViewArea area, String viewPath, String titleKey) {
+        return new View(area, titleKey, viewPath, Map.of());
+    }
+
+    /**
+     * Create a partial view with builder for metadata.
+     */
+    public static PartialBuilder partial(ViewArea area, String viewPath) {
+        return new PartialBuilder(area, viewPath);
+    }
+
+    /**
+     * Renders the given view by forwarding the request to its layout JSP.
      * Sends a 404 response if the view is {@code null} or the page does not exist.
      *
      * @param view the resolved view to render
@@ -83,23 +76,51 @@ public record View(
     public static void render(View view, HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        if (view == null || req.getServletContext().getResource(view.viewPath) == null) {
+        if (view == null || req.getServletContext().getResource(view.viewPath()) == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        switch (view.type()) {
-            case PAGE -> {
-                req.setAttribute(AREA_KEY, view.area());
-                req.setAttribute(PAGE_TITLE, view.title());
-                req.setAttribute(PAGE_CONTENT, view.viewPath());
+        // Pass metadata to JSP
+        if (!view.metadata.isEmpty()) {
+            req.setAttribute(VIEW_META, view.metadata);
+        }
 
-                req.getRequestDispatcher(view.layoutPath()).forward(req, resp);
-            }
-            case COMPONENT -> {
-                req.getRequestDispatcher(view.viewPath()).forward(req, resp);
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + view.type());
+        // Handle partial requests
+        if (RequestUtils.isPartialRequest(req) || view.titleKey == null) {
+            req.setAttribute(PAGE_CONTENT, view.viewPath);
+            req.getRequestDispatcher(ViewArea.SHARED.getLayoutPath()).forward(req, resp);
+            return;
+        }
+
+        // Handle full page rendering
+        req.setAttribute(AREA_KEY, view.area());
+        req.setAttribute(PAGE_TITLE, view.titleKey());
+        req.setAttribute(PAGE_CONTENT, view.viewPath());
+
+        req.getRequestDispatcher(view.area().getLayoutPath()).forward(req, resp);
+    }
+
+    /**
+     * Builder for partial views with metadata.
+     */
+    public static class PartialBuilder {
+        private final ViewArea area;
+        private final String viewPath;
+        private final Map<String, Object> metadata = new HashMap<>();
+
+        private PartialBuilder(ViewArea area, String viewPath) {
+            this.area = area;
+            this.viewPath = viewPath;
+        }
+
+        public PartialBuilder withMeta(String key, Object value) {
+            metadata.put(key, value);
+            return this;
+        }
+
+        public View build() {
+            return new View(area, null, viewPath, metadata);
         }
     }
 }
