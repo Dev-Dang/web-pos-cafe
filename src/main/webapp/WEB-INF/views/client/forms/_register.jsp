@@ -1,9 +1,10 @@
 <%--
   Description: Registration modal for customers (regEmail, regUsername, regPassword)
   Author: Dang Van Trung
-  LastModified: 02/01/2026
+  LastModified: 03/01/2026
 --%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
 <%-- ========= REGISTER MODAL ========= --%>
 <div
@@ -83,6 +84,8 @@
                         up-fail-target="#registerModal"
                         up-history="false"
                 >
+                    <%-- CSRF Token --%>
+                    <app:csrf/>
                     <div class="auth-modal__fields">
                         <div class="form-floating">
                             <input type="email" id="email" name="email"

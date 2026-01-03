@@ -2,7 +2,6 @@ package com.laptrinhweb.zerostarcafe.web.auth.filter;
 
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.ContextUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthResult;
@@ -10,6 +9,7 @@ import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthStatus;
 import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthReqService;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,8 +26,8 @@ import java.io.IOException;
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.1.1
- * @lastModified 13/12/2025
+ * @version 1.1.2
+ * @lastModified 03/01/2026
  * @since 1.0.0
  */
 @WebFilter(filterName = "AuthFilter", urlPatterns = "/*")
@@ -54,9 +54,7 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         // Skip authentication for static files or when manager is missing
-        String uri = request.getRequestURI();
-        String path = uri.substring(request.getContextPath().length());
-        if (PathUtil.isStatic(path) || sessionManager == null) {
+        if (RequestUtils.isStaticRequest(request) || sessionManager == null) {
             chain.doFilter(req, resp);
             return;
         }

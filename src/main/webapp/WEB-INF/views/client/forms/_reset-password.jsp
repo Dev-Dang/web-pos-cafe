@@ -1,9 +1,10 @@
 <%--
 Description: Reset password modal with new password and confirmation
 Author: Dang Van Trung
-LastModified: 02/01/2026
+LastModified: 03/01/2026
 --%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
 <%-- ========= RESET PASSWORD MODAL ========= --%>
 <div
@@ -52,6 +53,9 @@ LastModified: 02/01/2026
                         method="post"
                         action="auth/reset-password"
                 >
+                    <%-- CSRF Token --%>
+                    <app:csrf/>
+                    
                     <%-- Hidden token field (passed from email link) --%>
                     <input type="hidden" name="token" value="${param.token}"/>
 

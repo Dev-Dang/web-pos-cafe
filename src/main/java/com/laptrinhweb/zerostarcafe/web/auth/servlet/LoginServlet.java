@@ -99,11 +99,12 @@ public class LoginServlet extends HttpServlet {
         // Set flag to trigger cart merge on next page load
         req.getSession().setAttribute("needsCartMerge", Boolean.TRUE);
 
-        String fallback = AppRoute.getUrl(RouteMap.HOME, req);
-        String target = getRedirectPath(context, req, fallback);
+        // Get redirect path (without context path)
+        String redirectPath = getRedirectPath(context);
 
         // Smart redirect - handles both partial and normal requests
-        AppRoute.redirect(target, req, resp);
+        Message.success(req, "message.login_success");
+        AppRoute.redirect(redirectPath, req, resp);
     }
 
     private void failedLogin(HttpServletRequest req,
@@ -132,18 +133,15 @@ public class LoginServlet extends HttpServlet {
         View.render(ViewMap.Client.LOGIN_FORM, req, resp);
     }
 
-    private String getRedirectPath(AuthContext ctx,
-                                   HttpServletRequest req,
-                                   String fallback) {
-
+    private String getRedirectPath(AuthContext ctx) {
         if (ctx == null || ctx.getAuthUser() == null)
-            return fallback;
+            return RouteMap.HOME;
 
         var user = ctx.getAuthUser();
         if (user.hasRole(UserRole.SUPER_ADMIN) || user.hasRole(UserRole.STORE_MANAGER))
-            return AppRoute.getUrl(RouteMap.DASHBOARD, req);
+            return RouteMap.DASHBOARD;
 
         // Normal user
-        return fallback;
+        return RouteMap.HOME;
     }
 }

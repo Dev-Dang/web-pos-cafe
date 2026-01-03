@@ -1,10 +1,13 @@
 <%--
   Description: Response context with flash messages and form data
   Author: Dang Van Trung
-  Date: 02/01/2026
+  Date: 03/01/2026
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<%-- CSRF Token for JavaScript/Unpoly --%>
+<meta name="csrf-token" content="${sessionScope.csrfToken}">
 
 <%-- Flash messages for Unpoly - rendered into [up-flashes] target --%>
 <div up-flashes>

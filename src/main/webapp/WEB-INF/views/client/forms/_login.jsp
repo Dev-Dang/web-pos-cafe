@@ -1,9 +1,10 @@
 <%--
   Description: login form with (loginUsername, loginPassword)
   Author: Dang Van Trung
-  Date: 02/01/2026
+  Date: 03/01/2026
 --%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
 <%-- ========= LOGIN MODAL ========= --%>
 <div
@@ -14,7 +15,6 @@
         aria-modal="true"
         aria-labelledby="loginModalLabel"
         up-main="modal"
-        up-accept-location="${deeplinkRoot}"
 >
     <div class="auth-modal__content">
         <%-- Mobile Header --%>
@@ -76,10 +76,12 @@
                       method="post"
                       action="auth/login"
                       up-submit
-                      up-target="#loginModal"
+                      up-disable
                       up-fail-target="#loginModal"
-                      up-history="false"
                 >
+                    <%-- CSRF Token --%>
+                    <app:csrf/>
+
                     <div class="auth-modal__fields">
                         <div class="form-floating">
                             <input type="email" id="email" name="email"

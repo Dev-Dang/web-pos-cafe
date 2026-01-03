@@ -1,8 +1,8 @@
 package com.laptrinhweb.zerostarcafe.web.common.servlet;
 
-import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewArea;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
@@ -38,7 +38,7 @@ public class BaseServlet extends HttpServlet {
         String path = uri.substring(ctx.length());
 
         // ==== Ignore static file path ====
-        if (PathUtil.isStatic(path)) {
+        if (RequestUtils.isStaticRequest(req)) {
             RequestDispatcher rd = getServletContext().getNamedDispatcher("default");
             rd.forward(req, resp);
             return;

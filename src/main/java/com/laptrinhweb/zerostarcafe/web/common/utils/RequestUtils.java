@@ -1,13 +1,14 @@
 package com.laptrinhweb.zerostarcafe.web.common.utils;
 
+import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Utilities for HTTP request and response handling.
  *
  * @author Dang Van Trung
- * @version 2.0.0
- * @lastModified 02/01/2026
+ * @version 3.0.0
+ * @lastModified 03/01/2026
  * @since 1.0.0
  */
 public final class RequestUtils {
@@ -24,6 +25,20 @@ public final class RequestUtils {
     public static boolean isPartialRequest(HttpServletRequest req) {
         if (req == null) return false;
         return req.getHeader(WebConstants.Header.UP_VERSION) != null;
+    }
+
+    /**
+     * Check if request is for static resources (CSS, JS, images, etc.).
+     * Centralized method to detect static requests across the application.
+     *
+     * @param req HTTP request
+     * @return true if request is for static resources
+     */
+    public static boolean isStaticRequest(HttpServletRequest req) {
+        if (req == null) return false;
+        String uri = req.getRequestURI();
+        String path = uri.substring(req.getContextPath().length());
+        return PathUtil.isStatic(path);
     }
 
     /**

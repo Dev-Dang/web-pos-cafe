@@ -47,13 +47,6 @@
     <%-- Including the response context (flash message, ...) --%>
     <jsp:include page="/WEB-INF/views/shared/layouts/_response-context.jsp"/>
 
-    <%-- Embedded partial for deeplink restoration --%>
-    <c:if test="${not empty requestScope.embeddedPartial}">
-        <div id="embedded-partial" style="display: none;" data-partial-path="${requestScope.embeddedPartial}">
-            <jsp:include page="${requestScope.embeddedPartial}"/>
-        </div>
-    </c:if>
-
     <%-- Script --%>
     <script src="assets/client/unpoly/unpoly.min.js"></script>
     <script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>

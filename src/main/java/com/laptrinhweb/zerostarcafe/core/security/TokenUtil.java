@@ -101,12 +101,15 @@ public final class TokenUtil {
 
     /**
      * Compares two strings in constant time to prevent timing attacks.
+     * Made public for reuse across security components (CSRF, etc.).
      *
      * @param a the first string
      * @param b the second string
      * @return {@code true} if equal, {@code false} otherwise
      */
-    private static boolean constantTimeEquals(String a, String b) {
+    public static boolean constantTimeEquals(String a, String b) {
+        if (a == null || b == null) return false;
+        
         byte[] aBytes = a.getBytes(StandardCharsets.UTF_8);
         byte[] bBytes = b.getBytes(StandardCharsets.UTF_8);
 

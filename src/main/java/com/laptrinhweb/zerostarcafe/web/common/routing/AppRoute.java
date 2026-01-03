@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Central routing utility with smart redirect handling.
  * Automatically detects request type (partial vs normal) and applies the correct redirect strategy.
- * 
+ *
  * <h2>Example Usage:</h2>
  * <pre>
  * {@code
@@ -19,7 +19,7 @@ import java.io.IOException;
  *
  * // Send 404 error
  * AppRoute.sendError(HttpServletResponse.SC_NOT_FOUND, resp);
- * 
+ *
  * // Get full URL
  * String url = AppRoute.getUrl(RouteMap.HOME, req);
  * }
@@ -32,12 +32,11 @@ import java.io.IOException;
  */
 public final class AppRoute {
 
-    private AppRoute() {}
+    private AppRoute() {
+    }
 
     /**
      * Smart redirect that automatically detects request type.
-     * - If partial request: sends X-Up-Accept-Location header (client-side navigation)
-     * - If normal request: sends HTTP 302 redirect
      *
      * @param path the target route path from RouteMap
      * @param req  the HTTP request
@@ -47,15 +46,11 @@ public final class AppRoute {
     public static void redirect(String path, HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String targetUrl = getUrl(path, req);
-        
+
         if (RequestUtils.isPartialRequest(req)) {
-            // Partial request - use X-Up-Accept-Location header for client-side navigation
-            resp.setHeader(WebConstants.Header.UP_ACCEPT_LOCATION, targetUrl);
-            resp.setStatus(HttpServletResponse.SC_OK);
-            resp.setContentType("text/html; charset=UTF-8");
-            resp.getWriter().write("");
+            resp.setHeader(WebConstants.Header.UP_LOCATION, targetUrl);
+            resp.setStatus(HttpServletResponse.SC_SEE_OTHER);
         } else {
-            // Normal request - use HTTP redirect
             resp.sendRedirect(targetUrl);
         }
     }
@@ -93,7 +88,7 @@ public final class AppRoute {
      * Builds the full URL for the given route using the request context path.
      *
      * @param path the route path from RouteMap
-     * @param req the HTTP request
+     * @param req  the HTTP request
      * @return the full URL string
      */
     public static String getUrl(String path, HttpServletRequest req) {

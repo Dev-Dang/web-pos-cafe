@@ -1,12 +1,12 @@
 package com.laptrinhweb.zerostarcafe.web.client.filters;
 
 import com.laptrinhweb.zerostarcafe.core.security.CookieUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.domain.store.service.StoreService;
 import com.laptrinhweb.zerostarcafe.web.client.utils.StoreContextUtil;
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,8 +24,8 @@ import java.io.IOException;
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 13/12/2025
+ * @version 1.0.1
+ * @lastModified 03/01/2026
  * @since 1.0.0
  */
 @WebFilter(filterName = "StoreIDFilter", urlPatterns = "/*")
@@ -41,9 +41,7 @@ public class StoreIDFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         // 1. Skip static resources request
-        String uri = request.getRequestURI();
-        String path = uri.substring(request.getContextPath().length());
-        if (PathUtil.isStatic(path)) {
+        if (RequestUtils.isStaticRequest(request)) {
             chain.doFilter(req, resp);
             return;
         }

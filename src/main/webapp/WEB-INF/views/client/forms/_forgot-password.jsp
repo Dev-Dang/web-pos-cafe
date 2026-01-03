@@ -1,9 +1,10 @@
 <%--
 Description: Forgot password modal for password recovery (email only)
 Author: Dang Van Trung
-LastModified: 02/01/2026
+LastModified: 03/01/2026
 --%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
 <%-- ========= FORGOT PASSWORD MODAL ========= --%>
 <div
@@ -52,6 +53,9 @@ LastModified: 02/01/2026
                         method="post"
                         action="auth/forgot-password"
                 >
+                    <%-- CSRF Token --%>
+                    <app:csrf/>
+                    
                     <div class="auth-modal__fields">
                         <div class="form-floating">
                             <input type="email" id="forgotEmail" name="email"

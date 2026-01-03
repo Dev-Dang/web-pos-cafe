@@ -7,6 +7,7 @@ import com.laptrinhweb.zerostarcafe.core.utils.TimeUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthToken;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
+import com.laptrinhweb.zerostarcafe.domain.auth.service.CsrfTokenManager;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,8 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * }</pre>
  *
  * @author Dang Van Trung
- * @version 1.1.1
- * @lastModified 13/12/2025
+ * @version 1.2.0
+ * @lastModified 03/01/2026
  * @since 1.0.0
  */
 
@@ -69,6 +70,7 @@ public final class AuthSessionManager {
      * Creates a new session for the authenticated user.
      * The session ID is rotated, the user is stored in the session,
      * and all auth cookies are written to the response.
+     * Also generates a new CSRF token for the authenticated session.
      *
      * @param request  current HTTP request
      * @param response current HTTP response
@@ -94,6 +96,9 @@ public final class AuthSessionManager {
 
         applyContext(session, context);
         writeCookies(response, context);
+        
+        // Generate new CSRF token for authenticated session
+        CsrfTokenManager.generateAndSet(request, response);
     }
 
     /**
@@ -128,6 +133,7 @@ public final class AuthSessionManager {
     /**
      * Ends the active session and removes all authentication cookies.
      * If the user has an active session in memory, it will also be revoked.
+     * Also clears the CSRF token.
      *
      * @param request  current HTTP request
      * @param response current HTTP response
@@ -140,6 +146,7 @@ public final class AuthSessionManager {
 
         if (session == null) {
             clearAuthCookies(request, response);
+            CsrfTokenManager.clear(request, response);
             return;
         }
 
@@ -158,6 +165,9 @@ public final class AuthSessionManager {
         }
 
         clearAuthCookies(request, response);
+        
+        // Clear CSRF token on logout
+        CsrfTokenManager.clear(request, response);
     }
 
     /**
