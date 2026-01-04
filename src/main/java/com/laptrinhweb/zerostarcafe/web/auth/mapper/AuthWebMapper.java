@@ -1,6 +1,6 @@
 package com.laptrinhweb.zerostarcafe.web.auth.mapper;
 
-import com.laptrinhweb.zerostarcafe.core.security.CookieUtil;
+import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RegisterDTO;
@@ -52,7 +52,7 @@ public final class AuthWebMapper {
         return new RequestInfoDTO(
                 request.getRemoteAddr(),
                 request.getHeader("User-Agent"),
-                CookieUtil.getAll(request)
+                CookieUtils.getAll(request)
         );
     }
 

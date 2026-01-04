@@ -2,8 +2,6 @@ package com.laptrinhweb.zerostarcafe.web.auth.servlet;
 
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.ContextUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.Message;
 import com.laptrinhweb.zerostarcafe.core.validation.ValidationResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
@@ -14,8 +12,10 @@ import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthService;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
+import com.laptrinhweb.zerostarcafe.web.common.response.Message;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
+import com.laptrinhweb.zerostarcafe.web.common.utils.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletConfig;
@@ -27,12 +27,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Handles user login: validate → authenticate → create session → issue cookies.
  *
  * @author Dang Van Trung
- * @version 2.0.0
+ * @version 1.0.1
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
@@ -51,7 +52,12 @@ public class LoginServlet extends HttpServlet {
                 ctx, SecurityKeys.CTX_AUTH_SESSION_MANAGER, AuthSessionManager.class);
     }
 
-    // Note: doGet() removed - use PartialServlet at /partial/login-form instead
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        View.render(ViewMap.Client.LOGIN_FORM, req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -60,11 +66,11 @@ public class LoginServlet extends HttpServlet {
         // Read login form data
         LoginDTO form = AuthWebMapper.toLoginDTO(req);
 
-        // Validate input - always validate first
+        // Validate input
         ValidationResult validation = form.validate();
         if (!validation.valid()) {
-            LoggerUtil.info(getClass(), "Validation failed: " + validation.fieldErrors());
-            failedLogin(req, resp, form, validation);
+            Message.error(req, "message.validation_failed");
+            failedLogin(form, validation.fieldErrors(), req, resp);
             return;
         }
 
@@ -77,59 +83,49 @@ public class LoginServlet extends HttpServlet {
 
         AuthContext context = result.getData();
         if (context == null || !result.isSuccess()) {
-            LoggerUtil.info(getClass(), "Authentication failed");
-            // Create a fake validation error for authentication failure
-            ValidationResult authValidation = ValidationResult.fail("email", "message.invalid_credentials");
-            failedLogin(req, resp, form, authValidation);
+            Message.error(req, "message.login_failed");
+            failedLogin(form, validation.fieldErrors(), req, resp);
             return;
         }
 
         // Authentication successful → create session and redirect
-        LoggerUtil.info(getClass(), "Authentication successful");
-        successLogin(req, resp, context);
+        successLogin(context, req, resp);
     }
 
-    private void successLogin(HttpServletRequest req,
-                              HttpServletResponse resp,
-                              AuthContext context) throws IOException, ServletException {
+    private void successLogin(AuthContext context,
+                              HttpServletRequest req,
+                              HttpServletResponse resp) throws IOException {
 
         // Create session and persist authentication context
         sessionManager.startSession(req, resp, context);
 
         // Set flag to trigger cart merge on next page load
-        req.getSession().setAttribute("needsCartMerge", Boolean.TRUE);
+        req.getSession().setAttribute(WebConstants.
+                Request.NEED_CART_MERGE, Boolean.TRUE);
 
-        // Get redirect path (without context path)
-        String redirectPath = getRedirectPath(context);
-
-        // Smart redirect - handles both partial and normal requests
+        // Set flash message for redirect
         Message.success(req, "message.login_success");
+
+        // Redirect user to appropriate page
+        String redirectPath = getRedirectPath(context);
         AppRoute.redirect(redirectPath, req, resp);
     }
 
-    private void failedLogin(HttpServletRequest req,
-                             HttpServletResponse resp,
-                             LoginDTO form,
-                             ValidationResult validation) throws IOException, ServletException {
+    private void failedLogin(LoginDTO form,
+                             Map<String, String> fieldErrors,
+                             HttpServletRequest req,
+                             HttpServletResponse resp) throws IOException, ServletException {
 
-        LoggerUtil.info(getClass(), "failedLogin - returning form with errors");
+        // Add form data for refill (only email)
+        req.setAttribute(WebConstants.Request.FORM_DATA, form.formState());
+
+        // Add validation errors
+        if (fieldErrors != null && !fieldErrors.isEmpty()) {
+            req.setAttribute(WebConstants.Request.FORM_ERRORS, fieldErrors);
+        }
 
         // Return updated form with errors (422 status)
         resp.setStatus(HttpServletResponse.SC_UNPROCESSABLE_CONTENT);
-
-        // Add form data for refill
-        req.setAttribute("formData", form.formState());
-
-        // Add validation errors
-        if (validation != null && !validation.valid()) {
-            req.setAttribute("formErrors", validation.fieldErrors());
-            LoggerUtil.info(getClass(), "Validation errors: " + validation.fieldErrors());
-        }
-
-        // Add error message
-        Message.error(req, "message.login_failed");
-
-        // Return the complete login form
         View.render(ViewMap.Client.LOGIN_FORM, req, resp);
     }
 

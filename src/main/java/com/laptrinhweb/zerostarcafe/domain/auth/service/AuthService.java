@@ -2,9 +2,9 @@ package com.laptrinhweb.zerostarcafe.domain.auth.service;
 
 import com.laptrinhweb.zerostarcafe.core.database.DBConnection;
 import com.laptrinhweb.zerostarcafe.core.exception.AppException;
-import com.laptrinhweb.zerostarcafe.core.security.PasswordUtil;
+import com.laptrinhweb.zerostarcafe.core.security.PasswordUtils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
-import com.laptrinhweb.zerostarcafe.core.security.TokenUtil;
+import com.laptrinhweb.zerostarcafe.core.security.TokenUtils;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RegisterDTO;
@@ -84,7 +84,7 @@ public final class AuthService {
             newUser.setStatus(UserStatus.ACTIVE);
 
             // Hash password securely (Argon2)
-            String hashedPassword = PasswordUtil.hash(dto.getPassword());
+            String hashedPassword = PasswordUtils.hash(dto.getPassword());
             newUser.setPasswordHash(hashedPassword);
 
             // Persist user to the database
@@ -128,7 +128,7 @@ public final class AuthService {
 
             AuthToken authToken = new AuthToken(
                     SecurityKeys.TOKEN_AUTH,
-                    TokenUtil.generateToken(),
+                    TokenUtils.generateToken(),
                     sessionInfo.getExpiredAt()
             );
             tokens.add(authToken);
@@ -136,7 +136,7 @@ public final class AuthService {
             String deviceId = reqInfo.getCookieValue(SecurityKeys.TOKEN_DEVICE_ID);
             AuthToken deviceToken = new AuthToken(
                     SecurityKeys.TOKEN_DEVICE_ID,
-                    deviceId != null ? deviceId : TokenUtil.generateToken(),
+                    deviceId != null ? deviceId : TokenUtils.generateToken(),
                     sessionInfo.getExpiredAt()
             );
             tokens.add(deviceToken);
@@ -145,8 +145,8 @@ public final class AuthService {
             AuthContext context = new AuthContext(authUser, sessionInfo, tokens);
 
             // Save new auth record
-            String authHash = TokenUtil.hashToken(authToken.getValue());
-            String deviceIdHash = TokenUtil.hashToken(deviceToken.getValue());
+            String authHash = TokenUtils.hashToken(authToken.getValue());
+            String deviceIdHash = TokenUtils.hashToken(deviceToken.getValue());
 
             AuthRecord record = new AuthRecord();
             record.setUserId(authUser.getId());
@@ -201,7 +201,7 @@ public final class AuthService {
             return false;
 
         // Generate new token
-        String newToken = TokenUtil.generateToken();
+        String newToken = TokenUtils.generateToken();
         AuthToken newAuthToken = new AuthToken(
                 SecurityKeys.TOKEN_AUTH, newToken, session.getExpiredAt());
 
@@ -254,7 +254,7 @@ public final class AuthService {
                 return null;
 
             // Check device ID match
-            String deviceIdHash = TokenUtil.hashToken(rawDeviceId);
+            String deviceIdHash = TokenUtils.hashToken(rawDeviceId);
             if (!deviceIdHash.equals(record.getDeviceId()))
                 return null;
 
@@ -335,7 +335,7 @@ public final class AuthService {
         if (user == null)
             return null;
 
-        if (!PasswordUtil.verify(dto.getPassword(), user.getPasswordHash()))
+        if (!PasswordUtils.verify(dto.getPassword(), user.getPasswordHash()))
             return null;
 
         List<UserStoreRole> roles = userService.getRolesOf(user);

@@ -1,15 +1,23 @@
 package com.laptrinhweb.zerostarcafe.web.common.routing;
 
+import com.laptrinhweb.zerostarcafe.web.common.response.RespContext;
 import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import com.laptrinhweb.zerostarcafe.web.common.utils.WebConstants;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
 /**
+ * <h2>Description:</h2>
+ * <p>
  * Central routing utility with smart redirect handling.
  * Automatically detects request type (partial vs normal) and applies the correct redirect strategy.
+ * </p>
  *
  * <h2>Example Usage:</h2>
  * <pre>
@@ -26,17 +34,16 @@ import java.io.IOException;
  * </pre>
  *
  * @author Dang Van Trung
- * @version 3.0.0
- * @lastModified 02/01/2026
+ * @version 2.0.0
+ * @lastModified 03/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AppRoute {
-
-    private AppRoute() {
-    }
 
     /**
      * Smart redirect that automatically detects request type.
+     * For Unpoly redirects, renders response context JSP with flash messages.
      *
      * @param path the target route path from RouteMap
      * @param req  the HTTP request
@@ -50,9 +57,23 @@ public final class AppRoute {
         if (RequestUtils.isPartialRequest(req)) {
             resp.setHeader(WebConstants.Header.UP_LOCATION, targetUrl);
             resp.setStatus(HttpServletResponse.SC_SEE_OTHER);
+
+            // Render response context if there are messages
+            if (RespContext.from(req).hasData()) {
+                try {
+                    AppRoute.forward(ViewMap.Shared.RESPONSE_CONTEXT, req, resp);
+                } catch (Exception e) {
+                    // Silently fail - redirect still works
+                }
+            }
         } else {
             resp.sendRedirect(targetUrl);
         }
+    }
+
+    public static void forward(String path, HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher(path).forward(req, resp);
     }
 
     /**

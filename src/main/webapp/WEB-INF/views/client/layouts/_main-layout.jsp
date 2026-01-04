@@ -47,9 +47,13 @@
     <%-- Including the response context (flash message, ...) --%>
     <jsp:include page="/WEB-INF/views/shared/layouts/_response-context.jsp"/>
 
+    <%-- Including the page loader --%>
+    <jsp:include page="/WEB-INF/views/client/fragments/_page-loader.jsp"/>
+
     <%-- Script --%>
     <script src="assets/client/unpoly/unpoly.min.js"></script>
     <script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/shared/js/vendor/validate.min.js"></script>
     <script type="module" src="assets/shared/js/base.js"></script>
     <script type="module" src="assets/client/js/main.js"></script>
     <script type="module" src="assets/client/js/modules/mobile-nav.js"></script>

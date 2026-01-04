@@ -15,22 +15,15 @@
  * @module app-main
  * @author Dang Van Trung
  */
-import { initUnpoly } from "../../shared/js/modules/unpoly.js";
 import { initStoreDetection } from "./modules/store-detect.js";
 import { initCategorySlider } from "./modules/swiper.js";
 import { initCart } from "./modules/cart.js";
 import { initProductModal } from "./modules/product-modal.js";
 import { initProductCards } from "./modules/product-card.js";
-import { initPasswordToggle, initFormValidation } from "./modules/form.js";
 import { initCatalogSwitcher } from "./modules/catalog.js";
 import { initProductSearch } from "./modules/search.js";
 
-// Initialize Unpoly first (before DOM is fully parsed)
-initUnpoly();
-
 initStoreDetection();
-initPasswordToggle();
-initFormValidation();
 
 document.addEventListener("DOMContentLoaded", () => {
   initCategorySlider();

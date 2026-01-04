@@ -1,7 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.filters;
 
 import com.laptrinhweb.zerostarcafe.core.security.AppCookie;
-import com.laptrinhweb.zerostarcafe.core.security.CookieUtil;
+import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
 import com.laptrinhweb.zerostarcafe.core.utils.I18n;
 import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import com.laptrinhweb.zerostarcafe.web.common.utils.WebConstants;
@@ -16,7 +16,7 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * Resolves user locale (param → session → default) and prepares I18n for JSP.
+ * Resolves user locale (param > session > cookie > default) and prepares I18n for JSP.
  *
  * @author Dang Van Trung
  * @version 1.0.1
@@ -30,7 +30,8 @@ public class LocaleFilter implements Filter {
             WebConstants.Locale.SUPPORTED_VI,
             WebConstants.Locale.SUPPORTED_EN
     );
-    private static final Locale DEFAULT = Locale.forLanguageTag(WebConstants.Locale.DEFAULT_LOCALE);
+    private static final Locale DEFAULT = Locale
+            .forLanguageTag(WebConstants.Locale.DEFAULT_LOCALE);
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp,
@@ -48,7 +49,7 @@ public class LocaleFilter implements Filter {
         HttpSession session = request.getSession();
 
         String paramLang = request.getParameter(WebConstants.Locale.COOKIE_NAME);
-        String cookieLang = CookieUtil.get(request, WebConstants.Locale.COOKIE_NAME);
+        String cookieLang = CookieUtils.get(request, WebConstants.Locale.COOKIE_NAME);
 
         // Resolve locale from param > session > cookie > default
         Locale locale = resolveLocale(paramLang, session, cookieLang);
@@ -57,7 +58,10 @@ public class LocaleFilter implements Filter {
         String localeTag = locale.toLanguageTag();
         if (cookieLang == null || !cookieLang.equalsIgnoreCase(localeTag)) {
             response.addCookie(
-                    AppCookie.accessible(WebConstants.Locale.COOKIE_NAME, localeTag, WebConstants.Locale.COOKIE_MAX_AGE)
+                    AppCookie.accessible(
+                            WebConstants.Locale.COOKIE_NAME,
+                            localeTag,
+                            WebConstants.Locale.COOKIE_MAX_AGE)
             );
         }
 

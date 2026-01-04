@@ -1,13 +1,13 @@
 package com.laptrinhweb.zerostarcafe.web.common.view;
 
+import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <h2>Description:</h2>
@@ -21,7 +21,7 @@ import java.util.Map;
  * {@code
  * View view = View.page(ViewArea.CLIENT, "/WEB-INF/views/client/pages/home.jsp", "general.client.home");
  * View.render(view, req, resp);
- * 
+ *
  * // With metadata
  * View modal = View.partial(ViewArea.CLIENT, "/WEB-INF/views/client/forms/_login.jsp")
  *     .withMeta("modal", true)
@@ -37,30 +37,24 @@ import java.util.Map;
 public record View(
         ViewArea area,
         String titleKey,
-        String viewPath,
-        Map<String, Object> metadata
+        String viewPath
 ) {
     public static final String AREA_KEY = "area";
     public static final String PAGE_TITLE = "pageTitle";
     public static final String PAGE_CONTENT = "pageContent";
-    public static final String VIEW_META = "viewMeta";
-
-    public View {
-        metadata = metadata == null ? Map.of() : Map.copyOf(metadata);
-    }
 
     /**
      * Create a full page view with title.
      */
     public static View page(ViewArea area, String viewPath, String titleKey) {
-        return new View(area, titleKey, viewPath, Map.of());
+        return new View(area, titleKey, viewPath);
     }
 
     /**
-     * Create a partial view with builder for metadata.
+     * Create a partial view without title.
      */
-    public static PartialBuilder partial(ViewArea area, String viewPath) {
-        return new PartialBuilder(area, viewPath);
+    public static View partial(ViewArea area, String viewPath) {
+        return new View(area, null, viewPath);
     }
 
     /**
@@ -73,23 +67,21 @@ public record View(
      * @throws ServletException if the forwarding fails
      * @throws IOException      if the response cannot be written
      */
-    public static void render(View view, HttpServletRequest req, HttpServletResponse resp)
+    public static void render(@NonNull View view,
+                              HttpServletRequest req,
+                              HttpServletResponse resp)
             throws ServletException, IOException {
 
-        if (view == null || req.getServletContext().getResource(view.viewPath()) == null) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+        // Handle invalid (not found) view paths
+        if (req.getServletContext().getResource(view.viewPath()) == null) {
+            AppRoute.sendError(HttpServletResponse.SC_NOT_FOUND, resp);
             return;
-        }
-
-        // Pass metadata to JSP
-        if (!view.metadata.isEmpty()) {
-            req.setAttribute(VIEW_META, view.metadata);
         }
 
         // Handle partial requests
         if (RequestUtils.isPartialRequest(req) || view.titleKey == null) {
             req.setAttribute(PAGE_CONTENT, view.viewPath);
-            req.getRequestDispatcher(ViewArea.SHARED.getLayoutPath()).forward(req, resp);
+            AppRoute.forward(ViewArea.SHARED.getLayoutPath(), req, resp);
             return;
         }
 
@@ -98,29 +90,11 @@ public record View(
         req.setAttribute(PAGE_TITLE, view.titleKey());
         req.setAttribute(PAGE_CONTENT, view.viewPath());
 
-        req.getRequestDispatcher(view.area().getLayoutPath()).forward(req, resp);
-    }
-
-    /**
-     * Builder for partial views with metadata.
-     */
-    public static class PartialBuilder {
-        private final ViewArea area;
-        private final String viewPath;
-        private final Map<String, Object> metadata = new HashMap<>();
-
-        private PartialBuilder(ViewArea area, String viewPath) {
-            this.area = area;
-            this.viewPath = viewPath;
-        }
-
-        public PartialBuilder withMeta(String key, Object value) {
-            metadata.put(key, value);
-            return this;
-        }
-
-        public View build() {
-            return new View(area, null, viewPath, metadata);
+        try {
+            AppRoute.forward(view.area().getLayoutPath(), req, resp);
+        } catch (ServletException e) {
+            AppRoute.sendError(HttpServletResponse
+                    .SC_INTERNAL_SERVER_ERROR, e.getMessage(), resp);
         }
     }
 }

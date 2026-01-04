@@ -1,7 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.client.utils;
 
 import com.laptrinhweb.zerostarcafe.core.security.AppCookie;
-import com.laptrinhweb.zerostarcafe.core.security.CookieUtil;
+import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
 import com.laptrinhweb.zerostarcafe.core.utils.TimeUtil;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
@@ -92,7 +92,7 @@ public class StoreContextUtil {
             );
             resp.addCookie(tableIdCookie);
         } else {
-            CookieUtil.clear(StoreConstants.Cookie.LAST_TABLE_ID, resp);
+            CookieUtils.clear(StoreConstants.Cookie.LAST_TABLE_ID, resp);
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.view;
 
+import lombok.NonNull;
+
 import static com.laptrinhweb.zerostarcafe.core.utils.PathUtil.getViewPath;
 
 /**
@@ -19,7 +21,7 @@ import static com.laptrinhweb.zerostarcafe.core.utils.PathUtil.getViewPath;
  * </pre>
  *
  * @author Dang Van Trung
- * @version 2.0.0
+ * @version 1.1.0
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
@@ -32,7 +34,8 @@ public final class ViewMap {
     // CLIENT AREA
     // ============================================
     public static final class Client {
-        private Client() {}
+        private Client() {
+        }
 
         // Pages
         public static final View HOME = page("pages/home");
@@ -49,7 +52,7 @@ public final class ViewMap {
         public static final View FORGOT_PASSWORD_FORM = partial("forms/_forgot-password");
         public static final View RESET_PASSWORD_FORM = partial("forms/_reset-password");
         public static final View PRODUCT_DETAIL = partial("forms/_product-detail");
-        
+
         // Partials - Fragments
         public static final View CART_SIDEBAR = partial("fragments/cart-sidebar");
         public static final View CART_ITEM = partial("fragments/cart-item");
@@ -57,14 +60,14 @@ public final class ViewMap {
 
         private static View page(String path) {
             return View.page(
-                ViewArea.CLIENT,
-                getViewPath(ViewArea.CLIENT, path),
-                generateTitleKey(ViewArea.CLIENT, path)
+                    ViewArea.CLIENT,
+                    getViewPath(ViewArea.CLIENT, path),
+                    generateTitleKey(ViewArea.CLIENT, path)
             );
         }
 
         private static View partial(String path) {
-            return View.partial(ViewArea.CLIENT, getViewPath(ViewArea.CLIENT, path)).build();
+            return View.partial(ViewArea.CLIENT, getViewPath(ViewArea.CLIENT, path));
         }
     }
 
@@ -72,30 +75,32 @@ public final class ViewMap {
     // ADMIN AREA
     // ============================================
     public static final class Admin {
-        private Admin() {}
+        private Admin() {
+        }
 
         // Pages
         public static final View DASHBOARD = page("pages/dashboard");
 
         private static View page(String path) {
             return View.page(
-                ViewArea.ADMIN,
-                getViewPath(ViewArea.ADMIN, path),
-                generateTitleKey(ViewArea.ADMIN, path)
+                    ViewArea.ADMIN,
+                    getViewPath(ViewArea.ADMIN, path),
+                    generateTitleKey(ViewArea.ADMIN, path)
             );
         }
 
         private static View partial(String path) {
-            return View.partial(ViewArea.ADMIN, getViewPath(ViewArea.ADMIN, path)).build();
+            return View.partial(ViewArea.ADMIN, getViewPath(ViewArea.ADMIN, path));
         }
     }
 
     // ============================================
     // AUTO TITLE GENERATION
     // ============================================
+
     /**
      * Auto-generate i18n title key from area and path.
-     * 
+     * <p>
      * Examples:
      * - CLIENT, "pages/home" → "general.client.home"
      * - CLIENT, "pages/cart" → "general.client.cart"
@@ -103,8 +108,8 @@ public final class ViewMap {
      */
     static String generateTitleKey(ViewArea area, String path) {
         String slug = path.replaceFirst("^pages/", "")
-                         .replaceAll("/", ".")
-                         .replaceAll("_", "");
+                .replaceAll("/", ".")
+                .replaceAll("_", "");
         return "general." + area.name().toLowerCase() + "." + slug;
     }
 
@@ -112,13 +117,17 @@ public final class ViewMap {
     // SHARED AREA (Error pages, etc.)
     // ============================================
     public static final class Shared {
-        private Shared() {}
+        private Shared() {
+        }
 
         public static final View ERROR = View.page(
                 ViewArea.SHARED,
-                "/WEB-INF/views/shared/pages/error.jsp",
+                getViewPath(ViewArea.SHARED, "pages/error"),
                 "general.error"
         );
+
+        public static final String RESPONSE_CONTEXT = getViewPath(
+                ViewArea.SHARED, "layouts/_response-context");
     }
 
     // ============================================
@@ -131,22 +140,23 @@ public final class ViewMap {
             case SHARED -> Shared.ERROR;
         };
     }
-    
+
     // ============================================
     // PARTIAL LOOKUP BY NAME (Convention-based)
     // ============================================
+
     /**
      * Resolves a partial view by its name using naming convention.
      * Converts kebab-case URL names to SCREAMING_SNAKE_CASE field names.
-     * 
+     * <p>
      * Examples:
      * - "login-form" → Client.LOGIN_FORM
      * - "cart-sidebar" → Client.CART_SIDEBAR
-     * 
+     *
      * @param name partial name in kebab-case (e.g., "login-form")
      * @return the View object, or null if not found
      */
-    public static View getPartialByName(String name) {
+    public static View getPartialByName(@NonNull String name) {
         try {
             // Convert: "login-form" → "LOGIN_FORM"
             String fieldName = name.toUpperCase().replace("-", "_");
@@ -155,11 +165,11 @@ public final class ViewMap {
             return null;
         }
     }
-    
+
     /**
      * Gets the value of a static field using reflection.
-     * 
-     * @param clazz the class containing the field
+     *
+     * @param clazz     the class containing the field
      * @param fieldName the field name
      * @return the field value as View
      * @throws Exception if field not found or not accessible

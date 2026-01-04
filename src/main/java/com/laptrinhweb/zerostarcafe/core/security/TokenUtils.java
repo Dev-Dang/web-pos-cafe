@@ -9,19 +9,19 @@ import java.util.Base64;
 /**
  * <h2>Description:</h2>
  * <p>
- * TokenUtil provides simple methods to generate, hash, and verify tokens.
+ * TokenUtils provides simple methods to generate, hash, and verify tokens.
  * The hashToken method can also be used for general-purpose SHA-256 hashing.
  * </p>
  *
  * <h2>Example Usage:</h2>
  * <pre>
  * {@code
- * String raw = TokenUtil.generateToken();
- * String hash = TokenUtil.hashToken(raw);
- * boolean ok  = TokenUtil.verifyToken(raw, hash);
- * 
+ * String raw = TokenUtils.generateToken();
+ * String hash = TokenUtils.hashToken(raw);
+ * boolean ok  = TokenUtils.verifyToken(raw, hash);
+ *
  * // General SHA-256 hashing (reuse hashToken)
- * String itemHash = TokenUtil.hashToken("10|16,20|some note");
+ * String itemHash = TokenUtils.hashToken("10|16,20|some note");
  * }
  * </pre>
  *
@@ -30,14 +30,14 @@ import java.util.Base64;
  * @lastModified 29/12/2025
  * @since 1.0.0
  */
-public final class TokenUtil {
+public final class TokenUtils {
 
     // Secure random generator for cryptographic operations
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final int TOKEN_BYTES = 32; // 256-bit token
 
     // Prevent instantiation
-    private TokenUtil() {
+    private TokenUtils() {
     }
 
     /**
@@ -109,7 +109,7 @@ public final class TokenUtil {
      */
     public static boolean constantTimeEquals(String a, String b) {
         if (a == null || b == null) return false;
-        
+
         byte[] aBytes = a.getBytes(StandardCharsets.UTF_8);
         byte[] bBytes = b.getBytes(StandardCharsets.UTF_8);
 

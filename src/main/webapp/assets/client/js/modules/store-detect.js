@@ -16,7 +16,7 @@
  * @module store-detect
  * @author Dang Van Trung
  */
-import * as Cookie from './cookie.js';
+import * as Cookie from '../../../shared/js/modules/cookie.js';
 import {StoreWebConstants} from './web-constants.js';
 
 const GEO_DENIED_KEY = 'zrc_geo_denied_ts';

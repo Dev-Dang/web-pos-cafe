@@ -3,7 +3,7 @@ package com.laptrinhweb.zerostarcafe.domain.cart.service;
 import com.laptrinhweb.zerostarcafe.core.database.DBAction;
 import com.laptrinhweb.zerostarcafe.core.database.DBConnection;
 import com.laptrinhweb.zerostarcafe.core.exception.AppException;
-import com.laptrinhweb.zerostarcafe.core.security.TokenUtil;
+import com.laptrinhweb.zerostarcafe.core.security.TokenUtils;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.domain.cart.dao.CartDAO;
 import com.laptrinhweb.zerostarcafe.domain.cart.dao.CartDAOImpl;
@@ -24,7 +24,7 @@ import java.util.List;
  * for managing carts, adding/updating/removing items, and handling
  * item hash generation for deduplication.
  * </p>
- * 
+ *
  * <p>
  * <b>Important:</b> This service handles DB persistence only. For the full cart
  * strategy with caching and write-behind, see CartCacheService (to be implemented).
@@ -192,7 +192,7 @@ public final class CartService {
     /**
      * Merges a guest cart (from client-side) into a user's server cart.
      * Items with matching hashes have their quantities summed.
-     * 
+     *
      * <p><b>Security note:</b> This method only uses menuItemId and options from
      * the guest cart. Prices MUST be re-validated from the database, never trusted
      * from client. The caller is responsible for re-fetching current prices.</p>
@@ -353,6 +353,6 @@ public final class CartService {
             sb.append(note.trim().toLowerCase());
         }
 
-        return TokenUtil.hashToken(sb.toString());
+        return TokenUtils.hashToken(sb.toString());
     }
 }

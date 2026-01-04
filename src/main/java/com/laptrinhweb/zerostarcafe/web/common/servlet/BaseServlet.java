@@ -17,13 +17,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * <h2>Description:</h2>
+ * <p>
  * Base servlet for all requests not handled by other servlets.
  * Static resources are forwarded to the container’s default servlet.
  * Dynamic paths are resolved to a {@link View} and rendered via {@link View#render}.
+ * </p>
  *
  * @author Dang Van Trung
- * @version 2.0.0
- * @lastModified 11/12/2025
+ * @version 1.0.1
+ * @lastModified 04/01/2026
  * @since 1.0.0
  */
 @WebServlet(name = "BaseServlet", urlPatterns = "/")

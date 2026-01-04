@@ -14,7 +14,7 @@ import java.io.IOException;
  * Renders the generic error page for any container-dispatched error.
  *
  * @author Dang Van Trung
- * @version 2.0.0
+ * @version 1.0.1
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
@@ -24,7 +24,6 @@ public class ErrorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         View.render(ViewMap.Shared.ERROR, req, resp);
     }
 }

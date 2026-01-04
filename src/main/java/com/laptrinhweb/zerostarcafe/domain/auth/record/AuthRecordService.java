@@ -1,7 +1,7 @@
 package com.laptrinhweb.zerostarcafe.domain.auth.record;
 
 import com.laptrinhweb.zerostarcafe.core.exception.AppException;
-import com.laptrinhweb.zerostarcafe.core.security.TokenUtil;
+import com.laptrinhweb.zerostarcafe.core.security.TokenUtils;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
 import lombok.NonNull;
 
@@ -70,7 +70,7 @@ public final class AuthRecordService {
             @NonNull String newToken,
             @NonNull String oldToken
     ) {
-        String oldHash = TokenUtil.hashToken(oldToken);
+        String oldHash = TokenUtils.hashToken(oldToken);
 
         try {
             // Find the record to update
@@ -81,7 +81,7 @@ public final class AuthRecordService {
             AuthRecord record = recordOpt.get();
 
             // Generate token hash from the new token in context
-            String newHash = TokenUtil.hashToken(newToken);
+            String newHash = TokenUtils.hashToken(newToken);
 
             // Update record with new metadata
             record.setAuthHash(newHash);
@@ -118,7 +118,7 @@ public final class AuthRecordService {
         if (rawToken == null || rawToken.isBlank())
             return;
 
-        String hash = TokenUtil.hashToken(rawToken);
+        String hash = TokenUtils.hashToken(rawToken);
 
         try {
             recordDAO.revokeByAuthHash(hash);
@@ -137,7 +137,7 @@ public final class AuthRecordService {
         if (rawToken == null || rawToken.isBlank())
             return Optional.empty();
 
-        String hash = TokenUtil.hashToken(rawToken);
+        String hash = TokenUtils.hashToken(rawToken);
 
         try {
             return recordDAO.findValidByAuthHash(hash);

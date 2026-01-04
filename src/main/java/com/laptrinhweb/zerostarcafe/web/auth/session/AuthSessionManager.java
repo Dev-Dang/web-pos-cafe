@@ -1,19 +1,20 @@
 package com.laptrinhweb.zerostarcafe.web.auth.session;
 
 import com.laptrinhweb.zerostarcafe.core.security.AppCookie;
-import com.laptrinhweb.zerostarcafe.core.security.CookieUtil;
+import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
+import com.laptrinhweb.zerostarcafe.core.security.CsrfTokenUtils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.TimeUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthToken;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
-import com.laptrinhweb.zerostarcafe.domain.auth.service.CsrfTokenManager;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
@@ -38,15 +39,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * @lastModified 03/01/2026
  * @since 1.0.0
  */
-
+@RequiredArgsConstructor
 @Getter
 public final class AuthSessionManager {
 
     private final ConcurrentHashMap<Long, HttpSession> userSessions;
-
-    public AuthSessionManager(ConcurrentHashMap<Long, HttpSession> userSessions) {
-        this.userSessions = userSessions;
-    }
 
     /**
      * Builds an AuthContext from the current HttpSession.
@@ -96,9 +93,9 @@ public final class AuthSessionManager {
 
         applyContext(session, context);
         writeCookies(response, context);
-        
+
         // Generate new CSRF token for authenticated session
-        CsrfTokenManager.generateAndSet(request, response);
+        CsrfTokenUtils.getOrCreate(request, response);
     }
 
     /**
@@ -146,7 +143,7 @@ public final class AuthSessionManager {
 
         if (session == null) {
             clearAuthCookies(request, response);
-            CsrfTokenManager.clear(request, response);
+            CsrfTokenUtils.removeToken(request, response);
             return;
         }
 
@@ -165,9 +162,9 @@ public final class AuthSessionManager {
         }
 
         clearAuthCookies(request, response);
-        
+
         // Clear CSRF token on logout
-        CsrfTokenManager.clear(request, response);
+        CsrfTokenUtils.removeToken(request, response);
     }
 
     /**
@@ -225,7 +222,7 @@ public final class AuthSessionManager {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
-        Map<String, String> cookies = CookieUtil.getAll(request);
+        Map<String, String> cookies = CookieUtils.getAll(request);
         if (cookies.isEmpty())
             return;
 
@@ -233,7 +230,7 @@ public final class AuthSessionManager {
 
         for (String name : cookies.keySet()) {
             if (name != null && name.startsWith(prefix)) {
-                CookieUtil.clear(name, response);
+                CookieUtils.clear(name, response);
             }
         }
     }

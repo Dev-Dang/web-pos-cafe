@@ -1,6 +1,6 @@
 package com.laptrinhweb.zerostarcafe.web.client.filters;
 
-import com.laptrinhweb.zerostarcafe.core.security.CookieUtil;
+import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
@@ -75,8 +75,8 @@ public class StoreIDFilter implements Filter {
      * @return a valid StoreContext, or null if cookies are missing or invalid
      */
     private StoreContext resolveFromCookie(HttpServletRequest request) {
-        String rawStoreId = CookieUtil.get(request, StoreConstants.Cookie.LAST_STORE_ID);
-        String rawTableId = CookieUtil.get(request, StoreConstants.Cookie.LAST_TABLE_ID);
+        String rawStoreId = CookieUtils.get(request, StoreConstants.Cookie.LAST_STORE_ID);
+        String rawTableId = CookieUtils.get(request, StoreConstants.Cookie.LAST_TABLE_ID);
 
         if (rawStoreId == null || rawStoreId.isBlank())
             return null;

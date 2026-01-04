@@ -1,29 +1,23 @@
 package com.laptrinhweb.zerostarcafe.web.common.routing;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
+ * <h2>Description:</h2>
+ * <p>
  * Central registry for all application routes.
  * Similar to ViewMap - single source of truth for route paths.
- * 
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * // Forward to home
- * AppRoute.forward(RouteMap.HOME, req, resp);
- * 
- * // Redirect to login
- * AppRoute.redirect(RouteMap.LOGIN, req, resp);
- * }
- * </pre>
+ * </p>
  *
  * @author Dang Van Trung
  * @version 1.0.0
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RouteMap {
-    
-    private RouteMap() {}
-    
+
     // ============================================
     // CLIENT ROUTES
     // ============================================
@@ -34,7 +28,7 @@ public final class RouteMap {
     public static final String RESET_PASSWORD = "/auth/reset-password";
     public static final String CART = "/cart";
     public static final String CHECKOUT = "/checkout";
-    
+
     // ============================================
     // ADMIN ROUTES
     // ============================================

@@ -2,25 +2,40 @@ package com.laptrinhweb.zerostarcafe.web.common.utils;
 
 import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
- * Utilities for HTTP request and response handling.
+ * <h2>Description:</h2>
+ * <p>
+ * Utilities for HTTP request and response handling. Provides methods for detecting
+ * partial requests, static resources, and extracting path parameters safely.
+ * </p>
+ *
+ * <h2>Example Usage:</h2>
+ * <pre>
+ * {@code
+ * // Check request types
+ * boolean isPartial = RequestUtils.isPartialRequest(request);
+ *
+ * // Extract path parameters (returns null on error)
+ * Long productId = RequestUtils.extractLongParam(request, "productId");
+ * }
+ * </pre>
  *
  * @author Dang Van Trung
- * @version 3.0.0
- * @lastModified 03/01/2026
+ * @version 1.0.0
+ * @lastModified 04/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RequestUtils {
-
-    private RequestUtils() {}
-
+    
     /**
-     * Check if request is a partial request (e.g., from Unpoly).
-     * Detects X-Up-Version header sent by partial request frameworks.
+     * Check if request is partial (e.g., from Unpoly).
      *
      * @param req HTTP request
-     * @return true if this is a partial request
+     * @return true if partial request
      */
     public static boolean isPartialRequest(HttpServletRequest req) {
         if (req == null) return false;
@@ -28,11 +43,10 @@ public final class RequestUtils {
     }
 
     /**
-     * Check if request is for static resources (CSS, JS, images, etc.).
-     * Centralized method to detect static requests across the application.
+     * Check if request is for static resources.
      *
      * @param req HTTP request
-     * @return true if request is for static resources
+     * @return true if static resource request
      */
     public static boolean isStaticRequest(HttpServletRequest req) {
         if (req == null) return false;
@@ -42,48 +56,48 @@ public final class RequestUtils {
     }
 
     /**
-     * Extracts a single path parameter and converts it to Long.
-     * Use when URL pattern is /resource/{id}
+     * Extract path parameter as Long, returns null on error.
      *
-     * @param req       the HTTP request
-     * @param paramName descriptive name for error messages
-     * @return the extracted Long value
-     * @throws IllegalArgumentException if parameter is missing or invalid
+     * @param req       HTTP request
+     * @param paramName parameter name for logging
+     * @return Long value or null if invalid/missing
      */
     public static Long extractLongParam(HttpServletRequest req, String paramName) {
-        String pathInfo = req.getPathInfo();
-        if (pathInfo == null || pathInfo.equals("/")) {
-            throw new IllegalArgumentException(paramName + " is required");
-        }
-        String param = pathInfo.replace("/", "").trim();
-        if (param.isEmpty()) {
-            throw new IllegalArgumentException(paramName + " is required");
-        }
         try {
+            String pathInfo = req.getPathInfo();
+            if (pathInfo == null || pathInfo.equals("/")) {
+                return null;
+            }
+            String param = pathInfo.replace("/", "").trim();
+            if (param.isEmpty()) {
+                return null;
+            }
             return Long.parseLong(param);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid " + paramName + ": " + param, e);
+        } catch (Exception e) {
+            return null;
         }
     }
 
     /**
-     * Extracts a single path parameter as String.
-     * Use when parameter is not numeric (e.g., slug).
+     * Extract path parameter as String, returns null on error.
      *
-     * @param req       the HTTP request
-     * @param paramName descriptive name for error messages
-     * @return the extracted String value
-     * @throws IllegalArgumentException if parameter is missing
+     * @param req       HTTP request
+     * @param paramName parameter name for logging
+     * @return String value or null if missing
      */
     public static String extractStringParam(HttpServletRequest req, String paramName) {
-        String pathInfo = req.getPathInfo();
-        if (pathInfo == null || pathInfo.equals("/")) {
-            throw new IllegalArgumentException(paramName + " is required");
+        try {
+            String pathInfo = req.getPathInfo();
+            if (pathInfo == null || pathInfo.equals("/")) {
+                return null;
+            }
+            String param = pathInfo.replace("/", "").trim();
+            if (param.isEmpty()) {
+                return null;
+            }
+            return param;
+        } catch (Exception e) {
+            return null;
         }
-        String param = pathInfo.replace("/", "").trim();
-        if (param.isEmpty()) {
-            throw new IllegalArgumentException(paramName + " is required");
-        }
-        return param;
     }
 }

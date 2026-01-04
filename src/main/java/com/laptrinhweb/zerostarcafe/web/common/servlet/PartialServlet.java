@@ -1,5 +1,6 @@
 package com.laptrinhweb.zerostarcafe.web.common.servlet;
 
+import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
@@ -14,13 +15,6 @@ import java.io.IOException;
 /**
  * Single unified endpoint for fetching all partial views.
  * Uses ViewMap to resolve views by name - one place for all partials.
- *
- * <h2>Usage:</h2>
- * <pre>
- * GET /partial/login-form      → ViewMap.Client.LOGIN_FORM
- * GET /partial/register-form   → ViewMap.Client.REGISTER_FORM
- * GET /partial/cart-sidebar    → ViewMap.Client.CART_SIDEBAR
- * </pre>
  *
  * @author Dang Van Trung
  * @version 1.0.0
@@ -37,19 +31,24 @@ public class PartialServlet extends HttpServlet {
         try {
             // Extract partial name from path: /partial/login-form → login-form
             String partialName = RequestUtils.extractStringParam(req, "Partial name");
+            if (partialName == null || partialName.isBlank()) {
+                AppRoute.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                        "Missing partial name", resp);
+                return;
+            }
 
             // Let ViewMap resolve the view by name (centralized)
             View partial = ViewMap.getPartialByName(partialName);
-
             if (partial == null) {
-                resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Partial not found: " + partialName);
+                AppRoute.sendError(HttpServletResponse.SC_NOT_FOUND,
+                        "Partial not found: " + partialName, resp);
                 return;
             }
 
             View.render(partial, req, resp);
 
         } catch (IllegalArgumentException e) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+            AppRoute.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage(), resp);
         }
     }
 }

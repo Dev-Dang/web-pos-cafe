@@ -43,9 +43,13 @@
 }
 
 .btn-primary--filled {
-  color: $color-white;
-  background-color: $primary;
-  border-color: $primary;
+  color: $color-white !important;
+  background-color: $primary !important;
+  border-color: $primary !important;
+
+  &:disabled {
+    opacity: 0.65 !important;
+  }
 
   &:hover {
     background-color: darken($primary, 10%);

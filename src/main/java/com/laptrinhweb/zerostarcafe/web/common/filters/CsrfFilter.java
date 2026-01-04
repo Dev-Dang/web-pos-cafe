@@ -1,7 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.filters;
 
+import com.laptrinhweb.zerostarcafe.core.security.CsrfTokenUtils;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
-import com.laptrinhweb.zerostarcafe.domain.auth.service.CsrfTokenManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.*;
@@ -15,8 +15,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <h2>Description:</h2>
+ * <p>
  * CSRF protection filter using Double Submit Cookie pattern.
  * Validates CSRF tokens for all state-changing requests.
+ * </p>
  *
  * @author Dang Van Trung
  * @version 1.0.0
@@ -27,7 +30,7 @@ import java.util.Set;
 public class CsrfFilter implements Filter {
 
     private static final Set<String> SAFE_METHODS = new HashSet<>(
-        Arrays.asList("GET", "HEAD", "OPTIONS", "TRACE")
+            Arrays.asList("GET", "HEAD", "OPTIONS", "TRACE")
     );
 
     @Override
@@ -47,8 +50,8 @@ public class CsrfFilter implements Filter {
 
         // Skip safe methods (GET, HEAD, OPTIONS, TRACE)
         if (SAFE_METHODS.contains(method)) {
-            // Ensure CSRF token exists for the session
-            CsrfTokenManager.getOrCreate(request, response);
+            // Get or create CSRF token for safe methods (persisted to session)
+            CsrfTokenUtils.getOrCreate(request, response);
             chain.doFilter(req, resp);
             return;
         }
@@ -60,7 +63,7 @@ public class CsrfFilter implements Filter {
         }
 
         // Validate CSRF token for state-changing methods
-        if (!CsrfTokenManager.validate(request)) {
+        if (!CsrfTokenUtils.verifyToken(request)) {
             handleCsrfFailure(request, response);
             return;
         }
@@ -75,10 +78,9 @@ public class CsrfFilter implements Filter {
     private boolean isExempted(HttpServletRequest req) {
         String uri = req.getRequestURI();
         String path = uri.substring(req.getContextPath().length());
-        
-        // Add exemptions here (e.g., webhooks, public APIs)
-        return path.startsWith("/error") || 
-               path.startsWith("/api/webhook");
+
+        // Add exemptions here (e.g., errors, public APIs)
+        return path.startsWith("/error");
     }
 
     /**
@@ -86,19 +88,19 @@ public class CsrfFilter implements Filter {
      */
     private void handleCsrfFailure(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        
+
         String uri = req.getRequestURI();
         String path = uri.substring(req.getContextPath().length());
-        
-        LoggerUtil.warn(getClass(), 
-            String.format("CSRF validation failed - Method: %s, URI: %s, IP: %s",
-                req.getMethod(), path, req.getRemoteAddr()));
+
+        LoggerUtil.warn(getClass(),
+                String.format("CSRF validation failed - Method: %s, URI: %s, IP: %s",
+                        req.getMethod(), path, req.getRemoteAddr()));
 
         // Use AppRoute for centralized error handling
         AppRoute.sendError(
-            HttpServletResponse.SC_FORBIDDEN, 
-            "CSRF token validation failed. Please refresh the page and try again.",
-            resp
+                HttpServletResponse.SC_FORBIDDEN,
+                "CSRF token validation failed. Please refresh the page and try again.",
+                resp
         );
     }
 }

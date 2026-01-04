@@ -1,6 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.filters;
 
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
+import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,8 +14,8 @@ import java.io.IOException;
  * to the container's error handler.
  *
  * @author Dang Van Trung
- * @version 1.0.2
- * @lastModified 11/12/2025
+ * @version 1.0.3
+ * @lastModified 04/01/2026
  * @since 1.0.0
  */
 @WebFilter(filterName = "ErrorFilter", urlPatterns = "/*")
@@ -36,7 +37,7 @@ public class ErrorFilter implements Filter {
             }
 
             LoggerUtil.error(getClass(), "Unhandled exception", e);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            AppRoute.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage(), response);
         }
     }
 }

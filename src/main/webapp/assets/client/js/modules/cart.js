@@ -14,8 +14,8 @@
  * @author Dang Van Trung
  */
 
-import { CartWebConstants } from './web-constants.js';
-import * as Cookie from './cookie.js';
+import {CartWebConstants} from './web-constants.js';
+import * as Cookie from '../../../shared/js/modules/cookie.js';
 
 // ==========================================================
 // CONSTANTS
@@ -71,18 +71,18 @@ function getGuestCartKey() {
 function getCartItemIdentifier(element, isLoggedInUser) {
     if (isLoggedInUser) {
         const itemId = element.getAttribute('data-item-id');
-        
+
         if (!itemId || itemId === 'null' || itemId === 'undefined' || itemId.trim() === '') {
             console.error('[Cart] Missing item ID:', {
                 itemId: itemId,
                 element: element,
                 allAttributes: Array.from(element.attributes).map(attr => `${attr.name}="${attr.value}"`).join(', ')
             });
-            return { success: false, error: `Missing item ID. Found: "${itemId}"` };
+            return {success: false, error: `Missing item ID. Found: "${itemId}"`};
         }
 
         const numericId = parseInt(itemId.trim(), 10);
-        
+
         if (isNaN(numericId) || numericId <= 0) {
             console.error('[Cart] Invalid item ID:', {
                 original: itemId,
@@ -91,18 +91,18 @@ function getCartItemIdentifier(element, isLoggedInUser) {
                 isNaN: isNaN(numericId),
                 isPositive: numericId > 0
             });
-            return { success: false, error: `Invalid item ID: "${itemId}" -> ${numericId}` };
+            return {success: false, error: `Invalid item ID: "${itemId}" -> ${numericId}`};
         }
 
-        return { success: true, value: numericId, type: 'id' };
+        return {success: true, value: numericId, type: 'id'};
     } else {
         const itemIndex = element.getAttribute('data-item-index');
         const numericIndex = parseInt(itemIndex, 10);
         if (isNaN(numericIndex) || numericIndex < 0) {
-            return { success: false, error: `Invalid item index: ${itemIndex}` };
+            return {success: false, error: `Invalid item index: ${itemIndex}`};
         }
 
-        return { success: true, value: numericIndex, type: 'index' };
+        return {success: true, value: numericIndex, type: 'index'};
     }
 }
 
@@ -257,7 +257,7 @@ function addToGuestCart(item) {
  */
 function updateGuestCartItem(index, newQty) {
     const cart = getGuestCart();
-    
+
     // Validate inputs
     if (isNaN(index) || index < 0 || index >= cart.length) {
         console.error('[Cart] Invalid index for guest cart update:', index, 'cart length:', cart.length);
@@ -286,7 +286,7 @@ function updateGuestCartItem(index, newQty) {
  */
 function removeFromGuestCart(index) {
     const cart = getGuestCart();
-    
+
     // Validate input
     if (isNaN(index) || index < 0 || index >= cart.length) {
         console.error('[Cart] Invalid index for guest cart remove:', index, 'cart length:', cart.length);
@@ -311,7 +311,7 @@ async function postToCart(endpoint, params) {
     try {
         // Convert params object to URL-encoded string
         const body = new URLSearchParams(params).toString();
-        
+
         const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -392,7 +392,7 @@ async function updateServerCartItem(itemId, newQty) {
         console.error('[Cart] Invalid itemId for server update:', itemId);
         return null;
     }
-    
+
     if (!newQty || isNaN(newQty) || newQty <= 0) {
         console.error('[Cart] Invalid quantity for server update:', newQty);
         return null;
@@ -575,11 +575,11 @@ function updateCartUI(response) {
     // Parse the response HTML
     var temp = document.createElement('div');
     temp.innerHTML = response.html;
-    
+
     // Try to find the items container or empty state
     var serverItems = temp.querySelector('[data-cart-items]');
     var serverBody = temp.querySelector('.cart-sidebar__body');
-    
+
     // Get the content to inject into cart list containers
     var contentHtml = '';
     if (serverItems) {
@@ -748,7 +748,7 @@ async function handleQtyButtonClick(e) {
     // Get current quantity
     const qtyEl = btn.closest('.cart-item__qty-controls').querySelector('[data-item-qty]');
     const currentQty = parseInt(qtyEl.textContent, 10) || 1;
-    
+
     // Calculate new quantity
     const action = btn.getAttribute('data-qty-action');
     let newQty = action === 'increase' ? currentQty + 1 : currentQty - 1;
@@ -760,7 +760,7 @@ async function handleQtyButtonClick(e) {
 
     // Get item identifier
     const identifier = getCartItemIdentifier(btn, isLoggedIn());
-    
+
     if (!identifier.success) {
         console.error('[Cart] Identifier validation failed:', identifier.error);
         showToast('Debug: ' + identifier.error, 'error');
@@ -840,10 +840,10 @@ async function handleCheckoutClick(e) {
                 if (result.success) {
                     // Show success toast
                     showToast('Đặt hàng thành công! Hóa đơn đang được tải xuống...', 'success');
-                    
+
                     // Open invoice in new tab
                     window.open(`${CartWebConstants.Endpoint.INVOICE}?orderId=${result.orderId}`, '_blank');
-                    
+
                     // Refresh cart UI
                     updateCartBadge(0);
                     var cartLists = document.querySelectorAll('[data-cart-list]');
@@ -885,7 +885,7 @@ export async function initCart() {
     // Debug: Check existing cart items in DOM
     const existingCartItems = document.querySelectorAll('[data-cart-item]');
     existingCartItems.forEach((item, index) => {
-        });
+    });
 
     // Check if merge is needed (flag set by server after login)
     const needsMerge = document.body.hasAttribute('data-needs-cart-merge');

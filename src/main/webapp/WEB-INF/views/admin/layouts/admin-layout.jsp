@@ -47,6 +47,7 @@
         window.__APP_MODE__ = "${initParam.APP_MODE}";
     </script>
     <script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/shared/js/vendor/validate.min.js"></script>
     <script type="module" src="assets/shared/js/base.js"></script>
     <script src="assets/admin/js/admin.js"></script>
 </body>

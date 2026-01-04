@@ -18,9 +18,9 @@ import java.util.Map;
  * @lastModified 12/12/2025
  * @since 1.0.0
  */
-public final class CookieUtil {
+public final class CookieUtils {
 
-    private CookieUtil() {
+    private CookieUtils() {
     }
 
     /**

@@ -28,6 +28,20 @@ public final class WebConstants {
     }
 
     // ============================================
+    // HTTP REQUEST ATTRIBUTES
+    // ============================================
+    public static final class Request {
+        private Request() {
+        }
+
+        public static final String MESSAGES = "messages";
+        public static final String RESPONSE_CONTEXT = "responseContext";
+        public static final String FORM_DATA = "formData";
+        public static final String FORM_ERRORS = "formErrors";
+        public static final String NEED_CART_MERGE = "needsCartMerge";
+    }
+
+    // ============================================
     // LOCALE & INTERNATIONALIZATION
     // ============================================
     public static final class Locale {

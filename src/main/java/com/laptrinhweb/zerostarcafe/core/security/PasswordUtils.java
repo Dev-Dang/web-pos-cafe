@@ -23,7 +23,7 @@ import de.mkammerer.argon2.Argon2Factory;
  * @lastModified 28/10/2025
  * @since 1.0.0
  */
-public final class PasswordUtil {
+public final class PasswordUtils {
 
     // Config follows OWASP guidance for web backends
     private static final int ITERATIONS = 3;
@@ -31,7 +31,7 @@ public final class PasswordUtil {
     private static final int PARALLELISM = 1;
 
     // Prevent instantiation
-    private PasswordUtil() {
+    private PasswordUtils() {
     }
 
     // ===================== Preferred char[] API =====================

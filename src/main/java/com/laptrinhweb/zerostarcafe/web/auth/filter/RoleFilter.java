@@ -1,9 +1,9 @@
 package com.laptrinhweb.zerostarcafe.web.auth.filter;
 
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
-import com.laptrinhweb.zerostarcafe.core.utils.Message;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
+import com.laptrinhweb.zerostarcafe.web.common.response.Message;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import jakarta.servlet.*;
@@ -22,16 +22,9 @@ import java.io.IOException;
  * the filter blocks the request.
  * </p>
  *
- * <h2>Example Usage:</h2>
- * <pre>
- * /admin/*   -> requires SUPER_ADMIN
- * /manager/* -> requires STORE_MANAGER
- * /staff/*   -> requires STAFF
- * </pre>
- *
  * @author Dang Van Trung
- * @version 1.0.1
- * @lastModified 13/12/2025
+ * @version 1.0.2
+ * @lastModified 04/01/2025
  * @since 1.0.0
  */
 @WebFilter(filterName = "RoleFilter", urlPatterns = {
