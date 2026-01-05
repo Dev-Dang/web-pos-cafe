@@ -1,4 +1,7 @@
-package com.laptrinhweb.zerostarcafe.web.common.utils;
+package com.laptrinhweb.zerostarcafe.web.common;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  * Web layer constants for HTTP headers and request attributes.
@@ -9,17 +12,14 @@ package com.laptrinhweb.zerostarcafe.web.common.utils;
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class WebConstants {
-
-    private WebConstants() {
-    }
 
     // ============================================
     // HTTP HEADERS (Unpoly Protocol)
     // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static final class Header {
-        private Header() {
-        }
 
         public static final String UP_VERSION = "X-Up-Version";
         public static final String UP_TARGET = "X-Up-Target";
@@ -30,9 +30,8 @@ public final class WebConstants {
     // ============================================
     // HTTP REQUEST ATTRIBUTES
     // ============================================
-    public static final class Request {
-        private Request() {
-        }
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Attribute {
 
         public static final String MESSAGES = "messages";
         public static final String RESPONSE_CONTEXT = "responseContext";
@@ -44,9 +43,8 @@ public final class WebConstants {
     // ============================================
     // LOCALE & INTERNATIONALIZATION
     // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static final class Locale {
-        private Locale() {
-        }
 
         public static final String COOKIE_NAME = "lang";
         public static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
@@ -55,5 +53,6 @@ public final class WebConstants {
         public static final String SUPPORTED_VI = "vi-VN";
         public static final String SUPPORTED_EN = "en-US";
         public static final String DEFAULT_LOCALE = "vi-VN";
+        public static final String DEFAULT_LANGUAGE = "vi";
     }
 }
