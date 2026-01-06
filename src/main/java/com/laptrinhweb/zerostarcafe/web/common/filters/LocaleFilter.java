@@ -1,9 +1,9 @@
 package com.laptrinhweb.zerostarcafe.web.common.filters;
 
 import com.laptrinhweb.zerostarcafe.core.context.LocaleContext;
+import com.laptrinhweb.zerostarcafe.core.i18n.I18nService;
 import com.laptrinhweb.zerostarcafe.core.security.AppCookie;
 import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
-import com.laptrinhweb.zerostarcafe.core.utils.I18n;
 import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.*;
@@ -72,12 +72,9 @@ public class LocaleFilter implements Filter {
             );
         }
 
-        // Update I18n in session if needed
-        I18n i18n = (I18n) session.getAttribute(WebConstants.Locale.I18N_ATTRIBUTE);
-        if (i18n == null || !i18n.getLocale().equals(locale)) {
-            i18n = new I18n(locale, request.getServletContext());
-            session.setAttribute(WebConstants.Locale.I18N_ATTRIBUTE, i18n);
-        }
+        // Update I18nService for JSP access
+        I18nService i18nService = I18nService.getInstance();
+        request.setAttribute(WebConstants.Locale.I18N_ATTRIBUTE, i18nService);
 
         // Update LocaleContext for global access
         LocaleContext.setLocale(locale);
@@ -88,7 +85,7 @@ public class LocaleFilter implements Filter {
     private Locale resolveLocale(String paramLang,
                                  String cookieLang,
                                  Locale sessionLocale) {
-        
+
         // 1. Check if parameter language is valid
         if (paramLang != null && SUPPORTED.contains(paramLang)) {
             return Locale.forLanguageTag(paramLang);
