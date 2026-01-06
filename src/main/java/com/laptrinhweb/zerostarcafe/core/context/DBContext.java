@@ -1,6 +1,7 @@
 package com.laptrinhweb.zerostarcafe.core.context;
 
 import com.laptrinhweb.zerostarcafe.core.database.DBConnection;
+import com.laptrinhweb.zerostarcafe.core.transaction.TransactionManager;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -52,14 +53,25 @@ public class DBContext {
      * Get connection of the current request.
      * If not set, get one from pool and set it to the context.
      * The returned connection has auto-commit disabled.
+     * 
+     * Priority:
+     * 1. Active explicit transaction (from TransactionManager)
+     * 2. Filter-managed connection (existing thread-local)
+     * 3. Create new connection for filter
      *
      * @return Connection for the current request
      * @throws SQLException if a database access error occurs
      */
     public static Connection getOrCreate() throws SQLException {
+        // Priority 1: Active explicit transaction
+        Connection txConn = TransactionManager.getCurrentConnection();
+        if (txConn != null) return txConn;
+
+        // Priority 2: Filter-managed connection
         Connection conn = connHolder.get();
         if (conn != null) return conn;
 
+        // Priority 3: Create new connection for filter
         conn = DBConnection.getConnection();
         conn.setAutoCommit(false);
         connHolder.set(conn);

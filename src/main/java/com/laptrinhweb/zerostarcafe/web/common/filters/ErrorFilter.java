@@ -1,5 +1,8 @@
 package com.laptrinhweb.zerostarcafe.web.common.filters;
 
+import com.laptrinhweb.zerostarcafe.core.exception.AppException;
+import com.laptrinhweb.zerostarcafe.core.exception.BusinessException;
+import com.laptrinhweb.zerostarcafe.core.exception.TransactionException;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import jakarta.servlet.*;
@@ -30,14 +33,43 @@ public class ErrorFilter implements Filter {
 
         try {
             chain.doFilter(req, resp);
-        } catch (Exception e) {
+
+        } catch (BusinessException e) {
+            // Business rule violation - 400 Bad Request
             if (response.isCommitted()) {
-                LoggerUtil.warn(getClass(), "Response already committed.");
+                LoggerUtil.warn(getClass(),
+                        "Response already committed for BusinessException.");
+                throw new ServletException(e);
+            }
+
+            LoggerUtil.info(getClass(),
+                    "Business rule violation: " + e.getMessage());
+            AppRoute.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage(), response);
+
+        } catch (TransactionException | AppException e) {
+            // Technical/Infrastructure errors - 500 Internal Server Error
+            if (response.isCommitted()) {
+                LoggerUtil.warn(getClass(),
+                        "Response already committed for technical error.");
+                throw new ServletException(e);
+            }
+
+            LoggerUtil.error(getClass(),
+                    "Technical error: " + e.getClass().getSimpleName(), e);
+            AppRoute.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "Internal server error occurred", response);
+
+        } catch (Exception e) {
+            // Unknown errors - 500 Internal Server Error
+            if (response.isCommitted()) {
+                LoggerUtil.warn(getClass(),
+                        "Response already committed for unknown error.");
                 throw new ServletException(e);
             }
 
             LoggerUtil.error(getClass(), "Unhandled exception", e);
-            AppRoute.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage(), response);
+            AppRoute.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "Internal server error occurred", response);
         }
     }
 }
