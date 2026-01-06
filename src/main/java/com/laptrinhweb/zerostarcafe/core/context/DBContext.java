@@ -53,11 +53,12 @@ public class DBContext {
      * Get connection of the current request.
      * If not set, get one from pool and set it to the context.
      * The returned connection has auto-commit disabled.
-     * 
-     * Priority:
-     * 1. Active explicit transaction (from TransactionManager)
-     * 2. Filter-managed connection (existing thread-local)
-     * 3. Create new connection for filter
+     * <ul>
+     *     Priority:
+     *     <li> 1. Active explicit transaction (from TransactionManager) </li>
+     *     <li> 2. Filter-managed connection (existing thread-local) </li>
+     *     <li> 3. Create new connection for filter </li>
+     * </ul>
      *
      * @return Connection for the current request
      * @throws SQLException if a database access error occurs

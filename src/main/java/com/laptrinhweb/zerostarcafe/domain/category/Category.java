@@ -8,19 +8,11 @@ import lombok.Setter;
 /**
  * <h2>Description:</h2>
  * <p>
- *
+ * Domain model representing a product category.
+ * Maps directly to the {@code categories} table.
  * </p>
  *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * ... code here
- * }
- * </pre>
- *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 02/12/2025
  * @since 1.0.0
  */
 
