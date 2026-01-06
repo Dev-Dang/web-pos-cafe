@@ -3,6 +3,7 @@ package com.laptrinhweb.zerostarcafe.domain.category;
 import com.laptrinhweb.zerostarcafe.core.exception.AppException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.List;
 /**
  * <h2>Description:</h2>
  * <p>
- * Service layer for category queries with exception wrapping.
+ * Service class for managing category-related business logic.
+ * Provides methods to load active categories and retrieve categories by slug.
  * </p>
  *
  * <h2>Example Usage:</h2>
@@ -42,6 +44,12 @@ public class CategoryService {
         return INSTANCE;
     }
 
+    /**
+     * Loads all active categories ordered by display index.
+     *
+     * @return list of active categories
+     * @throws AppException if a database access error occurs
+     */
     public List<Category> loadActiveCategories() {
         try {
             return categoryDAO.findAllByIsActiveTrueOrderByOrderIndexAsc();
@@ -50,7 +58,14 @@ public class CategoryService {
         }
     }
 
-    public Category getCategoryBySlug(String slug) {
+    /**
+     * Finds an active category by its slug.
+     *
+     * @param slug category slug
+     * @return category or null if not found
+     * @throws AppException if a database access error occurs
+     */
+    public Category getCategoryBySlug(@NonNull String slug) {
         try {
             return categoryDAO.findBySlug(slug);
         } catch (SQLException e) {
