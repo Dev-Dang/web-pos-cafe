@@ -2,37 +2,35 @@ package com.laptrinhweb.zerostarcafe.web.client.mapper;
 
 import com.laptrinhweb.zerostarcafe.core.location.Location;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  * <h2>Description:</h2>
  * <p>
- * Map the HttpServletRequest into a Location object.
+ * Map the HttpServletRequest into a Location object using RequestUtils.
  * It extracts the latitude and longitude from the request.
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 13/12/2025
+ * @version 1.0.1
+ * @lastModified 05/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LocationMapper {
 
-    private LocationMapper() {
-    }
-
     /**
-     * Creates a Location from request latitude and longitude parameters.
+     * Creates a Location from request latitude and longitude parameters using RequestUtils.
      *
      * @param req the HTTP request
      * @return a valid Location, or null if inputs are missing or invalid
      */
     public static Location from(HttpServletRequest req) {
-        String latParam = req.getParameter(StoreConstants.Param.LATITUDE);
-        String lonParam = req.getParameter(StoreConstants.Param.LONGITUDE);
-
-        Double lat = parseDouble(latParam);
-        Double lon = parseDouble(lonParam);
+        Double lat = RequestUtils.getDoubleParam(req, StoreConstants.Param.LATITUDE);
+        Double lon = RequestUtils.getDoubleParam(req, StoreConstants.Param.LONGITUDE);
 
         if (lat == null || lon == null) {
             return null;
@@ -41,16 +39,4 @@ public final class LocationMapper {
         Location loc = new Location(lat, lon);
         return loc.isValid() ? loc : null;
     }
-
-    private static Double parseDouble(String value) {
-        if (value == null || value.isBlank())
-            return null;
-
-        try {
-            return Double.parseDouble(value.trim());
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
-
 }

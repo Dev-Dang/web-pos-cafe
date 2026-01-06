@@ -17,17 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * <h2>Description:</h2>
- * <p>
- *
- * </p>
- *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * ... code here
- * }
- * </pre>
+ * Detect nearest store from client location and persist store context.
  *
  * @author Dang Van Trung
  * @version 1.0.0
@@ -37,19 +27,21 @@ import java.io.IOException;
 @WebServlet(name = "StoreDetectServlet", urlPatterns = {"/store-detect"})
 public class StoreDetectServlet extends HttpServlet {
 
-    private final StoreService storeService = new StoreService();
+    private final StoreService storeService = StoreService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        // Get client location
         Location clientLoc = LocationMapper.from(req);
         if (clientLoc == null) {
             AppRoute.redirect(RouteMap.HOME, req, resp);
             return;
         }
 
-        Store store = storeService.findNearestStore(clientLoc);
+        // Compute and persist nearest store
+        Store store = storeService.resolveStoreByLocation(clientLoc);
         if (store != null) {
             StoreContext storeCtx = new StoreContext(store.getId(), null);
             StoreContextUtil.persist(req, resp, storeCtx);

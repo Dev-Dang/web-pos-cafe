@@ -31,7 +31,7 @@ import java.io.IOException;
 @WebFilter(filterName = "StoreIDFilter", urlPatterns = "/*")
 public class StoreIDFilter implements Filter {
 
-    private final StoreService storeService = new StoreService();
+    private final StoreService storeService = StoreService.getInstance();
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp,
@@ -48,7 +48,7 @@ public class StoreIDFilter implements Filter {
 
         // 2. If store context already exists in session -> do nothing
         HttpSession session = request.getSession();
-        if (session.getAttribute(StoreConstants.Session.CURRENT_STORE_CTX) != null) {
+        if (session.getAttribute(StoreConstants.Attribute.CURRENT_STORE_CTX) != null) {
             chain.doFilter(req, resp);
             return;
         }
@@ -70,6 +70,7 @@ public class StoreIDFilter implements Filter {
     /**
      * Tries to create a StoreContext by reading storeId and tableId
      * from browser cookies.
+     * Language is automatically retrieved from {@link com.laptrinhweb.zerostarcafe.core.context.LocaleContext}.
      *
      * @param request the current HTTP request
      * @return a valid StoreContext, or null if cookies are missing or invalid
@@ -84,7 +85,7 @@ public class StoreIDFilter implements Filter {
         try {
             long storeId = Long.parseLong(rawStoreId);
 
-            // Validate if the store still exists/is active in DB
+            // Validate if the store still exists/is active in DB (localized via LocaleContext)
             Store store = storeService.getActiveStoreById(storeId);
             if (store == null)
                 return null;
@@ -108,12 +109,15 @@ public class StoreIDFilter implements Filter {
 
     /**
      * Uses the client's IP address to find the nearest store.
+     * Language is automatically retrieved from {@link com.laptrinhweb.zerostarcafe.core.context.LocaleContext}.
      *
      * @param request the current HTTP request
      * @return a StoreContext based on IP lookup, or null if no store is found
      */
     private StoreContext resolveFromGeoIp(HttpServletRequest request) {
         String clientIp = request.getRemoteAddr();
+
+        // Resolve store by IP (localized via LocaleContext)
         Store store = storeService.resolveStoreByReqIp(clientIp);
 
         if (store != null) {

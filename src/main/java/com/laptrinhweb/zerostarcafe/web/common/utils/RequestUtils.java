@@ -1,6 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.utils;
 
 import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
+import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -9,28 +10,17 @@ import lombok.NoArgsConstructor;
  * <h2>Description:</h2>
  * <p>
  * Utilities for HTTP request and response handling. Provides methods for detecting
- * partial requests, static resources, and extracting path parameters safely.
+ * partial requests, static resources, extracting parameters and path parameters safely.
  * </p>
  *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * // Check request types
- * boolean isPartial = RequestUtils.isPartialRequest(request);
- *
- * // Extract path parameters (returns null on error)
- * Long productId = RequestUtils.extractLongParam(request, "productId");
- * }
- * </pre>
- *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 04/01/2026
+ * @version 2.0.0
+ * @lastModified 05/01/2026
  * @since 1.0.0
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RequestUtils {
-    
+
     /**
      * Check if request is partial (e.g., from Unpoly).
      *
@@ -54,6 +44,128 @@ public final class RequestUtils {
         String path = uri.substring(req.getContextPath().length());
         return PathUtil.isStatic(path);
     }
+
+    // ==========================================================
+    // QUERY PARAMETER UTILITIES
+    // ==========================================================
+
+    /**
+     * Get query parameter as String with default value.
+     *
+     * @param req          HTTP request
+     * @param paramName    parameter name
+     * @param defaultValue default value if parameter is missing or empty
+     * @return parameter value or default
+     */
+    public static String getStringParam(HttpServletRequest req, String paramName, String defaultValue) {
+        if (req == null || paramName == null)
+            return defaultValue;
+        String value = req.getParameter(paramName);
+        return (value != null && !value.trim().isEmpty())
+                ? value.trim()
+                : defaultValue;
+    }
+
+    /**
+     * Get query parameter as String, returns null if missing.
+     *
+     * @param req       HTTP request
+     * @param paramName parameter name
+     * @return parameter value or null
+     */
+    public static String getStringParam(HttpServletRequest req, String paramName) {
+        return getStringParam(req, paramName, null);
+    }
+
+    /**
+     * Get query parameter as Long with default value.
+     *
+     * @param req          HTTP request
+     * @param paramName    parameter name
+     * @param defaultValue default value if parameter is invalid or missing
+     * @return parameter value or default
+     */
+    public static Long getLongParam(HttpServletRequest req, String paramName, Long defaultValue) {
+        try {
+            String value = getStringParam(req, paramName);
+            return value != null ? Long.valueOf(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Get query parameter as Long, returns null if invalid.
+     *
+     * @param req       HTTP request
+     * @param paramName parameter name
+     * @return parameter value or null
+     */
+    public static Long getLongParam(HttpServletRequest req, String paramName) {
+        return getLongParam(req, paramName, null);
+    }
+
+    /**
+     * Get query parameter as Integer with default value.
+     *
+     * @param req          HTTP request
+     * @param paramName    parameter name
+     * @param defaultValue default value if parameter is invalid or missing
+     * @return parameter value or default
+     */
+    public static Integer getIntParam(HttpServletRequest req, String paramName, Integer defaultValue) {
+        try {
+            String value = getStringParam(req, paramName);
+            return value != null ? Integer.valueOf(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Get query parameter as Double with default value.
+     *
+     * @param req          HTTP request
+     * @param paramName    parameter name
+     * @param defaultValue default value if parameter is invalid or missing
+     * @return parameter value or default
+     */
+    public static Double getDoubleParam(HttpServletRequest req, String paramName, Double defaultValue) {
+        try {
+            String value = getStringParam(req, paramName);
+            return value != null ? Double.parseDouble(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Get query parameter as Double, returns null if invalid.
+     *
+     * @param req       HTTP request
+     * @param paramName parameter name
+     * @return parameter value or null
+     */
+    public static Double getDoubleParam(HttpServletRequest req, String paramName) {
+        return getDoubleParam(req, paramName, null);
+    }
+
+    /**
+     * Get query parameter as int with default value.
+     *
+     * @param req          HTTP request
+     * @param paramName    parameter name
+     * @param defaultValue default value if parameter is invalid or missing
+     * @return parameter value or default
+     */
+    public static int getIntParam(HttpServletRequest req, String paramName, int defaultValue) {
+        Integer result = getIntParam(req, paramName, Integer.valueOf(defaultValue));
+        return result != null ? result : defaultValue;
+    }
+
+    // ==========================================================
+    // PATH PARAMETER UTILITIES
+    // ==========================================================
 
     /**
      * Extract path parameter as Long, returns null on error.
@@ -99,5 +211,39 @@ public final class RequestUtils {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    // ==========================================================
+    // VALIDATION UTILITIES
+    // ==========================================================
+
+    /**
+     * Check if required parameter is present and not empty.
+     *
+     * @param req       HTTP request
+     * @param paramName parameter name
+     * @return true if parameter exists and not empty
+     */
+    public static boolean hasRequiredParam(HttpServletRequest req, String paramName) {
+        String value = getStringParam(req, paramName);
+        return value != null && !value.isEmpty();
+    }
+
+    /**
+     * Check if any of the required parameters are missing.
+     *
+     * @param req        HTTP request
+     * @param paramNames parameter names to check
+     * @return true if all required parameters are present
+     */
+    public static boolean hasAllRequiredParams(HttpServletRequest req, String... paramNames) {
+        if (paramNames == null || paramNames.length == 0) return true;
+
+        for (String paramName : paramNames) {
+            if (!hasRequiredParam(req, paramName)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -9,37 +9,24 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 /**
- * <h2>Description:</h2>
- * <p>
- * Utility class for storing and loading the current store context.
- * It helps save the context into session and also write related cookies
- * such as storeId and tableId for later requests.
- * </p>
- *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * StoreContext ctx = ...;
- * StoreContextUtil.persist(req, resp, ctx);
- * }
- * </pre>
+ * Helper for saving store context to session and cookies.
  *
  * @author Dang Van Trung
  * @version 1.0.0
  * @lastModified 12/12/2025
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StoreContextUtil {
 
-    private StoreContextUtil() {
-    }
-
     /**
-     * Saves the store context into the user's session.
+     * Save store context into the session.
      *
      * @param req the incoming HTTP request
      * @param ctx the store context to save
@@ -49,13 +36,11 @@ public class StoreContextUtil {
             return;
 
         HttpSession session = req.getSession();
-        session.setAttribute(StoreConstants.Session.CURRENT_STORE_CTX, ctx);
+        session.setAttribute(StoreConstants.Attribute.CURRENT_STORE_CTX, ctx);
     }
 
     /**
-     * Saves the store context to both session and cookies.
-     * Writes storeId and tableId cookies if available.
-     * Clears tableId cookie when the value is null.
+     * Save store context to session and cookies.
      *
      * @param req  the incoming HTTP request
      * @param resp the HTTP response used to add cookies
@@ -69,12 +54,15 @@ public class StoreContextUtil {
         if (ctx == null)
             return;
 
+        // Save store context to the current session
         bind(req, ctx);
 
+        // Compute cookie TTL
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime expired = now.plusMinutes(StoreConstants.Cookie.MAX_AGE_SECONDS);
         int ttlSeconds = TimeUtil.ttlFromNow(expired);
 
+        // Save storeId and tableId to cookies
         if (ctx.getStoreId() != null) {
             Cookie storeIdCookie = AppCookie.accessible(
                     StoreConstants.Cookie.LAST_STORE_ID,
@@ -92,6 +80,7 @@ public class StoreContextUtil {
             );
             resp.addCookie(tableIdCookie);
         } else {
+            // Remove stale table selection when tableId is not provided.
             CookieUtils.clear(StoreConstants.Cookie.LAST_TABLE_ID, resp);
         }
     }

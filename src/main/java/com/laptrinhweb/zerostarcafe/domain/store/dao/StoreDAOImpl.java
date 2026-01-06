@@ -1,5 +1,7 @@
 package com.laptrinhweb.zerostarcafe.domain.store.dao;
 
+import com.laptrinhweb.zerostarcafe.core.context.DBContext;
+import com.laptrinhweb.zerostarcafe.core.context.LocaleContext;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreStatus;
 
@@ -13,20 +15,14 @@ import java.util.Optional;
  * <p>
  * JDBC implementation of {@link StoreDAO} that interacts with
  * the {@code stores} table for reading store information.
- * </p>
+ * <p>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 02/12/2025
+ * @version 1.2.0
+ * @lastModified 05/01/2026
  * @since 1.0.0
  */
 public class StoreDAOImpl implements StoreDAO {
-
-    private final Connection conn;
-
-    public StoreDAOImpl(Connection conn) {
-        this.conn = conn;
-    }
 
     // ==========================================================
     // RETRIEVAL
@@ -34,15 +30,25 @@ public class StoreDAOImpl implements StoreDAO {
 
     @Override
     public Optional<Store> findById(long id) throws SQLException {
+        // Get current language from LocaleContext
+        String language = LocaleContext.getLanguage();
+        String jsonPath = "$." + language;
+
         String sql = """
-                SELECT id, name, address, latitude, longitude, status,
+                SELECT id,
+                       JSON_UNQUOTE(JSON_EXTRACT(name, ?)) as name,
+                       JSON_UNQUOTE(JSON_EXTRACT(address, ?)) as address,
+                       latitude, longitude, status,
                        created_at, updated_at
                 FROM stores
                 WHERE id = ?
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, id);
+            ps.setString(1, jsonPath);
+            ps.setString(2, jsonPath);
+            ps.setLong(3, id);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
@@ -55,8 +61,15 @@ public class StoreDAOImpl implements StoreDAO {
 
     @Override
     public List<Store> findAllByStatus(StoreStatus status) throws SQLException {
+        // Get current language from LocaleContext
+        String language = LocaleContext.getLanguage();
+        String jsonPath = "$." + language;
+
         String sql = """
-                SELECT id, name, address, latitude, longitude, status,
+                SELECT id,
+                       JSON_UNQUOTE(JSON_EXTRACT(name, ?)) as name,
+                       JSON_UNQUOTE(JSON_EXTRACT(address, ?)) as address,
+                       latitude, longitude, status,
                        created_at, updated_at
                 FROM stores
                 WHERE status = ?
@@ -64,8 +77,11 @@ public class StoreDAOImpl implements StoreDAO {
 
         List<Store> list = new ArrayList<>();
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, status.name().toLowerCase());
+            ps.setString(1, jsonPath);
+            ps.setString(2, jsonPath);
+            ps.setString(3, status.name().toLowerCase());
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {

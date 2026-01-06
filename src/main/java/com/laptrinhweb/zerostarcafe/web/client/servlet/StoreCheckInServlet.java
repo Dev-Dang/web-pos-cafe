@@ -3,7 +3,7 @@ package com.laptrinhweb.zerostarcafe.web.client.servlet;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.domain.store.service.StoreService;
-import com.laptrinhweb.zerostarcafe.web.client.mapper.ClientWebMapper;
+import com.laptrinhweb.zerostarcafe.web.client.mapper.StoreCtxMapper;
 import com.laptrinhweb.zerostarcafe.web.client.utils.StoreContextUtil;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
@@ -16,17 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * <h2>Description:</h2>
- * <p>
- *
- * </p>
- *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * ... code here
- * }
- * </pre>
+ * Validate store check-in and persist store context. Redirects to home.
  *
  * @author Dang Van Trung
  * @version 1.0.0
@@ -36,25 +26,29 @@ import java.io.IOException;
 @WebServlet(name = "StoreCheckInServlet", urlPatterns = {"/store/check-in"})
 public class StoreCheckInServlet extends HttpServlet {
 
-    private final StoreService storeService = new StoreService();
+    private final StoreService storeService = StoreService.getInstance();
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        StoreContext storeCtx = ClientWebMapper.toStoreContext(req);
+        // Get current store context
+        StoreContext storeCtx = StoreCtxMapper.toStoreContext(req);
         if (storeCtx == null) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            AppRoute.sendError(HttpServletResponse.SC_NOT_FOUND, resp);
             return;
         }
 
+        // Validate store check-in
         Store store = storeService.getActiveStoreById(storeCtx.getStoreId());
         if (store == null) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            AppRoute.sendError(HttpServletResponse.SC_NOT_FOUND, resp);
             return;
         }
 
+        // Persist store context
         StoreContextUtil.persist(req, resp, storeCtx);
+
         AppRoute.redirect(RouteMap.HOME, req, resp);
     }
 }
