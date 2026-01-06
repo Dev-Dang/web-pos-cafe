@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpSession;
  * <h2>Description:</h2>
  * <p>
  * CSRF token manager using Double Submit Cookie pattern. Provides secure token
- * generation, validation, and management for preventing Cross-Site Request Forgery attacks.
+ * generation, validation, and management for preventing Cross-Site Attribute Forgery attacks.
  * </p>
  *
  * <h2>Example Usage:</h2>
@@ -16,10 +16,10 @@ import jakarta.servlet.http.HttpSession;
  * {@code
  * // Get or generate token for safe methods
  * String token = CsrfTokenUtils.getOrCreate(request, response);
- * 
+ *
  * // Validate token for state-changing methods
  * boolean valid = CsrfTokenUtils.verifyToken(request);
- * 
+ *
  * // Clear token on logout
  * CsrfTokenUtils.removeToken(request, response);
  * }

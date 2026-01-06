@@ -29,7 +29,7 @@ public final class SecurityKeys {
     // CSRF PROTECTION
     // ============================================
     public static final String CSRF_TOKEN_NAME = "x-csrf-token";           // Cookie name
-    public static final String CSRF_HEADER_NAME = "x-csrf-token";        // Request header
+    public static final String CSRF_HEADER_NAME = "x-csrf-token";        // Attribute header
     public static final String CSRF_PARAM_NAME = "_csrf";                // Form parameter
     public static final String SESSION_CSRF_TOKEN = "csrfToken";         // Session attribute
 
