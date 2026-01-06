@@ -1,6 +1,5 @@
 package com.laptrinhweb.zerostarcafe.domain.auth.service;
 
-import com.laptrinhweb.zerostarcafe.core.database.DBConnection;
 import com.laptrinhweb.zerostarcafe.core.exception.AppException;
 import com.laptrinhweb.zerostarcafe.core.security.PasswordUtils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
@@ -18,10 +17,10 @@ import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserStatus;
 import com.laptrinhweb.zerostarcafe.domain.user.service.UserService;
 import com.laptrinhweb.zerostarcafe.domain.user_role.UserStoreRole;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -58,7 +57,22 @@ import java.util.Optional;
  * @lastModified 18/12/2025
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AuthService {
+
+    private static final AuthService INSTANCE = new AuthService();
+
+    private final UserService userService = UserService.getInstance();
+    private final AuthRecordService recordService = AuthRecordService.getInstance();
+
+    /**
+     * Gets the singleton instance of AuthService.
+     *
+     * @return AuthService instance
+     */
+    public static AuthService getInstance() {
+        return INSTANCE;
+    }
 
     /**
      * Registers a new user.
@@ -67,9 +81,7 @@ public final class AuthService {
      * @return AuthResult indicating success or failure
      */
     public AuthResult<AuthStatus, Void> register(@NonNull RegisterDTO dto) {
-        try (Connection conn = DBConnection.getConnection()) {
-            UserService userService = new UserService(conn);
-
+        try {
             String email = normalize(dto.getEmail());
             String username = UsernameGenerator.generate(email);
 
@@ -94,7 +106,7 @@ public final class AuthService {
                     "New User Registered: " + newUser.getUsername());
             return AuthResult.ok(AuthStatus.REGISTER_SUCCESS);
 
-        } catch (AppException | SQLException e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return AuthResult.fail(AuthStatus.REGISTER_FAILED);
         }
@@ -111,11 +123,9 @@ public final class AuthService {
             @NonNull LoginDTO form,
             @NonNull RequestInfoDTO reqInfo
     ) {
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
-
+        try {
             // Verify credential (username and password)
-            AuthUser authUser = verifyCredential(conn, form);
+            AuthUser authUser = verifyCredential(form);
             if (authUser == null)
                 return AuthResult.fail(AuthStatus.INVALID_CREDENTIALS);
 
@@ -165,7 +175,7 @@ public final class AuthService {
                     "New Login Record: \n" + record.toString());
             return AuthResult.ok(AuthStatus.LOGIN_SUCCESS, context);
 
-        } catch (AppException | SQLException e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return AuthResult.fail(AuthStatus.LOGIN_FAILED);
         }
@@ -210,11 +220,10 @@ public final class AuthService {
         context.updateToken(newAuthToken);
 
         // Update auth record
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
+        try {
             recordService.updateByToken(reqInfo, newToken, oldToken);
             return true;
-        } catch (Exception e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return false;
         }
@@ -237,10 +246,7 @@ public final class AuthService {
         if (rawAuthToken == null || rawDeviceId == null)
             return null;
 
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
-            UserService userService = new UserService(conn);
-
+        try {
             // Get the current auth record by token
             Optional<AuthRecord> recordOpt = recordService.findValidByRawToken(rawAuthToken);
             if (recordOpt.isEmpty())
@@ -297,7 +303,7 @@ public final class AuthService {
             recordService.save(userId, record);
 
             return context;
-        } catch (Exception e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return null;
         }
@@ -309,14 +315,12 @@ public final class AuthService {
      * @param token raw auth token
      */
     public void clearAuthState(String token) {
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
-
+        try {
             if (token == null || token.isBlank())
                 return;
 
             recordService.revokeByRawToken(token);
-        } catch (Exception e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
         }
     }
@@ -327,9 +331,7 @@ public final class AuthService {
      * @param dto login input
      * @return authenticated AuthUser or null if invalid
      */
-    public AuthUser verifyCredential(Connection conn, LoginDTO dto) {
-        UserService userService = new UserService(conn);
-
+    public AuthUser verifyCredential(LoginDTO dto) {
         String email = normalize(dto.getEmail());
         User user = userService.getActiveByEmail(email);
         if (user == null)

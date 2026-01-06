@@ -416,7 +416,8 @@ body::-webkit-scrollbar {
 .form-floating.password-field .password-toggle {
   position: absolute;
   right: 1.6rem;
-  top: 0;
+  top: 50%;
+  transform: translateY(calc(-50% + 3px));
   height: 5.2rem;
   border: none;
   background: transparent;
@@ -1507,6 +1508,11 @@ up-modal-box {
   background: #fff;
   border-radius: 1.6rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+up-modal-box::-webkit-scrollbar {
+  display: none;
 }
 @media (max-width: 767.98px) {
   up-modal-box {

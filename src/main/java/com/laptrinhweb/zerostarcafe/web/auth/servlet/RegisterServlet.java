@@ -6,10 +6,10 @@ import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthStatus;
 import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthService;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
+import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.response.Message;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
-import com.laptrinhweb.zerostarcafe.web.common.utils.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletException;
@@ -33,7 +33,7 @@ import java.util.Map;
 @WebServlet(name = "RegisterServlet", urlPatterns = "/auth/register")
 public class RegisterServlet extends HttpServlet {
 
-    private final AuthService authService = new AuthService();
+    private final AuthService authService = AuthService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -86,11 +86,11 @@ public class RegisterServlet extends HttpServlet {
                                 HttpServletResponse resp) throws IOException, ServletException {
 
         // Add form data for refill (only email)
-        req.setAttribute(WebConstants.Request.FORM_DATA, form.formState());
+        req.setAttribute(WebConstants.Attribute.FORM_DATA, form.formState());
 
         // Add validation errors
         if (fieldErrors != null && !fieldErrors.isEmpty()) {
-            req.setAttribute(WebConstants.Request.FORM_ERRORS, fieldErrors);
+            req.setAttribute(WebConstants.Attribute.FORM_ERRORS, fieldErrors);
         }
 
         // Return updated form with errors (422 status)

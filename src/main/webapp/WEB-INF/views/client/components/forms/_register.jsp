@@ -10,12 +10,10 @@
 <div class="auth-modal__content" up-main="modal">
     <%-- Mobile Header --%>
     <div class="modal-mobile-header">
-        <button
-                type="button"
+        <button type="button"
                 class="modal-mobile-header__back"
                 up-dismiss
-                aria-label="Close"
-        >
+                aria-label="Close">
             <i class="fi fi-rr-angle-small-left"></i>
         </button>
         <h3 class="modal-mobile-header__title"></h3>
@@ -36,16 +34,12 @@
 
             <%-- Social Login Section --%>
             <div class="auth-modal__social">
-                <button
-                        type="button"
-                        class="btn btn-lg btn-neutral--outlined btn-full auth-modal__social-btn"
-                >
+                <button type="button"
+                        class="btn btn-lg btn-neutral--outlined btn-full auth-modal__social-btn">
                     <span class="auth-modal__social-icon">
-                        <img
-                                src="${pageContext.request.contextPath}/assets/client/img/icons/google.svg"
-                                alt="Google"
-                                class="auth-modal__social-img"
-                        />
+                        <img src="${pageContext.request.contextPath}/assets/client/img/icons/google.svg"
+                             alt="Google"
+                             class="auth-modal__social-img"/>
                     </span>
                     <span class="auth-modal__social-text">
                         ${i18n.trans("form.useGoogleAccount")}
@@ -96,20 +90,25 @@
                                class="form-control <c:if test="${not empty formErrors.password}">is-invalid</c:if>"
                                placeholder="${i18n.trans("form.password")}" required
                                minlength="6"/>
-                        <label for="password"> ${i18n.trans("form.password")} </label>
-                        <button
-                                type="button"
+                        <label for="password">${i18n.trans("form.password")}</label>
+                        <button type="button"
                                 class="password-toggle"
                                 data-toggle-password="password"
-                                aria-label="Toggle password visibility"
-                        >
+                                aria-label="Toggle password visibility">
                             <i class="fi fi-rr-eye"></i>
                         </button>
-                        <div class="invalid-feedback">
-                            <c:if test="${not empty formErrors.password}">
-                                ${i18n.trans(formErrors.password)}
-                            </c:if>
-                        </div>
+                        <c:choose>
+                            <c:when test="${not empty formErrors.password}">
+                                <div class="invalid-feedback">
+                                        ${i18n.trans(formErrors.password)}
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="form-text text-muted">
+                                        ${i18n.trans("form.password.hint")}
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                     <div class="form-floating password-field">
@@ -121,12 +120,10 @@
                         <label for="confirmPassword">
                             ${i18n.trans("form.confirmPassword")}
                         </label>
-                        <button
-                                type="button"
+                        <button type="button"
                                 class="password-toggle"
                                 data-toggle-password="confirmPassword"
-                                aria-label="Toggle password visibility"
-                        >
+                                aria-label="Toggle password visibility">
                             <i class="fi fi-rr-eye"></i>
                         </button>
                         <div class="invalid-feedback">
@@ -156,10 +153,8 @@
                 </div>
 
                 <div class="auth-modal__actions">
-                    <button
-                            type="submit"
-                            class="btn btn-lg btn-primary--filled btn-full auth-modal__submit"
-                    >
+                    <button type="submit"
+                            class="btn btn-lg btn-primary--filled btn-full auth-modal__submit">
                         ${i18n.trans("form.button.register")}
                     </button>
                 </div>

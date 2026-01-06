@@ -34,7 +34,7 @@ import java.io.IOException;
 public class AuthFilter implements Filter {
 
     private AuthSessionManager sessionManager;
-    private final AuthReqService authReqService = new AuthReqService();
+    private final AuthReqService authReqService = AuthReqService.getInstance();
 
     @Override
     public void init(FilterConfig config) throws ServletException {

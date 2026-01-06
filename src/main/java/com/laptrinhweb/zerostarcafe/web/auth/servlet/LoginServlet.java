@@ -12,10 +12,10 @@ import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthService;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
+import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.response.Message;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
-import com.laptrinhweb.zerostarcafe.web.common.utils.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletConfig;
@@ -27,6 +27,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -41,7 +42,7 @@ import java.util.Map;
 public class LoginServlet extends HttpServlet {
 
     private AuthSessionManager sessionManager;
-    private final AuthService authService = new AuthService();
+    private final AuthService authService = AuthService.getInstance();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -82,14 +83,25 @@ public class LoginServlet extends HttpServlet {
                 authService.authenticate(form, reqInfo);
 
         AuthContext context = result.getData();
-        if (context == null || !result.isSuccess()) {
-            Message.error(req, "message.login_failed");
-            failedLogin(form, validation.fieldErrors(), req, resp);
+        if (result.isSuccess() && context != null) {
+            // Authentication successful → create session and redirect
+            Message.success(req, "message.login_success");
+            successLogin(context, req, resp);
             return;
         }
 
-        // Authentication successful → create session and redirect
-        successLogin(context, req, resp);
+        // Handle known authentication errors
+        Map<String, String> fieldErrors = new HashMap<>();
+        if (result.getStatus() == AuthStatus.INVALID_CREDENTIALS) {
+            Message.error(req, "message.invalid_credentials");
+            fieldErrors.put("email", "form.invalid_credentials");
+            failedLogin(form, fieldErrors, req, resp);
+            return;
+        }
+
+        // Handle unknown errors
+        Message.error(req, "message.login_failed");
+        failedLogin(form, fieldErrors, req, resp);
     }
 
     private void successLogin(AuthContext context,
@@ -100,11 +112,7 @@ public class LoginServlet extends HttpServlet {
         sessionManager.startSession(req, resp, context);
 
         // Set flag to trigger cart merge on next page load
-        req.getSession().setAttribute(WebConstants.
-                Request.NEED_CART_MERGE, Boolean.TRUE);
-
-        // Set flash message for redirect
-        Message.success(req, "message.login_success");
+        req.getSession().setAttribute(WebConstants.Attribute.NEED_CART_MERGE, Boolean.TRUE);
 
         // Redirect user to appropriate page
         String redirectPath = getRedirectPath(context);
@@ -117,11 +125,11 @@ public class LoginServlet extends HttpServlet {
                              HttpServletResponse resp) throws IOException, ServletException {
 
         // Add form data for refill (only email)
-        req.setAttribute(WebConstants.Request.FORM_DATA, form.formState());
+        req.setAttribute(WebConstants.Attribute.FORM_DATA, form.formState());
 
         // Add validation errors
         if (fieldErrors != null && !fieldErrors.isEmpty()) {
-            req.setAttribute(WebConstants.Request.FORM_ERRORS, fieldErrors);
+            req.setAttribute(WebConstants.Attribute.FORM_ERRORS, fieldErrors);
         }
 
         // Return updated form with errors (422 status)

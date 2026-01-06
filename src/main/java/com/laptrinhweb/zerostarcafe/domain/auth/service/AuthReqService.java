@@ -5,7 +5,8 @@ import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthStatus;
-import lombok.RequiredArgsConstructor;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
@@ -30,13 +31,19 @@ import java.util.Map;
  * @since 1.0.0
  */
 
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AuthReqService {
 
-    private final AuthService authService;
+    private static final AuthReqService INSTANCE = new AuthReqService();
+    private final AuthService authService = AuthService.getInstance();
 
-    public AuthReqService() {
-        this(new AuthService());
+    /**
+     * Get the singleton instance of AuthReqService.
+     *
+     * @return the AuthReqService instance
+     */
+    public static AuthReqService getInstance() {
+        return INSTANCE;
     }
 
     /**

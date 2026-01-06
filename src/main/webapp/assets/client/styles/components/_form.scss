@@ -44,7 +44,8 @@
     .password-toggle {
       position: absolute;
       right: $spacing-lg;
-      top: 0;
+      top: 50%;
+      transform: translateY(calc(-50% + 3px));
       height: $form-floating-height;
       border: none;
       background: transparent;
