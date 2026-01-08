@@ -14,8 +14,8 @@
  * @author Dang Van Trung
  */
 
-import {CartWebConstants} from './web-constants.js';
-import * as Cookie from '../../../shared/js/modules/cookie.js';
+import {CartWebConstants} from '../src/main/webapp/assets/client/js/modules/web-constants.js';
+import * as Cookie from '../src/main/webapp/assets/shared/js/modules/cookie.js';
 
 // ==========================================================
 // CONSTANTS
@@ -564,7 +564,7 @@ function formatPrice(value) {
 
 /**
  * Update cart UI with server response (HTML fragment).
- * The server returns cart-sidebar.jsp which contains [data-cart-sidebar] wrapper.
+ * The server returns _cart-sidebar.jsp which contains [data-cart-sidebar] wrapper.
  * home.jsp has a different structure with [data-cart-list] for items.
  */
 function updateCartUI(response) {

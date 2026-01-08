@@ -14,10 +14,13 @@
                 <span>${option.name}</span>
                 <c:choose>
                     <c:when test="${option.required}">
-                        <span class="product-modal__section-sub">(${i18n.trans("general.product.modal.required")})</span>
+                        <span class="product-modal__section-sub">(${i18n.trans("general.product.modal.required")})
+                        </span>
                     </c:when>
                     <c:when test="${option.maxSelect > 1}">
-                        <span class="product-modal__section-sub">(${i18n.trans("general.product.modal.maxSelect").replace("{0}", option.maxSelect)})</span>
+                        <span class="product-modal__section-sub">
+                            (${i18n.trans("general.product.modal.maxSelect").replace("{0}", option.maxSelect)})
+                        </span>
                     </c:when>
                 </c:choose>
             </div>
@@ -26,7 +29,13 @@
                 <c:when test="${option.maxSelect <= 1}">
                     <div class="option-group">
                         <c:forEach var="value" items="${option.values}">
-                            <button class="option-card" type="button">
+                            <button class="option-card"
+                                    type="button"
+                                    data-option-item
+                                    data-option-type="single"
+                                    data-option-group="${option.id}"
+                                    data-option-value-id="${value.id}"
+                                    data-option-price="${value.priceDelta}">
                                     ${value.name}
                                 <c:if test="${value.priceDelta > 0}">
                                     + <fmt:formatNumber value="${value.priceDelta}" type="number" groupingUsed="true"/>đ
@@ -39,12 +48,18 @@
                 <c:otherwise>
                     <div class="option-list">
                         <c:forEach var="value" items="${option.values}">
-                            <div class="option-row">
+                            <div class="option-row"
+                                 data-option-item
+                                 data-option-type="multi"
+                                 data-option-group="${option.id}"
+                                 data-option-value-id="${value.id}"
+                                 data-option-price="${value.priceDelta}">
                                 <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
                                 <span>
                                         ${value.name}
                                     <c:if test="${value.priceDelta > 0}">
-                                        (+ <fmt:formatNumber value="${value.priceDelta}" type="number" groupingUsed="true"/>đ)
+                                        (+ <fmt:formatNumber value="${value.priceDelta}" type="number"
+                                                             groupingUsed="true"/>đ)
                                     </c:if>
                                 </span>
                             </div>

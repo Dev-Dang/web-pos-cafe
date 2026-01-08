@@ -1,35 +1,40 @@
-﻿/**
- * ------------------------------------------------------------
- * Module: Client App Bootstrap
- * ------------------------------------------------------------
- * @description
- * Entry point for client-side features. Wires up UI modules
- * on DOMContentLoaded using simple, predictable initialization.
- *
- * @example
- * // Executed automatically after DOM is ready
- *
- * @version 1.0.3
- * @since 1.0.0
- * @lastModified 01/01/2026
- * @module app-main
- * @author Dang Van Trung
- */
-import { initStoreDetection } from "./modules/store-detect.js";
-import { initCategorySlider } from "./modules/swiper.js";
-import { initCart } from "./modules/cart.js";
-import { initProductModal } from "./modules/product-modal.js";
-import { initProductCards } from "./modules/product-card.js";
-import { initCatalogSwitcher } from "./modules/catalog.js";
-import { initProductSearch } from "./modules/search.js";
+import {initStoreDetection} from "./modules/store-detect.js";
+import {initCategorySlider} from "./modules/swiper.js";
+import {initProductSearch} from "./modules/search.js";
+import {initUnpoly} from "./modules/unpoly.js";
+import {initInfiniteScroll} from "./modules/infinite-scroll.js";
+import "./modules/product-modal.js"; // Auto-registers via up.compiler
 
+// Initialize core modules
 initStoreDetection();
+initUnpoly();
+initProductSearch();
 
-document.addEventListener("DOMContentLoaded", () => {
-  initCategorySlider();
-  initCart();
-  initProductModal();
-  initProductCards();
-  initCatalogSwitcher();
-  initProductSearch();
-});
+// Initialize Unpoly-aware modules
+if (typeof up !== 'undefined') {
+    // Category slider initialization for Unpoly
+    up.compiler('[data-category-slider]', (slider) => {
+        initCategorySlider(slider);
+    });
+
+    // Modal close handler for Unpoly modals
+    up.compiler('.product-modal__close', (button) => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            up.layer.dismiss();
+        });
+    });
+
+    // Mobile back button handler
+    up.compiler('.product-modal__mobile-header__back', (button) => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            up.layer.dismiss();
+        });
+    });
+
+    // Infinite scroll
+    up.compiler('[data-load-trigger]', (trigger) => {
+        initInfiniteScroll(trigger);
+    });
+}

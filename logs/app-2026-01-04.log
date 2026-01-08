@@ -1,0 +1,1196 @@
+[2026-01-04 00:57:43] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 00:58:13] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 00:58:14] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 00:58:14] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 00:58:14] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 00:58:14] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 00:58:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  670 ms
+[2026-01-04 00:58:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 00:58:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   10 ms
+[2026-01-04 00:58:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  138 ms
+[2026-01-04 00:58:25] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   16 ms
+[2026-01-04 00:59:36] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    8 ms
+[2026-01-04 00:59:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   85 ms
+[2026-01-04 00:59:41] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/register            | 422 |    2 ms
+[2026-01-04 00:59:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 01:00:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   24 ms
+[2026-01-04 01:00:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   10 ms
+[2026-01-04 01:00:19] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    1 ms
+[2026-01-04 01:00:39] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    8 ms
+[2026-01-04 01:00:39] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    0 ms
+[2026-01-04 01:00:39] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    1 ms
+[2026-01-04 01:00:39] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    0 ms
+[2026-01-04 01:00:39] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    2 ms
+[2026-01-04 01:08:57] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:09:21] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:09:21] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:09:21] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:09:21] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:09:21] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:09:21] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  518 ms
+[2026-01-04 01:09:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    7 ms
+[2026-01-04 01:09:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   10 ms
+[2026-01-04 01:09:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  113 ms
+[2026-01-04 01:09:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   17 ms
+[2026-01-04 01:09:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   10 ms
+[2026-01-04 01:09:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    1 ms
+[2026-01-04 01:09:49] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   10 ms
+[2026-01-04 01:11:25] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:11:42] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:11:42] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:11:42] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:11:42] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:11:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    6 ms
+[2026-01-04 01:11:42] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:11:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  509 ms
+[2026-01-04 01:11:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 01:11:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   10 ms
+[2026-01-04 01:11:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  100 ms
+[2026-01-04 01:12:09] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  319 ms
+[2026-01-04 01:12:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  235 ms
+[2026-01-04 01:12:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  224 ms
+[2026-01-04 01:12:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   22 ms
+[2026-01-04 01:12:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   10 ms
+[2026-01-04 01:13:11] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   11 ms
+[2026-01-04 01:13:30] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=155, userId=9, authHash=ea3ed6adc1a399e6f43a1290dd4834054e2dc16223f8ad0a1a4607b372f6d48c, deviceId=2580950666be12a3876a6a6f4eb3a269c69308e48f15f8d7f8d42234df79ca81, status=ACTIVE, createdAt=2026-01-04T01:13:30.140604500, expiredAt=2026-01-11T01:13:30.132790600, lastRotatedAt=2026-01-04T01:13:30.140604500, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-04 01:13:30] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  235 ms
+[2026-01-04 01:13:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   28 ms
+[2026-01-04 01:13:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    5 ms
+[2026-01-04 01:13:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    7 ms
+[2026-01-04 01:13:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 01:13:40] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   11 ms
+[2026-01-04 01:14:12] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   10 ms
+[2026-01-04 01:14:57] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:15:09] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:15:10] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:15:10] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:15:10] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:15:10] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:15:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  479 ms
+[2026-01-04 01:15:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 01:15:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    8 ms
+[2026-01-04 01:15:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  118 ms
+[2026-01-04 01:15:30] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  268 ms
+[2026-01-04 01:18:51] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:19:01] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:19:01] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:19:01] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:19:01] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:19:01] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:19:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  450 ms
+[2026-01-04 01:19:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 01:19:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    7 ms
+[2026-01-04 01:19:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  102 ms
+[2026-01-04 01:19:21] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   37 ms
+[2026-01-04 01:19:39] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    8 ms
+[2026-01-04 01:19:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   69 ms
+[2026-01-04 01:19:52] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/register            | 422 |    8 ms
+[2026-01-04 01:29:11] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:29:21] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:29:21] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:29:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  505 ms
+[2026-01-04 01:29:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   87 ms
+[2026-01-04 01:29:35] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   36 ms
+[2026-01-04 01:29:50] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:29:50] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:29:50] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:29:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   19 ms
+[2026-01-04 01:29:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-04 01:29:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 01:29:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 01:29:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-04 01:29:56] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    4 ms
+[2026-01-04 01:30:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   20 ms
+[2026-01-04 01:30:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-04 01:30:12] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    4 ms
+[2026-01-04 01:30:25] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    7 ms
+[2026-01-04 01:31:23] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    8 ms
+[2026-01-04 01:43:16] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:43:28] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:43:28] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:43:28] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:43:28] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:43:28] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:43:28] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  406 ms
+[2026-01-04 01:43:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    5 ms
+[2026-01-04 01:43:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    6 ms
+[2026-01-04 01:43:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  122 ms
+[2026-01-04 01:43:44] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   26 ms
+[2026-01-04 01:44:02] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   23 ms
+[2026-01-04 01:51:31] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:51:52] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:51:52] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:51:52] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:51:52] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:51:52] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:51:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  440 ms
+[2026-01-04 01:51:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 01:51:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    8 ms
+[2026-01-04 01:52:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  100 ms
+[2026-01-04 01:52:24] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   42 ms
+[2026-01-04 01:52:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    4 ms
+[2026-01-04 01:52:36] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:52:36] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:52:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   12 ms
+[2026-01-04 01:52:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    2 ms
+[2026-01-04 01:52:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   19 ms
+[2026-01-04 01:52:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 01:53:19] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  286 ms
+[2026-01-04 01:53:27] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=156, userId=9, authHash=80fcda891090686d913c67ac3d26224857c496c7f43da5b9c3352ca9dc6f70cf, deviceId=6e983b8627c5728e5016881e1a94af1e407e379d45c4c23213580419f29bdf95, status=ACTIVE, createdAt=2026-01-04T01:53:27.392747, expiredAt=2026-01-11T01:53:27.389751100, lastRotatedAt=2026-01-04T01:53:27.392747, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-04 01:53:27] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  262 ms
+[2026-01-04 01:53:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   22 ms
+[2026-01-04 01:53:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    3 ms
+[2026-01-04 01:53:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    4 ms
+[2026-01-04 01:53:32] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 01:53:51] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  233 ms
+[2026-01-04 01:56:50] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:57:04] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:57:04] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:57:04] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:57:04] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:57:04] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:57:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  450 ms
+[2026-01-04 01:57:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    5 ms
+[2026-01-04 01:57:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    6 ms
+[2026-01-04 01:57:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  108 ms
+[2026-01-04 01:57:25] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   35 ms
+[2026-01-04 01:57:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    3 ms
+[2026-01-04 01:57:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   23 ms
+[2026-01-04 01:57:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 01:58:04] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   11 ms
+[2026-01-04 01:59:30] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 01:59:42] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 01:59:42] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 01:59:42] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 01:59:42] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 01:59:42] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 01:59:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  478 ms
+[2026-01-04 01:59:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 01:59:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    7 ms
+[2026-01-04 01:59:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   21 ms
+[2026-01-04 01:59:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   93 ms
+[2026-01-04 02:00:09] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   37 ms
+[2026-01-04 02:00:19] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    9 ms
+[2026-01-04 02:00:28] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  311 ms
+[2026-01-04 02:00:33] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=157, userId=9, authHash=0c93f37d04ed217417381f1b1e1d2b58bf255f57bd8824e2a61e5ebe85d7463b, deviceId=d2f29d81988af3b4c1d3b8932fd044ccf4e18a50bf88349fd3a85603b0707e2a, status=ACTIVE, createdAt=2026-01-04T02:00:33.351902200, expiredAt=2026-01-11T02:00:33.348903900, lastRotatedAt=2026-01-04T02:00:33.351902200, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-04 02:00:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  221 ms
+[2026-01-04 02:00:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   24 ms
+[2026-01-04 02:00:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    3 ms
+[2026-01-04 02:00:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 02:00:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 02:00:56] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   10 ms
+[2026-01-04 02:04:20] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 02:04:26] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 02:04:26] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 02:04:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  427 ms
+[2026-01-04 02:04:28] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  143 ms
+[2026-01-04 02:04:36] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   31 ms
+[2026-01-04 02:08:57] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 02:09:02] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 02:09:02] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 02:09:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  458 ms
+[2026-01-04 02:09:12] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 02:09:12] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 02:09:12] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 02:09:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-04 02:09:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 02:09:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    7 ms
+[2026-01-04 02:09:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  116 ms
+[2026-01-04 02:09:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   42 ms
+[2026-01-04 02:11:47] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 02:11:55] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 02:11:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    8 ms
+[2026-01-04 02:11:55] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 02:11:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  509 ms
+[2026-01-04 02:12:06] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 02:12:06] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=0:0:0:0:0:0:0:1: The address 0:0:0:0:0:0:0:1 is not in the database.
+[2026-01-04 02:12:06] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=0:0:0:0:0:0:0:1, using default.
+[2026-01-04 02:12:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 02:12:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    5 ms
+[2026-01-04 02:12:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    6 ms
+[2026-01-04 02:12:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   87 ms
+[2026-01-04 02:12:20] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   42 ms
+[2026-01-04 07:53:20] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 07:53:20] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 07:53:20] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 07:53:20] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 07:53:20] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 07:53:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   16 ms
+[2026-01-04 07:53:20] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 07:53:20] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 07:53:20] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 07:53:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 07:53:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  317 ms
+[2026-01-04 07:53:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1963 ms
+[2026-01-04 07:53:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   88 ms
+[2026-01-04 07:54:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  435 ms
+[2026-01-04 07:54:31] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  573 ms
+[2026-01-04 07:54:40] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=158, userId=9, authHash=577265f6afc7382796f7f8b42779e4e214750723bf43ac1436652083fba167b4, deviceId=e69b22b38fe6d90b0014e0f723dcc9d43eb94145e5cd3008ed2a68636eb60046, status=ACTIVE, createdAt=2026-01-04T07:54:40.330983200, expiredAt=2026-01-11T07:54:40.291301800, lastRotatedAt=2026-01-04T07:54:40.330983200, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 07:54:40] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  717 ms
+[2026-01-04 07:54:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  141 ms
+[2026-01-04 07:54:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    6 ms
+[2026-01-04 07:54:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   42 ms
+[2026-01-04 07:55:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   14 ms
+[2026-01-04 07:55:25] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  370 ms
+[2026-01-04 08:07:28] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:07:56] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:07:56] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:07:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1464 ms
+[2026-01-04 08:08:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   31 ms
+[2026-01-04 08:11:18] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:11:26] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:11:26] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:11:28] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1817 ms
+[2026-01-04 08:11:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  274 ms
+[2026-01-04 08:22:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  540 ms
+[2026-01-04 08:30:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   72 ms
+[2026-01-04 08:30:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   32 ms
+[2026-01-04 08:30:44] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:30:57] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:30:57] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:30:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1299 ms
+[2026-01-04 08:31:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  277 ms
+[2026-01-04 08:31:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   52 ms
+[2026-01-04 08:31:21] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   14 ms
+[2026-01-04 08:31:49] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   59 ms
+[2026-01-04 08:37:01] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:37:09] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:37:09] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:37:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1671 ms
+[2026-01-04 08:37:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  268 ms
+[2026-01-04 08:38:24] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:38:33] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:38:33] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:38:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 2002 ms
+[2026-01-04 08:38:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  501 ms
+[2026-01-04 08:39:18] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   42 ms
+[2026-01-04 08:43:09] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:43:12] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:43:12] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:43:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  950 ms
+[2026-01-04 08:44:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  276 ms
+[2026-01-04 08:44:24] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   53 ms
+[2026-01-04 08:45:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   37 ms
+[2026-01-04 08:45:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   12 ms
+[2026-01-04 08:45:44] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   13 ms
+[2026-01-04 08:45:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   35 ms
+[2026-01-04 08:50:33] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:50:37] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:50:37] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:50:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  978 ms
+[2026-01-04 08:50:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  264 ms
+[2026-01-04 08:50:56] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   45 ms
+[2026-01-04 08:52:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   27 ms
+[2026-01-04 08:52:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 08:53:11] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:53:14] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:53:14] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:53:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1034 ms
+[2026-01-04 08:53:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  982 ms
+[2026-01-04 08:53:23] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   44 ms
+[2026-01-04 08:54:11] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:54:14] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:54:14] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:54:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  960 ms
+[2026-01-04 08:54:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  241 ms
+[2026-01-04 08:54:26] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   52 ms
+[2026-01-04 08:56:50] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:56:57] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:56:57] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:56:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  923 ms
+[2026-01-04 08:56:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  619 ms
+[2026-01-04 08:57:04] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   48 ms
+[2026-01-04 08:57:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   23 ms
+[2026-01-04 08:57:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 08:57:41] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   13 ms
+[2026-01-04 08:59:01] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:59:04] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:59:04] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:59:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  913 ms
+[2026-01-04 08:59:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  178 ms
+[2026-01-04 08:59:18] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   55 ms
+[2026-01-04 08:59:48] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 08:59:53] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 08:59:53] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 08:59:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  911 ms
+[2026-01-04 09:00:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   24 ms
+[2026-01-04 09:00:21] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   31 ms
+[2026-01-04 09:00:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  255 ms
+[2026-01-04 09:00:49] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   51 ms
+[2026-01-04 09:01:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   13 ms
+[2026-01-04 09:01:43] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=159, userId=9, authHash=b5d0f8c772db97fbb4242225c01f37d4c5387c5d77556b4f1b37090a823b2fbe, deviceId=6b141dd2b23eed4b449f6aadc4eb6dce28b3cdf662d5db9ea55f4c681c1b936b, status=ACTIVE, createdAt=2026-01-04T09:01:43.823369400, expiredAt=2026-01-11T09:01:43.813462900, lastRotatedAt=2026-01-04T09:01:43.823369400, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 09:01:43] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  566 ms
+[2026-01-04 09:02:29] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:02:35] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:02:35] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:02:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  923 ms
+[2026-01-04 09:02:36] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 09:02:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    4 ms
+[2026-01-04 09:02:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   11 ms
+[2026-01-04 09:02:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  184 ms
+[2026-01-04 09:03:22] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=160, userId=9, authHash=b051e4d9753cef8310bc770ce4938528909a3f71ef9c1ae4b8696aa9f26d82fe, deviceId=3d69d13b94f78ff52f36c981b4a498b1b6b547a3ca8ba42e77fc2c60f261db14, status=ACTIVE, createdAt=2026-01-04T09:03:22.672468300, expiredAt=2026-01-11T09:03:22.672468300, lastRotatedAt=2026-01-04T09:03:22.672468300, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 09:03:22] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  517 ms
+[2026-01-04 09:03:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   16 ms
+[2026-01-04 09:03:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   26 ms
+[2026-01-04 09:03:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   31 ms
+[2026-01-04 09:03:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   23 ms
+[2026-01-04 09:04:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    5 ms
+[2026-01-04 09:04:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   22 ms
+[2026-01-04 09:06:20] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:06:47] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:06:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  442 ms
+[2026-01-04 09:07:09] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   60 ms
+[2026-01-04 09:08:27] WARN  c.l.z.web.common.filters.CsrfFilter CSRF validation failed - Method: POST, URI: /auth/login, IP: 127.0.0.1
+[2026-01-04 09:08:48] WARN  c.l.z.web.common.filters.CsrfFilter CSRF validation failed - Method: POST, URI: /auth/login, IP: 127.0.0.1
+[2026-01-04 09:09:02] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:09:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  652 ms
+[2026-01-04 09:09:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   12 ms
+[2026-01-04 09:09:50] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   12 ms
+[2026-01-04 09:11:36] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:11:39] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:11:39] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:11:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1462 ms
+[2026-01-04 09:11:40] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 09:11:42] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 09:12:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   29 ms
+[2026-01-04 09:12:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   21 ms
+[2026-01-04 09:12:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  171 ms
+[2026-01-04 09:13:03] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   45 ms
+[2026-01-04 09:15:25] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:15:32] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:15:32] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:15:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  860 ms
+[2026-01-04 09:15:33] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 09:15:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  141 ms
+[2026-01-04 09:15:41] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   47 ms
+[2026-01-04 09:16:29] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:16:33] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:16:33] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:16:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  842 ms
+[2026-01-04 09:16:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  184 ms
+[2026-01-04 09:16:44] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   41 ms
+[2026-01-04 09:16:54] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   12 ms
+[2026-01-04 09:17:22] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:17:29] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:17:29] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:17:29] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  852 ms
+[2026-01-04 09:17:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  198 ms
+[2026-01-04 09:18:01] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  933 ms
+[2026-01-04 09:18:16] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=161, userId=9, authHash=8ca10f88222346ddc472141ea7c78880f8c8716905c6c3d443bbf9de20b1468e, deviceId=c66b62d624bfbf5cb75b5077361b7afbeb00469279f2154a7cf172a8e5aa461a, status=ACTIVE, createdAt=2026-01-04T09:18:16.691193700, expiredAt=2026-01-11T09:18:16.683561200, lastRotatedAt=2026-01-04T09:18:16.691193700, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 09:18:16] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  392 ms
+[2026-01-04 09:19:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   46 ms
+[2026-01-04 09:22:59] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:23:06] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:23:11] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:23:12] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:23:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |   14 ms
+[2026-01-04 09:23:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1598 ms
+[2026-01-04 09:23:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  174 ms
+[2026-01-04 09:23:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   28 ms
+[2026-01-04 09:23:41] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=162, userId=9, authHash=671e0c58cc22c27261884f7b866d23467339d81f5940f72f161126bde7bcfd8a, deviceId=4d3b5d5efae500adea24398400b6736b96e9271f82802943ecc223abaf603aa1, status=ACTIVE, createdAt=2026-01-04T09:23:41.153354700, expiredAt=2026-01-11T09:23:41.149337, lastRotatedAt=2026-01-04T09:23:41.153354700, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 09:23:41] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  721 ms
+[2026-01-04 09:26:44] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 09:26:53] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 09:26:53] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 09:26:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  876 ms
+[2026-01-04 09:26:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    4 ms
+[2026-01-04 09:26:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 09:26:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  135 ms
+[2026-01-04 09:27:07] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=163, userId=9, authHash=00cabc28c9443f06be566ab16e46206c5ed565e3caf27eb272290b8218652c48, deviceId=b07e9914d99e1c3ccfd4f5677b69c4fad670af82625b617663b2106aaabb093e, status=ACTIVE, createdAt=2026-01-04T09:27:07.481063100, expiredAt=2026-01-11T09:27:07.481063100, lastRotatedAt=2026-01-04T09:27:07.481063100, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 09:27:07] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  593 ms
+[2026-01-04 09:27:24] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 09:29:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   13 ms
+[2026-01-04 09:29:23] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  364 ms
+[2026-01-04 09:29:29] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=164, userId=9, authHash=5199ec0cb6378ae8b78d510e0e0e4b4d352bd2388a06f5718ba92e027d4fd852, deviceId=b07e9914d99e1c3ccfd4f5677b69c4fad670af82625b617663b2106aaabb093e, status=ACTIVE, createdAt=2026-01-04T09:29:29.708643, expiredAt=2026-01-11T09:29:29.707511, lastRotatedAt=2026-01-04T09:29:29.708643, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 09:29:29] ERROR c.l.z.web.common.filters.ErrorFilter Unhandled exception
+java.lang.IllegalStateException: setAttribute: Session [E5E60F4E1FD2B2E84061E353608573B5] has already been invalidated
+	at org.apache.catalina.session.StandardSession.setAttribute(StandardSession.java:990)
+	at org.apache.catalina.session.StandardSession.setAttribute(StandardSession.java:956)
+	at org.apache.catalina.session.StandardSessionFacade.setAttribute(StandardSessionFacade.java:103)
+	at com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager.applyContext(AuthSessionManager.java:197)
+	at com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager.startSession(AuthSessionManager.java:97)
+	at com.laptrinhweb.zerostarcafe.web.auth.servlet.LoginServlet.successLogin(LoginServlet.java:93)
+	at com.laptrinhweb.zerostarcafe.web.auth.servlet.LoginServlet.doPost(LoginServlet.java:85)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:71)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:31)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-04 09:29:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   35 ms
+[2026-01-04 09:29:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 09:29:54] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=165, userId=9, authHash=ba0dadd617aa1b4c21dd0ae892da76bb4c1485f6752c060c8ede9b130221aa30, deviceId=f472acad07bf32e49c72f7d201a33b9557186551e37e7a6163060b510cfa2d1b, status=ACTIVE, createdAt=2026-01-04T09:29:54.916246300, expiredAt=2026-01-11T09:29:54.916246300, lastRotatedAt=2026-01-04T09:29:54.916246300, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 09:29:54] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  369 ms
+[2026-01-04 09:31:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   11 ms
+[2026-01-04 11:54:55] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   30 ms
+[2026-01-04 13:03:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   11 ms
+[2026-01-04 13:03:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |  155 ms
+[2026-01-04 13:03:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 | 1357 ms
+[2026-01-04 13:03:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    1 ms
+[2026-01-04 13:04:15] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    8 ms
+[2026-01-04 15:35:00] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 15:35:01] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 15:35:01] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:35:01] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:35:01] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 15:35:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    9 ms
+[2026-01-04 15:35:01] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 15:35:01] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:35:01] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:35:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1151 ms
+[2026-01-04 15:35:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 15:35:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   22 ms
+[2026-01-04 15:35:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  234 ms
+[2026-01-04 15:35:13] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  296 ms
+[2026-01-04 15:35:22] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  214 ms
+[2026-01-04 15:35:29] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=166, userId=9, authHash=cc810d87c287f2e51a9c766bb0f0f14d974277194765a6353bf2a47b58676939, deviceId=f472acad07bf32e49c72f7d201a33b9557186551e37e7a6163060b510cfa2d1b, status=ACTIVE, createdAt=2026-01-04T15:35:29.823030500, expiredAt=2026-01-11T15:35:29.821033600, lastRotatedAt=2026-01-04T15:35:29.823030500, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 15:35:29] ERROR c.l.z.web.common.filters.ErrorFilter Unhandled exception
+java.lang.IllegalStateException: setAttribute: Session [80672812447729F3593FEBCA506972E3] has already been invalidated
+	at org.apache.catalina.session.StandardSession.setAttribute(StandardSession.java:990)
+	at org.apache.catalina.session.StandardSession.setAttribute(StandardSession.java:956)
+	at org.apache.catalina.session.StandardSessionFacade.setAttribute(StandardSessionFacade.java:103)
+	at com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager.applyContext(AuthSessionManager.java:197)
+	at com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager.startSession(AuthSessionManager.java:97)
+	at com.laptrinhweb.zerostarcafe.web.auth.servlet.LoginServlet.successLogin(LoginServlet.java:93)
+	at com.laptrinhweb.zerostarcafe.web.auth.servlet.LoginServlet.doPost(LoginServlet.java:85)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:71)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:31)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-04 15:36:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   34 ms
+[2026-01-04 15:36:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    8 ms
+[2026-01-04 15:36:22] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  196 ms
+[2026-01-04 15:36:31] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=167, userId=9, authHash=c176d9302454b64afb04ab0874a8311b302f91ac62755c79d796f2e5cc23bb6b, deviceId=de011f1f0f2818600a5994e6e80fc1180c52104b4a0a009efeaeee3e6cb72368, status=ACTIVE, createdAt=2026-01-04T15:36:31.039917300, expiredAt=2026-01-11T15:36:31.038907600, lastRotatedAt=2026-01-04T15:36:31.039917300, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 15:36:31] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  230 ms
+[2026-01-04 15:36:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   37 ms
+[2026-01-04 15:36:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    5 ms
+[2026-01-04 15:36:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   12 ms
+[2026-01-04 15:36:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 15:36:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   63 ms
+[2026-01-04 15:36:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   78 ms
+[2026-01-04 15:36:54] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  189 ms
+[2026-01-04 15:36:59] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=168, userId=9, authHash=d32c0a4d319a05054d16a5d10eaf2f238b0534fcb947a4dd570ed92b99b71b06, deviceId=310e2e407141a35a12f5dd85132547daaa723bf3dc7840f010bfc473bb3a3230, status=ACTIVE, createdAt=2026-01-04T15:36:59.071512800, expiredAt=2026-01-11T15:36:59.070513100, lastRotatedAt=2026-01-04T15:36:59.071512800, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 15:36:59] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  239 ms
+[2026-01-04 15:36:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   16 ms
+[2026-01-04 15:37:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    5 ms
+[2026-01-04 15:37:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    7 ms
+[2026-01-04 15:37:03] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 15:39:42] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:485)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:342)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.utils.DBConnectionTest.getConnection(DBConnectionTest.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+[2026-01-04 15:39:42] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 15:40:01] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:485)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:342)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.utils.DBConnectionTest.getConnection(DBConnectionTest.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+[2026-01-04 15:40:01] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 15:40:51] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 15:40:51] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 15:40:51] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:40:51] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:40:51] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 15:40:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   12 ms
+[2026-01-04 15:40:51] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 15:40:51] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:40:51] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:40:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1122 ms
+[2026-01-04 15:40:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 15:40:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   20 ms
+[2026-01-04 15:49:48] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 15:49:49] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 15:49:49] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:49:49] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:49:49] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 15:49:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    7 ms
+[2026-01-04 15:49:49] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 15:49:49] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:49:49] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:49:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 15:49:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1103 ms
+[2026-01-04 15:49:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   33 ms
+[2026-01-04 15:49:50] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 15:52:33] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 15:53:29] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 15:53:30] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 15:53:30] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:53:30] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:53:30] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 15:53:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    9 ms
+[2026-01-04 15:53:30] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 15:53:30] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 15:53:30] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 15:53:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 15:53:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   46 ms
+[2026-01-04 15:53:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1242 ms
+[2026-01-04 15:53:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   32 ms
+[2026-01-04 15:53:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  152 ms
+[2026-01-04 15:53:44] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   29 ms
+[2026-01-04 15:53:55] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   15 ms
+[2026-01-04 16:21:09] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 16:21:09] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 16:21:09] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:21:09] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:21:09] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 16:21:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    7 ms
+[2026-01-04 16:21:09] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 16:21:09] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:21:09] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:21:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    1 ms
+[2026-01-04 16:21:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1177 ms
+[2026-01-04 16:21:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   25 ms
+[2026-01-04 16:21:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  130 ms
+[2026-01-04 16:21:47] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:21:47] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:21:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   27 ms
+[2026-01-04 16:21:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    7 ms
+[2026-01-04 16:21:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   14 ms
+[2026-01-04 16:21:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   14 ms
+[2026-01-04 16:22:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   33 ms
+[2026-01-04 16:23:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 16:24:50] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:24:50] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:24:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 16:24:50] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:24:50] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:24:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-04 16:27:48] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:27:48] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:27:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   92 ms
+[2026-01-04 16:27:48] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 16:27:48] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 16:27:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    2 ms
+[2026-01-04 16:27:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   10 ms
+[2026-01-04 16:27:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-04 16:28:25] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 16:28:32] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  356 ms
+[2026-01-04 16:28:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 16:45:51] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 16:46:53] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 16:46:53] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 16:46:53] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:46:53] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:46:53] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 16:46:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  531 ms
+[2026-01-04 16:47:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    5 ms
+[2026-01-04 16:47:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   27 ms
+[2026-01-04 16:47:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  143 ms
+[2026-01-04 16:48:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 16:48:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 16:48:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   12 ms
+[2026-01-04 16:48:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    0 ms
+[2026-01-04 16:52:53] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 16:53:14] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 16:53:14] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 16:53:14] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 16:53:14] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 16:53:14] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 16:53:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  484 ms
+[2026-01-04 16:53:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    3 ms
+[2026-01-04 16:53:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 16:53:25] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   25 ms
+[2026-01-04 16:53:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  129 ms
+[2026-01-04 16:53:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   62 ms
+[2026-01-04 16:53:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 16:53:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   66 ms
+[2026-01-04 16:53:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 16:53:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 16:53:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 16:53:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:03:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   32 ms
+[2026-01-04 17:03:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 17:05:06] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:05:09] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:05:09] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:05:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  467 ms
+[2026-01-04 17:05:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  110 ms
+[2026-01-04 17:08:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-04 17:08:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-04 17:10:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 | 1277 ms
+[2026-01-04 17:10:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 17:10:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:10:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   47 ms
+[2026-01-04 17:10:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 17:10:28] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:10:33] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:10:33] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 17:10:33] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:10:33] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:10:33] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:10:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  590 ms
+[2026-01-04 17:10:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   93 ms
+[2026-01-04 17:10:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    7 ms
+[2026-01-04 17:10:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 17:10:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:10:45] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   36 ms
+[2026-01-04 17:10:50] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    7 ms
+[2026-01-04 17:11:02] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=169, userId=9, authHash=6692ad082a7d0adfb53173e7af500506a0cac3faa60cab11d6e00aec13737e24, deviceId=7569c475028d76c34f96f864346aa6b7488f2b9ed02e5436f0a74ec11a7cf5f2, status=ACTIVE, createdAt=2026-01-04T17:11:02.342333600, expiredAt=2026-01-11T17:11:02.337316200, lastRotatedAt=2026-01-04T17:11:02.342333600, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 17:11:02] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  285 ms
+[2026-01-04 17:11:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   31 ms
+[2026-01-04 17:11:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    6 ms
+[2026-01-04 17:11:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    8 ms
+[2026-01-04 17:11:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:11:11] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  187 ms
+[2026-01-04 17:11:13] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  194 ms
+[2026-01-04 17:11:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   70 ms
+[2026-01-04 17:11:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:11:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   63 ms
+[2026-01-04 17:11:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   22 ms
+[2026-01-04 17:11:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:11:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 17:11:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:11:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    5 ms
+[2026-01-04 17:11:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    0 ms
+[2026-01-04 17:11:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    8 ms
+[2026-01-04 17:12:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 17:16:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    9 ms
+[2026-01-04 17:16:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    2 ms
+[2026-01-04 17:16:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:16:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    9 ms
+[2026-01-04 17:16:53] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/register            | 422 |    8 ms
+[2026-01-04 17:21:36] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:21:46] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:21:47] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 17:21:47] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:21:47] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:21:47] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:21:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  522 ms
+[2026-01-04 17:21:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   92 ms
+[2026-01-04 17:21:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    3 ms
+[2026-01-04 17:21:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   17 ms
+[2026-01-04 17:21:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:21:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   66 ms
+[2026-01-04 17:21:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-04 17:21:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   50 ms
+[2026-01-04 17:21:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:22:04] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  286 ms
+[2026-01-04 17:22:14] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  243 ms
+[2026-01-04 17:22:35] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  194 ms
+[2026-01-04 17:22:38] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  196 ms
+[2026-01-04 17:22:41] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  179 ms
+[2026-01-04 17:22:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   21 ms
+[2026-01-04 17:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   27 ms
+[2026-01-04 17:22:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 17:23:07] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:23:07] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:23:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    5 ms
+[2026-01-04 17:23:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   23 ms
+[2026-01-04 17:23:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   25 ms
+[2026-01-04 17:23:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    2 ms
+[2026-01-04 17:23:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    6 ms
+[2026-01-04 17:23:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    9 ms
+[2026-01-04 17:23:27] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  203 ms
+[2026-01-04 17:23:35] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  214 ms
+[2026-01-04 17:23:52] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  195 ms
+[2026-01-04 17:23:55] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  191 ms
+[2026-01-04 17:23:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 17:24:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    0 ms
+[2026-01-04 17:24:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    0 ms
+[2026-01-04 17:24:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    9 ms
+[2026-01-04 17:24:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:24:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    4 ms
+[2026-01-04 17:24:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 17:26:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 17:26:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   11 ms
+[2026-01-04 17:26:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    4 ms
+[2026-01-04 17:26:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:32:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   10 ms
+[2026-01-04 17:32:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 17:32:28] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    9 ms
+[2026-01-04 17:32:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    0 ms
+[2026-01-04 17:32:59] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:33:07] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:33:07] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 17:33:07] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:33:07] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:33:07] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:33:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  558 ms
+[2026-01-04 17:33:08] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 17:33:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    7 ms
+[2026-01-04 17:33:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    8 ms
+[2026-01-04 17:33:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  115 ms
+[2026-01-04 17:33:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    8 ms
+[2026-01-04 17:33:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   41 ms
+[2026-01-04 17:33:19] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    0 ms
+[2026-01-04 17:33:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   68 ms
+[2026-01-04 17:33:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    2 ms
+[2026-01-04 17:33:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    1 ms
+[2026-01-04 17:33:25] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    4 ms
+[2026-01-04 17:33:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  302 ms
+[2026-01-04 17:33:34] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 17:33:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    8 ms
+[2026-01-04 17:33:47] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    9 ms
+[2026-01-04 17:33:49] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    1 ms
+[2026-01-04 17:33:53] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   10 ms
+[2026-01-04 17:37:34] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:37:46] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:37:46] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 17:37:46] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:37:46] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:37:46] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:37:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  450 ms
+[2026-01-04 17:37:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  127 ms
+[2026-01-04 17:37:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   59 ms
+[2026-01-04 17:37:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:37:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    5 ms
+[2026-01-04 17:37:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-04 17:37:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 17:37:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   68 ms
+[2026-01-04 17:37:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 17:37:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-04 17:37:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-04 17:38:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    9 ms
+[2026-01-04 17:38:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:38:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:38:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 17:38:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:38:52] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:39:02] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:39:02] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 17:39:02] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:39:02] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:39:02] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:39:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  536 ms
+[2026-01-04 17:39:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    7 ms
+[2026-01-04 17:39:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-04 17:39:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  122 ms
+[2026-01-04 17:39:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   62 ms
+[2026-01-04 17:39:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:39:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   49 ms
+[2026-01-04 17:39:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    0 ms
+[2026-01-04 17:39:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:39:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    2 ms
+[2026-01-04 17:39:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-04 17:39:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    0 ms
+[2026-01-04 17:39:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:39:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-04 17:39:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-04 17:39:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-04 17:39:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    0 ms
+[2026-01-04 17:39:15] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 17:39:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    6 ms
+[2026-01-04 17:39:46] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:39:53] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:39:53] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 17:39:53] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:39:53] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:39:53] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:39:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  395 ms
+[2026-01-04 17:39:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    3 ms
+[2026-01-04 17:39:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    6 ms
+[2026-01-04 17:39:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   10 ms
+[2026-01-04 17:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  144 ms
+[2026-01-04 17:40:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   60 ms
+[2026-01-04 17:40:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:40:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:40:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   66 ms
+[2026-01-04 17:40:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:40:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    2 ms
+[2026-01-04 17:40:55] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:41:00] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:41:00] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:41:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  435 ms
+[2026-01-04 17:41:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  135 ms
+[2026-01-04 17:41:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   48 ms
+[2026-01-04 17:41:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    0 ms
+[2026-01-04 17:41:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    1 ms
+[2026-01-04 17:41:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   44 ms
+[2026-01-04 17:41:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:41:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    4 ms
+[2026-01-04 17:41:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 17:41:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    3 ms
+[2026-01-04 17:41:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 17:41:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    2 ms
+[2026-01-04 17:41:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:41:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    0 ms
+[2026-01-04 17:42:01] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  274 ms
+[2026-01-04 17:42:05] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  186 ms
+[2026-01-04 17:42:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    5 ms
+[2026-01-04 17:42:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 17:42:27] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:42:35] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:42:35] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 17:42:35] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 17:42:35] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 17:42:35] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:42:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  398 ms
+[2026-01-04 17:42:35] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 17:42:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    6 ms
+[2026-01-04 17:42:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    7 ms
+[2026-01-04 17:42:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  116 ms
+[2026-01-04 17:42:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   66 ms
+[2026-01-04 17:42:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:42:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   46 ms
+[2026-01-04 17:42:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:42:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:42:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    7 ms
+[2026-01-04 17:42:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:42:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    5 ms
+[2026-01-04 17:42:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    4 ms
+[2026-01-04 17:42:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    4 ms
+[2026-01-04 17:42:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 17:42:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 17:52:22] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 17:52:25] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 17:52:25] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 17:52:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  411 ms
+[2026-01-04 17:52:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  129 ms
+[2026-01-04 17:52:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  268 ms
+[2026-01-04 17:52:40] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  240 ms
+[2026-01-04 17:52:45] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  203 ms
+[2026-01-04 17:52:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   60 ms
+[2026-01-04 17:52:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 17:52:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    2 ms
+[2026-01-04 17:52:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 17:52:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |   55 ms
+[2026-01-04 17:52:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 17:53:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    4 ms
+[2026-01-04 17:53:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    7 ms
+[2026-01-04 17:53:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-04 17:53:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    5 ms
+[2026-01-04 17:53:29] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  189 ms
+[2026-01-04 17:53:49] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   10 ms
+[2026-01-04 17:53:53] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |    2 ms
+[2026-01-04 17:53:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    9 ms
+[2026-01-04 17:53:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:53:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-04 17:53:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 17:53:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/register-form    | 200 |    3 ms
+[2026-01-04 17:54:24] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/register            | 422 |    8 ms
+[2026-01-04 17:54:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 17:54:38] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |  188 ms
+[2026-01-04 17:54:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 17:54:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   18 ms
+[2026-01-04 17:54:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    6 ms
+[2026-01-04 17:54:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    2 ms
+[2026-01-04 17:54:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:54:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 17:54:51] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=170, userId=9, authHash=0888d01c65879e942be6248e9ebe7de3b72807e516d71c6d39838e15f1a0325b, deviceId=b98ae5aa7c239b648bb1f028bb70eff50eb24c3ed8845cc1b69721499ff3274d, status=ACTIVE, createdAt=2026-01-04T17:54:51.555534400, expiredAt=2026-01-11T17:54:51.551548700, lastRotatedAt=2026-01-04T17:54:51.555534400, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 17:54:51] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  198 ms
+[2026-01-04 17:54:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   26 ms
+[2026-01-04 17:54:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    6 ms
+[2026-01-04 17:54:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 17:54:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 17:54:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 17:54:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    8 ms
+[2026-01-04 17:55:03] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=171, userId=9, authHash=eb854b863e0872b8ad7ccbd04e1c20f1a6e1921691f6794b6cf8b7d3d672a6f5, deviceId=32044dc61dfe0a07063602b733e43d6880334af6b050e1004292c7af008c195b, status=ACTIVE, createdAt=2026-01-04T17:55:03.865820400, expiredAt=2026-01-11T17:55:03.865820400, lastRotatedAt=2026-01-04T17:55:03.865820400, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 17:55:03] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  213 ms
+[2026-01-04 17:55:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   18 ms
+[2026-01-04 17:55:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   18 ms
+[2026-01-04 17:55:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 17:55:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 17:55:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   17 ms
+[2026-01-04 17:55:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    5 ms
+[2026-01-04 17:55:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    4 ms
+[2026-01-04 17:55:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    9 ms
+[2026-01-04 17:55:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 17:55:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   15 ms
+[2026-01-04 17:55:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 17:55:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   11 ms
+[2026-01-04 17:55:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    8 ms
+[2026-01-04 17:55:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-04 17:55:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    5 ms
+[2026-01-04 17:55:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    7 ms
+[2026-01-04 17:55:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-04 17:56:00] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=172, userId=9, authHash=385993dcea007bc49673d25067c9bfc6c3101ac4d69d7593b3cdf7e0a5d2a581, deviceId=85e71897b8f15755c021f020050d005ee5d2427cee8b7b6ae03c437f450f28c4, status=ACTIVE, createdAt=2026-01-04T17:56:00.915868100, expiredAt=2026-01-11T17:56:00.915868100, lastRotatedAt=2026-01-04T17:56:00.915868100, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-04 17:56:00] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  199 ms
+[2026-01-04 17:56:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   14 ms
+[2026-01-04 18:30:10] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 18:30:11] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 18:30:11] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 18:30:11] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 18:30:11] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 18:30:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   11 ms
+[2026-01-04 18:30:11] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 18:30:11] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 18:30:11] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 18:30:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1113 ms
+[2026-01-04 18:30:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-04 18:30:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   26 ms
+[2026-01-04 18:30:30] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 18:30:30] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 18:30:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   26 ms
+[2026-01-04 18:30:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |   13 ms
+[2026-01-04 18:30:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    8 ms
+[2026-01-04 18:30:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |  190 ms
+[2026-01-04 18:30:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |   13 ms
+[2026-01-04 18:30:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    2 ms
+[2026-01-04 18:30:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    2 ms
+[2026-01-04 18:33:21] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-04 18:33:38] INFO  c.l.z.d.c.service.CartCacheService CartCacheService initialized
+[2026-01-04 18:33:38] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-04 18:33:38] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-04 18:33:38] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-04 18:33:38] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-04 18:33:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  672 ms
+[2026-01-04 18:33:39] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 18:33:39] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-04 18:33:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store-detect             | 302 |    4 ms
+[2026-01-04 18:33:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   12 ms
+[2026-01-04 18:33:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |  186 ms
+[2026-01-04 18:33:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |   64 ms
+[2026-01-04 18:33:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    2 ms
+[2026-01-04 18:33:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    7 ms
+[2026-01-04 18:33:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    4 ms
+[2026-01-04 18:33:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    9 ms
+[2026-01-04 18:33:57] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    2 ms
+[2026-01-04 18:33:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |   62 ms
+[2026-01-04 18:34:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    2 ms
+[2026-01-04 18:34:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 18:34:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    7 ms
+[2026-01-04 18:34:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    2 ms
+[2026-01-04 18:34:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    1 ms
+[2026-01-04 18:34:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    1 ms
+[2026-01-04 18:34:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    6 ms
+[2026-01-04 18:34:23] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 |   37 ms
+[2026-01-04 18:34:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    7 ms
+[2026-01-04 18:34:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    5 ms
+[2026-01-04 18:34:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    1 ms
+[2026-01-04 18:34:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    5 ms
+[2026-01-04 18:34:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    4 ms
+[2026-01-04 18:34:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    3 ms
+[2026-01-04 18:34:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    6 ms
+[2026-01-04 18:34:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    1 ms
+[2026-01-04 18:34:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    3 ms
+[2026-01-04 18:34:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    7 ms
+[2026-01-04 18:34:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    3 ms
+[2026-01-04 18:34:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    7 ms
+[2026-01-04 18:34:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    4 ms
+[2026-01-04 18:34:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    3 ms
+[2026-01-04 18:34:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    1 ms
+[2026-01-04 18:34:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |    5 ms
+[2026-01-04 18:34:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |    8 ms

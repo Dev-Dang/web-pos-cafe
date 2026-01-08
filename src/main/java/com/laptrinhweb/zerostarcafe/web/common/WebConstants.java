@@ -69,6 +69,16 @@ public final class WebConstants {
         public static final String PRODUCT_CARDS = "productCards";
     }
 
+
+    // ============================================
+    // CART
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Cart {
+
+        public static final String CART_ACTION = "cartAction";
+    }
+
     // ============================================
     // FLAGS
     // ============================================

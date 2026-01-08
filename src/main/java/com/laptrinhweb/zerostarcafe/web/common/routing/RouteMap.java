@@ -27,6 +27,10 @@ public final class RouteMap {
     public static final String FORGOT_PASSWORD = "/auth/forgot-password";
     public static final String RESET_PASSWORD = "/auth/reset-password";
     public static final String CART = "/cart";
+    public static final String CART_ADD = "/cart/add";
+    public static final String CART_PREVIEW = "/cart/preview";
+    public static final String CART_MERGE = "/cart/merge";
+    public static final String CART_SIDEBAR = "/cart/sidebar";
     public static final String CHECKOUT = "/checkout";
 
     // ============================================

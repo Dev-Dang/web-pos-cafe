@@ -11,7 +11,7 @@ structured authentication system.
 | **Language**           | Java 21+                                     |
 | **Web Container**      | Apache Tomcat 11 (Jakarta EE 10)             |
 | **Database**           | MySQL 8.x                                    |
-| **Connection Pooling** | Apache DBCP2 via Tomcat JNDI                 |
+| **Connection Pooling** | HikariCP via Tomcat JNDI                 |
 | **Logging**            | Logback (daily rolling logs)                 |
 | **UI**                 | JSP, Bootstrap 5, SCSS, shared layout system |
 

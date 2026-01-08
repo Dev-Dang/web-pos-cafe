@@ -14,7 +14,15 @@
 <c:set var="optionGroupCount" value="${fn:length(productDetail.options)}"/>
 <c:set var="layoutType" value="${optionGroupCount <= 1 ? 'compact' : 'full'}"/>
 
-<div id="product-detail-modal" class="product-modal" tabindex="-1">
+<div id="product-detail-modal"
+     class="product-modal"
+     tabindex="-1"
+     up-data="{
+         productId: ${productDetail.id},
+         basePrice: ${productDetail.basePrice},
+         currentPrice: ${productDetail.currentPrice},
+         initialQty: 1
+     }">
     <div class="product-modal__dialog">
         <div class="product-modal__content">
             <%-- Mobile Header --%>
@@ -31,48 +39,64 @@
                 <span class="icon-base"><i class="fi fi-rr-cross-small"></i></span>
             </button>
 
-            <%-- Dynamic layout based on option group count --%>
-            <c:choose>
-                <%-- Layout 1: 0-1 option groups - Compact 2 columns (image left, info+options right) --%>
-                <c:when test="${layoutType == 'compact'}">
-                    <div class="row g-3 product-modal__panel product-modal__panel--compact">
-                            <%-- Column 1: Image only --%>
-                        <div class="col-lg-6 col-12 product-modal__col product-modal__col-1">
-                            <div class="product-modal__image-wrapper">
-                                <img src="${productDetail.imageUrl}" class="product-modal__image"
-                                     alt="${productDetail.name}">
+            <%-- Hidden form for cart submission --%>
+            <form id="add-to-cart-form"
+                  action="${pageContext.request.contextPath}/cart/add"
+                  method="POST"
+                  up-submit
+                  up-target=".cart-count"
+                  up-fail-target="#product-detail-modal"
+                  data-product-modal-form>
+
+                <%-- Hidden inputs for form data --%>
+                <input type="hidden" name="menuItemId" value="${productDetail.id}">
+                <input type="hidden" name="quantity" value="1" data-form-quantity>
+                <input type="hidden" name="note" value="" data-form-note>
+                <%-- Option values will be added dynamically via JS as multiple inputs with name="optionValueIds" --%>
+
+                <%-- Dynamic layout based on option group count --%>
+                <c:choose>
+                    <%-- Layout 1: 0-1 option groups - Compact 2 columns (image left, info+options right) --%>
+                    <c:when test="${layoutType == 'compact'}">
+                        <div class="row g-3 product-modal__panel product-modal__panel--compact">
+                                <%-- Column 1: Image only --%>
+                            <div class="col-lg-6 col-12 product-modal__col product-modal__col-1">
+                                <div class="product-modal__image-wrapper">
+                                    <img src="${productDetail.imageUrl}" class="product-modal__image"
+                                         alt="${productDetail.name}">
+                                </div>
+                            </div>
+
+                                <%-- Column 2: Info + Options + Actions --%>
+                            <div class="col-lg-6 col-12 product-modal__col product-modal__col-2">
+                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-info.jsp"/>
+                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
+                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-footer.jsp"/>
                             </div>
                         </div>
+                    </c:when>
 
-                            <%-- Column 2: Info + Options + Actions --%>
-                        <div class="col-lg-6 col-12 product-modal__col product-modal__col-2">
-                            <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-info.jsp"/>
-                            <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
-                            <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-footer.jsp"/>
-                        </div>
-                    </div>
-                </c:when>
+                    <%-- Layout 2: 2+ option groups - Full 2 columns (info+image left, all options right) --%>
+                    <c:otherwise>
+                        <div class="row g-3 product-modal__panel product-modal__panel--full">
+                                <%-- Column 1: Product Info + Image --%>
+                            <div class="col-lg-6 col-12 product-modal__col product-modal__col-1">
+                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-info.jsp"/>
+                                <div class="product-modal__image-wrapper">
+                                    <img src="${productDetail.imageUrl}" class="product-modal__image"
+                                         alt="${productDetail.name}">
+                                </div>
+                            </div>
 
-                <%-- Layout 2: 2+ option groups - Full 2 columns (info+image left, all options right) --%>
-                <c:otherwise>
-                    <div class="row g-3 product-modal__panel product-modal__panel--full">
-                            <%-- Column 1: Product Info + Image --%>
-                        <div class="col-lg-6 col-12 product-modal__col product-modal__col-1">
-                            <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-info.jsp"/>
-                            <div class="product-modal__image-wrapper">
-                                <img src="${productDetail.imageUrl}" class="product-modal__image"
-                                     alt="${productDetail.name}">
+                                <%-- Column 2: ALL Options + Actions (scrollable) --%>
+                            <div class="col-lg-6 col-12 product-modal__col product-modal__col-2">
+                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
+                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-footer.jsp"/>
                             </div>
                         </div>
-
-                            <%-- Column 2: ALL Options + Actions (scrollable) --%>
-                        <div class="col-lg-6 col-12 product-modal__col product-modal__col-2">
-                            <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
-                            <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-footer.jsp"/>
-                        </div>
-                    </div>
-                </c:otherwise>
-            </c:choose>
+                    </c:otherwise>
+                </c:choose>
+            </form>
         </div>
     </div>
 </div>

@@ -1,104 +1,101 @@
 package com.laptrinhweb.zerostarcafe.domain.cart.dao;
 
+import com.laptrinhweb.zerostarcafe.core.context.DBContext;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.Cart;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartItem;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartItemOption;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * <h2>Description:</h2>
  * <p>
- * JDBC implementation of {@link CartDAO} that interacts with the
- * {@code carts}, {@code cart_items}, and {@code cart_item_options} tables.
+ * JDBC implementation of {@link CartDAO} that interacts with
+ * the carts, cart_items, and cart_item_options tables.
  * </p>
- *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * try (Connection conn = DBConnection.getConnection()) {
- *     CartDAO cartDAO = new CartDAOImpl(conn);
- *     Cart cart = cartDAO.findByUserIdAndStoreId(userId, storeId);
- *     if (cart == null) {
- *         cart = new Cart();
- *         cart.setUserId(userId);
- *         cart.setStoreId(storeId);
- *         cart = cartDAO.save(cart);
- *     }
- * }
- * }
- * </pre>
  *
  * @author Dang Van Trung
  * @version 1.0.0
- * @lastModified 29/12/2025
+ * @lastModified 08/01/2026
  * @since 1.0.0
  */
 public class CartDAOImpl implements CartDAO {
-
-    private final Connection conn;
-
-    public CartDAOImpl(Connection conn) {
-        this.conn = conn;
-    }
 
     // ==========================================================
     // CART OPERATIONS
     // ==========================================================
 
     @Override
-    public Cart findByUserIdAndStoreId(long userId, long storeId) throws SQLException {
+    public Optional<Cart> findByUserIdAndStoreId(Long userId, Long storeId) throws SQLException {
         String sql = """
                 SELECT id, store_id, user_id, created_at, updated_at
-                FROM carts
+                FROM carts 
                 WHERE user_id = ? AND store_id = ?
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, userId);
             ps.setLong(2, storeId);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
-                    return null;
+                    return Optional.empty();
                 }
-                Cart cart = mapCart(rs);
-                cart.setItems(findItemsByCartId(cart.getId()));
-                return cart;
+                return Optional.of(mapToCart(rs));
+            }
+        }
+    }
+
+    @Override
+    public Optional<Cart> findById(Long id) throws SQLException {
+        String sql = """
+                SELECT id, store_id, user_id, created_at, updated_at
+                FROM carts 
+                WHERE id = ?
+                """;
+
+        Connection conn = DBContext.getOrCreate();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    return Optional.empty();
+                }
+                Cart cart = mapToCart(rs);
+                
+                // Load cart items with options
+                List<CartItem> items = findItemsByCartId(id);
+                cart.setItems(items);
+                
+                return Optional.of(cart);
             }
         }
     }
 
     @Override
     public Cart save(Cart cart) throws SQLException {
-        String sql = """
-                INSERT INTO carts (store_id, user_id)
-                VALUES (?, ?)
-                """;
-
-        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setLong(1, cart.getStoreId());
-            ps.setLong(2, cart.getUserId());
-            ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    cart.setId(rs.getLong(1));
-                }
-            }
+        if (cart.getId() == null) {
+            return insertCart(cart);
+        } else {
+            updateCart(cart);
+            return cart;
         }
-
-        return cart;
     }
 
     @Override
-    public void deleteById(long cartId) throws SQLException {
+    public void deleteById(Long id) throws SQLException {
         String sql = "DELETE FROM carts WHERE id = ?";
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, cartId);
+            ps.setLong(1, id);
             ps.executeUpdate();
         }
     }
@@ -108,205 +105,290 @@ public class CartDAOImpl implements CartDAO {
     // ==========================================================
 
     @Override
-    public List<CartItem> findItemsByCartId(long cartId) throws SQLException {
+    public Optional<CartItem> findItemById(Long id) throws SQLException {
         String sql = """
-                SELECT id, cart_id, menu_item_id, qty, unit_price_snapshot,
+                SELECT id, cart_id, menu_item_id, qty, unit_price_snapshot, 
                        options_price_snapshot, note, item_hash, item_name_snapshot,
                        created_at, updated_at
-                FROM cart_items
-                WHERE cart_id = ?
-                ORDER BY created_at
+                FROM cart_items 
+                WHERE id = ?
                 """;
 
-        List<CartItem> items = new ArrayList<>();
-
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, cartId);
+            ps.setLong(1, id);
 
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    CartItem item = mapCartItem(rs);
-                    item.setOptions(findOptionsByCartItemId(item.getId()));
-                    items.add(item);
+                if (!rs.next()) {
+                    return Optional.empty();
                 }
+                CartItem item = mapToCartItem(rs);
+                
+                // Load item options
+                List<CartItemOption> options = findOptionsByCartItemId(id);
+                item.setOptions(options);
+                
+                return Optional.of(item);
             }
         }
-
-        return items;
     }
 
     @Override
-    public CartItem findItemByCartIdAndItemHash(long cartId, String itemHash) throws SQLException {
+    public Optional<CartItem> findItemByCartIdAndItemHash(Long cartId, String itemHash) throws SQLException {
         String sql = """
-                SELECT id, cart_id, menu_item_id, qty, unit_price_snapshot,
+                SELECT id, cart_id, menu_item_id, qty, unit_price_snapshot, 
                        options_price_snapshot, note, item_hash, item_name_snapshot,
                        created_at, updated_at
-                FROM cart_items
+                FROM cart_items 
                 WHERE cart_id = ? AND item_hash = ?
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, cartId);
             ps.setString(2, itemHash);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
-                    return null;
+                    return Optional.empty();
                 }
-                CartItem item = mapCartItem(rs);
-                item.setOptions(findOptionsByCartItemId(item.getId()));
-                return item;
+                CartItem item = mapToCartItem(rs);
+                
+                // Load item options
+                List<CartItemOption> options = findOptionsByCartItemId(item.getId());
+                item.setOptions(options);
+                
+                return Optional.of(item);
             }
         }
     }
 
     @Override
-    public CartItem findItemById(long itemId) throws SQLException {
+    public List<CartItem> findItemsByCartId(Long cartId) throws SQLException {
         String sql = """
-                SELECT id, cart_id, menu_item_id, qty, unit_price_snapshot,
+                SELECT id, cart_id, menu_item_id, qty, unit_price_snapshot, 
                        options_price_snapshot, note, item_hash, item_name_snapshot,
                        created_at, updated_at
-                FROM cart_items
-                WHERE id = ?
+                FROM cart_items 
+                WHERE cart_id = ?
+                ORDER BY created_at ASC
                 """;
 
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, itemId);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next()) {
-                    return null;
-                }
-                CartItem item = mapCartItem(rs);
-                item.setOptions(findOptionsByCartItemId(item.getId()));
-                return item;
-            }
-        }
-    }
-
-    @Override
-    public CartItem saveItem(CartItem item) throws SQLException {
-        String sql = """
-                INSERT INTO cart_items 
-                    (cart_id, menu_item_id, qty, unit_price_snapshot, 
-                     options_price_snapshot, note, item_hash, item_name_snapshot)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                """;
-
-        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setLong(1, item.getCartId());
-            ps.setLong(2, item.getMenuItemId());
-            ps.setInt(3, item.getQty());
-            ps.setInt(4, item.getUnitPriceSnapshot());
-            ps.setInt(5, item.getOptionsPriceSnapshot());
-            ps.setString(6, item.getNote());
-            ps.setString(7, item.getItemHash());
-            ps.setString(8, item.getItemNameSnapshot());
-            ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    item.setId(rs.getLong(1));
-                }
-            }
-        }
-
-        return item;
-    }
-
-    @Override
-    public void updateItemQty(long itemId, int qty) throws SQLException {
-        String sql = "UPDATE cart_items SET qty = ? WHERE id = ?";
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, qty);
-            ps.setLong(2, itemId);
-            ps.executeUpdate();
-        }
-    }
-
-    @Override
-    public void deleteItemById(long itemId) throws SQLException {
-        String sql = "DELETE FROM cart_items WHERE id = ?";
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, itemId);
-            ps.executeUpdate();
-        }
-    }
-
-    @Override
-    public void deleteAllItemsByCartId(long cartId) throws SQLException {
-        String sql = "DELETE FROM cart_items WHERE cart_id = ?";
-
+        List<CartItem> items = new ArrayList<>();
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, cartId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    CartItem item = mapToCartItem(rs);
+                    
+                    // Load options for each item
+                    List<CartItemOption> options = findOptionsByCartItemId(item.getId());
+                    item.setOptions(options);
+                    
+                    items.add(item);
+                }
+            }
+        }
+        return items;
+    }
+
+    @Override
+    public CartItem saveItem(CartItem cartItem) throws SQLException {
+        if (cartItem.getId() == null) {
+            return insertCartItem(cartItem);
+        } else {
+            updateCartItem(cartItem);
+            return cartItem;
+        }
+    }
+
+    @Override
+    public void deleteItemById(Long id) throws SQLException {
+        // First delete options
+        deleteOptionsByCartItemId(id);
+        
+        // Then delete item
+        String sql = "DELETE FROM cart_items WHERE id = ?";
+        Connection conn = DBContext.getOrCreate();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, id);
             ps.executeUpdate();
         }
     }
 
     // ==========================================================
-    // CART ITEM OPTIONS OPERATIONS
+    // CART ITEM OPTION OPERATIONS
     // ==========================================================
 
     @Override
-    public List<CartItemOption> findOptionsByCartItemId(long cartItemId) throws SQLException {
+    public List<CartItemOption> findOptionsByCartItemId(Long cartItemId) throws SQLException {
         String sql = """
-                SELECT id, cart_item_id, option_value_id, 
-                       option_group_name_snapshot, option_value_name_snapshot, 
-                       price_delta_snapshot
-                FROM cart_item_options
+                SELECT id, cart_item_id, option_value_id, option_group_name_snapshot,
+                       option_value_name_snapshot, price_delta_snapshot
+                FROM cart_item_options 
                 WHERE cart_item_id = ?
-                ORDER BY id
+                ORDER BY id ASC
                 """;
 
         List<CartItemOption> options = new ArrayList<>();
-
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, cartItemId);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    options.add(mapCartItemOption(rs));
+                    CartItemOption option = mapToCartItemOption(rs);
+                    options.add(option);
                 }
             }
         }
-
         return options;
     }
 
     @Override
     public CartItemOption saveOption(CartItemOption option) throws SQLException {
         String sql = """
-                INSERT INTO cart_item_options 
-                    (cart_item_id, option_value_id, option_group_name_snapshot, 
-                     option_value_name_snapshot, price_delta_snapshot)
+                INSERT INTO cart_item_options (cart_item_id, option_value_id, option_group_name_snapshot,
+                                             option_value_name_snapshot, price_delta_snapshot) 
                 VALUES (?, ?, ?, ?, ?)
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setLong(1, option.getCartItemId());
             ps.setLong(2, option.getOptionValueId());
             ps.setString(3, option.getOptionGroupNameSnapshot());
             ps.setString(4, option.getOptionValueNameSnapshot());
             ps.setInt(5, option.getPriceDeltaSnapshot());
-            ps.executeUpdate();
 
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    option.setId(rs.getLong(1));
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        option.setId(rs.getLong(1));
+                        return option;
+                    }
                 }
             }
         }
+        throw new SQLException("Creating cart item option failed, no ID obtained.");
+    }
 
-        return option;
+    @Override
+    public void deleteOptionsByCartItemId(Long cartItemId) throws SQLException {
+        String sql = "DELETE FROM cart_item_options WHERE cart_item_id = ?";
+
+        Connection conn = DBContext.getOrCreate();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, cartItemId);
+            ps.executeUpdate();
+        }
     }
 
     // ==========================================================
-    // MAPPING UTILITIES
+    // PRIVATE HELPER METHODS
     // ==========================================================
 
-    private Cart mapCart(ResultSet rs) throws SQLException {
+    /**
+     * Insert new cart and return with generated ID.
+     */
+    private Cart insertCart(Cart cart) throws SQLException {
+        String sql = """
+                INSERT INTO carts (store_id, user_id, created_at, updated_at) 
+                VALUES (?, ?, NOW(), NOW())
+                """;
+
+        Connection conn = DBContext.getOrCreate();
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setLong(1, cart.getStoreId());
+            ps.setLong(2, cart.getUserId());
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        cart.setId(rs.getLong(1));
+                        return cart;
+                    }
+                }
+            }
+        }
+        throw new SQLException("Creating cart failed, no ID obtained.");
+    }
+
+    /**
+     * Update existing cart timestamp.
+     */
+    private void updateCart(Cart cart) throws SQLException {
+        String sql = "UPDATE carts SET updated_at = NOW() WHERE id = ?";
+
+        Connection conn = DBContext.getOrCreate();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, cart.getId());
+            ps.executeUpdate();
+        }
+    }
+
+    /**
+     * Insert new cart item and return with generated ID.
+     */
+    private CartItem insertCartItem(CartItem cartItem) throws SQLException {
+        String sql = """
+                INSERT INTO cart_items (cart_id, menu_item_id, qty, unit_price_snapshot, 
+                                      options_price_snapshot, note, item_hash, item_name_snapshot,
+                                      created_at, updated_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+                """;
+
+        Connection conn = DBContext.getOrCreate();
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setLong(1, cartItem.getCartId());
+            ps.setLong(2, cartItem.getMenuItemId());
+            ps.setInt(3, cartItem.getQty());
+            ps.setInt(4, cartItem.getUnitPriceSnapshot());
+            ps.setInt(5, cartItem.getOptionsPriceSnapshot());
+            ps.setString(6, cartItem.getNote());
+            ps.setString(7, cartItem.getItemHash());
+            ps.setString(8, cartItem.getItemNameSnapshot());
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        cartItem.setId(rs.getLong(1));
+                        return cartItem;
+                    }
+                }
+            }
+        }
+        throw new SQLException("Creating cart item failed, no ID obtained.");
+    }
+
+    /**
+     * Update existing cart item.
+     */
+    private void updateCartItem(CartItem cartItem) throws SQLException {
+        String sql = """
+                UPDATE cart_items 
+                SET qty = ?, note = ?, updated_at = NOW() 
+                WHERE id = ?
+                """;
+
+        Connection conn = DBContext.getOrCreate();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, cartItem.getQty());
+            ps.setString(2, cartItem.getNote());
+            ps.setLong(3, cartItem.getId());
+            ps.executeUpdate();
+        }
+    }
+
+    /**
+     * Maps a ResultSet row to a Cart object.
+     */
+    private Cart mapToCart(ResultSet rs) throws SQLException {
         Cart cart = new Cart();
         cart.setId(rs.getLong("id"));
         cart.setStoreId(rs.getLong("store_id"));
@@ -325,7 +407,10 @@ public class CartDAOImpl implements CartDAO {
         return cart;
     }
 
-    private CartItem mapCartItem(ResultSet rs) throws SQLException {
+    /**
+     * Maps a ResultSet row to a CartItem object.
+     */
+    private CartItem mapToCartItem(ResultSet rs) throws SQLException {
         CartItem item = new CartItem();
         item.setId(rs.getLong("id"));
         item.setCartId(rs.getLong("cart_id"));
@@ -350,7 +435,10 @@ public class CartDAOImpl implements CartDAO {
         return item;
     }
 
-    private CartItemOption mapCartItemOption(ResultSet rs) throws SQLException {
+    /**
+     * Maps a ResultSet row to a CartItemOption object.
+     */
+    private CartItemOption mapToCartItemOption(ResultSet rs) throws SQLException {
         CartItemOption option = new CartItemOption();
         option.setId(rs.getLong("id"));
         option.setCartItemId(rs.getLong("cart_item_id"));
