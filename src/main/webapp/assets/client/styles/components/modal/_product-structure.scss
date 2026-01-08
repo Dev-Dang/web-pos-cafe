@@ -1,17 +1,13 @@
 // Product Modal - 2 Column Layout (Optimized Size)
-.product-modal .modal-dialog {
+.product-modal__dialog {
   margin: 0 auto;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) !important;
   width: 94vw;
   max-width: 1000px; // Reduced from 1100px
   max-height: 90vh;
   height: auto;
 }
 
-.product-modal .modal-content {
+.product-modal__content {
   width: 100%;
   height: auto;
   max-height: 90vh;
@@ -27,12 +23,28 @@
   }
 }
 
+// Unpoly Modal Specific Overrides for Product Modal
+up-modal {
+  .product-modal {
+    position: static !important;
+    display: block !important;
+
+    .product-modal__dialog {
+      // Override any legacy positioning for Unpoly integration
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+    }
+  }
+}
+
 .modal-backdrop.show {
   opacity: 0.6;
 }
 
 // Mobile Header - Shows only on mobile (< 768px)
-.modal-mobile-header {
+.product-modal__mobile-header {
   display: none;
 
   @media (max-width: 767.98px) {
@@ -45,6 +57,40 @@
     background: transparent;
     border-bottom: 1px solid rgba($border-outline-color, 0.1);
     margin-bottom: $spacing-lg;
+  }
+
+  &__back {
+    border: none;
+    background: transparent;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-body-color;
+    cursor: pointer;
+
+    i {
+      font-size: 2.4rem;
+    }
+
+    &:hover {
+      background: rgba($primary, 0.1);
+      border-radius: $radius-sm;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    text-align: center;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    margin: 0;
+    color: $text-heading-color;
+  }
+
+  &__spacer {
+    width: 4rem; // Balance the back button
   }
 }
 
@@ -118,35 +164,35 @@
     display: flex;
     flex-direction: column;
     min-height: 0; // Important for flexbox
-    
+
     // Make the panel itself scrollable
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     max-height: calc(90vh - 5.6rem - #{$spacing-xl} * 2);
-    
+
     &::-webkit-scrollbar {
       width: 6px;
     }
-    
+
     &::-webkit-scrollbar-track {
       background: rgba($border-outline-color, 0.15);
       border-radius: $radius-xs;
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background: rgba($primary, 0.5);
       border-radius: $radius-xs;
     }
-    
+
     scrollbar-width: thin;
     scrollbar-color: rgba($primary, 0.5) rgba($border-outline-color, 0.15);
-    
+
     // Ensure columns stack naturally
     .product-modal__col {
       flex-shrink: 0;
     }
-    
+
     // Footer sticky on mobile when scrolling
     .product-modal__footer {
       position: sticky;
@@ -159,7 +205,7 @@
       border-top: 1px solid rgba($border-outline-color, 0.3);
     }
   }
-  
+
   // Desktop & Tablet: fixed height for layout
   @media (min-width: 768px) {
     max-height: calc(90vh - #{$spacing-2xl} * 2);
@@ -179,22 +225,22 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .product-modal__col-2 {
       display: flex;
       flex-direction: column;
       max-height: 85vh;
-      
+
       .product-modal__info {
         flex-shrink: 0;
       }
-      
+
       .product-modal__options-wrapper {
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
         padding-right: $spacing-sm;
-        
+
         // Custom scrollbar
         &::-webkit-scrollbar {
           width: 6px;
@@ -218,7 +264,7 @@
         scrollbar-width: thin;
         scrollbar-color: rgba($primary, 0.5) rgba($border-outline-color, 0.15);
       }
-      
+
       .product-modal__footer {
         flex-shrink: 0;
         position: sticky;
@@ -239,19 +285,19 @@
       display: flex;
       flex-direction: column;
     }
-    
+
     .product-modal__col-2 {
       display: flex;
       flex-direction: column;
       max-height: 85vh;
-      
+
       // Single scrollable wrapper for all options
       .product-modal__options-wrapper {
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
         padding-right: $spacing-sm;
-        
+
         // Custom scrollbar
         &::-webkit-scrollbar {
           width: 6px;
@@ -275,7 +321,7 @@
         scrollbar-width: thin;
         scrollbar-color: rgba($primary, 0.5) rgba($border-outline-color, 0.15);
       }
-      
+
       .product-modal__footer {
         flex-shrink: 0;
         position: sticky;
@@ -320,7 +366,7 @@
   flex-direction: column;
   gap: $spacing-lg;
   min-width: 0;
-  
+
   // Mobile: remove gap, let layout variants handle styling
   @media (max-width: 767.98px) {
     gap: $spacing-lg;
@@ -355,10 +401,10 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(
-    90deg,
-    $badge-gradient-start 0%,
-    $badge-gradient-mid 50%,
-    $primary 100%
+                  90deg,
+                  $badge-gradient-start 0%,
+                  $badge-gradient-mid 50%,
+                  $primary 100%
   );
   padding: $spacing-xs $spacing-md;
   border-radius: $radius-sm;

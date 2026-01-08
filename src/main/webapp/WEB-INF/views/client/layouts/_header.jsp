@@ -72,7 +72,7 @@
                         <button type="button"
                                 class="btn btn-md btn-primary--filled"
                                 up-follow
-                                up-href="partial/login-form"
+                                up-href="${ctxPath}/partial/login-form"
                                 up-layer="new modal"
                                 up-size="small"
                                 up-animation="fade-in"

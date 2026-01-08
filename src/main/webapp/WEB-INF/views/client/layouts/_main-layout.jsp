@@ -48,7 +48,10 @@
     <jsp:include page="/WEB-INF/views/shared/layouts/_response-context.jsp"/>
 
     <%-- Including the page loader --%>
-    <jsp:include page="/WEB-INF/views/client/fragments/_page-loader.jsp"/>
+    <jsp:include page="/WEB-INF/views/client/components/_page-loader.jsp"/>
+
+    <%-- Scroll to top button --%>
+    <jsp:include page="/WEB-INF/views/client/components/_scroll-to-top.jsp"/>
 
     <%-- Script --%>
     <script src="assets/client/unpoly/unpoly.min.js"></script>

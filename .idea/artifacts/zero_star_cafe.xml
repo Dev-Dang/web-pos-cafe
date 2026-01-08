@@ -1,15 +1,10 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="zero-star-cafe">
-    <output-path>$PROJECT_DIR$/build/artifacts/zero_star_cafe</output-path>
+    <output-path>$PROJECT_DIR$/target/artifacts/zero_star_cafe</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="zero-star-cafe" />
-          <element id="library" level="project" name="font-awesome" />
-          <element id="library" level="project" name="litepicker" />
-          <element id="library" level="project" name="xlsx" />
-          <element id="library" level="application" name="chart.js" />
-          <element id="library" level="project" name="uicons-solid-rounded" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0" />
@@ -25,8 +20,15 @@
           <element id="library" level="project" name="Maven: net.java.dev.jna:jna:5.16.0" />
           <element id="library" level="project" name="Maven: com.maxmind.geoip2:geoip2:5.0.0" />
           <element id="library" level="project" name="Maven: com.maxmind.db:maxmind-db:4.0.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.20" />
+          <element id="library" level="project" name="Maven: com.github.ben-manes.caffeine:caffeine:3.1.8" />
+          <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.37.0" />
+          <element id="library" level="project" name="Maven: com.google.errorprone:error_prone_annotations:2.21.1" />
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.42" />
-          <element id="library" level="project" name="mysql.connector.j" />
+          <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:5.0.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.17.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.17.2" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="zero-star-cafe/web/Web" />

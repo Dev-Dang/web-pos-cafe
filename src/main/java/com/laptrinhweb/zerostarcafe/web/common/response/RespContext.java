@@ -1,6 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.response;
 
-import com.laptrinhweb.zerostarcafe.web.common.utils.WebConstants;
+import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
+import com.laptrinhweb.zerostarcafe.web.common.utils.PaginationContext;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -36,13 +37,34 @@ public final class RespContext {
      */
     public static RespContext from(HttpServletRequest req) {
         RespContext ctx = (RespContext) req.getAttribute(
-                WebConstants.Request.RESPONSE_CONTEXT);
+                WebConstants.Attribute.RESPONSE_CONTEXT);
 
         if (ctx == null) {
             ctx = new RespContext(req);
-            req.setAttribute(WebConstants.Request.RESPONSE_CONTEXT, ctx);
+            req.setAttribute(WebConstants.Attribute.RESPONSE_CONTEXT, ctx);
         }
         return ctx;
+    }
+
+    /**
+     * Set data with key-value pair and sync to request attributes.
+     */
+    public RespContext setData(String key, Object value) {
+        data.put(key, value);
+        syncDataToRequest();
+        return this;
+    }
+
+    /**
+     * Set pagination data from PaginationContext and sync to request attributes.
+     */
+    public RespContext setPaginationData(PaginationContext context) {
+        data.put(WebConstants.Attribute.SEARCH_QUERY, context.getQuery());
+        data.put(WebConstants.Attribute.HAS_MORE, context.isHasMore());
+        data.put(WebConstants.Attribute.SEARCH_RESULTS_COUNT, context.getResultsCount());
+        data.put(WebConstants.Attribute.PAGINATION_URL, context.getPaginationUrl());
+        syncDataToRequest();
+        return this;
     }
 
     /**
@@ -52,14 +74,22 @@ public final class RespContext {
     public RespContext addMsg(Message msg) {
         // Get message list (if not exists, create a new one)
         List<Message> msgs = (List<Message>) data.computeIfAbsent(
-                WebConstants.Request.MESSAGES,
+                WebConstants.Attribute.MESSAGES,
                 k -> new ArrayList<>()
         );
         msgs.add(msg);
 
-        // Return updated context
-        req.setAttribute(WebConstants.Request.MESSAGES, msgs);
+        // Add back to data and sync to request
+        data.put(WebConstants.Attribute.MESSAGES, msgs);
+        syncDataToRequest();
         return this;
+    }
+
+    /**
+     * Sync all data to request attributes for consistency.
+     */
+    private void syncDataToRequest() {
+        data.forEach(req::setAttribute);
     }
 
     /**

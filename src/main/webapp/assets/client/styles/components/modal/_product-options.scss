@@ -120,27 +120,27 @@
     background-color: rgba($primary, 0.06);
     transform: translateX(2px);
   }
-  
+
   &.is-selected {
     color: $primary;
-    
+
     .option-row__check {
       background-color: $primary;
       border-color: $primary;
-      
+
       i {
         display: inline-block;
       }
     }
   }
-  
+
   // Disabled state when max reached
   &.is-disabled {
     cursor: not-allowed;
     opacity: 0.4;
     color: $text-disabled-color;
     pointer-events: none;
-    
+
     &:hover {
       background-color: transparent;
       transform: none;

@@ -66,3 +66,40 @@ export const ModalWebConstants = {
         CONTAINER: "#modal-container"
     }
 };
+
+export const InfiniteScrollConstants = {
+    Endpoint: {
+        SEARCH: "search",
+        CATEGORIES: "categories"
+    },
+    
+    Selector: {
+        PRODUCT_GRID: '.product-grid',
+        LOAD_TRIGGER: '[data-load-trigger]',
+        SEARCH_INPUT: '[data-search-input]',
+        CATEGORY_ACTIVE: '.category-item.is-active'
+    },
+    
+    UnpolyAttribute: {
+        TARGET: 'up-target',
+        MODE: 'up-mode', 
+        HREF: 'up-href',
+        REVEAL: 'up-reveal'
+    },
+    
+    Config: {
+        PAGE_SIZE: 9,
+        SCROLL_THRESHOLD: 100
+    },
+    
+    // Helper method to build pagination URLs
+    buildPaginationUrl(type, query, page) {
+        const contextPath = window.location.pathname.split('/')[1];
+        const base = contextPath ? `/${contextPath}` : '';
+        
+        if (type === 'search') {
+            return `${base}/${this.Endpoint.SEARCH}?q=${encodeURIComponent(query)}&page=${page}`;
+        }
+        return `${base}/${this.Endpoint.CATEGORIES}/${query}?page=${page}`;
+    }
+};

@@ -1,36 +1,44 @@
 package com.laptrinhweb.zerostarcafe.domain.product.model;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * <h2>Description:</h2>
  * <p>
- * Constants used throughout the product domain for parameter names,
- * request attributes, and session keys related to products and menu items.
+ * Constants for the product domain including option types,
+ * availability statuses, and default values.
  * </p>
  *
  * @author Dang Van Trung
  * @version 1.0.0
- * @lastModified 26/12/2025
+ * @lastModified 06/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ProductConstants {
 
-    private ProductConstants() {
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Attributes {
+        public static final String PRODUCT_CARDS = "productCards";
     }
 
-    public static final class Param {
-        public static final String PRODUCT_ID = "productId";
-        public static final String CATEGORY_ID = "categoryId";
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class OptionType {
+        public static final String SIZE = "size";
+        public static final String TOPPING = "topping";
     }
 
-    public static final class Request {
-        public static final String PRODUCTS = "products";
-        public static final String PRODUCT = "product";
-        public static final String PRODUCT_DETAIL = "productDetail";
-        public static final String CATALOG_ITEMS = "catalogItems";
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class AvailabilityStatus {
+        public static final String AVAILABLE = "available";
+        public static final String SOLD_OUT = "sold_out";
+        public static final String DISCONTINUED = "discontinued";
     }
 
-    public static final class Session {
-        public static final String CART = "SESSION_CART";
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Defaults {
+        public static final String DEFAULT_IMAGE_URL = "assets/client/img/product/default.png";
+        public static final String DEFAULT_UNIT = "ly";
     }
 }
-

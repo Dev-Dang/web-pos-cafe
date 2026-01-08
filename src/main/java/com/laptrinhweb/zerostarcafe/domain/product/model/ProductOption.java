@@ -10,27 +10,25 @@ import java.util.List;
 /**
  * <h2>Description:</h2>
  * <p>
- * Represents a group of options (e.g., Size, Sugar, Ice, Topping) that
- * can be selected for a product. Maps to {@code option_groups} table
- * and its relationship with {@code item_option_groups}.
+ * Domain model representing an option group (e.g., "Size", "Toppings") with its available values.
+ * Maps to the {@code option_groups} table and includes related option values.
  * </p>
  *
  * @author Dang Van Trung
  * @version 1.0.0
- * @lastModified 26/12/2025
+ * @lastModified 06/01/2026
  * @since 1.0.0
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class OptionGroup {
+public class ProductOption {
     private long id;
-    private String name;
+    private String nameJson;
     private String type;
     private boolean required;
     private int minSelect;
     private int maxSelect;
-    private List<OptionValue> values;
+    private List<ProductOptionValue> values;
 }
-

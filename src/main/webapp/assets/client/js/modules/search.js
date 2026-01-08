@@ -1,43 +1,35 @@
 /**
  * ------------------------------------------------------------
- * Module: Product Search
+ * Module: Product Search with Auto-submit & History
  * ------------------------------------------------------------
  * @description
- * Manages product search functionality with debounced AJAX requests,
- * full-page loading indicators, and search history stored in localStorage.
+ * Manages product search with auto-submit delay and search history.
+ * Infinite scroll is handled by the separate infinite-scroll module.
  *
  * @example
  * import { initProductSearch } from './search.js';
  * initProductSearch();
  *
- * @version 1.3.0
+ * @version 4.0.0
  * @since 1.0.0
- * @lastModified 28/12/2025
+ * @lastModified 07/01/2026
  * @module search
  * @author Dang Van Trung
  */
-
-import { ProductWebConstants } from './web-constants.js';
-import { showLoader, hideLoader } from './page-loader.js';
 
 const SEARCH_INPUT = '[data-search-input]';
 const SEARCH_HISTORY = '[data-search-history]';
 const HISTORY_LIST = '[data-history-list]';
 const HISTORY_CLEAR = '[data-history-clear]';
-const CATALOG_CONTAINER = '[data-product-grid]';
-const CATEGORY_TITLE = '[data-category-title]';
-const CATEGORY_META = '[data-category-meta]';
-const CATEGORY_ITEM = '[data-category-item]';
-const ACTIVE_CLASS = 'is-active';
-const DEBOUNCE_DELAY = 600; // Increased to 600ms for better UX
-const MAX_HISTORY_ITEMS = 5;
+const MAX_HISTORY_ITEMS = 100; // Store up to 100 items
+const MAX_DISPLAY_HISTORY = 5; // Show max 5 items in dropdown
 const STORAGE_KEY = 'product_search_history';
+const SEARCH_DELAY = 500; // 500ms delay for auto-submit
 
 let searchTimeout = null;
-let isSearching = false;
 
 /**
- * Initializes product search functionality.
+ * Initializes product search with auto-submit and history.
  */
 export function initProductSearch() {
     const searchInput = document.querySelector(SEARCH_INPUT);
@@ -46,22 +38,63 @@ export function initProductSearch() {
     const historyDropdown = document.querySelector(SEARCH_HISTORY);
     const historyList = document.querySelector(HISTORY_LIST);
     const historyClear = document.querySelector(HISTORY_CLEAR);
+    const searchForm = searchInput.closest('form');
 
-    // Focus: Show search history when input is empty
+    console.log('Product search initialized');
+
+    // Prevent form submission for empty queries only
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            const query = searchInput.value.trim();
+            if (query.length === 0) { // Only prevent empty submissions
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
+
+    // Handle Enter key for immediate search submission
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            clearTimeout(searchTimeout);
+            performSearch(searchInput, searchForm, historyDropdown);
+        }
+    });
+
+    // Auto-submit search with delay after typing stops
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.trim();
+        
+        // Clear any existing timeout
+        clearTimeout(searchTimeout);
+        
+        // Show filtered search history based on current input
+        if (historyDropdown) {
+            showSearchHistory(historyDropdown, historyList, searchInput, searchTerm);
+        }
+
+        // Set timeout for auto-submit (only if not empty)
+        if (searchTerm.length > 0) {
+            searchTimeout = setTimeout(() => {
+                performSearch(searchInput, searchForm, historyDropdown);
+            }, SEARCH_DELAY);
+        }
+    });
+
+    // Show search history when input is focused
     searchInput.addEventListener('focus', () => {
-        if (!searchInput.value.trim()) {
-            showSearchHistory(historyDropdown, historyList, searchInput);
-        }
+        const currentValue = searchInput.value.trim();
+        showSearchHistory(historyDropdown, historyList, searchInput, currentValue);
     });
 
-    // Click: Show search history when input is empty
+    // Show search history when input is clicked
     searchInput.addEventListener('click', () => {
-        if (!searchInput.value.trim()) {
-            showSearchHistory(historyDropdown, historyList, searchInput);
-        }
+        const currentValue = searchInput.value.trim();
+        showSearchHistory(historyDropdown, historyList, searchInput, currentValue);
     });
 
-    // Blur: Hide history dropdown
+    // Hide history dropdown when input loses focus
     searchInput.addEventListener('blur', () => {
         // Delay to allow clicking on history items
         setTimeout(() => {
@@ -69,36 +102,6 @@ export function initProductSearch() {
                 historyDropdown.classList.remove('is-visible');
             }
         }, 200);
-    });
-
-    // Search input handler with debouncing
-    searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.trim();
-
-        // Show history when input is empty, hide when typing
-        if (historyDropdown) {
-            if (!searchTerm) {
-                showSearchHistory(historyDropdown, historyList, searchInput);
-            } else {
-                historyDropdown.classList.remove('is-visible');
-            }
-        }
-
-        // Clear previous timeout
-        if (searchTimeout) {
-            clearTimeout(searchTimeout);
-        }
-
-        // Debounce search
-        searchTimeout = setTimeout(async () => {
-            if (searchTerm.length > 0) {
-                await performSearch(searchTerm);
-                // Save to history after successful search
-                saveSearchHistory(searchTerm);
-            } else {
-                await reloadDefaultCategory();
-            }
-        }, DEBOUNCE_DELAY);
     });
 
     // Clear all history
@@ -110,27 +113,10 @@ export function initProductSearch() {
         historyClear.addEventListener('click', (e) => {
             e.stopPropagation();
             clearSearchHistory();
-            showSearchHistory(historyDropdown, historyList, searchInput);
+            const currentValue = searchInput.value.trim();
+            showSearchHistory(historyDropdown, historyList, searchInput, currentValue);
         });
     }
-
-    // Prevent form submission on Enter key and blur
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            searchInput.blur();
-        }
-    });
-
-    // Clear search input when clicking on category
-    document.querySelectorAll(CATEGORY_ITEM).forEach(categoryEl => {
-        categoryEl.addEventListener('click', () => {
-            searchInput.value = '';
-            if (historyDropdown) {
-                historyDropdown.classList.remove('is-visible');
-            }
-        });
-    });
 
     // Hide history when clicking anywhere outside search field
     document.addEventListener('click', (e) => {
@@ -141,27 +127,88 @@ export function initProductSearch() {
             }
         }
     });
+
+    // Handle Unpoly events
+    setupUnpolyEvents();
 }
 
 /**
- * Shows search history dropdown.
+ * Performs search submission
+ */
+function performSearch(searchInput, searchForm, historyDropdown) {
+    const query = searchInput.value.trim();
+    
+    if (query.length === 0) { // Only prevent empty searches
+        return;
+    }
+    
+    // Save to history before search
+    saveSearchHistory(query);
+    
+    // Submit the form with Unpoly (page loader will show automatically)
+    if (searchForm) {
+        up.submit(searchForm);
+    }
+    
+    // Hide history dropdown
+    if (historyDropdown) {
+        historyDropdown.classList.remove('is-visible');
+    }
+}
+
+/**
+ * Setup Unpoly event handlers
+ */
+function setupUnpolyEvents() {
+    // Handle search form submission
+    up.on('up:form:submit', 'form', (event) => {
+        const form = event.target;
+        const searchInputInForm = form.querySelector(SEARCH_INPUT);
+        if (searchInputInForm) {
+            const searchTerm = searchInputInForm.value.trim();
+            if (searchTerm.length > 0) { // Only save non-empty searches
+                saveSearchHistory(searchTerm);
+            }
+        }
+    });
+
+    // Clear search input only on page reload
+    window.addEventListener('beforeunload', () => {
+        const searchInput = document.querySelector(SEARCH_INPUT);
+        if (searchInput) {
+            searchInput.value = '';
+        }
+    });
+}
+
+/**
+ * Shows search history dropdown with filtering based on current input.
  * @param {HTMLElement} dropdown - History dropdown element
  * @param {HTMLElement} list - History list element
  * @param {HTMLElement} input - Search input element
+ * @param {string} currentInput - Current input value to filter by
  */
-function showSearchHistory(dropdown, list, input) {
+function showSearchHistory(dropdown, list, input, currentInput = '') {
     const history = getSearchHistory();
     
     if (!dropdown || !list) return;
 
+    // Filter history based on current input
+    const filteredHistory = currentInput 
+        ? history.filter(term => term.toLowerCase().includes(currentInput.toLowerCase()))
+        : history;
+    
+    // Limit to max display items
+    const displayHistory = filteredHistory.slice(0, MAX_DISPLAY_HISTORY);
+
     // Clear existing items
     list.innerHTML = '';
 
-    if (history.length === 0) {
+    if (displayHistory.length === 0) {
         list.innerHTML = `
             <li class="search-history__empty">
                 <i class="fi fi-rr-time-past"></i>
-                <span>Không có lịch sử tìm kiếm</span>
+                <span>${currentInput ? 'Không tìm thấy lịch sử phù hợp' : 'Không có lịch sử tìm kiếm'}</span>
             </li>
         `;
         dropdown.classList.add('is-visible');
@@ -169,19 +216,32 @@ function showSearchHistory(dropdown, list, input) {
     }
 
     // Render history items
-    history.forEach(term => {
+    displayHistory.forEach(term => {
         const li = document.createElement('li');
         li.className = 'search-history__item';
+        
+        // Highlight matching text
+        let displayText = term;
+        if (currentInput && currentInput.length > 0) {
+            const regex = new RegExp(`(${escapeRegex(currentInput)})`, 'gi');
+            displayText = term.replace(regex, '<mark>$1</mark>');
+        }
+        
         li.innerHTML = `
             <i class="fi fi-rr-search"></i>
-            <span class="search-history__text">${escapeHtml(term)}</span>
+            <span class="search-history__text">${displayText}</span>
         `;
         
-        li.addEventListener('mousedown', async (e) => {
+        li.addEventListener('mousedown', (e) => {
             e.preventDefault(); // Prevent blur
             input.value = term;
             dropdown.classList.remove('is-visible');
-            await performSearch(term);
+            
+            // Trigger search immediately when clicking history item
+            const searchForm = input.closest('form');
+            if (searchForm) {
+                performSearch(input, searchForm, dropdown);
+            }
         });
         
         list.appendChild(li);
@@ -195,12 +255,15 @@ function showSearchHistory(dropdown, list, input) {
  * @param {string} term - Search term to save
  */
 function saveSearchHistory(term) {
-    if (!term || term.length < 2) return;
+    if (!term || term.length === 0) return;
 
     let history = getSearchHistory();
     
+    // Remove existing occurrence of the term
     history = history.filter(item => item !== term);
+    // Add to the beginning
     history.unshift(term);
+    // Limit to max items
     history = history.slice(0, MAX_HISTORY_ITEMS);
     
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
@@ -239,159 +302,10 @@ function escapeHtml(str) {
 }
 
 /**
- * Performs product search via AJAX with loading state.
- * @param {string} searchTerm - The search term
+ * Escapes regex special characters.
+ * @param {string} str - String to escape
+ * @returns {string} Escaped string
  */
-async function performSearch(searchTerm) {
-    if (isSearching) return;
-    
-    isSearching = true;
-    showLoader();
-
-    try {
-        const url = `${ProductWebConstants.Endpoint.PRODUCT_SEARCH}?q=${encodeURIComponent(searchTerm)}`;
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-
-        const html = await response.text();
-        const container = document.querySelector(CATALOG_CONTAINER);
-        
-        // Smooth transition
-        await new Promise(resolve => setTimeout(resolve, 150));
-        
-        container.innerHTML = html;
-
-        // Update header
-        updateSearchHeader(searchTerm);
-
-        // Clear active category
-        document.querySelectorAll(`${CATEGORY_ITEM}.${ACTIVE_CLASS}`)
-            .forEach(c => c.classList.remove(ACTIVE_CLASS));
-
-        // Re-attach event listeners
-        await initProductModalTriggers();
-
-    } catch (error) {
-        console.error('Search failed:', error);
-        showErrorMessage('Không thể tìm kiếm sản phẩm. Vui lòng thử lại.');
-    } finally {
-        hideLoader();
-        isSearching = false;
-    }
-}
-
-/**
- * Reloads the default category when search is cleared.
- */
-async function reloadDefaultCategory() {
-    const firstCategory = document.querySelector(CATEGORY_ITEM);
-    if (!firstCategory) return;
-
-    const categorySlug = firstCategory.dataset.categorySlug;
-    if (!categorySlug) return;
-
-    try {
-        const container = document.querySelector(CATALOG_CONTAINER);
-        container.style.opacity = '0.5';
-
-        const url = `${ProductWebConstants.Endpoint.PRODUCTS_BY_CATEGORY}/${categorySlug}`;
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-
-        const html = await response.text();
-        
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        container.innerHTML = html;
-        container.style.opacity = '1';
-
-        // Restore first category as active
-        document.querySelectorAll(`${CATEGORY_ITEM}.${ACTIVE_CLASS}`)
-            .forEach(c => c.classList.remove(ACTIVE_CLASS));
-        firstCategory.classList.add(ACTIVE_CLASS);
-
-        // Update header
-        updateCategoryHeader(firstCategory);
-
-        // Re-attach event listeners
-        await initProductModalTriggers();
-
-    } catch (error) {
-        console.error('Failed to reload category:', error);
-    }
-}
-
-/**
- * Updates the category header for search results.
- * @param {string} searchTerm - The search term
- */
-function updateSearchHeader(searchTerm) {
-    const titleEl = document.querySelector(CATEGORY_TITLE);
-    const metaEl = document.querySelector(CATEGORY_META);
-
-    if (titleEl) {
-        titleEl.textContent = `Kết quả tìm kiếm: "${searchTerm}"`;
-    }
-
-    if (metaEl) {
-        const productCount = document.querySelectorAll('[data-product-card]').length;
-        metaEl.textContent = productCount === 0 
-            ? 'Không tìm thấy sản phẩm' 
-            : productCount === 1 
-                ? '1 sản phẩm' 
-                : `${productCount} sản phẩm`;
-    }
-}
-
-/**
- * Updates the category header with category name and product count.
- * @param {HTMLElement} categoryEl - The active category element
- */
-function updateCategoryHeader(categoryEl) {
-    const categoryName = categoryEl.dataset.categoryName;
-    if (!categoryName) return;
-
-    const titleEl = document.querySelector(CATEGORY_TITLE);
-    const metaEl = document.querySelector(CATEGORY_META);
-
-    if (titleEl) {
-        titleEl.textContent = categoryName;
-    }
-
-    if (metaEl) {
-        const productCount = document.querySelectorAll('[data-product-card]').length;
-        metaEl.textContent = productCount === 1 ? '1 sản phẩm' : `${productCount} sản phẩm`;
-    }
-}
-
-/**
- * Re-initializes product modal triggers for dynamically loaded cards.
- */
-async function initProductModalTriggers() {
-    try {
-        const { initProductModal } = await import('./product-modal.js');
-        initProductModal();
-    } catch (error) {
-        console.error('Failed to init product modal:', error);
-    }
-}
-
-/**
- * Shows error toast message.
- * @param {string} message - Error message to display
- */
-async function showErrorMessage(message) {
-    try {
-        const { Toast } = await import('../../../shared/js/modules/toast.js');
-        Toast.error(message);
-    } catch (error) {
-        console.error('Toast not available:', error);
-        alert(message);
-    }
+function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

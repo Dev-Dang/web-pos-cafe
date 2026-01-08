@@ -469,6 +469,12 @@ body::-webkit-scrollbar {
   border: 1px solid #e7e5e4;
   border-radius: 1.6rem;
 }
+.search-field form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 
 .search-field__input {
   border: none;
@@ -718,13 +724,13 @@ body::-webkit-scrollbar {
   cursor: pointer;
   overflow: hidden;
 }
-.product-card.is-sold-out, .product-card[data-sold-out=true] {
+.product-card.is-sold-out {
   cursor: not-allowed;
   pointer-events: none;
   filter: grayscale(0.8);
   opacity: 0.75;
 }
-.product-card.is-sold-out .product-card__media::after, .product-card[data-sold-out=true] .product-card__media::after {
+.product-card.is-sold-out .product-card__media::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -1487,51 +1493,41 @@ body::-webkit-scrollbar {
   }
 }
 
-up-modal .modal-dialog {
-  margin: 0;
-  max-width: none;
-  width: auto;
-  height: auto;
-}
-
 up-modal-viewport {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex !important;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 2rem;
+}
+@media (max-width: 767.98px) {
+  up-modal-viewport {
+    padding: 1rem;
+    align-items: flex-end;
+  }
 }
 
 up-modal-box {
-  background: #fff;
-  border-radius: 1.6rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 up-modal-box::-webkit-scrollbar {
   display: none;
 }
-@media (max-width: 767.98px) {
-  up-modal-box {
-    border-radius: 1.6rem 1.6rem 0 0;
-    max-height: 90vh;
-    box-shadow: none;
-    position: relative;
-  }
-}
 
 up-modal-content {
   position: relative;
+  width: 100%;
+  height: auto;
 }
-@media (max-width: 767.98px) {
-  up-modal-content {
-    padding-top: 5.6rem;
-  }
-}
-
 up-modal-dismiss {
   display: none;
 }
@@ -1585,19 +1581,15 @@ up-modal-dismiss {
   width: 4rem;
 }
 
-.product-modal .modal-dialog {
+.product-modal__dialog {
   margin: 0 auto;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) !important;
   width: 94vw;
   max-width: 1000px;
   max-height: 90vh;
   height: auto;
 }
 
-.product-modal .modal-content {
+.product-modal__content {
   width: 100%;
   height: auto;
   max-height: 90vh;
@@ -1609,20 +1601,31 @@ up-modal-dismiss {
   overflow: hidden;
 }
 @media (min-width: 768px) {
-  .product-modal .modal-content {
+  .product-modal__content {
     padding: 3.2rem;
   }
+}
+
+up-modal .product-modal {
+  position: static !important;
+  display: block !important;
+}
+up-modal .product-modal .product-modal__dialog {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
 }
 
 .modal-backdrop.show {
   opacity: 0.6;
 }
 
-.modal-mobile-header {
+.product-modal__mobile-header {
   display: none;
 }
 @media (max-width: 767.98px) {
-  .modal-mobile-header {
+  .product-modal__mobile-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1633,6 +1636,35 @@ up-modal-dismiss {
     border-bottom: 1px solid rgba(231, 229, 228, 0.1);
     margin-bottom: 1.6rem;
   }
+}
+.product-modal__mobile-header__back {
+  border: none;
+  background: transparent;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #292727;
+  cursor: pointer;
+}
+.product-modal__mobile-header__back i {
+  font-size: 2.4rem;
+}
+.product-modal__mobile-header__back:hover {
+  background: rgba(248, 121, 56, 0.1);
+  border-radius: 0.8rem;
+}
+.product-modal__mobile-header__title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0;
+  color: #1f1717;
+}
+.product-modal__mobile-header__spacer {
+  width: 4rem;
 }
 
 .modal-mobile-header__back {
@@ -2313,6 +2345,8 @@ up-modal-dismiss {
 
 .auth-modal__content {
   border: none;
+  border-radius: 1.6rem;
+  padding: 2.4rem;
   background: #fff;
 }
 @media (max-width: 767.98px) {

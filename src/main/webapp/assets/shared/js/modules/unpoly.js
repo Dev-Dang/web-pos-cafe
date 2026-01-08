@@ -25,6 +25,12 @@ export function initUnpoly() {
 
     // Handle #response-context updates
     up.on('up:fragment:inserted', '#response-context', function (event, fragment) {
+        console.info("Handling response context update ...");
+        handleRespContext(fragment);
+    })
+
+    up.compiler('#response-context', function (fragment) {
+        console.info("Handling response context ...");
         handleRespContext(fragment);
     })
 

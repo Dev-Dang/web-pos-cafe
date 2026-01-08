@@ -3,10 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- Product modal fragment - dynamically loaded via AJAX --%>
-<c:set var="item" value="${productDetail.item}"/>
-<c:set var="hasPromotion" value="${item.basePrice > item.resolvedPrice}"/>
-<c:set var="optionGroupCount" value="${fn:length(productDetail.optionGroups)}"/>
+<%-- Product modal fragment - dynamically loaded via Unpoly --%>
+<c:set var="hasPromotion" value="${productDetail.basePrice > productDetail.currentPrice}"/>
+<c:set var="optionGroupCount" value="${fn:length(productDetail.options)}"/>
 
 <%-- Determine layout: 
      - 0-1 groups = 2 columns compact (image left, info+options right)
@@ -14,7 +13,7 @@
 --%>
 <c:set var="layoutType" value="${optionGroupCount <= 1 ? 'compact' : 'full'}"/>
 
-<div class="modal product-modal" tabindex="-1" data-menu-item-id="${item.id}" data-product-slug="${item.slug}">
+<div class="modal product-modal" tabindex="-1" data-menu-item-id="${productDetail.id}" data-product-slug="${productDetail.slug}">
     <div class="modal-dialog modal-lg product-modal__dialog">
         <div class="modal-content">
             <%-- Mobile Header --%>

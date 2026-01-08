@@ -30,6 +30,13 @@ public final class RouteMap {
     public static final String CHECKOUT = "/checkout";
 
     // ============================================
+    // API ROUTES
+    // ============================================
+    public static final String CATEGORY_PRODUCTS = "/categories";
+    public static final String PRODUCTS = "/products";
+    public static final String SEARCH = "/search";
+
+    // ============================================
     // ADMIN ROUTES
     // ============================================
     public static final String DASHBOARD = "/admin/dashboard";

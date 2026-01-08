@@ -1,205 +1,244 @@
 package com.laptrinhweb.zerostarcafe.domain.product.service;
 
-import com.laptrinhweb.zerostarcafe.core.database.DBConnection;
 import com.laptrinhweb.zerostarcafe.core.exception.AppException;
-import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.domain.product.dao.ProductDAO;
 import com.laptrinhweb.zerostarcafe.domain.product.dao.ProductDAOImpl;
-import com.laptrinhweb.zerostarcafe.domain.product.model.CatalogItem;
-import com.laptrinhweb.zerostarcafe.domain.product.model.OptionGroup;
-import com.laptrinhweb.zerostarcafe.domain.product.model.OptionValue;
-import com.laptrinhweb.zerostarcafe.domain.product.model.ProductDetail;
+import com.laptrinhweb.zerostarcafe.domain.product.dto.ProductCardDTO;
+import com.laptrinhweb.zerostarcafe.domain.product.dto.ProductDetailDTO;
+import com.laptrinhweb.zerostarcafe.domain.product.model.Product;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <h2>Description:</h2>
  * <p>
- * Provides methods to retrieve catalog items and product details
- * with proper error handling and logging.
+ * Service layer for product-related business logic. Handles product retrieval,
+ * price resolution, localization, and DTO conversion.
+ * Language is automatically determined from LocaleContext.
  * </p>
  *
  * <h2>Example Usage:</h2>
  * <pre>
  * {@code
- * ProductService productService = new ProductService();
+ * ProductService productService = ProductService.getInstance();
  *
- * // Load all products for a store
- * List<CatalogItem> items = productService.getCatalogItemsByStoreId(1L);
+ * // Get products by category (locale from LocaleContext)
+ * List<ProductCardDTO> products = productService.getProductsByCategory(1L, storeId);
  *
- * // Get product detail for modal
- * ProductDetail detail = productService.getProductDetailBySlugAndStoreId("ca-phe-sua", 1L);
+ * // Get full product details (locale from LocaleContext)
+ * ProductDetailDTO product = productService.getProductDetail(9L, storeId);
  * }
  * </pre>
  *
  * @author Dang Van Trung
  * @version 1.0.0
- * @lastModified 28/12/2025
+ * @lastModified 06/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ProductService {
 
-    /**
-     * Retrieves all catalog items (products with pricing and availability) for a specific store.
-     * This method is used for rendering the store's menu on the homepage.
-     *
-     * @param storeId the store ID
-     * @return list of catalog items for the store, or empty list if error occurs
-     */
-    public List<CatalogItem> getCatalogItemsByStoreId(@NonNull Long storeId) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            return productDAO.findCatalogItemsByStoreId(storeId);
-        } catch (AppException | SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to get catalog items for storeId=" + storeId, e);
-            return List.of();
-        }
+    private static final ProductService INSTANCE = new ProductService();
+    private final ProductDAO productDAO = new ProductDAOImpl();
+
+    public static ProductService getInstance() {
+        return INSTANCE;
     }
 
     /**
-     * Retrieves catalog items filtered by category for a specific store.
+     * Retrieves products by category as cards for UI display.
      *
-     * @param storeId    the store ID
      * @param categoryId the category ID
-     * @return list of catalog items for the store and category, or empty list if error occurs
+     * @param storeId    the store ID for availability and pricing
+     * @return list of product cards with localized content
      */
-    public List<CatalogItem> getCatalogItemsByStoreIdAndCategoryId(@NonNull Long storeId, @NonNull Long categoryId) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            return productDAO.findCatalogItemsByStoreIdAndCategoryId(storeId, categoryId);
-        } catch (AppException | SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to get catalog items for storeId=" + storeId + ", categoryId=" + categoryId, e);
-            return List.of();
-        }
-    }
-
-    /**
-     * Retrieves complete product detail by slug including options and pricing for a specific store.
-     * This method is used for product detail modals where users configure their order.
-     *
-     * @param productSlug the product slug
-     * @param storeId     the store ID
-     * @return the product detail, or null if not found or error occurs
-     */
-    public ProductDetail getProductDetailBySlugAndStoreId(@NonNull String productSlug, @NonNull Long storeId) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            Optional<ProductDetail> detailOpt = productDAO.findProductDetailBySlugAndStoreId(productSlug, storeId);
-            return detailOpt.orElse(null);
+    public List<ProductCardDTO> getProductsByCategoryId(@NonNull Long categoryId, @NonNull Long storeId) {
+        try {
+            List<Product> products = productDAO.findByCategoryId(categoryId, storeId);
+            return ProductMapper.toProductCards(products);
         } catch (SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to get product detail by slug: " + productSlug + " - " + e.getMessage(), e);
-            return null;
+            throw new AppException("Failed to get products by category=" + categoryId
+                    + " for store=" + storeId, e);
         }
     }
 
     /**
-     * Searches for catalog items by product name for a specific store.
+     * Retrieves products in a category as cards with pagination.
      *
-     * @param storeId    the store ID
-     * @param searchTerm the search term to match against product names
-     * @return list of catalog items matching the search term, or empty list if error occurs
+     * @param categoryId the category ID
+     * @param storeId    the store ID for availability and pricing
+     * @param limit      maximum number of results to return
+     * @param offset     number of results to skip
+     * @return list of product cards with localized content
      */
-    public List<CatalogItem> searchCatalogItemsByNameAndStoreId(@NonNull Long storeId, @NonNull String searchTerm) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            return productDAO.searchCatalogItemsByNameAndStoreId(storeId, searchTerm);
-        } catch (AppException | SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to search products for storeId=" + storeId + ", searchTerm=" + searchTerm, e);
-            return List.of();
-        }
-    }
-
-    /**
-     * Retrieves a catalog item by product ID for a specific store.
-     * Used for price validation when adding items to cart.
-     *
-     * @param productId the menu item ID
-     * @param storeId   the store ID
-     * @return the catalog item, or null if not found or error occurs
-     */
-    public CatalogItem getCatalogItemByIdAndStoreId(@NonNull Long productId, @NonNull Long storeId) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            return productDAO.findCatalogItemByIdAndStoreId(productId, storeId).orElse(null);
+    public List<ProductCardDTO> getProductsByCategoryId(@NonNull Long categoryId, @NonNull Long storeId, int limit, int offset) {
+        try {
+            List<Product> products = productDAO.findByCategoryId(categoryId, storeId, limit, offset);
+            return ProductMapper.toProductCards(products);
         } catch (SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to get catalog item by id=" + productId + ", storeId=" + storeId, e);
-            return null;
+            throw new AppException("Failed to get products by category=" + categoryId
+                    + " for store=" + storeId + " with pagination", e);
+        }
+    }
+
+    public List<ProductCardDTO> getProductsByCategorySlug(@NonNull String categorySlug, @NonNull Long storeId) {
+        try {
+            List<Product> products = productDAO.findByCategorySlug(categorySlug, storeId);
+            return ProductMapper.toProductCards(products);
+        } catch (SQLException e) {
+            throw new AppException("Failed to get products by category slug=" + categorySlug
+                    + " for store=" + storeId, e);
         }
     }
 
     /**
-     * Retrieves complete product detail by product ID for a specific store.
-     * Includes option groups and their values.
+     * Retrieves full product details including options.
      *
-     * @param productId the menu item ID
-     * @param storeId   the store ID
-     * @return the product detail, or null if not found or error occurs
+     * @param productId the product ID
+     * @param storeId   the store ID for availability and pricing
+     * @return product detail with localized content, or null if not found
      */
-    public ProductDetail getProductDetailByIdAndStoreId(@NonNull Long productId, @NonNull Long storeId) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            
-            CatalogItem item = productDAO.findCatalogItemByIdAndStoreId(productId, storeId).orElse(null);
-            if (item == null) {
+    public ProductDetailDTO getProductDetail(@NonNull Long productId, @NonNull Long storeId) {
+        try {
+            Product product = productDAO.findById(productId, storeId).orElse(null);
+            if (product == null) {
                 return null;
             }
-            
-            List<OptionGroup> optionGroups = productDAO.findOptionGroupsByProductIdAndStoreId(productId, storeId);
-            
-            ProductDetail detail = new ProductDetail();
-            detail.setItem(item);
-            detail.setOptionGroups(optionGroups);
-            
-            return detail;
+            return ProductMapper.toProductDetail(product);
         } catch (SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to get product detail by id=" + productId + ", storeId=" + storeId, e);
-            return null;
+            throw new AppException("Failed to get product detail id=" + productId
+                    + " for store=" + storeId, e);
+        }
+    }
+
+
+    /**
+     * Retrieves product details by slug for SEO-friendly URLs.
+     *
+     * @param slug    the product slug
+     * @param storeId the store ID for availability and pricing
+     * @return product detail with localized content, or null if not found
+     */
+    public ProductDetailDTO getProductBySlug(@NonNull String slug, @NonNull Long storeId) {
+        try {
+            Product product = productDAO.findBySlug(slug, storeId).orElse(null);
+            if (product == null) {
+                return null;
+            }
+            return ProductMapper.toProductDetail(product);
+        } catch (SQLException e) {
+            throw new AppException("Failed to get product by slug=" + slug
+                    + " for store=" + storeId, e);
         }
     }
 
     /**
-     * Validates an option value and returns its details.
-     * Used for cart item validation.
+     * Retrieves all available products in a store as cards.
      *
-     * @param optionValueId the option value ID
-     * @return the option value, or null if not found
+     * @param storeId the store ID
+     * @return list of available product cards
      */
-    public OptionValue getOptionValueById(@NonNull Long optionValueId) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            return productDAO.findOptionValueById(optionValueId).orElse(null);
+    public List<ProductCardDTO> getAvailableProducts(@NonNull Long storeId) {
+        try {
+            List<Product> products = productDAO.findAvailableInStore(storeId);
+            return ProductMapper.toProductCards(products);
         } catch (SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to get option value by id=" + optionValueId, e);
-            return null;
+            throw new AppException("Failed to get available products for store=" + storeId, e);
         }
     }
 
     /**
-     * Gets the option group containing a specific option value.
+     * Retrieves a product card by ID (lightweight version).
      *
-     * @param optionValueId the option value ID
-     * @return the option group, or null if not found
+     * @param productId the product ID
+     * @param storeId   the store ID for availability and pricing
+     * @return product card with localized content, or null if not found
      */
-    public OptionGroup getOptionGroupByOptionValueId(@NonNull Long optionValueId) {
-        try (Connection conn = DBConnection.getConnection()) {
-            ProductDAO productDAO = new ProductDAOImpl(conn);
-            return productDAO.findOptionGroupByOptionValueId(optionValueId).orElse(null);
+    public ProductCardDTO getProductCard(@NonNull Long productId, @NonNull Long storeId) {
+        try {
+            Product product = productDAO.findById(productId, storeId).orElse(null);
+            if (product == null) {
+                return null;
+            }
+            return ProductMapper.toProductCard(product);
         } catch (SQLException e) {
-            LoggerUtil.error(ProductService.class,
-                    "Failed to get option group by optionValueId=" + optionValueId, e);
-            return null;
+            throw new AppException("Failed to get product card id=" + productId
+                    + " for store=" + storeId, e);
+        }
+    }
+
+    /**
+     * Searches for products by name and description.
+     *
+     * @param query   the search query (product name or description)
+     * @param storeId the store ID for availability and pricing
+     * @return list of product cards matching the search query
+     */
+    public List<ProductCardDTO> searchProducts(@NonNull String query, @NonNull Long storeId) {
+        try {
+            List<Product> products = productDAO.searchProducts(query.trim(), storeId);
+            return ProductMapper.toProductCards(products);
+        } catch (SQLException e) {
+            throw new AppException("Failed to search products with query='" + query
+                    + "' for store=" + storeId, e);
+        }
+    }
+
+    /**
+     * Searches for products with pagination support.
+     *
+     * @param query   the search query (product name or description)
+     * @param storeId the store ID for availability and pricing
+     * @param limit   maximum number of results to return
+     * @param offset  number of results to skip
+     * @return list of product cards matching the search query
+     */
+    public List<ProductCardDTO> searchProducts(@NonNull String query, @NonNull Long storeId, int limit, int offset) {
+        try {
+            List<Product> products = productDAO.searchProducts(query.trim(), storeId, limit, offset);
+            return ProductMapper.toProductCards(products);
+        } catch (SQLException e) {
+            throw new AppException("Failed to search products with pagination query='" + query
+                    + "' for store=" + storeId, e);
+        }
+    }
+
+    /**
+     * Retrieves products by category slug with pagination.
+     *
+     * @param categorySlug the category slug
+     * @param storeId      the store ID for availability and pricing
+     * @param limit        maximum number of results to return
+     * @param offset       number of results to skip
+     * @return list of product cards with localized content
+     */
+    public List<ProductCardDTO> getProductsByCategorySlug(@NonNull String categorySlug, @NonNull Long storeId, int limit, int offset) {
+        try {
+            List<Product> products = productDAO.findByCategorySlug(categorySlug, storeId, limit, offset);
+            return ProductMapper.toProductCards(products);
+        } catch (SQLException e) {
+            throw new AppException("Failed to get products by category slug=" + categorySlug
+                    + " for store=" + storeId + " with pagination", e);
+        }
+    }
+
+    /**
+     * Counts total search results for a query.
+     *
+     * @param query   the search query (product name or description)
+     * @param storeId the store ID for availability and pricing
+     * @return total number of products matching the search query
+     */
+    public int countSearchResults(@NonNull String query, @NonNull Long storeId) {
+        try {
+            return productDAO.countSearchResults(query.trim(), storeId);
+        } catch (SQLException e) {
+            throw new AppException("Failed to count search results with query='" + query
+                    + "' for store=" + storeId, e);
         }
     }
 }
-

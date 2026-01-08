@@ -1,5 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.view;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import static com.laptrinhweb.zerostarcafe.core.utils.PathUtil.getViewPath;
@@ -25,10 +27,8 @@ import static com.laptrinhweb.zerostarcafe.core.utils.PathUtil.getViewPath;
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ViewMap {
-
-    private ViewMap() {
-    }
 
     // ============================================
     // CLIENT AREA
@@ -43,20 +43,22 @@ public final class ViewMap {
         public static final View CHECKOUT = page("pages/checkout");
         public static final View INVOICE = page("pages/invoice");
 
-        // Partials - Pages
-        public static final View CART_CONTENT = partial("pages/cart-content");
-
         // Partials - Forms
         public static final View LOGIN_FORM = partial("forms/_login");
         public static final View REGISTER_FORM = partial("forms/_register");
         public static final View FORGOT_PASSWORD_FORM = partial("forms/_forgot-password");
         public static final View RESET_PASSWORD_FORM = partial("forms/_reset-password");
-        public static final View PRODUCT_DETAIL = partial("forms/_product-detail");
 
-        // Partials - Fragments
-        public static final View CART_SIDEBAR = partial("fragments/cart-sidebar");
-        public static final View CART_ITEM = partial("fragments/cart-item");
-        public static final View PRODUCT_CATALOG = partial("fragments/product-catalog");
+        // Partials - Product
+        public static final View PRODUCT_SECTION = partial("product/_product-section");
+        public static final View PRODUCT_CARDS = partial("product/_product-card");
+        public static final View PRODUCT_MODAL = partial("product/modal/_product-details");
+
+        // Partials - Search
+        public static final View SEARCH_SECTION = partial("search/_search-section");
+
+        // Partials - Sliders
+        public static final View CATEGORY_SLIDER = partial("slider/category-slider");
 
         private static View page(String path) {
             return View.page(
@@ -67,7 +69,7 @@ public final class ViewMap {
         }
 
         private static View partial(String path) {
-            return View.partial(ViewArea.CLIENT, getViewPath(ViewArea.CLIENT, path));
+            return View.partial(ViewArea.CLIENT, getViewPath(ViewArea.CLIENT, "components/" + path));
         }
     }
 

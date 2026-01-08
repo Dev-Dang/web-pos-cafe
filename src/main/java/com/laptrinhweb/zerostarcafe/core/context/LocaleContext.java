@@ -30,7 +30,7 @@ public final class LocaleContext {
 
     private static final ThreadLocal<Locale> localeHolder = new ThreadLocal<>();
     private static final Locale DEFAULT_LOCALE = Locale
-            .forLanguageTag(WebConstants.Locale.DEFAULT_LANGUAGE);
+            .forLanguageTag(WebConstants.Locale.DEFAULT_LOCALE);
 
     /**
      * Sets the current locale for this request thread.

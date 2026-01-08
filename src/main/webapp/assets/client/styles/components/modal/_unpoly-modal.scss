@@ -1,11 +1,6 @@
 up-modal {
-  // Ensure proper display and positioning for modal
-  .modal-dialog {
-    margin: 0;
-    max-width: none;
-    width: auto;
-    height: auto;
-  }
+  // Inherits unpoly's default modal styles
+  // Can be customized if needed
 }
 
 // Modal backdrop (semi-transparent background)
@@ -14,25 +9,32 @@ up-modal-backdrop {
   // Can be customized if needed
 }
 
-// Modal viewport (handles scrolling)
+// Modal viewport (handles scrolling and centering)
 up-modal-viewport {
-  // Inherits unpoly's default viewport styles
-  // Can be customized for scroll behavior
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // Center the modal properly
+  display: flex !important;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 2rem;
+
+  @media (max-width: 767.98px) {
+    padding: 1rem;
+    align-items: flex-end; // Bottom align on mobile
+  }
 }
 
 // Modal box (white container with padding)
 up-modal-box {
-  // Default styling for the modal box
-  background: $color-white;
-  border-radius: $radius-lg;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  // Remove default unpoly box styling to let our content handle it
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
 
   // Hide scrollbar but keep scroll functionality
   scrollbar-width: none; // Firefox
@@ -41,23 +43,17 @@ up-modal-box {
   &::-webkit-scrollbar {
     display: none; // Chrome, Safari, Opera
   }
-
-  // Mobile responsive adjustments
-  @media (max-width: 767.98px) {
-    border-radius: $radius-lg $radius-lg 0 0;
-    max-height: 90vh;
-    box-shadow: none;
-    position: relative;
-  }
 }
 
 // Modal content wrapper (unstyled by unpoly)
 up-modal-content {
-  // Base content styling
+  // Ensure content displays properly
   position: relative;
+  width: 100%;
+  height: auto;
 
   @media (max-width: 767.98px) {
-    padding-top: 5.6rem; // Space for mobile header
+    // No extra padding - let inner content handle mobile spacing
   }
 }
 

@@ -28,6 +28,19 @@ public final class WebConstants {
     }
 
     // ============================================
+    // UNPOLY ATTRIBUTES
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class UnpolyAttribute {
+
+        public static final String UP_TARGET = "up-target";
+        public static final String UP_MODE = "up-mode";
+        public static final String UP_HREF = "up-href";
+        public static final String UP_REVEAL = "up-reveal";
+        public static final String UP_TRANSITION = "up-transition";
+    }
+
+    // ============================================
     // HTTP REQUEST ATTRIBUTES
     // ============================================
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -38,6 +51,53 @@ public final class WebConstants {
         public static final String FORM_DATA = "formData";
         public static final String FORM_ERRORS = "formErrors";
         public static final String NEED_CART_MERGE = "needsCartMerge";
+        public static final String SELECTED_CATEGORY_ID = "selectedCategoryId";
+        public static final String SELECTED_CATEGORY_SLUG = "selectedCategorySlug";
+        public static final String SELECTED_CATEGORY = "selectedCategory";
+        public static final String CURRENT_CATEGORY_ID = "currentCategoryId";
+        public static final String PRODUCT_DETAIL = "productDetail";
+        public static final String PRODUCT_MODAL = "productModal";
+        public static final String SEARCH_QUERY = "searchQuery";
+        public static final String SEARCH_RESULTS_COUNT = "searchResultsCount";
+        public static final String SEARCH_PAGE = "searchPage";
+        public static final String SEARCH_HAS_MORE = "searchHasMore";
+        public static final String CATEGORY_PAGE = "categoryPage";
+        public static final String HAS_MORE = "hasMore";
+        public static final String CURRENT_PAGE = "currentPage";
+        public static final String NEXT_PAGE = "nextPage";
+        public static final String PAGINATION_URL = "paginationUrl";
+        public static final String PRODUCT_CARDS = "productCards";
+    }
+
+    // ============================================
+    // FLAGS
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Flag {
+
+        public static final String RE_OPEN_MODAL = "reOpenModal";
+    }
+
+    // ============================================
+    // PARAMETERS
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Param {
+
+        public static final String CATEGORY_SLUG = "categorySlug";
+        public static final String PRODUCT_ID = "productId";
+        public static final String PRODUCT_SLUG = "productSlug";
+        public static final String SEARCH_KEYWORD = "keyword";
+        public static final String PAGE = "page";
+    }
+
+    // ============================================
+    // PAGINATION
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Default {
+
+        public static final int PAGE_SIZE = 9;
     }
 
     // ============================================

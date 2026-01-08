@@ -1,10 +1,6 @@
 package com.laptrinhweb.zerostarcafe.domain.product.dao;
 
-import com.laptrinhweb.zerostarcafe.domain.product.model.CatalogItem;
-import com.laptrinhweb.zerostarcafe.domain.product.model.OptionGroup;
-import com.laptrinhweb.zerostarcafe.domain.product.model.OptionValue;
 import com.laptrinhweb.zerostarcafe.domain.product.model.Product;
-import com.laptrinhweb.zerostarcafe.domain.product.model.ProductDetail;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,114 +9,147 @@ import java.util.Optional;
 /**
  * <h2>Description:</h2>
  * <p>
- * Provides database access operations for product-related entities.
- * This DAO handles queries for products, catalog items, options, and
- * store-specific availability information.
+ * Provides database access operations for the {@link Product} entity,
+ * which represents menu items with pricing, options, and localized content.
  * </p>
  *
  * <h2>Responsibilities:</h2>
  * <ul>
- *     <li>Find products by ID or category</li>
- *     <li>Load catalog items for a specific store (with pricing and availability)</li>
- *     <li>Load product details including options and price schedules</li>
- *     <li>Query option groups and values for products</li>
+ *     <li>Find products by category with store-specific availability</li>
+ *     <li>Find product by ID with full details including options</li>
+ *     <li>Find products by slug with localized content</li>
+ *     <li>Resolve pricing with promotional schedules</li>
+ *     <li>Load option groups and values with store availability</li>
  * </ul>
  *
  * <h2>Example Usage:</h2>
  * <pre>{@code
  * ProductDAO productDAO = new ProductDAOImpl(connection);
  *
- * // Load all active products for a store's menu
- * List<CatalogItem> items = productDAO.findCatalogItemsByStoreId(1L);
+ * // Get products by category with current locale (from LocaleContext)
+ * List<Product> products = productDAO.findByCategoryId(1L, storeId);
  *
- * // Get full product details for a specific product by slug
- * Optional<ProductDetail> detail = productDAO.findProductDetailBySlugAndStoreId("ca-phe-sua", 1L);
+ * // Load full product details with options
+ * Optional<Product> product = productDAO.findById(9L, storeId);
  * }</pre>
  *
  * @author Dang Van Trung
  * @version 1.0.0
- * @lastModified 26/12/2025
+ * @lastModified 06/01/2026
  * @since 1.0.0
  */
 public interface ProductDAO {
 
     /**
-     * Loads catalog items (products with availability and pricing) for a specific store.
-     * Only returns products that are active, in the store's menu, and available.
+     * Finds all products in a category that are available in the specified store.
+     * Includes pricing resolution and localized content based on current locale.
      *
-     * @param storeId the store ID
-     * @return list of catalog items for the store
+     * @param categoryId the category ID to filter by
+     * @param storeId    the store ID for availability and pricing
+     * @return list of products with resolved pricing and availability
      * @throws SQLException if a database access error occurs
      */
-    List<CatalogItem> findCatalogItemsByStoreId(long storeId) throws SQLException;
+    List<Product> findByCategoryId(long categoryId, long storeId) throws SQLException;
 
     /**
-     * Loads catalog items filtered by category for a specific store.
+     * Finds products in a category with pagination support.
      *
-     * @param storeId    the store ID
-     * @param categoryId the category ID
-     * @return list of catalog items for the store and category
+     * @param categoryId the category ID to filter by
+     * @param storeId    the store ID for availability and pricing
+     * @param limit      maximum number of results to return
+     * @param offset     number of results to skip
+     * @return list of products with resolved pricing and availability
      * @throws SQLException if a database access error occurs
      */
-    List<CatalogItem> findCatalogItemsByStoreIdAndCategoryId(long storeId, long categoryId) throws SQLException;
+    List<Product> findByCategoryId(long categoryId, long storeId, int limit, int offset) throws SQLException;
 
     /**
-     * Finds a catalog item by slug and store ID.
-     */
-    Optional<CatalogItem> findCatalogItemBySlugAndStoreId(String productSlug, long storeId) throws SQLException;
-
-    /**
-     * Finds complete product details by slug and store.
-     */
-    Optional<ProductDetail> findProductDetailBySlugAndStoreId(String productSlug, long storeId) throws SQLException;
-
-    /**
-     * Finds all option groups associated with a specific product.
+     * Finds a product by ID with full details including options and pricing.
+     * Includes all option groups and values available in the specified store.
      *
      * @param productId the product ID
-     * @param storeId   the store ID (for store-specific option availability)
-     * @return list of option groups with their values
+     * @param storeId   the store ID for availability and pricing
+     * @return an {@link Optional} containing the product if found
      * @throws SQLException if a database access error occurs
      */
-    List<OptionGroup> findOptionGroupsByProductIdAndStoreId(long productId, long storeId) throws SQLException;
+    Optional<Product> findById(long productId, long storeId) throws SQLException;
 
     /**
-     * Searches catalog items by product name for a specific store.
+     * Finds a product by slug with full details.
+     * Used for SEO-friendly URLs and product page routing.
+     *
+     * @param slug    the product slug
+     * @param storeId the store ID for availability and pricing
+     * @return an {@link Optional} containing the product if found
+     * @throws SQLException if a database access error occurs
+     */
+    Optional<Product> findBySlug(String slug, long storeId) throws SQLException;
+
+    /**
+     * Finds all products available in the menu for the specified store.
+     * Only returns products with inMenu = true and available status.
      *
      * @param storeId the store ID
-     * @param searchTerm the search term to match against product names
-     * @return list of catalog items matching the search term
+     * @return list of available products
      * @throws SQLException if a database access error occurs
      */
-    List<CatalogItem> searchCatalogItemsByNameAndStoreId(long storeId, String searchTerm) throws SQLException;
+    List<Product> findAvailableInStore(long storeId) throws SQLException;
 
     /**
-     * Finds a catalog item by product ID and store ID.
-     * Used for price validation when adding to cart.
+     * Searches products by name and description in the specified store.
+     * Performs full-text search on localized content.
      *
-     * @param productId the menu item ID
-     * @param storeId   the store ID
-     * @return the catalog item if found
+     * @param query   the search query (product name or description)
+     * @param storeId the store ID for availability and pricing
+     * @return list of products matching the search query
      * @throws SQLException if a database access error occurs
      */
-    Optional<CatalogItem> findCatalogItemByIdAndStoreId(long productId, long storeId) throws SQLException;
+    List<Product> searchProducts(String query, long storeId) throws SQLException;
 
     /**
-     * Finds an option value by its ID for validation.
+     * Searches products with pagination support.
      *
-     * @param optionValueId the option value ID
-     * @return the option value if found
+     * @param query   the search query (product name or description)
+     * @param storeId the store ID for availability and pricing
+     * @param limit   maximum number of results to return
+     * @param offset  number of results to skip
+     * @return list of products matching the search query
      * @throws SQLException if a database access error occurs
      */
-    Optional<OptionValue> findOptionValueById(long optionValueId) throws SQLException;
+    List<Product> searchProducts(String query, long storeId, int limit, int offset) throws SQLException;
 
     /**
-     * Finds the option group containing a specific option value.
+     * Finds products in a category by slug with pagination support.
+     * Used for SEO-friendly URLs and direct slug-based product filtering.
      *
-     * @param optionValueId the option value ID
-     * @return the option group if found
+     * @param categorySlug the category slug to filter by
+     * @param storeId      the store ID for availability and pricing
+     * @param limit        maximum number of results to return
+     * @param offset       number of results to skip
+     * @return list of products with resolved pricing and availability
      * @throws SQLException if a database access error occurs
      */
-    Optional<OptionGroup> findOptionGroupByOptionValueId(long optionValueId) throws SQLException;
+    List<Product> findByCategorySlug(String categorySlug, long storeId, int limit, int offset) throws SQLException;
+
+    /**
+     * Finds all products in a category by slug that are available in the specified store.
+     * This method provides direct slug-based access without requiring category ID lookup.
+     * Includes pricing resolution and localized content based on current locale.
+     *
+     * @param categorySlug the category slug to filter by (e.g., "coffee", "pastries")
+     * @param storeId      the store ID for availability and pricing
+     * @return list of products with resolved pricing and availability, empty if category not found
+     * @throws SQLException if a database access error occurs
+     */
+    List<Product> findByCategorySlug(String categorySlug, long storeId) throws SQLException;
+
+    /**
+     * Counts total search results for a query.
+     *
+     * @param query   the search query (product name or description)
+     * @param storeId the store ID for availability and pricing
+     * @return total number of products matching the search query
+     * @throws SQLException if a database access error occurs
+     */
+    int countSearchResults(String query, long storeId) throws SQLException;
 }
-

@@ -1,8 +1,11 @@
 package com.laptrinhweb.zerostarcafe.web.common.utils;
 
 import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
+import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
+import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -110,7 +113,7 @@ public final class RequestUtils {
      *
      * @param req          HTTP request
      * @param paramName    parameter name
-     * @param defaultValue default value if parameter is invalid or missing
+     * @param defaultValue default value if parameter is invalid or missing (can be null)
      * @return parameter value or default
      */
     public static Integer getIntParam(HttpServletRequest req, String paramName, Integer defaultValue) {
@@ -120,6 +123,17 @@ public final class RequestUtils {
         } catch (NumberFormatException e) {
             return defaultValue;
         }
+    }
+
+    /**
+     * Get query parameter as int with default value.
+     *
+     * @param req       HTTP request
+     * @param paramName parameter name
+     * @return parameter value or default
+     */
+    public static Integer getIntParam(HttpServletRequest req, String paramName) {
+        return getIntParam(req, paramName, null);
     }
 
     /**
@@ -133,7 +147,7 @@ public final class RequestUtils {
     public static Double getDoubleParam(HttpServletRequest req, String paramName, Double defaultValue) {
         try {
             String value = getStringParam(req, paramName);
-            return value != null ? Double.parseDouble(value) : defaultValue;
+            return value != null ? Double.valueOf(value) : defaultValue;
         } catch (NumberFormatException e) {
             return defaultValue;
         }
@@ -148,19 +162,6 @@ public final class RequestUtils {
      */
     public static Double getDoubleParam(HttpServletRequest req, String paramName) {
         return getDoubleParam(req, paramName, null);
-    }
-
-    /**
-     * Get query parameter as int with default value.
-     *
-     * @param req          HTTP request
-     * @param paramName    parameter name
-     * @param defaultValue default value if parameter is invalid or missing
-     * @return parameter value or default
-     */
-    public static int getIntParam(HttpServletRequest req, String paramName, int defaultValue) {
-        Integer result = getIntParam(req, paramName, Integer.valueOf(defaultValue));
-        return result != null ? result : defaultValue;
     }
 
     // ==========================================================
@@ -213,6 +214,29 @@ public final class RequestUtils {
         }
     }
 
+    /**
+     * Extract path parameter as Integer, returns null on error.
+     *
+     * @param req       HTTP request
+     * @param paramName parameter name for logging
+     * @return Integer value or null if invalid/missing
+     */
+    public static Integer extractIntegerParam(HttpServletRequest req, String paramName) {
+        try {
+            String pathInfo = req.getPathInfo();
+            if (pathInfo == null || pathInfo.equals("/")) {
+                return null;
+            }
+            String param = pathInfo.replace("/", "").trim();
+            if (param.isEmpty()) {
+                return null;
+            }
+            return Integer.parseInt(param);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     // ==========================================================
     // VALIDATION UTILITIES
     // ==========================================================
@@ -245,5 +269,24 @@ public final class RequestUtils {
             }
         }
         return true;
+    }
+
+    // ==========================================================
+    // SESSION UTILITIES
+    // ==========================================================
+
+    /**
+     * Get store ID from session context with fallback to default.
+     *
+     * @param req HTTP request
+     * @return store ID from session or default store ID
+     */
+    public static Long getStoreIdFromSession(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        StoreContext storeCtx = (StoreContext)
+                session.getAttribute(StoreConstants.Attribute.CURRENT_STORE_CTX);
+        return storeCtx != null
+                ? storeCtx.getStoreId()
+                : StoreConstants.DEFAULT_STORE_ID;
     }
 }

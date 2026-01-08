@@ -76,8 +76,7 @@ public final class I18nService {
         }
 
         try {
-            String bundlePath = String.format
-                    (BUNDLE_PATH_TEMPLATE, locale.toLanguageTag(), bundleName);
+            String bundlePath = String.format(BUNDLE_PATH_TEMPLATE, locale.toLanguageTag(), bundleName);
             ResourceBundle bundle = ResourceBundle.getBundle(bundlePath, locale);
 
             if (bundle.containsKey(key)) {

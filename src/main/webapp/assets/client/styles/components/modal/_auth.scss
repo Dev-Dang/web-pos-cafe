@@ -1,6 +1,8 @@
 // Auth modal content wrapper
 .auth-modal__content {
   border: none;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
   background: $color-white;
 
   @media (max-width: 767.98px) {
