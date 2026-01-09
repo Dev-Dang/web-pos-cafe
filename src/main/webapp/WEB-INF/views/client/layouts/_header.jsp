@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="ctxPath" value="${pageContext.request.contextPath}"/>
 <header class="site-header header">
@@ -95,7 +96,17 @@
                                     aria-expanded="false">
                                 <div class="user-tool">
                                     <div class="user-info">
-                                        <span class="user-name">${authUser.username}</span>
+                                        <div class='d-flex flex-column align-items-center justify-content-center'>
+                                            <p class="user-name">${authUser.username}</p>
+                                            <c:if test="${not empty loyaltyPoints}">
+                                                <span class="user-points text-primary">
+                                                    <i class="fi fi-rr-coins"></i>
+                                                    <fmt:formatNumber value="${loyaltyPoints.pointsBalance}"
+                                                                      type="number"
+                                                                      groupingUsed="true"/>
+                                                </span>
+                                            </c:if>
+                                        </div>
                                         <img src="https://images.unsplash.com/photo-1631947430066-48c30d57b943?auto=format&fit=crop&q=80&w=832"
                                              alt="${authUser.username}"
                                              class="user-avatar object-fit-cover rounded-circle"/>

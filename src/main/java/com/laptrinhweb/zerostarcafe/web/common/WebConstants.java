@@ -94,6 +94,17 @@ public final class WebConstants {
     }
 
     // ============================================
+    // LOYALTY POINTS
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Loyalty {
+
+        public static final String POINTS = "loyaltyPoints";
+        public static final String REDEMPTION = "loyaltyRedemption";
+        public static final String APPLY_POINTS = "applyLoyaltyPoints";
+    }
+
+    // ============================================
     // FLAGS
     // ============================================
     @NoArgsConstructor(access = AccessLevel.PRIVATE)

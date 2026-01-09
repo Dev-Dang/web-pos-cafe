@@ -3,6 +3,7 @@ package com.laptrinhweb.zerostarcafe.web.common.utils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.LoyaltyPointsDTO;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
@@ -308,5 +309,35 @@ public final class RequestUtils {
                 .getAttribute(SecurityKeys.SESSION_AUTH_USER);
 
         return authUser != null ? authUser.getId() : null;
+    }
+
+    /**
+     * Get loyalty points DTO from session.
+     *
+     * @param req HTTP request
+     * @return LoyaltyPointsDTO or null if not found
+     */
+    public static LoyaltyPointsDTO getLoyaltyPointsFromSession(HttpServletRequest req) {
+        if (req == null) return null;
+        HttpSession session = req.getSession(false);
+        if (session == null) return null;
+
+        return (LoyaltyPointsDTO)
+                session.getAttribute(WebConstants.Loyalty.POINTS);
+    }
+
+    /**
+     * Get apply loyalty points state from session.
+     *
+     * @param req HTTP request
+     * @return true if points should be applied, false otherwise
+     */
+    public static boolean getApplyLoyaltyFromSession(HttpServletRequest req) {
+        if (req == null) return false;
+        HttpSession session = req.getSession(false);
+        if (session == null) return false;
+
+        Boolean apply = (Boolean) session.getAttribute(WebConstants.Loyalty.APPLY_POINTS);
+        return apply != null && apply;
     }
 }

@@ -854,7 +854,7 @@ body::-webkit-scrollbar {
   justify-self: end;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 1.6rem;
   overflow: hidden;
 }
 @media (max-width: 991.98px) {
@@ -883,6 +883,7 @@ body::-webkit-scrollbar {
 
 .cart-item {
   display: flex;
+  flex-shrink: 0;
   gap: 1.6rem;
   align-items: flex-start;
   padding: 0.8rem 0;
@@ -1300,6 +1301,12 @@ body::-webkit-scrollbar {
   padding: 0;
 }
 
+.cart-loyalty-form {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+}
+
 .cart-row__label {
   display: flex;
   align-items: center;
@@ -1307,6 +1314,14 @@ body::-webkit-scrollbar {
   font-size: 1.5rem;
   line-height: 2.25rem;
   color: #1f1717;
+}
+.cart-row__label .icon-base {
+  font-size: 1.8rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cart-chip {
@@ -1378,7 +1393,6 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  margin-top: 1.6rem;
   flex-shrink: 0;
 }
 
@@ -1526,9 +1540,8 @@ body::-webkit-scrollbar {
   color: #292727;
   font-size: 1.6rem;
   line-height: 2.25rem;
-  padding-top: 1.2rem;
+  padding-top: 2.4rem;
   border-top: 1px dashed #e7e5e4;
-  margin-top: 1.2rem;
 }
 
 .cart-divider {
@@ -1545,12 +1558,12 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 0;
   padding-right: 0.8rem;
-  margin-right: 0;
+  margin-right: -0.8rem;
   max-height: 500px;
 }
 .cart-list::-webkit-scrollbar {

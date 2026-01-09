@@ -5,6 +5,9 @@ import com.laptrinhweb.zerostarcafe.domain.cart.dto.CartDTO;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartAction;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartConstants;
 import com.laptrinhweb.zerostarcafe.domain.cart.service.CartService;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.LoyaltyPointsDTO;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.RedeemCalcDTO;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.service.LoyaltyService;
 import com.laptrinhweb.zerostarcafe.web.client.mapper.CartWebMapper;
 import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.response.Message;
@@ -18,6 +21,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -25,6 +29,7 @@ import java.io.IOException;
 public class CartServlet extends HttpServlet {
 
     private final CartService cartService = CartService.getInstance();
+    private final LoyaltyService loyaltyService = LoyaltyService.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -70,8 +75,11 @@ public class CartServlet extends HttpServlet {
             return;
         }
 
-        // Call service (returns CartDTO)
+        // Call service
         CartDTO cartDTO = cartService.addToCart(userId, storeId, dto);
+
+        // Recalculate loyalty redemption after cart change
+        recalculateLoyaltyRedemption(userId, cartDTO, req);
 
         // Return cart fragment for client
         req.setAttribute(WebConstants.Cart.CART, cartDTO);
@@ -121,6 +129,9 @@ public class CartServlet extends HttpServlet {
         CartDTO cartDTO = cartService
                 .updateQuantity(userId, storeId, cartItemId, newQty);
 
+        // Recalculate loyalty redemption after cart change
+        recalculateLoyaltyRedemption(userId, cartDTO, req);
+
         // Return cart fragment for client
         req.setAttribute(WebConstants.Cart.CART, cartDTO);
         View.render(ViewMap.Client.CART_PANEL, req, resp);
@@ -143,11 +154,52 @@ public class CartServlet extends HttpServlet {
             return;
         }
 
-        // Call service (returns CartDTO)
+        // Call service
         CartDTO cartDTO = cartService.removeItem(userId, storeId, cartItemId);
+
+        // Recalculate loyalty redemption after cart change
+        recalculateLoyaltyRedemption(userId, cartDTO, req);
 
         // Return cart fragment for client
         req.setAttribute(WebConstants.Cart.CART, cartDTO);
         View.render(ViewMap.Client.CART_PANEL, req, resp);
+    }
+
+    /**
+     * Recalculate loyalty redemption after cart changes.
+     * Updates session points if needed and sets redemption calculation in request.
+     */
+    private void recalculateLoyaltyRedemption(Long userId, CartDTO cartDTO, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+
+        // Ensure loyalty points are in session
+        LoyaltyPointsDTO loyaltyPoints = RequestUtils.getLoyaltyPointsFromSession(req);
+        if (loyaltyPoints == null) {
+            loyaltyPoints = loyaltyService.getUserPoints(userId);
+            session.setAttribute(WebConstants.Loyalty.POINTS, loyaltyPoints);
+        }
+
+        // Handle empty cart
+        if (cartDTO == null || cartDTO.getItems().isEmpty()) {
+            RedeemCalcDTO emptyRedemption = new RedeemCalcDTO();
+            emptyRedemption.setUserTotalPoints(loyaltyPoints.getPointsBalance());
+            emptyRedemption.setMaxRedeemablePoints(0);
+            emptyRedemption.setPointsToRedeem(0);
+            emptyRedemption.setDiscountAmount(0);
+            emptyRedemption.setCanRedeem(false);
+            emptyRedemption.setApplied(false);
+            req.setAttribute(WebConstants.Loyalty.REDEMPTION, emptyRedemption);
+            return;
+        }
+
+        // Get current apply state
+        boolean applyPoints = RequestUtils.getApplyLoyaltyFromSession(req);
+
+        // Calculate redemption with new cart total
+        RedeemCalcDTO redemption = loyaltyService.calculateRedemption(
+                userId, cartDTO.getTotal(), applyPoints
+        );
+
+        req.setAttribute(WebConstants.Loyalty.REDEMPTION, redemption);
     }
 }

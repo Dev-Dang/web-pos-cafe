@@ -4,6 +4,9 @@ import com.laptrinhweb.zerostarcafe.domain.cart.dto.CartDTO;
 import com.laptrinhweb.zerostarcafe.domain.cart.service.CartService;
 import com.laptrinhweb.zerostarcafe.domain.category.Category;
 import com.laptrinhweb.zerostarcafe.domain.category.CategoryService;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.LoyaltyPointsDTO;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.RedeemCalcDTO;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.service.LoyaltyService;
 import com.laptrinhweb.zerostarcafe.domain.product.dto.ProductCardDTO;
 import com.laptrinhweb.zerostarcafe.domain.product.service.ProductService;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
@@ -19,6 +22,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,6 +44,7 @@ public class HomeServlet extends HttpServlet {
     private static final CategoryService categoryService = CategoryService.getInstance();
     private static final ProductService productService = ProductService.getInstance();
     private static final CartService cartService = CartService.getInstance();
+    private static final LoyaltyService loyaltyService = LoyaltyService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -76,6 +81,24 @@ public class HomeServlet extends HttpServlet {
         if (userId != null && currentStoreId != null) {
             CartDTO cartDTO = cartService.getCurrentCart(userId, currentStoreId);
             req.setAttribute(WebConstants.Cart.CART, cartDTO);
+
+            // Load loyalty points for user
+            HttpSession session = req.getSession();
+            LoyaltyPointsDTO loyaltyPoints = RequestUtils.getLoyaltyPointsFromSession(req);
+            if (loyaltyPoints == null) {
+                loyaltyPoints = loyaltyService.getUserPoints(userId);
+                session.setAttribute(WebConstants.Loyalty.POINTS, loyaltyPoints);
+            }
+
+            // Calculate redemption if cart not empty
+            if (cartDTO != null && !cartDTO.getItems().isEmpty()) {
+                boolean applyPoints = RequestUtils.getApplyLoyaltyFromSession(req);
+
+                RedeemCalcDTO redemption = loyaltyService.calculateRedemption(
+                        userId, cartDTO.getTotal(), applyPoints
+                );
+                req.setAttribute(WebConstants.Loyalty.REDEMPTION, redemption);
+            }
         }
 
         // Render the home view

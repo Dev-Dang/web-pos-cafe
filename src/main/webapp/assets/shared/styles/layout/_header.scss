@@ -148,6 +148,13 @@
     height: $size-avatar;
     border-radius: 50%;
   }
+
+  &-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-right: -0.8rem;
+  }
 }
 
 .dropdown-menu {
