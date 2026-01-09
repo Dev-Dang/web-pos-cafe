@@ -33,6 +33,3 @@
 
 <!-- Mobile Bottom Navigation -->
 <jsp:include page="../components/navbar/_mobile-nav.jsp"/>
-
-<!-- Mobile Cart Drawer -->
-<jsp:include page="../components/cart/_mobile-cart.jsp"/>

@@ -3,7 +3,7 @@ import {initCategorySlider} from "./modules/swiper.js";
 import {initProductSearch} from "./modules/search.js";
 import {initUnpoly} from "./modules/unpoly.js";
 import {initInfiniteScroll} from "./modules/infinite-scroll.js";
-import "./modules/product-modal.js"; // Auto-registers via up.compiler
+import "./modules/product-modal.js";
 
 // Initialize core modules
 initStoreDetection();

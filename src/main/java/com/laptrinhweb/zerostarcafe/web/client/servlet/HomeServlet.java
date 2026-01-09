@@ -1,5 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.client.servlet;
 
+import com.laptrinhweb.zerostarcafe.domain.cart.dto.CartDTO;
+import com.laptrinhweb.zerostarcafe.domain.cart.service.CartService;
 import com.laptrinhweb.zerostarcafe.domain.category.Category;
 import com.laptrinhweb.zerostarcafe.domain.category.CategoryService;
 import com.laptrinhweb.zerostarcafe.domain.product.dto.ProductCardDTO;
@@ -37,6 +39,7 @@ public class HomeServlet extends HttpServlet {
     private static final StoreService storeService = StoreService.getInstance();
     private static final CategoryService categoryService = CategoryService.getInstance();
     private static final ProductService productService = ProductService.getInstance();
+    private static final CartService cartService = CartService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -66,6 +69,13 @@ public class HomeServlet extends HttpServlet {
 
         if (productCards == null || productCards.isEmpty()) {
             loadDefaultProducts(req, currentStoreId, categories);
+        }
+
+        // Load current cart if user logged in
+        Long userId = RequestUtils.getUserIdFromSession(req);
+        if (userId != null && currentStoreId != null) {
+            CartDTO cartDTO = cartService.getCurrentCart(userId, currentStoreId);
+            req.setAttribute(WebConstants.Cart.CART, cartDTO);
         }
 
         // Render the home view

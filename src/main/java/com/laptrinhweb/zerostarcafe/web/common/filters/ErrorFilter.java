@@ -37,8 +37,8 @@ public class ErrorFilter implements Filter {
         } catch (BusinessException e) {
             // Business rule violation - 400 Bad Request
             if (response.isCommitted()) {
-                LoggerUtil.warn(getClass(),
-                        "Response already committed for BusinessException.");
+                LoggerUtil.error(getClass(),
+                        "Response already committed for BusinessException.", e);
                 throw new ServletException(e);
             }
 
@@ -62,8 +62,8 @@ public class ErrorFilter implements Filter {
         } catch (Exception e) {
             // Unknown errors - 500 Internal Server Error
             if (response.isCommitted()) {
-                LoggerUtil.warn(getClass(),
-                        "Response already committed for unknown error.");
+                LoggerUtil.error(getClass(),
+                        "Response already committed for unknown error.", e);
                 throw new ServletException(e);
             }
 
