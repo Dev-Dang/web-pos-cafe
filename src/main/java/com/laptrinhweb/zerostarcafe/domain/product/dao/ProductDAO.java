@@ -75,7 +75,7 @@ public interface ProductDAO {
     Optional<Product> findById(long productId, long storeId) throws SQLException;
 
     /**
-     * Finds a product by slug with full details.
+     * Finds a product by ID with full details.
      * Used for SEO-friendly URLs and product page routing.
      *
      * @param slug    the product slug
@@ -84,6 +84,17 @@ public interface ProductDAO {
      * @throws SQLException if a database access error occurs
      */
     Optional<Product> findBySlug(String slug, long storeId) throws SQLException;
+
+    /**
+     * Finds an active and available product by ID.
+     * Already filtered by is_active = 1 and availability_status = 'available'.
+     *
+     * @param productId the product ID
+     * @param storeId   the store ID for availability and pricing
+     * @return an {@link Optional} containing the product if found and available
+     * @throws SQLException if a database access error occurs
+     */
+    Optional<Product> findActiveProductById(long productId, long storeId) throws SQLException;
 
     /**
      * Finds all products available in the menu for the specified store.

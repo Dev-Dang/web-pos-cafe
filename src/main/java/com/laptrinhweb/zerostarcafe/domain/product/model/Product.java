@@ -38,7 +38,7 @@ public class Product {
 
     // Store-specific fields
     private boolean inMenu;
-    private String availabilityStatus;
+    private AvailabilityStatus availabilityStatus;
     private LocalDateTime soldOutUntil;
     private String soldOutNote;
 

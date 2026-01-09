@@ -59,9 +59,10 @@ public final class ProductMapper {
         // Determine availability
         boolean isAvailable = product.isActive() && 
             (product.getAvailabilityStatus() == null || 
-             ProductConstants.AvailabilityStatus.AVAILABLE.equals(product.getAvailabilityStatus()));
+             product.getAvailabilityStatus().isAvailable());
         card.setAvailable(isAvailable);
-        card.setAvailabilityStatus(product.getAvailabilityStatus());
+        card.setAvailabilityStatus(product.getAvailabilityStatus() != null ? 
+            product.getAvailabilityStatus().name().toLowerCase() : null);
 
         return card;
     }
@@ -97,9 +98,10 @@ public final class ProductMapper {
         // Availability
         boolean isAvailable = product.isActive() && 
             (product.getAvailabilityStatus() == null || 
-             ProductConstants.AvailabilityStatus.AVAILABLE.equals(product.getAvailabilityStatus()));
+             product.getAvailabilityStatus().isAvailable());
         detail.setAvailable(isAvailable);
-        detail.setAvailabilityStatus(product.getAvailabilityStatus());
+        detail.setAvailabilityStatus(product.getAvailabilityStatus() != null ? 
+            product.getAvailabilityStatus().name().toLowerCase() : null);
         detail.setSoldOutUntil(product.getSoldOutUntil());
         detail.setSoldOutNote(product.getSoldOutNote());
 

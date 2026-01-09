@@ -1,6 +1,7 @@
 package com.laptrinhweb.zerostarcafe.domain.product.dao;
 
 import com.laptrinhweb.zerostarcafe.core.context.DBContext;
+import com.laptrinhweb.zerostarcafe.domain.product.model.AvailabilityStatus;
 import com.laptrinhweb.zerostarcafe.domain.product.model.Product;
 import com.laptrinhweb.zerostarcafe.domain.product.model.ProductOption;
 import com.laptrinhweb.zerostarcafe.domain.product.model.ProductOptionValue;
@@ -171,6 +172,41 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
+    public Optional<Product> findActiveProductById(long productId, long storeId) throws SQLException {
+        String sql = """
+                SELECT 
+                    mi.id, mi.category_id, mi.name, mi.slug, mi.image_url, 
+                    mi.description, mi.base_price, mi.unit, mi.is_active, mi.created_at,
+                    smi.in_menu, smi.availability_status, smi.sold_out_until, smi.sold_out_note,
+                    sips.price as promo_price, sips.valid_from, sips.valid_to
+                FROM menu_items mi
+                LEFT JOIN store_menu_items smi ON mi.id = smi.menu_item_id AND smi.store_id = ?
+                LEFT JOIN store_item_price_schedules sips ON mi.id = sips.menu_item_id 
+                    AND sips.store_id = ? AND sips.valid_from <= NOW() AND sips.valid_to >= NOW()
+                WHERE mi.id = ? AND mi.is_active = 1 
+                    AND (smi.availability_status IS NULL OR smi.availability_status = 'available')
+                """;
+
+        Connection conn = DBContext.getOrCreate();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, storeId);
+            ps.setLong(2, storeId);
+            ps.setLong(3, productId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Product product = mapToProduct(rs);
+                    product.setOptions(loadProductOptions(productId, storeId));
+                    return Optional.of(product);
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
     public List<Product> findAvailableInStore(long storeId) throws SQLException {
         String sql = """
                 SELECT 
@@ -229,7 +265,8 @@ public class ProductDAOImpl implements ProductDAO {
 
         // Store-specific fields
         product.setInMenu(rs.getBoolean("in_menu"));
-        product.setAvailabilityStatus(rs.getString("availability_status"));
+        product.setAvailabilityStatus(AvailabilityStatus
+                .fromString(rs.getString("availability_status")));
         product.setSoldOutUntil(rs.getTimestamp("sold_out_until") != null ?
                 rs.getTimestamp("sold_out_until").toLocalDateTime() : null);
         product.setSoldOutNote(rs.getString("sold_out_note"));

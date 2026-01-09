@@ -54,6 +54,9 @@ public final class ViewMap {
         public static final View PRODUCT_CARDS = partial("product/_product-card");
         public static final View PRODUCT_MODAL = partial("product/modal/_product-details");
 
+        // Partials - Cart
+        public static final View CART_PANEL = partial("cart/_cart-panel");
+
         // Partials - Search
         public static final View SEARCH_SECTION = partial("search/_search-section");
 

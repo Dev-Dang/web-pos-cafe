@@ -90,11 +90,6 @@ public record View(
         req.setAttribute(PAGE_TITLE, view.titleKey());
         req.setAttribute(PAGE_CONTENT, view.viewPath());
 
-        try {
-            AppRoute.forward(view.area().getLayoutPath(), req, resp);
-        } catch (ServletException e) {
-            AppRoute.sendError(HttpServletResponse
-                    .SC_INTERNAL_SERVER_ERROR, e.getMessage(), resp);
-        }
+        AppRoute.forward(view.area().getLayoutPath(), req, resp);
     }
 }

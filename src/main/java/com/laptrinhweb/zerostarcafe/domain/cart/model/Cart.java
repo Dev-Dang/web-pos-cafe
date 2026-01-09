@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * <h2>Description:</h2>
  * <p>
- * Domain model representing a shopping cart. Maps to the {@code carts} table.
- * Contains cart items and tracks user's shopping session for a specific store.
+ * Domain model representing a shopping cart with full details including all items and options.
+ * Maps to the {@code carts} table and includes related cart items via join.
  * </p>
  *
  * @author Dang Van Trung
@@ -25,12 +26,10 @@ import java.util.List;
 @Getter
 @Setter
 public class Cart {
-    private Long id;
-    private Long storeId;
-    private Long userId;
+    private long id;
+    private long userId;
+    private long storeId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    
-    // Related entities
-    private List<CartItem> items;
+    private List<CartItem> items = new ArrayList<>();
 }

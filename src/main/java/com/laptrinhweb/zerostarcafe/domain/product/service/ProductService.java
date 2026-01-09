@@ -137,6 +137,26 @@ public final class ProductService {
     }
 
     /**
+     * Get active product by ID with store validation.
+     * Returns null if product not found or inactive.
+     *
+     * @param productId product ID
+     * @param storeId   store ID for validation
+     * @return Product or null if not found/inactive
+     */
+    public Product getActiveProductById(long productId, long storeId) {
+        try {
+            java.util.Optional<Product> productOpt = productDAO.findActiveProductById(productId, storeId);
+            if (productOpt.isPresent()) {
+                return productOpt.get();
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new AppException("Failed to get product", e);
+        }
+    }
+
+    /**
      * Retrieves all available products in a store as cards.
      *
      * @param storeId the store ID

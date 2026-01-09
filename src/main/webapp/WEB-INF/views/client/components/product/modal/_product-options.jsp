@@ -9,7 +9,7 @@
 
 <div class="product-modal__options-wrapper">
     <c:forEach var="option" items="${productDetail.options}">
-        <div class="product-modal__section">
+        <div class="product-modal__section" data-option-group="${option.id}" data-max-select="${option.maxSelect}" data-required="${option.required}">
             <div class="product-modal__section-header">
                 <span>${option.name}</span>
                 <c:choose>
@@ -19,7 +19,7 @@
                     </c:when>
                     <c:when test="${option.maxSelect > 1}">
                         <span class="product-modal__section-sub">
-                            (${i18n.trans("general.product.modal.maxSelect").replace("{0}", option.maxSelect)})
+                            (Tối đa ${option.maxSelect})
                         </span>
                     </c:when>
                 </c:choose>

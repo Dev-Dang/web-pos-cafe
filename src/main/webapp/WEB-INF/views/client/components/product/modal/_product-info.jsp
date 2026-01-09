@@ -23,7 +23,7 @@
         </p>
     </div>
     <div class="product-modal__price d-flex flex-wrap align-items-end gap-3">
-        <span class="product-modal__price-current">
+        <span class="product-modal__price-current" data-modal-price>
             <fmt:formatNumber value="${productDetail.currentPrice}" type="number" groupingUsed="true"/>đ
         </span>
         <c:if test="${hasPromotion}">

@@ -1,6 +1,8 @@
 package com.laptrinhweb.zerostarcafe.web.common.utils;
 
+import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
+import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
@@ -288,5 +290,23 @@ public final class RequestUtils {
         return storeCtx != null
                 ? storeCtx.getStoreId()
                 : StoreConstants.DEFAULT_STORE_ID;
+    }
+
+    /**
+     * Get user ID from authenticated session.
+     *
+     * @param req HTTP request
+     * @return user ID or null if not authenticated
+     */
+    public static Long getUserIdFromSession(HttpServletRequest req) {
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            return null;
+        }
+
+        AuthUser authUser = (AuthUser) session
+                .getAttribute(SecurityKeys.SESSION_AUTH_USER);
+
+        return authUser != null ? authUser.getId() : null;
     }
 }

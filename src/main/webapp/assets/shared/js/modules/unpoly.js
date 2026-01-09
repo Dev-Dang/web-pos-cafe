@@ -7,7 +7,7 @@ export function initUnpoly() {
     // Configure CSRF protection
     up.protocol.config.csrfHeader = 'X-CSRF-Token';
     up.protocol.config.csrfToken = () => {
-        document.querySelector('meta[name="csrf-token"]')?.content;
+        return document.querySelector('meta[name="csrf-token"]')?.content;
     }
 
     // Page loader

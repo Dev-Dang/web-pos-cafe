@@ -15,8 +15,25 @@ export function initUnpoly() {
         return; // Unpoly not loaded
     }
 
+    // Configure CSRF token
+    configureCsrf();
+
     // Auto-open product modal when triggered by response context
     initAutoModalOpening();
+}
+
+/**
+ * Configure CSRF token from meta tag
+ */
+function configureCsrf() {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+    
+    if (csrfToken) {
+        up.network.config.csrfToken = () => csrfToken.getAttribute('content');
+        console.log('[CSRF] Token configured from meta tag');
+    } else {
+        console.warn('[CSRF] Meta tag not found');
+    }
 }
 
 /**

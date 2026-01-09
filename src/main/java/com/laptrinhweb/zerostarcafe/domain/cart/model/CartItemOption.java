@@ -8,8 +8,8 @@ import lombok.Setter;
 /**
  * <h2>Description:</h2>
  * <p>
- * Domain model representing an option selected for a cart item. Maps to the {@code cart_item_options} table.
- * Stores snapshot of option information at the time of adding to cart for price consistency.
+ * Domain model representing selected options for a cart item.
+ * Maps to the {@code cart_item_options} table.
  * </p>
  *
  * @author Dang Van Trung
@@ -22,10 +22,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CartItemOption {
-    private Long id;
-    private Long cartItemId;
-    private Long optionValueId;
-    private String optionGroupNameSnapshot; // JSON: {"vi": "...", "en": "..."}
-    private String optionValueNameSnapshot; // JSON: {"vi": "...", "en": "..."}
-    private Integer priceDeltaSnapshot;
+    private long id;
+    private long cartItemId;
+    private long optionValueId;
+    private String optionGroupNameSnapshot;
+    private String optionValueNameSnapshot;
+    private int priceDeltaSnapshot;
 }

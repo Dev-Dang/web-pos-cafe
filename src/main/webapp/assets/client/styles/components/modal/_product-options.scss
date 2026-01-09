@@ -121,7 +121,8 @@
     transform: translateX(2px);
   }
 
-  &.is-selected {
+  &.is-selected,
+  &.is-active {
     color: $primary;
 
     .option-row__check {

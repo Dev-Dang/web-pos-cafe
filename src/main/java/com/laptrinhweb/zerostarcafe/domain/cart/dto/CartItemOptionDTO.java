@@ -5,14 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 /**
  * <h2>Description:</h2>
  * <p>
- * DTO representing an option selected for a cart item.
- * Contains snapshot of option information for price consistency and UI display.
- * Supports both guest and logged-in user cart item options.
+ * DTO for cart item option view with localized names.
  * </p>
  *
  * @author Dang Van Trung
@@ -25,10 +21,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class CartItemOptionDTO {
-    private Long id;                              // null for guest cart item options
-    private Long cartItemId;                      // null for guest cart item options
-    private Long optionValueId;
-    private String optionGroupNameSnapshot;       // JSON: {"vi": "...", "en": "..."}
-    private String optionValueNameSnapshot;       // JSON: {"vi": "...", "en": "..."}
-    private BigDecimal priceDeltaSnapshot;        // price difference from base product
+    private long id;
+    private String optionGroupName;
+    private String optionValueName;
+    private int priceDelta;
 }

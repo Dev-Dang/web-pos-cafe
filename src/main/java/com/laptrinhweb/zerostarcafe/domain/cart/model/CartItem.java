@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * <h2>Description:</h2>
  * <p>
- * Domain model representing an item in a shopping cart. Maps to the {@code cart_items} table.
- * Contains product information snapshot and selected options at the time of adding to cart.
+ * Domain model representing an item in a shopping cart with full option details.
+ * Maps to the {@code cart_items} table and includes related options via join.
  * </p>
  *
  * @author Dang Van Trung
@@ -25,18 +26,18 @@ import java.util.List;
 @Getter
 @Setter
 public class CartItem {
-    private Long id;
-    private Long cartId;
-    private Long menuItemId;
-    private Integer qty;
-    private Integer unitPriceSnapshot;
-    private Integer optionsPriceSnapshot;
+    private long id;
+    private long cartId;
+    private long menuItemId;
+    private int qty;
+    private int unitPriceSnapshot;
+    private int optionsPriceSnapshot;
     private String note;
     private String itemHash;
-    private String itemNameSnapshot; // JSON: {"vi": "...", "en": "..."}
+    private String itemNameSnapshot;
+    private String imageUrlSnapshot;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    
-    // Related entities
-    private List<CartItemOption> options;
+
+    private List<CartItemOption> options = new ArrayList<>();
 }

@@ -1,283 +1,333 @@
-const ProductModal = (() => {
-    const SELECTORS = {
-        modal: '[data-product-modal-form]',
-        optionItem: '[data-option-item]',
-        optionSingle: '[data-option-type="single"]',
-        optionMulti: '[data-option-type="multi"]',
-        qtyDisplay: '[data-modal-qty]',
-        qtyInput: '[data-form-quantity]',
-        noteTextarea: '[data-modal-note]',
-        noteInput: '[data-form-note]',
-        totalDisplay: '[data-modal-total]',
-        minusBtn: '[data-modal-minus]',
-        plusBtn: '[data-modal-plus]',
-        submitBtn: '[data-modal-action]'
-    };
+const parsePrice = (value) => {
+    const numeric = (value || "").toString().replace(/[^\d]/g, "");
+    return parseInt(numeric, 10) || 0;
+};
 
-    const CLASSES = {
-        active: 'is-active',
-        selected: 'is-selected',
-        disabled: 'is-disabled'
-    };
+const formatPrice = (value) => {
+    return new Intl.NumberFormat('vi-VN').format(value) + 'đ';
+};
 
-    class ModalState {
-        constructor(modalElement) {
-            this.modal = modalElement;
-            this.form = modalElement.querySelector('form');
-            this.data = up.data(modalElement);
-            this.quantity = this.data.initialQty || 1;
-            this.note = '';
-            this.selectedOptions = new Map(); // groupId -> Set of valueIds
-            this.optionPrices = new Map(); // valueId -> price delta
-            this.optionGroups = new Map(); // groupId -> {required, maxSelect, selectedCount}
+/**
+ * Handles option selection (single/multi)
+ */
+function initOptionHandlers(modalEl) {
+    const items = modalEl.querySelectorAll("[data-option-item]");
 
-            this.initializeOptions();
-            this.syncFormInputs();
-        }
+    items.forEach((item) => {
+        item.addEventListener("click", () => {
+            const group = item.dataset.optionGroup;
+            const type = item.dataset.optionType;
+            const section = item.closest(".product-modal__section");
 
-        initializeOptions() {
-            const optionItems = this.modal.querySelectorAll(SELECTORS.optionItem);
+            if (type === "single") {
+                // Deselect all in group
+                modalEl.querySelectorAll(`[data-option-group="${group}"]`)
+                    .forEach(el => {
+                        el.classList.remove("is-active");
+                        el.querySelector(".option-row__check")?.classList.remove("is-active");
+                    });
+                // Select clicked
+                item.classList.add("is-active");
+                item.querySelector(".option-row__check")?.classList.add("is-active");
+            } else if (type === "multi") {
+                // Toggle multi-select with max check
+                // Try to get max from data attribute first, then fallback to text parsing
+                const maxSelect = parseInt(section.dataset.maxSelect) ||
+                    parseInt(section.querySelector(".product-modal__section-sub")
+                        ?.textContent.match(/\d+/)?.[0]) || 999;
+                const groupItems = modalEl.querySelectorAll(`[data-option-group="${group}"]`);
+                const currentActive = Array.from(groupItems).filter(el => el.classList.contains("is-active")).length;
 
-            optionItems.forEach(item => {
-                const groupId = item.dataset.optionGroup;
-                const valueId = item.dataset.optionValueId;
-                const price = parseFloat(item.dataset.optionPrice) || 0;
+                // Clicking on already selected item (deselect)
+                if (item.classList.contains("is-active")) {
+                    item.classList.remove("is-active");
+                    item.classList.remove("is-disabled");
+                    item.querySelector(".option-row__check")?.classList.remove("is-active");
 
-                // Store price delta
-                this.optionPrices.set(valueId, price);
-
-                // Initialize group tracking
-                if (!this.selectedOptions.has(groupId)) {
-                    this.selectedOptions.set(groupId, new Set());
-                }
-
-                // Get group metadata from section header
-                const section = item.closest('.product-modal__section');
-                if (section && !this.optionGroups.has(groupId)) {
-                    const header = section.querySelector('.product-modal__section-header');
-                    const isRequired = header?.textContent.includes('required') || false;
-                    const maxSelectMatch = header?.textContent.match(/\(.*?(\d+).*?\)/);
-                    const maxSelect = maxSelectMatch ? parseInt(maxSelectMatch[1]) : 1;
-
-                    this.optionGroups.set(groupId, {
-                        required: isRequired,
-                        maxSelect: maxSelect,
-                        selectedCount: 0
+                    // Re-enable other disabled items
+                    groupItems.forEach(el => {
+                        if (!el.classList.contains("is-active")) {
+                            el.classList.remove("is-disabled");
+                        }
                     });
                 }
-            });
-        }
-
-        toggleOption(item) {
-            const groupId = item.dataset.optionGroup;
-            const valueId = item.dataset.optionValueId;
-            const type = item.dataset.optionType;
-            const group = this.optionGroups.get(groupId);
-
-            if (type === 'single') {
-                // Deselect all in group
-                const groupItems = this.modal.querySelectorAll(`[data-option-group="${groupId}"]`);
-                groupItems.forEach(i => {
-                    i.classList.remove(CLASSES.active);
-                    const vid = i.dataset.optionValueId;
-                    this.selectedOptions.get(groupId).delete(vid);
-                });
-
-                // Select this one
-                item.classList.add(CLASSES.active);
-                this.selectedOptions.get(groupId).add(valueId);
-                group.selectedCount = 1;
-            } else {
-                // Multi-select
-                const isSelected = item.classList.contains(CLASSES.selected);
-                const checkbox = item.querySelector('.option-row__check');
-
-                if (isSelected) {
-                    // Deselect
-                    item.classList.remove(CLASSES.selected);
-                    checkbox?.classList.remove(CLASSES.active);
-                    this.selectedOptions.get(groupId).delete(valueId);
-                    group.selectedCount--;
-                } else {
-                    // Check if max reached
-                    if (group.selectedCount >= group.maxSelect) {
-                        this.flashWarning(item.closest('.product-modal__section'));
-                        return;
+                // Clicking on unselected item
+                else {
+                    if (currentActive >= maxSelect) {
+                        flashHighlight(section);
+                        return; // Max reached, do nothing
                     }
 
-                    // Select
-                    item.classList.add(CLASSES.selected);
-                    checkbox?.classList.add(CLASSES.active);
-                    this.selectedOptions.get(groupId).add(valueId);
-                    group.selectedCount++;
-                }
+                    item.classList.add("is-active");
+                    item.querySelector(".option-row__check")?.classList.add("is-active");
 
-                // Update disabled state for other items
-                this.updateMultiSelectState(groupId);
-            }
-
-            this.updateTotal();
-            this.syncFormInputs();
-        }
-
-        updateMultiSelectState(groupId) {
-            const group = this.optionGroups.get(groupId);
-            const groupItems = this.modal.querySelectorAll(`[data-option-group="${groupId}"][data-option-type="multi"]`);
-
-            groupItems.forEach(item => {
-                const isSelected = item.classList.contains(CLASSES.selected);
-                if (!isSelected && group.selectedCount >= group.maxSelect) {
-                    item.classList.add(CLASSES.disabled);
-                } else {
-                    item.classList.remove(CLASSES.disabled);
-                }
-            });
-        }
-
-        flashWarning(section) {
-            section?.classList.add('flash-highlight');
-            setTimeout(() => section?.classList.remove('flash-highlight'), 1800);
-        }
-
-        incrementQty() {
-            this.quantity++;
-            this.updateQtyDisplay();
-            this.updateTotal();
-            this.syncFormInputs();
-        }
-
-        decrementQty() {
-            if (this.quantity > 1) {
-                this.quantity--;
-                this.updateQtyDisplay();
-                this.updateTotal();
-                this.syncFormInputs();
-            }
-        }
-
-        updateQtyDisplay() {
-            const display = this.modal.querySelector(SELECTORS.qtyDisplay);
-            if (display) display.textContent = this.quantity;
-        }
-
-        updateNote(value) {
-            this.note = value;
-            this.syncFormInputs();
-        }
-
-        calculateTotal() {
-            let total = this.data.currentPrice;
-
-            // Add option prices
-            this.selectedOptions.forEach(valueSet => {
-                valueSet.forEach(valueId => {
-                    total += this.optionPrices.get(valueId) || 0;
-                });
-            });
-
-            // Multiply by quantity
-            return total * this.quantity;
-        }
-
-        updateTotal() {
-            const total = this.calculateTotal();
-            const display = this.modal.querySelector(SELECTORS.totalDisplay);
-            if (display) {
-                display.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
-            }
-        }
-
-        syncFormInputs() {
-            // Update quantity
-            const qtyInput = this.form.querySelector(SELECTORS.qtyInput);
-            if (qtyInput) qtyInput.value = this.quantity;
-
-            // Update note
-            const noteInput = this.form.querySelector(SELECTORS.noteInput);
-            if (noteInput) noteInput.value = this.note;
-
-            // Clear existing option inputs
-            this.form.querySelectorAll('input[name="optionValueIds"]').forEach(input => input.remove());
-
-            // Add selected option inputs
-            const allSelectedIds = [];
-            this.selectedOptions.forEach(valueSet => {
-                valueSet.forEach(valueId => allSelectedIds.push(valueId));
-            });
-
-            allSelectedIds.forEach(valueId => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'optionValueIds';
-                input.value = valueId;
-                this.form.appendChild(input);
-            });
-        }
-
-        validateForm() {
-            // Check required options
-            for (const [groupId, group] of this.optionGroups) {
-                if (group.required && group.selectedCount === 0) {
-                    return false;
+                    // Check if max reached after this selection
+                    const newActive = currentActive + 1;
+                    if (newActive >= maxSelect) {
+                        // Disable unselected items
+                        groupItems.forEach(el => {
+                            if (!el.classList.contains("is-active")) {
+                                el.classList.add("is-disabled");
+                            }
+                        });
+                    }
                 }
             }
-            return true;
+
+            updateTotals(modalEl);
+            syncFormInputs(modalEl);
+        });
+    });
+}
+
+/**
+ * Handles quantity +/- buttons
+ */
+function initQuantityStepper(modalEl) {
+    const minus = modalEl.querySelector("[data-modal-minus]");
+    const plus = modalEl.querySelector("[data-modal-plus]");
+    const qtyEl = modalEl.querySelector("[data-modal-qty]");
+
+    if (!qtyEl) return;
+
+    const updateQty = (delta) => {
+        const current = parseInt(qtyEl.textContent) || 1;
+        const newQty = Math.max(1, Math.min(99, current + delta));
+        qtyEl.textContent = newQty;
+        updateTotals(modalEl);
+        syncFormInputs(modalEl);
+    };
+
+    minus?.addEventListener("click", () => updateQty(-1));
+    plus?.addEventListener("click", () => updateQty(1));
+}
+
+/**
+ * Handles note input synchronization
+ */
+function initNoteHandler(modalEl) {
+    const noteTextarea = modalEl.querySelector("[data-modal-note]");
+    noteTextarea?.addEventListener("input", () => syncFormInputs(modalEl));
+}
+
+/**
+ * Validates required option sections
+ */
+function validateRequired(modalEl) {
+    const sections = modalEl.querySelectorAll(".product-modal__section");
+
+    for (const section of sections) {
+        // Check data attribute first, then fallback to text
+        const isRequired = section.dataset.required === "true" ||
+            section.querySelector(".product-modal__section-sub")?.textContent.toLowerCase().includes("bắt buộc") ||
+            section.querySelector(".product-modal__section-sub")?.textContent.toLowerCase().includes("required");
+
+        if (!isRequired) continue;
+
+        const firstItem = section.querySelector("[data-option-item]");
+        const group = firstItem?.dataset.optionGroup;
+
+        // Both single and multi use "is-active" class
+        const selected = section.querySelectorAll(`[data-option-group="${group}"].is-active`).length;
+
+        if (selected === 0) {
+            const headerText = section.querySelector(".product-modal__section-header span")?.textContent;
+            return {valid: false, missing: headerText || "tùy chọn", section};
         }
     }
 
-    function bindEvents(modal, state) {
-        // Option selection
-        modal.querySelectorAll(SELECTORS.optionItem).forEach(item => {
-            item.addEventListener('click', () => state.toggleOption(item));
-        });
+    return {valid: true};
+}
 
-        // Quantity buttons
-        const minusBtn = modal.querySelector(SELECTORS.minusBtn);
-        const plusBtn = modal.querySelector(SELECTORS.plusBtn);
+/**
+ * Gets base price from modal
+ */
+function getBasePrice(modalEl) {
+    const priceData = modalEl.querySelector("[data-modal-price]");
+    return parsePrice(priceData?.textContent || "0");
+}
 
-        minusBtn?.addEventListener('click', () => state.decrementQty());
-        plusBtn?.addEventListener('click', () => state.incrementQty());
+/**
+ * Gets selected options and calculates total option price
+ */
+function getSelectedOptionsData(modalEl) {
+    const items = modalEl.querySelectorAll("[data-option-item].is-active");
+    const optionValueIds = [];
+    let optionsPrice = 0;
 
-        // Note input
-        const noteTextarea = modal.querySelector(SELECTORS.noteTextarea);
-        noteTextarea?.addEventListener('input', (e) => state.updateNote(e.target.value));
+    items.forEach((item) => {
+        const valueId = item.dataset.optionValueId;
+        const price = parsePrice(item.dataset.optionPrice);
 
-        // Form submission validation
-        const form = modal.querySelector('form');
-        form?.addEventListener('submit', (e) => {
-            if (!state.validateForm()) {
-                e.preventDefault();
-                alert('Vui lòng chọn đầy đủ các tùy chọn bắt buộc');
-            }
-        });
-    }
-
-    function init(modalElement) {
-        if (!modalElement) return;
-
-        const state = new ModalState(modalElement);
-        bindEvents(modalElement, state);
-
-        // Select first option for single-choice required groups
-        state.optionGroups.forEach((group, groupId) => {
-            if (group.required && group.maxSelect === 1 && group.selectedCount === 0) {
-                const firstOption = modalElement.querySelector(`[data-option-group="${groupId}"][data-option-type="single"]`);
-                if (firstOption) {
-                    state.toggleOption(firstOption);
-                }
-            }
-        });
-
-        return state;
-    }
-
-    // Unpoly compiler - automatically runs when modal is loaded
-    up.compiler('#product-detail-modal', (element) => {
-        init(element);
+        if (valueId) {
+            optionValueIds.push(valueId);
+        }
+        optionsPrice += price;
     });
 
-    return {init};
-})();
+    return {optionValueIds, optionsPrice};
+}
+
+/**
+ * Updates total price display
+ */
+function updateTotals(modalEl) {
+    const qtyEl = modalEl.querySelector("[data-modal-qty]");
+    const totalEl = modalEl.querySelector("[data-modal-total]");
+
+    const qty = parseInt(qtyEl?.textContent || "1");
+    const basePrice = getBasePrice(modalEl);
+    const {optionsPrice} = getSelectedOptionsData(modalEl);
+    const total = (basePrice + optionsPrice) * qty;
+
+    if (totalEl) {
+        totalEl.textContent = formatPrice(total);
+    }
+}
+
+/**
+ * Syncs visible UI state to hidden form inputs
+ */
+function syncFormInputs(modalEl) {
+    const form = modalEl.querySelector("form");
+    if (!form) return;
+
+    // Update quantity
+    const qtyInput = form.querySelector("[data-form-quantity]");
+    const qtyDisplay = modalEl.querySelector("[data-modal-qty]");
+    if (qtyInput && qtyDisplay) {
+        qtyInput.value = qtyDisplay.textContent;
+    }
+
+    // Update note
+    const noteInput = form.querySelector("[data-form-note]");
+    const noteTextarea = modalEl.querySelector("[data-modal-note]");
+    if (noteInput && noteTextarea) {
+        noteInput.value = noteTextarea.value;
+    }
+
+    // Clear existing option inputs
+    form.querySelectorAll('input[name="optionValueIds"]').forEach(input => input.remove());
+
+    // Add selected option value IDs
+    const {optionValueIds} = getSelectedOptionsData(modalEl);
+    optionValueIds.forEach(valueId => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'optionValueIds';
+        input.value = valueId;
+        form.appendChild(input);
+    });
+}
+
+/**
+ * Flashes highlight animation on section
+ */
+function flashHighlight(section) {
+    if (!section) return;
+    section.classList.add('flash-highlight');
+    setTimeout(() => section.classList.remove('flash-highlight'), 1800);
+}
+
+/**
+ * Highlights and scrolls to missing required section
+ */
+function highlightMissingSection(section) {
+    if (!section) return;
+    section.scrollIntoView({behavior: "smooth", block: "center"});
+    flashHighlight(section);
+}
+
+/**
+ * Form submission validation handler
+ */
+function initFormValidation(modalEl) {
+    const form = modalEl.querySelector("form");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+        const validation = validateRequired(modalEl);
+        if (!validation.valid) {
+            e.preventDefault();
+            highlightMissingSection(validation.section);
+
+            // Show error message
+            showError(`Vui lòng chọn ${validation.missing}`);
+        }
+    });
+}
+
+/**
+ * Shows error message (using toast if available, otherwise alert)
+ */
+async function showError(message) {
+    try {
+        const {Toast} = await import("../../../shared/js/modules/toast.js");
+        Toast.error(message);
+    } catch (e) {
+        alert(message);
+    }
+}
+
+/**
+ * Auto-selects first option for required single-choice groups
+ */
+function autoSelectRequiredSingleOptions(modalEl) {
+    const sections = modalEl.querySelectorAll(".product-modal__section");
+
+    sections.forEach(section => {
+        // Check data attribute first, then fallback to text
+        const isRequired = section.dataset.required === "true" ||
+            section.querySelector(".product-modal__section-sub")?.textContent.toLowerCase().includes("bắt buộc") ||
+            section.querySelector(".product-modal__section-sub")?.textContent.toLowerCase().includes("required");
+
+        if (!isRequired) return;
+
+        const firstItem = section.querySelector("[data-option-item]");
+        const type = firstItem?.dataset.optionType;
+
+        // Only auto-select for single-choice
+        if (type === "single") {
+            const group = firstItem?.dataset.optionGroup;
+            const alreadySelected = section.querySelector(`[data-option-group="${group}"].is-active`);
+
+            if (!alreadySelected && firstItem) {
+                firstItem.classList.add("is-active");
+                firstItem.querySelector(".option-row__check")?.classList.add("is-active");
+            }
+        }
+    });
+
+    // Update totals and sync after auto-selection
+    updateTotals(modalEl);
+    syncFormInputs(modalEl);
+}
+
+/**
+ * Main initialization function
+ */
+function initProductModal(modalEl) {
+    if (!modalEl) return;
+
+    // Initialize all handlers
+    initOptionHandlers(modalEl);
+    initQuantityStepper(modalEl);
+    initNoteHandler(modalEl);
+    initFormValidation(modalEl);
+
+    // Auto-select required single options
+    autoSelectRequiredSingleOptions(modalEl);
+
+    // Initial sync
+    syncFormInputs(modalEl);
+}
+
+/**
+ * Unpoly compiler - automatically runs when modal is loaded
+ */
+up.compiler('#product-detail-modal', (element) => {
+    initProductModal(element);
+});
 
 // Export for external use if needed
-window.ProductModal = ProductModal;
+export {initProductModal};

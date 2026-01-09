@@ -13,16 +13,11 @@
 <c:set var="hasPromotion" value="${productDetail.basePrice > productDetail.currentPrice}"/>
 <c:set var="optionGroupCount" value="${fn:length(productDetail.options)}"/>
 <c:set var="layoutType" value="${optionGroupCount <= 1 ? 'compact' : 'full'}"/>
+<c:set var="ctxPath" value="${pageContext.request.contextPath}"/>
 
 <div id="product-detail-modal"
      class="product-modal"
-     tabindex="-1"
-     up-data="{
-         productId: ${productDetail.id},
-         basePrice: ${productDetail.basePrice},
-         currentPrice: ${productDetail.currentPrice},
-         initialQty: 1
-     }">
+     tabindex="-1">
     <div class="product-modal__dialog">
         <div class="product-modal__content">
             <%-- Mobile Header --%>
@@ -41,16 +36,18 @@
 
             <%-- Hidden form for cart submission --%>
             <form id="add-to-cart-form"
-                  action="${pageContext.request.contextPath}/cart/add"
+                  action="${ctxPath}/cart/add"
                   method="POST"
                   up-submit
-                  up-target=".cart-count"
+                  up-layer="root"
+                  up-target=".cart-panel"
                   up-fail-target="#product-detail-modal"
+                  up-on-loaded="up.layer.get('overlay').dismiss()"
                   data-product-modal-form>
 
                 <%-- Hidden inputs for form data --%>
                 <input type="hidden" name="menuItemId" value="${productDetail.id}">
-                <input type="hidden" name="quantity" value="1" data-form-quantity>
+                <input type="hidden" name="qty" value="1" data-form-quantity>
                 <input type="hidden" name="note" value="" data-form-note>
                 <%-- Option values will be added dynamically via JS as multiple inputs with name="optionValueIds" --%>
 
@@ -70,7 +67,8 @@
                                 <%-- Column 2: Info + Options + Actions --%>
                             <div class="col-lg-6 col-12 product-modal__col product-modal__col-2">
                                 <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-info.jsp"/>
-                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
+                                <jsp:include
+                                        page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
                                 <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-footer.jsp"/>
                             </div>
                         </div>
@@ -90,7 +88,8 @@
 
                                 <%-- Column 2: ALL Options + Actions (scrollable) --%>
                             <div class="col-lg-6 col-12 product-modal__col product-modal__col-2">
-                                <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
+                                <jsp:include
+                                        page="/WEB-INF/views/client/components/product/modal/_product-options.jsp"/>
                                 <jsp:include page="/WEB-INF/views/client/components/product/modal/_product-footer.jsp"/>
                             </div>
                         </div>

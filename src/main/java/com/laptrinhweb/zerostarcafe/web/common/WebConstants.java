@@ -69,6 +69,14 @@ public final class WebConstants {
         public static final String PRODUCT_CARDS = "productCards";
     }
 
+    // ============================================
+    // AUTH
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Auth {
+
+        public static final String LOGIN_MODAL = "loginModal";
+    }
 
     // ============================================
     // CART
@@ -76,7 +84,13 @@ public final class WebConstants {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static final class Cart {
 
-        public static final String CART_ACTION = "cartAction";
+        public static final String CART = "cart";
+        public static final String CART_ITEM_ID = "cartItemId";
+        public static final String MENU_ITEM_ID = "menuItemId";
+        public static final String QUANTITY = "qty";
+        public static final String NOTE = "note";
+        public static final String OPTION_VALUE_IDS = "optionValueIds";
+        public static final String ACTION = "action";
     }
 
     // ============================================
