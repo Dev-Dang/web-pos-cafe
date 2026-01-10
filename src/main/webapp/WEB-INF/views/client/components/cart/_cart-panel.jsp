@@ -131,18 +131,18 @@
                         <c:choose>
                             <c:when test="${not empty loyaltyRedemption and loyaltyRedemption.applied and loyaltyRedemption.discountAmount > 0}">
                                 <%-- Total after loyalty discount --%>
-                                <fmt:formatNumber value="${cart.total - loyaltyRedemption.discountAmount}" 
-                                                  type="number" 
+                                <fmt:formatNumber value="${cart.total - loyaltyRedemption.discountAmount}"
+                                                  type="number"
                                                   groupingUsed="true"/>
                             </c:when>
                             <c:otherwise>
                                 <%-- Original total --%>
-                                <fmt:formatNumber value="${cart.total}" 
-                                                  type="number" 
+                                <fmt:formatNumber value="${cart.total}"
+                                                  type="number"
                                                   groupingUsed="true"/>
                             </c:otherwise>
                         </c:choose>
-                        ${i18n.trans('general.currency.vnd')}
+                            ${i18n.trans('general.currency.vnd')}
                     </span>
                 </div>
             </div>
@@ -151,7 +151,11 @@
         <!-- Checkout Button -->
         <button type="button"
                 class="btn btn-lg btn-primary--filled w-100"
-
+                up-follow
+                up-layer="new modal"
+                up-size="small"
+                up-href="${pageContext.request.contextPath}/payment/select-method"
+                up-target=".payment-modal"
                 data-checkout-btn>
             <span>${i18n.trans('general.cart.checkout')}</span>
         </button>

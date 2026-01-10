@@ -22,6 +22,7 @@ import lombok.Setter;
 @Setter
 public class CartItemOptionDTO {
     private long id;
+    private long optionValueId;
     private String optionGroupName;
     private String optionValueName;
     private int priceDelta;

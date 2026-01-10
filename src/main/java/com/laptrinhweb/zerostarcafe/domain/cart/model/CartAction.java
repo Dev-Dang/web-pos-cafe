@@ -16,13 +16,16 @@ public enum CartAction {
     REMOVE,
     UPDATE,
     INCREASE,
-    DECREASE;
+    DECREASE,
+    EDIT,
+    UPDATE_ITEM;
 
     public static CartAction fromPath(String path) {
         if (path == null || path.length() <= 1)
             return null;
         try {
-            return valueOf(path.substring(1).toUpperCase());
+            String action = path.substring(1).replace("-", "_").toUpperCase();
+            return valueOf(action);
         } catch (IllegalArgumentException e) {
             return null;
         }

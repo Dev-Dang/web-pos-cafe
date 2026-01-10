@@ -31,7 +31,7 @@
     <button class="product-modal__cta"
             type="submit"
             data-modal-action>
-        <span>${i18n.trans("general.product.modal.addToCart")}</span>
+        <span>${i18n.trans(modalTitleKey)}</span>
         <span class="product-modal__cta-dot"></span>
         <span data-modal-total>
             <fmt:formatNumber value="${productDetail.currentPrice}" type="number" groupingUsed="true"/>đ

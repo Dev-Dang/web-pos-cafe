@@ -60,4 +60,5 @@ public final class SecurityKeys {
     public static final int MANAGER_SESSION_TTL = 240;
     public static final int STAFF_SESSION_TTL = -1;
     public static final int DEFAULT_SESSION_TTL = 10080;
+    public static final int RESET_PASSWORD_TOKEN_TTL_MINUTES = 15;
 }

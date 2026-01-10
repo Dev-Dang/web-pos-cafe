@@ -221,6 +221,112 @@ function syncFormInputs(modalEl) {
 }
 
 /**
+ * Reads edit state values from the hidden inputs.
+ */
+function getEditState(modalEl) {
+    const form = modalEl.querySelector("form");
+    if (!form) return null;
+
+    const editFlag = form.querySelector("[data-edit-mode]");
+    if (!editFlag) return null;
+
+    const optionField = form.querySelector("[data-edit-options]");
+    const optionCsv = optionField ? optionField.value : "";
+    const optionValueIds = [];
+    if (optionCsv) {
+        const parts = optionCsv.split(",");
+        for (let i = 0; i < parts.length; i++) {
+            const value = parts[i].trim();
+            if (value) {
+                optionValueIds.push(value);
+            }
+        }
+    }
+
+    const qtyField = form.querySelector("[data-edit-qty]");
+    const noteField = form.querySelector("[data-edit-note]");
+    const parsedQty = parseInt(qtyField ? qtyField.value : "1", 10);
+    const qty = Number.isNaN(parsedQty) ? 1 : parsedQty;
+    const note = noteField ? noteField.value : "";
+
+    return {optionValueIds, qty, note};
+}
+
+/**
+ * Syncs multi-select disabled state after programmatic selection.
+ */
+function syncMultiSelectState(modalEl) {
+    const sections = modalEl.querySelectorAll(".product-modal__section");
+
+    for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const firstItem = section.querySelector("[data-option-item]");
+        const type = firstItem ? firstItem.dataset.optionType : null;
+        if (type !== "multi") {
+            continue;
+        }
+
+        const group = firstItem.dataset.optionGroup;
+        const maxSelect = parseInt(section.dataset.maxSelect, 10) || 999;
+        const groupItems = modalEl.querySelectorAll(`[data-option-group="${group}"]`);
+        let activeCount = 0;
+
+        for (let j = 0; j < groupItems.length; j++) {
+            if (groupItems[j].classList.contains("is-active")) {
+                activeCount++;
+            }
+        }
+
+        if (activeCount >= maxSelect) {
+            for (let j = 0; j < groupItems.length; j++) {
+                if (!groupItems[j].classList.contains("is-active")) {
+                    groupItems[j].classList.add("is-disabled");
+                }
+            }
+        } else {
+            for (let j = 0; j < groupItems.length; j++) {
+                groupItems[j].classList.remove("is-disabled");
+            }
+        }
+    }
+}
+
+/**
+ * Applies edit state (selected options, qty, note) if present.
+ */
+function applyEditState(modalEl) {
+    const state = getEditState(modalEl);
+    if (!state) return false;
+
+    for (let i = 0; i < state.optionValueIds.length; i++) {
+        const valueId = state.optionValueIds[i];
+        const item = modalEl.querySelector(`[data-option-item][data-option-value-id="${valueId}"]`);
+        if (!item) continue;
+
+        item.classList.add("is-active");
+        const check = item.querySelector(".option-row__check");
+        if (check) {
+            check.classList.add("is-active");
+        }
+    }
+
+    const qtyEl = modalEl.querySelector("[data-modal-qty]");
+    if (qtyEl && state.qty > 0) {
+        qtyEl.textContent = state.qty;
+    }
+
+    const noteTextarea = modalEl.querySelector("[data-modal-note]");
+    if (noteTextarea) {
+        noteTextarea.value = state.note;
+    }
+
+    syncMultiSelectState(modalEl);
+    updateTotals(modalEl);
+    syncFormInputs(modalEl);
+    return true;
+}
+
+/**
  * Flashes highlight animation on section
  */
 function flashHighlight(section) {
@@ -315,8 +421,11 @@ function initProductModal(modalEl) {
     initNoteHandler(modalEl);
     initFormValidation(modalEl);
 
-    // Auto-select required single options
-    autoSelectRequiredSingleOptions(modalEl);
+    const appliedEditState = applyEditState(modalEl);
+    if (!appliedEditState) {
+        // Auto-select required single options
+        autoSelectRequiredSingleOptions(modalEl);
+    }
 
     // Initial sync
     syncFormInputs(modalEl);

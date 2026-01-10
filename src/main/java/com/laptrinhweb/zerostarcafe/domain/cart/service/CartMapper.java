@@ -149,6 +149,7 @@ public final class CartMapper {
     private static CartItemOptionDTO toCartItemOptionDTO(CartItemOption option) {
         CartItemOptionDTO dto = new CartItemOptionDTO();
         dto.setId(option.getId());
+        dto.setOptionValueId(option.getOptionValueId());
         dto.setOptionGroupName(I18nUtils.extract(option.getOptionGroupNameSnapshot()));
         dto.setOptionValueName(I18nUtils.extract(option.getOptionValueNameSnapshot()));
         dto.setPriceDelta(option.getPriceDeltaSnapshot());

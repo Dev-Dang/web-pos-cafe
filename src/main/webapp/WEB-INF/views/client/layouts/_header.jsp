@@ -115,13 +115,16 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="${ctxPath}/user/orders">
+                                    <a class="dropdown-item"
+                                       href="${ctxPath}/user/orders"
+                                       up-follow
+                                       up-layer="new modal"
+                                       up-size="large"
+                                       up-animation="fade-in"
+                                       up-target=".order-history-modal"
+                                       up-history="false"
+                                       up-cache="false">
                                             ${i18n.trans("general.user.orderHistory")}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="${ctxPath}/user/booking">
-                                            ${i18n.trans("general.user.bookTable")}
                                     </a>
                                 </li>
                                 <li>

@@ -3,12 +3,18 @@ import {initCategorySlider} from "./modules/swiper.js";
 import {initProductSearch} from "./modules/search.js";
 import {initUnpoly} from "./modules/unpoly.js";
 import {initInfiniteScroll} from "./modules/infinite-scroll.js";
+import {initFormSuccessDelay} from "./modules/form-success-delay.js";
+import {initOrderHistory} from "./modules/order-history.js";
+import {initPaymentSuccessAutoClose} from "./modules/payment-success.js";
 import "./modules/product-modal.js";
 
 // Initialize core modules
 initStoreDetection();
 initUnpoly();
 initProductSearch();
+initFormSuccessDelay();
+initOrderHistory();
+initPaymentSuccessAutoClose();
 
 // Initialize Unpoly-aware modules
 if (typeof up !== 'undefined') {
@@ -38,3 +44,4 @@ if (typeof up !== 'undefined') {
         initInfiniteScroll(trigger);
     });
 }
+

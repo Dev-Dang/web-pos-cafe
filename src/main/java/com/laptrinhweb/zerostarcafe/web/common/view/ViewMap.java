@@ -57,6 +57,13 @@ public final class ViewMap {
         // Partials - Cart
         public static final View CART_PANEL = partial("cart/_cart-panel");
 
+        // Partials - Payment
+        public static final View PAYMENT_MODAL = partial("payment/_payment-modal");
+        public static final View PAYMENT_SUCCESS = partial("payment/_payment-success");
+
+        // Partials - Order History
+        public static final View ORDER_HISTORY_MODAL = partial("order/_order-history-modal");
+
         // Partials - Search
         public static final View SEARCH_SECTION = partial("search/_search-section");
 

@@ -21,6 +21,7 @@
         <hikari.version>5.0.1</hikari.version>
         <mysql.connector.version>8.2.0</mysql.connector.version>
         <jackson.version>2.17.2</jackson.version>
+        <jakarta-mail.version>2.0.2</jakarta-mail.version>
     </properties>
 
     <dependencies>
@@ -137,6 +138,13 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Jakarta Mail (SMTP email) -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>${jakarta-mail.version}</version>
         </dependency>
     </dependencies>
 

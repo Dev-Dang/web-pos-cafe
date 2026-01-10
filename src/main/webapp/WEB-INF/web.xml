@@ -15,6 +15,32 @@
         <param-value>form,message,general</param-value>
     </context-param>
 
+    <!--  SMTP Mail Config  -->
+    <context-param>
+        <param-name>SMTP_HOST</param-name>
+        <param-value>smtp-relay.brevo.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>SMTP_PORT</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>SMTP_USERNAME</param-name>
+        <param-value>8c031c001@smtp-brevo.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>SMTP_PASSWORD</param-name>
+        <param-value>bskEaz581uy2Tby</param-value>
+    </context-param>
+    <context-param>
+        <param-name>SMTP_FROM_EMAIL</param-name>
+        <param-value>trungvan.me@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>SMTP_FROM_NAME</param-name>
+        <param-value>Zero Star Cafe</param-value>
+    </context-param>
+
     <!--  Declare Filters  -->
     <filter>
         <filter-name>TransactionFilter</filter-name>

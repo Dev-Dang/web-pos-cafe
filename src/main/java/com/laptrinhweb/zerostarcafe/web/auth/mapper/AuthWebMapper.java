@@ -2,9 +2,11 @@ package com.laptrinhweb.zerostarcafe.web.auth.mapper;
 
 import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
+import com.laptrinhweb.zerostarcafe.domain.auth.dto.ForgotPasswordDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RegisterDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
+import com.laptrinhweb.zerostarcafe.domain.auth.dto.ResetPasswordDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthSession;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthToken;
@@ -43,6 +45,18 @@ public final class AuthWebMapper {
         String agreeTerms = request.getParameter("agreeTerms");
 
         return new RegisterDTO(email, password, agreeTerms);
+    }
+
+    public static ForgotPasswordDTO toForgotPasswordDTO(HttpServletRequest request) {
+        String email = request.getParameter("email");
+        return new ForgotPasswordDTO(email);
+    }
+
+    public static ResetPasswordDTO toResetPasswordDTO(HttpServletRequest request) {
+        String token = request.getParameter("token");
+        String password = request.getParameter("password");
+        String confirm = request.getParameter("confirmPassword");
+        return new ResetPasswordDTO(token, password, confirm);
     }
 
     public static RequestInfoDTO toReqInfoDTO(HttpServletRequest request) {

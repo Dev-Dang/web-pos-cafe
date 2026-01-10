@@ -11,6 +11,14 @@ import com.laptrinhweb.zerostarcafe.domain.cart.model.CartConstants;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartItem;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartItemOption;
 import com.laptrinhweb.zerostarcafe.domain.cart.utils.CartUtils;
+import com.laptrinhweb.zerostarcafe.domain.invoice.dao.InvoiceDAO;
+import com.laptrinhweb.zerostarcafe.domain.invoice.dao.InvoiceDAOImpl;
+import com.laptrinhweb.zerostarcafe.domain.invoice.model.Invoice;
+import com.laptrinhweb.zerostarcafe.domain.order.dao.OrderDAO;
+import com.laptrinhweb.zerostarcafe.domain.order.dao.OrderDAOImpl;
+import com.laptrinhweb.zerostarcafe.domain.order.model.Order;
+import com.laptrinhweb.zerostarcafe.domain.order.model.OrderItem;
+import com.laptrinhweb.zerostarcafe.domain.order.model.OrderItemOption;
 import com.laptrinhweb.zerostarcafe.domain.product.model.Product;
 import com.laptrinhweb.zerostarcafe.domain.product.service.ProductService;
 import lombok.AccessLevel;
@@ -18,6 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +48,8 @@ public final class CartService {
     private static final CartService INSTANCE = new CartService();
     private final CartDAO cartDAO = new CartDAOImpl();
     private final ProductService productService = ProductService.getInstance();
+    private final InvoiceDAO invoiceDAO = new InvoiceDAOImpl();
+    private final OrderDAO orderDAO = new OrderDAOImpl();
 
     public static CartService getInstance() {
         return INSTANCE;
@@ -125,6 +136,92 @@ public final class CartService {
     }
 
     /**
+     * Get cart item for editing.
+     * Returns CartItem with options if it belongs to the user's cart.
+     */
+    public CartItem getCartItemForEdit(@NonNull Long userId, @NonNull Long storeId,
+                                       @NonNull Long cartItemId) {
+        Cart cart = getExistingCart(userId, storeId);
+        if (cart == null || cart.getItems() == null) {
+            return null;
+        }
+
+        for (CartItem item : cart.getItems()) {
+            if (item.getId() == cartItemId) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Update cart item details (qty, note, options).
+     * Returns updated CartDTO.
+     */
+    public CartDTO updateCartItem(@NonNull Long userId, @NonNull Long storeId,
+                                  @NonNull Long cartItemId, @NonNull AddToCartDTO dto) {
+        Cart cart = getExistingCart(userId, storeId);
+        if (cart == null) {
+            throw new BusinessException("Cart not found");
+        }
+
+        CartItem currentItem = null;
+        for (CartItem item : cart.getItems()) {
+            if (item.getId() == cartItemId) {
+                currentItem = item;
+                break;
+            }
+        }
+
+        if (currentItem == null) {
+            throw new BusinessException("Cart item not found");
+        }
+
+        if (currentItem.getMenuItemId() != dto.getMenuItemId()) {
+            throw new BusinessException("Invalid cart item update");
+        }
+
+        Product product = productService.getActiveProductById(dto.getMenuItemId(), storeId);
+        if (product == null) {
+            throw new BusinessException("Product is not available");
+        }
+
+        CartItem updatedItem = CartMapper.toCartItem(product, dto);
+        updatedItem.setId(currentItem.getId());
+        updatedItem.setCartId(currentItem.getCartId());
+
+        CartItem existingItem = CartUtils.findExistingItemByHash(cart, updatedItem.getItemHash());
+        if (existingItem != null && existingItem.getId() != currentItem.getId()) {
+            int requestedQty = existingItem.getQty() + updatedItem.getQty();
+            int finalQty = Math.min(requestedQty, CartConstants.Validation.MAX_QUANTITY);
+            updateCartItemQuantity(existingItem.getId(), finalQty);
+
+            try {
+                cartDAO.deleteCartItem(currentItem.getId());
+            } catch (SQLException e) {
+                throw new AppException("Failed to remove merged cart item", e);
+            }
+        } else {
+            try {
+                cartDAO.updateCartItemDetails(updatedItem);
+                cartDAO.deleteCartItemOptions(currentItem.getId());
+
+                List<CartItemOption> options = CartMapper.toCartItemOptions(product, dto.getOptionValueIds());
+                for (CartItemOption option : options) {
+                    option.setCartItemId(currentItem.getId());
+                    cartDAO.saveCartItemOption(option);
+                }
+            } catch (SQLException e) {
+                throw new AppException("Failed to update cart item", e);
+            }
+        }
+
+        Cart updatedCart = getExistingCart(userId, storeId);
+        return CartMapper.toCartDTO(updatedCart);
+    }
+
+    /**
      * Remove item from cart.
      * Returns updated CartDTO.
      *
@@ -148,6 +245,78 @@ public final class CartService {
     }
 
     /**
+     * Clear all items from user's cart.
+     * Used after successful payment.
+     *
+     * @param userId  user ID from session
+     * @param storeId store ID from session
+     */
+    public void clearCart(@NonNull Long userId, @NonNull Long storeId) {
+        try {
+            Optional<Cart> cartOpt = cartDAO.findByUserIdAndStoreId(userId, storeId);
+
+            if (cartOpt.isPresent()) {
+                Cart cart = cartOpt.get();
+                cartDAO.clearCart(cart.getId());
+            }
+
+        } catch (SQLException e) {
+            throw new AppException("Failed to clear cart", e);
+        }
+    }
+
+    /**
+     * Clone cart items from an invoice's order.
+     * Clears current cart then adds items from the invoice order.
+     */
+    public CartDTO cloneCartFromInvoice(@NonNull Long userId, @NonNull Long storeId,
+                                        @NonNull Long invoiceId) {
+        try {
+            Optional<Invoice> invoiceOpt = invoiceDAO.findById(invoiceId);
+            if (invoiceOpt.isEmpty()) {
+                throw new BusinessException("Invoice not found");
+            }
+
+            Invoice invoice = invoiceOpt.get();
+            Optional<Order> orderOpt = orderDAO.findById(invoice.getOrderId());
+            if (orderOpt.isEmpty()) {
+                throw new BusinessException("Order not found");
+            }
+
+            Order order = orderOpt.get();
+            Cart cart = getOrCreateCart(userId, storeId);
+            cartDAO.clearCart(cart.getId());
+
+            List<OrderItem> items = order.getItems();
+            if (items != null) {
+                for (OrderItem item : items) {
+                    AddToCartDTO dto = new AddToCartDTO();
+                    dto.setMenuItemId(item.getMenuItemId());
+                    dto.setQty(item.getQty());
+                    dto.setNote(item.getNote());
+
+                    List<Long> optionValueIds = new ArrayList<>();
+                    List<OrderItemOption> options = item.getOptions();
+                    if (options != null) {
+                        for (OrderItemOption option : options) {
+                            optionValueIds.add(option.getOptionValueId());
+                        }
+                    }
+
+                    dto.setOptionValueIds(optionValueIds);
+                    addToCart(userId, storeId, dto);
+                }
+            }
+
+            Cart refreshedCart = getOrCreateCart(userId, storeId);
+            return CartMapper.toCartDTO(refreshedCart);
+
+        } catch (SQLException e) {
+            throw new AppException("Failed to clone cart from invoice: " + invoiceId, e);
+        }
+    }
+
+    /**
      * Get current cart for user.
      * Returns CartDTO or null if no cart exists.
      *
@@ -164,6 +333,22 @@ public final class CartService {
 
             return CartMapper.toCartDTO(cartOpt.get());
 
+        } catch (SQLException e) {
+            throw new AppException("Failed to get cart", e);
+        }
+    }
+
+    /**
+     * Get current cart for user.
+     * Returns Cart model or null if no cart exists.
+     */
+    private Cart getExistingCart(long userId, long storeId) {
+        try {
+            Optional<Cart> cartOpt = cartDAO.findByUserIdAndStoreId(userId, storeId);
+            if (cartOpt.isPresent()) {
+                return cartOpt.get();
+            }
+            return null;
         } catch (SQLException e) {
             throw new AppException("Failed to get cart", e);
         }

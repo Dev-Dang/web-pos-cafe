@@ -77,6 +77,14 @@ public interface CartDAO {
     void saveCartItemOption(CartItemOption cartItemOption) throws SQLException;
 
     /**
+     * Updates full cart item details (qty, snapshots, note, hash).
+     *
+     * @param cartItem the cart item to update
+     * @throws SQLException if database error occurs
+     */
+    void updateCartItemDetails(CartItem cartItem) throws SQLException;
+
+    /**
      * Updates the quantity of a cart item.
      *
      * @param cartItemId the cart item ID
@@ -84,6 +92,14 @@ public interface CartDAO {
      * @throws SQLException if database error occurs
      */
     void updateCartItemQuantity(long cartItemId, int quantity) throws SQLException;
+
+    /**
+     * Deletes all options for a cart item.
+     *
+     * @param cartItemId the cart item ID
+     * @throws SQLException if database error occurs
+     */
+    void deleteCartItemOptions(long cartItemId) throws SQLException;
 
     /**
      * Deletes a cart item and its options.

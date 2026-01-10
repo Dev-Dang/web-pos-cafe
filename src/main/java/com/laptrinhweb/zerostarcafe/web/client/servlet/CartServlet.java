@@ -4,10 +4,13 @@ import com.laptrinhweb.zerostarcafe.domain.cart.dto.AddToCartDTO;
 import com.laptrinhweb.zerostarcafe.domain.cart.dto.CartDTO;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartAction;
 import com.laptrinhweb.zerostarcafe.domain.cart.model.CartConstants;
+import com.laptrinhweb.zerostarcafe.domain.cart.model.CartItem;
 import com.laptrinhweb.zerostarcafe.domain.cart.service.CartService;
 import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.LoyaltyPointsDTO;
 import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.RedeemCalcDTO;
 import com.laptrinhweb.zerostarcafe.domain.loyalty.service.LoyaltyService;
+import com.laptrinhweb.zerostarcafe.domain.product.dto.ProductDetailDTO;
+import com.laptrinhweb.zerostarcafe.domain.product.service.ProductService;
 import com.laptrinhweb.zerostarcafe.web.client.mapper.CartWebMapper;
 import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.response.Message;
@@ -24,12 +27,39 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "CartServlet", urlPatterns = {RouteMap.CART + "/*"})
 public class CartServlet extends HttpServlet {
 
     private final CartService cartService = CartService.getInstance();
     private final LoyaltyService loyaltyService = LoyaltyService.getInstance();
+    private final ProductService productService = ProductService.getInstance();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        Long userId = RequestUtils.getUserIdFromSession(req);
+        Long storeId = RequestUtils.getStoreIdFromSession(req);
+
+        if (userId == null || storeId == null) {
+            Message.warn(req, "general.client.requiredLogin");
+            AppRoute.redirect(RouteMap.HOME, req, resp);
+            return;
+        }
+
+        String requestPath = req.getPathInfo();
+        CartAction action = CartAction.fromPath(requestPath);
+
+        if (action == CartAction.EDIT) {
+            handleEditCartItem(storeId, userId, req, resp);
+            return;
+        }
+
+        Message.warn(req, "general.error.badRequest");
+        AppRoute.redirect(RouteMap.HOME, req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -52,6 +82,7 @@ public class CartServlet extends HttpServlet {
         switch (action) {
             case ADD -> handleAddToCart(storeId, userId, req, resp);
             case UPDATE -> handleUpdateQuantity(storeId, userId, req, resp);
+            case UPDATE_ITEM -> handleUpdateItem(storeId, userId, req, resp);
             case REMOVE -> handleRemoveItem(storeId, userId, req, resp);
             default -> {
                 Message.warn(req, "general.error.badRequest");
@@ -133,6 +164,79 @@ public class CartServlet extends HttpServlet {
         recalculateLoyaltyRedemption(userId, cartDTO, req);
 
         // Return cart fragment for client
+        req.setAttribute(WebConstants.Cart.CART, cartDTO);
+        View.render(ViewMap.Client.CART_PANEL, req, resp);
+    }
+
+    /**
+     * Handle GET /cart/edit - returns product modal fragment with selected options.
+     */
+    private void handleEditCartItem(Long storeId, Long userId,
+                                    HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
+
+        Long cartItemId = RequestUtils.getLongParam(req, WebConstants.Cart.CART_ITEM_ID);
+        if (cartItemId == null) {
+            Message.warn(req, "general.error.badRequest");
+            AppRoute.redirect(RouteMap.HOME, req, resp);
+            return;
+        }
+
+        CartItem cartItem = cartService.getCartItemForEdit(userId, storeId, cartItemId);
+        if (cartItem == null) {
+            Message.warn(req, "general.error.badRequest");
+            AppRoute.redirect(RouteMap.HOME, req, resp);
+            return;
+        }
+
+        ProductDetailDTO productDetail = productService.getProductDetail(cartItem.getMenuItemId(), storeId);
+        if (productDetail == null || !productDetail.isAvailable()) {
+            Message.warn(req, "general.error.badRequest");
+            AppRoute.redirect(RouteMap.HOME, req, resp);
+            return;
+        }
+
+        StringBuilder optionCsv = new StringBuilder();
+        List<com.laptrinhweb.zerostarcafe.domain.cart.model.CartItemOption> options = cartItem.getOptions();
+        if (options != null) {
+            for (int i = 0; i < options.size(); i++) {
+                if (i > 0) {
+                    optionCsv.append(",");
+                }
+                optionCsv.append(options.get(i).getOptionValueId());
+            }
+        }
+
+        req.setAttribute(WebConstants.Attribute.PRODUCT_DETAIL, productDetail);
+        req.setAttribute("editMode", true);
+        req.setAttribute("cartItemId", cartItem.getId());
+        req.setAttribute("selectedQty", cartItem.getQty());
+        req.setAttribute("selectedNote", cartItem.getNote());
+        req.setAttribute("selectedOptionValueIdsCsv", optionCsv.toString());
+
+        View.render(ViewMap.Client.PRODUCT_MODAL, req, resp);
+    }
+
+    /**
+     * Handle POST /cart/update-item - returns cart fragment.
+     */
+    private void handleUpdateItem(Long storeId, Long userId,
+                                  HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
+
+        Long cartItemId = RequestUtils.getLongParam(req, WebConstants.Cart.CART_ITEM_ID);
+        AddToCartDTO dto = CartWebMapper.toAddToCartDTO(req);
+
+        if (cartItemId == null || dto == null || !dto.isValid()) {
+            Message.warn(req, "general.error.badRequest");
+            AppRoute.redirect(RouteMap.HOME, req, resp);
+            return;
+        }
+
+        CartDTO cartDTO = cartService.updateCartItem(userId, storeId, cartItemId, dto);
+
+        recalculateLoyaltyRedemption(userId, cartDTO, req);
+
         req.setAttribute(WebConstants.Cart.CART, cartDTO);
         View.render(ViewMap.Client.CART_PANEL, req, resp);
     }

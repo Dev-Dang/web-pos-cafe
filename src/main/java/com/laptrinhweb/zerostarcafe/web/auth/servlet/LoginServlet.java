@@ -14,6 +14,7 @@ import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
 import com.laptrinhweb.zerostarcafe.web.common.response.Message;
+import com.laptrinhweb.zerostarcafe.web.common.response.RespContext;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
 import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
@@ -38,7 +39,7 @@ import java.util.Map;
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
-@WebServlet(name = "LoginServlet", urlPatterns = "/auth/login")
+@WebServlet(name = "LoginServlet", urlPatterns = {RouteMap.LOGIN})
 public class LoginServlet extends HttpServlet {
 
     private AuthSessionManager sessionManager;
@@ -57,7 +58,14 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        View.render(ViewMap.Client.LOGIN_FORM, req, resp);
+        // Set auto-open modal flag in response context
+        RespContext.from(req).setData(
+                WebConstants.Flag.RE_OPEN_MODAL,
+                WebConstants.Auth.LOGIN_MODAL
+        );
+
+        // Forward to home page to render full page with modal
+        AppRoute.forward(RouteMap.HOME, req, resp);
     }
 
     @Override

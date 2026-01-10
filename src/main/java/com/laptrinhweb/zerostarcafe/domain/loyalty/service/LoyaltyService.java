@@ -145,17 +145,19 @@ public final class LoyaltyService {
     /**
      * Records a points redemption transaction and updates user's balance.
      *
-     * @param userId     the user ID
-     * @param storeId    the store ID
-     * @param pointsUsed the points to redeem
-     * @param paymentId  the payment ID (optional)
+     * @param userId        the user ID
+     * @param storeId       the store ID
+     * @param paymentId     the payment ID
+     * @param pointsUsed    the points to redeem
+     * @param discountValue the VND value of discount applied
      * @return true if redemption successful
      */
     public boolean redeemPoints(
             @NonNull Long userId,
             @NonNull Long storeId,
+            Long paymentId,
             int pointsUsed,
-            Long paymentId) {
+            int discountValue) {
 
         if (pointsUsed <= 0) {
             throw new IllegalArgumentException("Points to redeem must be positive");
@@ -185,21 +187,22 @@ public final class LoyaltyService {
                 throw new AppException("Failed to update points balance for userId=" + userId);
             }
 
-            // Record transaction
+            // Record transaction with discount value in reason
             LoyaltyTransaction transaction = new LoyaltyTransaction();
             transaction.setUserId(userId);
             transaction.setStoreId(storeId);
             transaction.setType(TransactionType.REDEEM);
-            transaction.setPoints(-pointsUsed); // Negative for redemption
+            transaction.setPoints(-pointsUsed);
             transaction.setPaymentId(paymentId);
-            transaction.setReason("Redeemed for cart discount");
+            transaction.setReason(String.format("Redeemed %d points for %,d VND discount",
+                    pointsUsed, discountValue));
             transaction.setOccurredAt(LocalDateTime.now());
 
             loyaltyDAO.insertTransaction(transaction);
 
             LoggerUtil.info(LoyaltyService.class,
-                    String.format("Redeemed %d points for userId=%d, new balance=%d",
-                            pointsUsed, userId, newBalance));
+                    String.format("Redeemed %d points (-%,d VND) for userId=%d, new balance=%d",
+                            pointsUsed, discountValue, userId, newBalance));
 
             return true;
 

@@ -179,6 +179,29 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
+    public void updateCartItemDetails(CartItem cartItem) throws SQLException {
+        String sql = "UPDATE cart_items SET menu_item_id = ?, qty = ?, unit_price_snapshot = ?, " +
+                "options_price_snapshot = ?, note = ?, item_hash = ?, item_name_snapshot = ?, " +
+                "image_url_snapshot = ?, updated_at = NOW() WHERE id = ?";
+
+        Connection conn = DBContext.getOrCreate();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, cartItem.getMenuItemId());
+            ps.setInt(2, cartItem.getQty());
+            ps.setInt(3, cartItem.getUnitPriceSnapshot());
+            ps.setInt(4, cartItem.getOptionsPriceSnapshot());
+            ps.setString(5, cartItem.getNote());
+            ps.setString(6, cartItem.getItemHash());
+            ps.setString(7, cartItem.getItemNameSnapshot());
+            ps.setString(8, cartItem.getImageUrlSnapshot());
+            ps.setLong(9, cartItem.getId());
+
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
     public void updateCartItemQuantity(long cartItemId, int quantity) throws SQLException {
         String sql = "UPDATE cart_items SET qty = ?, updated_at = NOW() WHERE id = ?";
 
@@ -188,6 +211,18 @@ public class CartDAOImpl implements CartDAO {
             ps.setInt(1, quantity);
             ps.setLong(2, cartItemId);
 
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public void deleteCartItemOptions(long cartItemId) throws SQLException {
+        String sql = "DELETE FROM cart_item_options WHERE cart_item_id = ?";
+
+        Connection conn = DBContext.getOrCreate();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, cartItemId);
             ps.executeUpdate();
         }
     }

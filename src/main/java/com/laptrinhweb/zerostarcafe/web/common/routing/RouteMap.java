@@ -31,7 +31,11 @@ public final class RouteMap {
     public static final String CART_PREVIEW = "/cart/preview";
     public static final String CART_MERGE = "/cart/merge";
     public static final String CART_SIDEBAR = "/cart/sidebar";
+    public static final String PAYMENT_SELECT = "/payment/select-method";
+    public static final String PAYMENT_PROCESS_CASH = "/payment/process-cash";
+    public static final String PAYMENT_SUCCESS = "/payment/success";
     public static final String CHECKOUT = "/checkout";
+    public static final String USER_ORDERS = "/user/orders";
 
     // ============================================
     // API ROUTES

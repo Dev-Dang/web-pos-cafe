@@ -14,6 +14,13 @@
 <c:set var="optionGroupCount" value="${fn:length(productDetail.options)}"/>
 <c:set var="layoutType" value="${optionGroupCount <= 1 ? 'compact' : 'full'}"/>
 <c:set var="ctxPath" value="${pageContext.request.contextPath}"/>
+<c:set var="isEditMode" value="${requestScope.editMode == true}" scope="request"/>
+<c:set var="modalTitleKey"
+       value="${isEditMode ? 'general.product.modal.updateCart' : 'general.product.modal.addToCart'}"
+       scope="request"/>
+<c:set var="formAction"
+       value="${isEditMode ? ctxPath.concat('/cart/update-item') : ctxPath.concat('/cart/add')}"
+       scope="request"/>
 
 <div id="product-detail-modal"
      class="product-modal"
@@ -25,7 +32,7 @@
                 <button type="button" class="product-modal__mobile-header__back" aria-label="Close">
                     <i class="fi fi-rr-angle-small-left"></i>
                 </button>
-                <h3 class="product-modal__mobile-header__title">${i18n.trans("general.product.modal.addToCart")}</h3>
+                <h3 class="product-modal__mobile-header__title">${i18n.trans(modalTitleKey)}</h3>
                 <div class="product-modal__mobile-header__spacer"></div>
             </div>
 
@@ -36,7 +43,7 @@
 
             <%-- Hidden form for cart submission --%>
             <form id="add-to-cart-form"
-                  action="${ctxPath}/cart/add"
+                  action="${formAction}"
                   method="POST"
                   up-submit
                   up-layer="root"
@@ -49,6 +56,13 @@
                 <input type="hidden" name="menuItemId" value="${productDetail.id}">
                 <input type="hidden" name="qty" value="1" data-form-quantity>
                 <input type="hidden" name="note" value="" data-form-note>
+                <c:if test="${isEditMode}">
+                    <input type="hidden" name="cartItemId" value="${cartItemId}">
+                    <input type="hidden" data-edit-mode value="true">
+                    <input type="hidden" data-edit-qty value="${selectedQty}">
+                    <input type="hidden" data-edit-note value="${fn:escapeXml(selectedNote)}">
+                    <input type="hidden" data-edit-options value="${selectedOptionValueIdsCsv}">
+                </c:if>
                 <%-- Option values will be added dynamically via JS as multiple inputs with name="optionValueIds" --%>
 
                 <%-- Dynamic layout based on option group count --%>

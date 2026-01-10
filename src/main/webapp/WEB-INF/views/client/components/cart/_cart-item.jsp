@@ -34,6 +34,18 @@
                         <i class="fi fi-rr-comment-alt icon-base"></i>
                     </div>
                 </c:if>
+                <button type="button"
+                        class="cart-item__edit-btn"
+                        up-follow
+                        up-target="#product-detail-modal"
+                        up-href="${pageContext.request.contextPath}/cart/edit?cartItemId=${cartItem.id}"
+                        up-layer="new modal"
+                        up-size="large"
+                        up-animation="fade-in"
+                        up-cache="false"
+                        aria-label="${i18n.trans('general.cart.edit')}">
+                    <i class="fi fi-rr-pencil icon-base"></i>
+                </button>
             </div>
 
             <!-- Options & Notes -->

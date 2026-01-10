@@ -76,6 +76,11 @@ public final class WebConstants {
     public static final class Auth {
 
         public static final String LOGIN_MODAL = "loginModal";
+        public static final String REGISTER_MODAL = "registerModal";
+        public static final String FORGOT_PASSWORD_MODAL = "forgotPasswordModal";
+        public static final String RESET_PASSWORD_MODAL = "resetPasswordModal";
+        public static final String RESET_PASSWORD_TOKEN = "resetPasswordToken";
+        public static final String TOKEN = "token";
     }
 
     // ============================================
@@ -102,6 +107,16 @@ public final class WebConstants {
         public static final String POINTS = "loyaltyPoints";
         public static final String REDEMPTION = "loyaltyRedemption";
         public static final String APPLY_POINTS = "applyLoyaltyPoints";
+    }
+
+    // ============================================
+    // PAYMENT
+    // ============================================
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static final class Payment {
+
+        public static final String PAYMENT_RESULT = "paymentResult";
+        public static final String PAYMENT_METHOD = "paymentMethod";
     }
 
     // ============================================

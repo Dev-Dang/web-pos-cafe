@@ -75,4 +75,43 @@ public final class AuthValidator {
 
         return ValidationResult.merge(errors);
     }
+
+    /**
+     * Validate forgot-password email field.
+     */
+    public static ValidationResult forgotPasswordCheck(String email) {
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        String emailErr = Validator.field("email", email)
+                .notEmpty()
+                .email()
+                .maxLength(100)
+                .getError();
+        if (emailErr != null) errors.put("email", emailErr);
+
+        return ValidationResult.merge(errors);
+    }
+
+    /**
+     * Validate reset-password fields.
+     */
+    public static ValidationResult resetPasswordCheck(String password, String confirmPassword) {
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        String passErr = Validator.field("password", password)
+                .notEmpty()
+                .passwordBasic()
+                .minLength(6)
+                .maxLength(32)
+                .getError();
+        if (passErr != null) errors.put("password", passErr);
+
+        String confirmErr = Validator.field("confirmPassword", confirmPassword)
+                .notEmpty()
+                .equalTo(password)
+                .getError();
+        if (confirmErr != null) errors.put("confirmPassword", confirmErr);
+
+        return ValidationResult.merge(errors);
+    }
 }
