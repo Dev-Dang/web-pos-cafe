@@ -10,8 +10,8 @@ package com.laptrinhweb.zerostarcafe.core.security;
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 16/11/2025
+ * @version 1.0.1
+ * @lastModified 29/11/2025
  * @since 1.0.0
  */
 public final class SecurityKeys {
@@ -19,12 +19,25 @@ public final class SecurityKeys {
     private SecurityKeys() {
     }
 
-    public static final String COOKIE_AUTH_SESSION = "auth_token";
-    public static final String COOKIE_DEVICE_ID = "device_id";
+    // AuthToken keys
+    public static final String TOKEN_AUTH = "x-auth";
+    public static final String TOKEN_DEVICE_ID = "x-auth-device";
+
+    // Cookie keys
+    public static final String AUTH_COOKIE_PREFIX = "x-auth";
+
+    // Session attribute keys
     public static final String SESSION_AUTH_USER = "authUser";
-    public static final String SESSION_EXPIRED_AT = "expiredAt";
-    public static final String SESSION_LAST_ROTATED = "lastRotatedAt";
-    public static final String SESSION_DEVICE_ID = "deviceId";
-    public static final String SESSION_AUTH_TOKEN = "authToken";
-    public static final String CTX_AUTH_SESSION_SERVICE = "authSessionService";
+    public static final String SESSION_AUTH_TOKENS = "authTokens";
+    public static final String SESSION_AUTH_SESSION = "authSessionInfo";
+
+    // Servlet context keys
+    public static final String CTX_AUTH_SESSION_MANAGER = "authSessionManager";
+
+    // Session durations (in minutes)
+    public static final int REFRESH_MINUTES = 15;
+    public static final int SUPER_ADMIN_SESSION_TTL = 30;
+    public static final int MANAGER_SESSION_TTL = 240;      // 4 hours
+    public static final int STAFF_SESSION_TTL = -1;         // end of day (special case)
+    public static final int DEFAULT_SESSION_TTL = 10080;    // 7 days
 }

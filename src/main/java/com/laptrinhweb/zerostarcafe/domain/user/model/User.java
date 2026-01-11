@@ -1,5 +1,10 @@
 package com.laptrinhweb.zerostarcafe.domain.user.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 /**
@@ -10,11 +15,16 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.0.1
- * @lastModified 12/11/2025
+ * @version 1.0.2
+ * @lastModified 16/12/2025
  * @since 1.0.0
  */
-public final class User {
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class User {
     private Long id;
     private String email;
     private String username;
@@ -26,11 +36,6 @@ public final class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // ===== Constructors ====
-
-    public User() {
-    }
-
     public User(String email, String username, String passwordHash) {
         this.email = email;
         this.username = username;
@@ -39,87 +44,5 @@ public final class User {
         this.isSuperAdmin = false;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-    }
-
-    // ===== Getters and Setters ====
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getOauthProvider() {
-        return oauthProvider;
-    }
-
-    public void setOauthProvider(String oauthProvider) {
-        this.oauthProvider = oauthProvider;
-    }
-
-    public String getOauthId() {
-        return oauthId;
-    }
-
-    public void setOauthId(String oauthId) {
-        this.oauthId = oauthId;
-    }
-
-    public UserStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(UserStatus status) {
-        this.status = status;
-    }
-
-    public boolean isSuperAdmin() {
-        return isSuperAdmin;
-    }
-
-    public void setSuperAdmin(boolean superAdmin) {
-        this.isSuperAdmin = superAdmin;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

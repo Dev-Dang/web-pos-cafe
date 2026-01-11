@@ -4,57 +4,23 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <h2>Description:</h2>
  * <p>
- * Utility for managing secure HTTP Cookies.
- * Provides helpers to create, get, and clear cookies
- * with secure defaults (HttpOnly, Secure, Path=/, SameSite=Strict).
+ * Utility for retrieving and clearing HTTP Cookies.
  * </p>
  *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * // Create a secure cookie
- * Cookie cookie = CookieUtil.create("myCookie", "value", 3600);
- * response.addCookie(cookie);
- * }
- * </pre>
- *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 16/11/2025
+ * @version 2.0.0
+ * @lastModified 12/12/2025
  * @since 1.0.0
  */
 public final class CookieUtil {
 
     private CookieUtil() {
-    }
-
-    /**
-     * Creates a secure {@link Cookie} for authentication purposes.
-     *
-     * @param name          the cookie name
-     * @param value         the cookie value
-     * @param maxAgeSeconds the time to live (TTL) in seconds.
-     *                      If <= 0, the cookie is a session cookie.
-     * @return {@link Cookie} object
-     */
-    public static Cookie create(String name, String value, int maxAgeSeconds) {
-        Cookie cookie = new Cookie(name, value);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setAttribute("SameSite", "Strict");
-
-        if (maxAgeSeconds > 0) {
-            cookie.setMaxAge(maxAgeSeconds);
-        } else {
-            // session cookie: exists until the browser is closed
-            cookie.setMaxAge(-1);
-        }
-
-        return cookie;
     }
 
     /**
@@ -72,30 +38,54 @@ public final class CookieUtil {
 
         for (Cookie c : cookies) {
             if (name.equals(c.getName())) {
-                return c.getValue();
+                String value = c.getValue();
+                if (value == null || value.isBlank()) {
+                    return null;
+                }
+                return value;
             }
         }
         return null;
     }
 
     /**
+     * Returns all cookies from the request as an immutable Map.
+     *
+     * @param request the current HttpServletRequest
+     * @return map of cookie name -> cookie value (never null, may be empty)
+     */
+    public static Map<String, String> getAll(HttpServletRequest request) {
+        Map<String, String> map = new HashMap<>();
+
+        if (request == null || request.getCookies() == null) {
+            return map;
+        }
+
+        for (Cookie c : request.getCookies()) {
+            String name = c.getName();
+            String value = c.getValue();
+
+            if (name != null && value != null && !value.isBlank()) {
+                map.put(name, value);
+            }
+        }
+
+        return Map.copyOf(map);
+    }
+
+    /**
      * Clears a cookie by overwriting it with empty value
      * and {@code maxAge = 0} (expires immediately)
      *
-     * @param name the name of the cookie to clear
-     * @param resp the {@link HttpServletResponse} to add the "clearing" cookie to
+     * @param name     the name of the cookie to clear
+     * @param response the {@link HttpServletResponse} to add the "clearing" cookie to
      */
-    public static void clear(String name, HttpServletResponse resp) {
-        if (name == null || resp == null) {
+    public static void clear(String name, HttpServletResponse response) {
+        if (name == null || response == null) {
             return;
         }
 
-        Cookie cookie = new Cookie(name, "");
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setMaxAge(0);
-
-        resp.addCookie(cookie);
+        Cookie cookie = AppCookie.strict(name, "", 0);
+        response.addCookie(cookie);
     }
 }

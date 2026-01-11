@@ -8,18 +8,25 @@ package com.laptrinhweb.zerostarcafe.domain.auth.model;
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 12/11/2025
+ * @version 1.0.1
+ * @lastModified 22/11/2025
  * @since 1.0.0
  */
 public enum AuthStatus {
-    LOGIN_SUCCESS,
+
+    // Login / Register
     REGISTER_SUCCESS,
-    SERVER_ERROR,
+    REGISTER_FAILED,
+    LOGIN_SUCCESS,
+    LOGIN_FAILED,
     EMAIL_EXISTS,
     USERNAME_EXISTS,
-    REGISTER_FAILED,
-    ACCOUNT_NOT_FOUND,
     INVALID_CREDENTIALS,
-    ACCOUNT_INACTIVE
+
+    // Auth session state
+    SESSION_NOT_FOUND,
+    SESSION_REUSED,
+    SESSION_ROTATED,
+    SESSION_RESTORED,
+    SESSION_INVALID
 }

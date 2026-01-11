@@ -26,13 +26,13 @@ import java.util.Optional;
  * UserStoreRoleDAO dao = new UserStoreRoleDAOImpl(connection);
  *
  * // Assign role to user at a store
- * dao.save(new UserStoreRole(userId, storeId, "staff"));
+ * dao.save(new UserStoreRole(id, storeId, "staff"));
  *
  * // Load all roles for user
- * List<UserStoreRole> roles = dao.findByUserId(userId);
+ * List<UserStoreRole> roles = dao.findByUserId(id);
  *
  * // Delete a specific assignment
- * dao.delete(userId, storeId);
+ * dao.delete(id, storeId);
  * }</pre>
  *
  * @author Dang Van Trung

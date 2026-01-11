@@ -18,10 +18,14 @@
 
     <%-- Flat icon --%>
     <link rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link rel="stylesheet"
           href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"/>
 
     <%-- Style --%>
-    <link href="assets/client/styles/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/shared/styles/base.css"/>
+    <link rel="stylesheet" href="assets/client/styles/app.css"/>
 </head>
 <body class="scroll-hidden">
     <%-- Including the header component --%>
@@ -50,5 +54,6 @@
     </script>
     <script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="assets/shared/js/base.js"></script>
+    <script type="module" src="assets/client/js/main.js"></script>
 </body>
 </html>

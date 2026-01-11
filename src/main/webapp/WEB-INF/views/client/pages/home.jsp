@@ -80,76 +80,16 @@
 
                     <div class="category-container">
                         <ul class="category-list">
-                            <li class="category-chip active">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
-                            <li class="category-chip">
-                                <img
-                                        src="assets/client/img/category/coffee.png"
-                                        alt="Cà phê"
-                                        class="category-image"/>
-                                <span class="category-name">Cà phê</span>
-                            </li>
+                            <c:forEach items="${categories}" var="category">
+                                <li class="category-chip">
+                                    <img src="${category.iconUrl}"
+                                         alt="${category.name}"
+                                         class="category-image"/>
+                                    <span class="category-name">
+                                            ${category.name}
+                                    </span>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
 
@@ -165,7 +105,7 @@
                         <%-- Product card --%>
                         <div class="card" data-bs-toggle="modal" data-bs-target="#productDetailModal">
                             <img
-                                    src="./assets/client/img/product/soda-dao.png"
+                                    src="assets/client/img/product/soda-dao.png"
                                     class="card-img-top"
                                     alt="Soda Đào"/>
                             <div class="card-body">

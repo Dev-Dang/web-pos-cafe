@@ -1,5 +1,8 @@
 package com.laptrinhweb.zerostarcafe.domain.auth.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * <h2>Description:</h2>
  * <p>
@@ -15,15 +18,17 @@ package com.laptrinhweb.zerostarcafe.domain.auth.model;
  * }</pre>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 12/11/2025
+ * @version 1.0.1
+ * @lastModified 14/12/2025
  * @since 1.0.0
  */
-public record AuthResult<S, T>(
-        boolean success,
-        S status,
-        T data
-) {
+
+@Getter
+@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
+public final class AuthResult<S, T> {
+    private final boolean success;
+    private final S status;
+    private final T data;
 
     // Creates a successful result with data.
     public static <S, T> AuthResult<S, T> ok(S status, T data) {

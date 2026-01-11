@@ -203,9 +203,9 @@ Used for:
 ### 4. AuthTokenService (Persistent Login)
 
 - Generates long-lived tokens (“auth_token”)
-- Validates token from cookies
+- Validates authToken from cookies
 - Restores login without password
-- Creates a new session if token is valid
+- Creates a new session if authToken is valid
 
 ### 5. AuthSessionListener (App Startup)
 

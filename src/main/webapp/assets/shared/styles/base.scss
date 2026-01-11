@@ -1,5 +1,3 @@
-@import "admin/admin";
-
 @import "base/global";
 @import "../bootstrap/scss/bootstrap.scss";
 
@@ -7,12 +5,7 @@
 @import "base/utilities";
 
 @import "components/button";
-@import "components/dropdown";
-@import "components/form";
 @import "components/toast";
 
 @import "layout/header";
 @import "layout/footer";
-
-@import "pages/menu";
-

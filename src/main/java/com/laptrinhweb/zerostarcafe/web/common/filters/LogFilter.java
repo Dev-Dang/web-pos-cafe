@@ -1,6 +1,7 @@
 package com.laptrinhweb.zerostarcafe.web.common.filters;
 
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
+import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,33 +13,32 @@ import java.io.IOException;
  * Logs each dynamic HTTP request with method, URI, status, and response time.
  *
  * @author Dang Van Trung
- * @version 1.0.1
- * @lastModified 16/11/2025
+ * @version 1.0.2
+ * @lastModified 23/11/2025
  * @since 1.0.0
  */
 @WebFilter(filterName = "LogFilter", urlPatterns = "/*")
 public class LogFilter implements Filter {
 
-    private static final String STATIC_REGEX =
-            ".*\\.(css|js|png|jpg|jpeg|gif|svg|map|scss|webp|ico|woff|woff2|ttf)$";
-
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res,
+    public void doFilter(ServletRequest req, ServletResponse resp,
                          FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) res;
+        HttpServletResponse response = (HttpServletResponse) resp;
 
         String uri = request.getRequestURI();
         long start = System.currentTimeMillis();
 
-        // Ignore static files for cleaner logs
-        if (uri.matches(STATIC_REGEX)) {
-            chain.doFilter(req, res);
+        // Skip static file
+        String path = uri.substring(request.getContextPath().length());
+
+        if (PathUtil.isStatic(path)) {
+            chain.doFilter(req, resp);
             return;
         }
 
-        chain.doFilter(req, res);
+        chain.doFilter(req, resp);
 
         long duration = System.currentTimeMillis() - start;
 

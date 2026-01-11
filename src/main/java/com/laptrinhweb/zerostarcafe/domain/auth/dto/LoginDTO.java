@@ -2,6 +2,8 @@ package com.laptrinhweb.zerostarcafe.domain.auth.dto;
 
 import com.laptrinhweb.zerostarcafe.core.validation.ValidationResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthValidator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Map;
 
@@ -13,14 +15,16 @@ import java.util.Map;
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 12/11/2025
+ * @version 1.0.1
+ * @lastModified 13/12/2025
  * @since 1.0.0
  */
-public record LoginDTO(
-        String username,
-        String password
-) {
+
+@AllArgsConstructor
+@Getter
+public final class LoginDTO {
+    private final String username;
+    private final String password;
 
     public Map<String, String> formState() {
         return Map.of("loginUsername", username);

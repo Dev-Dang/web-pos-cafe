@@ -16,8 +16,8 @@ import java.util.Optional;
  * </p>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 11/11/2025
+ * @version 1.0.1
+ * @lastModified 16/12/2025
  * @since 1.0.0
  */
 public class UserDAOImpl implements UserDAO {
@@ -32,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
     // ==========================================================
 
     @Override
-    public boolean save(User user) throws SQLException {
+    public User save(User user) throws SQLException {
         if (user.getId() == null) {
             // INSERT branch (new record)
             String sql = """
@@ -47,13 +47,22 @@ public class UserDAOImpl implements UserDAO {
                 ps.setBoolean(5, user.isSuperAdmin());
 
                 int affected = ps.executeUpdate();
-                if (affected == 0) return false;
+                if (affected != 1)
+                    throw new SQLException(
+                            "Inserting new user failed, rows affected=" + affected);
 
                 // Retrieve generated ID
+                Long generatedId = null;
                 try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) user.setId(rs.getLong(1));
+                    if (rs.next())
+                        generatedId = rs.getLong(1);
                 }
-                return true;
+
+                if (generatedId != null && generatedId > 0) {
+                    user.setId(generatedId);
+                    return user;
+                } else
+                    throw new SQLException("Failed to retrieve generated ID");
             }
         } else {
             // UPDATE branch (existing record)
@@ -69,7 +78,14 @@ public class UserDAOImpl implements UserDAO {
                 ps.setString(4, user.getStatus().name());
                 ps.setBoolean(5, user.isSuperAdmin());
                 ps.setLong(6, user.getId());
-                return ps.executeUpdate() > 0;
+
+                int affected = ps.executeUpdate();
+                if (affected != 1)
+                    throw new SQLException(
+                            "Update user record failed, rows affected=" + affected
+                    );
+
+                return user;
             }
         }
     }

@@ -26,13 +26,53 @@
                 <%-- Navigation --%>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav w-100 justify-content-md-center align-items-md-center">
-                        <li class="nav-item ms-md-auto">
-                            <a class="nav-link active" aria-current="page" href="#">
-                                ${i18n.trans("general.menu")}
+
+                        <%-- Store select --%>
+                        <li class="nav-item ms-md-auto dropdown store-dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <div class="store-tool d-inline-flex align-items-center">
+                                    <i class="fi fi-rr-marker icon-base"></i>
+                                    <div class="store-pickup d-inline-flex flex-column me-4">
+                                        <p class="store-name">${currentStore != null ? currentStore.name : i18n.trans("general.selectStore")}</p>
+                                        <span class="store-address text-muted text-sm-start">${currentStore.address}</span>
+                                    </div>
+                                    <i class="fi fi-rr-angle-down"></i>
+                                </div>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"> ${i18n.trans("general.bookingSeat")} </a>
+
+                            <ul class="dropdown-menu">
+                                <c:if test="${currentStore != null}">
+                                    <li class="store-chip">
+                                        <a class="dropdown-item active"
+                                           href="${pageContext.request.contextPath}/store/check-in?storeId=${currentStore.id}">
+                                            <div class="store-pickup">
+                                                <div class="store-detail">
+                                                    <p class="store-name">${currentStore.name}</p>
+                                                    <span class="store-address text-muted text-sm-start">${currentStore.address}</span>
+                                                </div>
+                                                <i class="fi fi-sr-check-circle icon-base"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                                <c:forEach items="${stores}" var="store">
+                                    <c:if test="${empty currentStore or store.id != currentStore.id}">
+                                        <li class="store-chip">
+                                            <a class="dropdown-item"
+                                               href="${pageContext.request.contextPath}/store/check-in?storeId=${store.id}">
+                                                <div class="store-pickup">
+                                                    <div class="store-detail">
+                                                        <p class="store-name">${store.name}</p>
+                                                        <span class="store-address text-muted text-sm-start">${store.address}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
                         </li>
 
                         <c:choose>
@@ -53,10 +93,7 @@
                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="user-tool d-inline-flex align-items-center">
                                             <div class="user-info d-inline-flex flex-column me-4">
-                                                <span class="user-name text-black fw-semibold">${sessionScope.authUser.username}</span>
-                                                <span class="user-membership">
-                                                    1,200 điểm
-                                                </span>
+                                                <span class="user-name text-black fw-semibold">${authUser.username}</span>
                                             </div>
                                             <img
                                                     src="https://images.unsplash.com/photo-1631947430066-48c30d57b943?auto=format&fit=crop&q=80&w=832"

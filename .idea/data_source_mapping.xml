@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/laptrinhweb/zerostarcafe/domain/auth_token/AuthTokenDAOImpl.java" value="020c0f57-f0cb-4e08-8d6a-95c8f3c232bd" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/laptrinhweb/zerostarcafe/domain/auth/record/AuthRecordDAOImpl.java" value="020c0f57-f0cb-4e08-8d6a-95c8f3c232bd" />
   </component>
 </project>

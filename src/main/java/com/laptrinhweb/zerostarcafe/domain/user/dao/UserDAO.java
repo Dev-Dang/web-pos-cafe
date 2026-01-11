@@ -35,8 +35,8 @@ import java.util.Optional;
  * }</pre>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 14/11/2025
+ * @version 1.0.1
+ * @lastModified 16/12/2025
  * @since 1.0.0
  */
 public interface UserDAO {
@@ -45,10 +45,10 @@ public interface UserDAO {
      * Inserts or updates a {@link User} record.
      *
      * @param user the {@link User} entity to persist
-     * @return {@code true} if the operation succeeded, {@code false} otherwise
+     * @return the saved {@link User} with generated ID if new
      * @throws SQLException if a database access error occurs
      */
-    boolean save(User user) throws SQLException;
+    User save(User user) throws SQLException;
 
     /**
      * Finds a user by ID.

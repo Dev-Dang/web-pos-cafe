@@ -24,8 +24,8 @@ import java.sql.SQLException;
  * - Requires DataSource defined in context.xml with name "jdbc/ZeroStarDB"
  *
  * @author Dang Van Trung
- * @version 1.0.1
- * @lastModified 16/11/2025
+ * @version 1.0.2
+ * @lastModified 20/11/2025
  * @since 1.0.0
  */
 public final class DBConnection {
@@ -35,16 +35,22 @@ public final class DBConnection {
      * name of the configured DataSource in Tomcat context.xml.
      */
     private static final String JNDI_NAME = "java:comp/env/jdbc/ZeroStarDB";
+    private static DataSource dataSource;
 
     // “one-time” initialization checks
     // Make sure the JDBC driver is present in Tomcat's lib directory
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            LoggerUtil.info(DBConnection.class, "✅ MySQL JDBC driver loaded.");
+            InitialContext ctx = new InitialContext();
+            dataSource = (DataSource) ctx.lookup(JNDI_NAME);
+            LoggerUtil.info(DBConnection.class, "Datasource loaded.");
         } catch (ClassNotFoundException e) {
             LoggerUtil.error(DBConnection.class,
-                    "❌ MySQL JDBC driver not found. Add 'mysql-connector-j' to $CATALINA_HOME/lib.", e);
+                    "MySQL JDBC driver not found. Add 'mysql-connector-j' to $CATALINA_HOME/lib.", e);
+        } catch (NamingException e) {
+            LoggerUtil.error(DBConnection.class,
+                    "Failed to lookup DataSource: " + JNDI_NAME, e);
         }
     }
 
@@ -60,19 +66,7 @@ public final class DBConnection {
      */
     public static Connection getConnection() throws SQLException {
         try {
-            InitialContext ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup(JNDI_NAME);
-            Connection connection = ds.getConnection();
-
-            LoggerUtil.info(DBConnection.class,
-                    "✅ DBConnection acquired from pool.");
-            return connection;
-
-        } catch (NamingException e) {
-            LoggerUtil.error(DBConnection.class,
-                    "❌ Failed to lookup DataSource: " + JNDI_NAME, e);
-            throw new SQLException("DataSource lookup failed.", e);
-
+            return dataSource.getConnection();
         } catch (SQLException e) {
             LoggerUtil.error(DBConnection.class,
                     "❌ Failed to get connection from DataSource.", e);
