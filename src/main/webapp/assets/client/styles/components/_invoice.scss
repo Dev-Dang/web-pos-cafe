@@ -1,0 +1,172 @@
+// =====================================================
+// Invoice Page Styles
+// =====================================================
+
+.invoice-section {
+  background-color: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+}
+
+.invoice-header {
+  padding-bottom: $spacing-lg;
+}
+
+.invoice-logo {
+  .icon-success {
+    font-size: 64px;
+    color: $success-color;
+  }
+}
+
+.invoice-title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $text-heading-color;
+  margin: $spacing-md 0 $spacing-xs;
+}
+
+.invoice-subtitle {
+  font-size: $font-size-base;
+  margin: 0;
+}
+
+.invoice-card {
+  border: 1px solid $border-outline-color;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  background-color: $color-white;
+}
+
+.invoice-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.invoice-card__title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  margin: 0;
+}
+
+.invoice-status {
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+
+  &--paid {
+    background-color: rgba($success-color, 0.1);
+    color: $success-color;
+  }
+
+  &--pending {
+    background-color: rgba($warning-color, 0.1);
+    color: $warning-color;
+  }
+}
+
+.invoice-meta {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.invoice-meta__row {
+  display: flex;
+  gap: $spacing-md;
+  font-size: $font-size-sm;
+}
+
+.invoice-meta__label {
+  color: $text-muted-color;
+  min-width: 80px;
+}
+
+.invoice-meta__value {
+  color: $text-body-color;
+}
+
+.invoice-divider {
+  border-top: 1px dashed $border-outline-color;
+  margin: $spacing-lg 0;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table__th {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-muted-color;
+  text-transform: uppercase;
+  padding: $spacing-sm 0;
+  border-bottom: 1px solid $border-outline-color;
+}
+
+.invoice-table__td {
+  padding: $spacing-md 0;
+  font-size: $font-size-base;
+  color: $text-body-color;
+  vertical-align: top;
+  border-bottom: 1px solid rgba($border-outline-color, 0.5);
+}
+
+.invoice-table__row:last-child .invoice-table__td {
+  border-bottom: none;
+}
+
+.invoice-item-name {
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  margin-bottom: $spacing-2xs;
+}
+
+.invoice-item-options {
+  font-size: $font-size-sm;
+  color: $text-muted-color;
+}
+
+.invoice-item-note {
+  font-size: $font-size-xs;
+  color: $text-muted-color;
+  font-style: italic;
+  margin-top: $spacing-xs;
+}
+
+.invoice-summary {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.invoice-summary__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: $font-size-base;
+  color: $text-body-color;
+
+  &--total {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $text-heading-color;
+    padding-top: $spacing-md;
+    border-top: 1px solid $border-outline-color;
+    margin-top: $spacing-sm;
+  }
+}
+
+.invoice-total-price {
+  color: $primary;
+  font-size: $font-size-xl;
+}
+
+.invoice-actions {
+  margin-top: $spacing-xl;
+}

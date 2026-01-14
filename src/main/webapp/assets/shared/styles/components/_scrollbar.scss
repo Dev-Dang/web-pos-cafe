@@ -1,0 +1,50 @@
+// Unified scrollbar styling for the entire website
+// Use this mixin for consistent scrollbar appearance
+
+@mixin custom-scrollbar {
+  // Webkit scrollbar (Chrome, Safari, Edge)
+  &::-webkit-scrollbar {
+    width: $spacing-md;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba($border-outline-color, 0.2);
+    border-radius: $radius-ms;
+    margin: $spacing-xs 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      rgba($primary, 0.4) 0%,
+      rgba($primary, 0.6) 100%
+    );
+    border-radius: $radius-ms;
+    border: $border-width-thick solid transparent;
+    background-clip: padding-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background: linear-gradient(
+        180deg,
+        rgba($primary, 0.6) 0%,
+        rgba($primary, 0.8) 100%
+      );
+      background-clip: padding-box;
+    }
+
+    &:active {
+      background: linear-gradient(
+        180deg,
+        rgba($primary, 0.7) 0%,
+        rgba($primary, 0.9) 100%
+      );
+      background-clip: padding-box;
+    }
+  }
+
+  // Firefox scrollbar
+  scrollbar-width: auto;
+  scrollbar-color: rgba($primary, 0.5) rgba($border-outline-color, 0.2);
+}
+

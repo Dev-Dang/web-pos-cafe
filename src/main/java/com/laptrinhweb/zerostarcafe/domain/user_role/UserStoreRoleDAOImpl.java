@@ -1,5 +1,7 @@
 package com.laptrinhweb.zerostarcafe.domain.user_role;
 
+import com.laptrinhweb.zerostarcafe.core.context.DBContext;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +21,6 @@ import java.util.Optional;
  */
 public class UserStoreRoleDAOImpl implements UserStoreRoleDAO {
 
-    private final Connection conn;
-
-    public UserStoreRoleDAOImpl(Connection conn) {
-        this.conn = conn;
-    }
-
     // ==========================================================
     // SAVE (Insert or Update)
     // ==========================================================
@@ -37,6 +33,7 @@ public class UserStoreRoleDAOImpl implements UserStoreRoleDAO {
                     ON DUPLICATE KEY UPDATE role_code = VALUES(role_code)
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, usr.getUserId());
             ps.setLong(2, usr.getStoreId());
@@ -54,6 +51,7 @@ public class UserStoreRoleDAOImpl implements UserStoreRoleDAO {
         String sql = "SELECT * FROM user_store_roles WHERE user_id=? ORDER BY store_id ASC";
         List<UserStoreRole> list = new ArrayList<>();
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, userId);
             try (ResultSet rs = ps.executeQuery()) {
@@ -67,6 +65,7 @@ public class UserStoreRoleDAOImpl implements UserStoreRoleDAO {
     public Optional<UserStoreRole> findByUserAndStore(long userId, long storeId) throws SQLException {
         String sql = "SELECT * FROM user_store_roles WHERE user_id=? AND store_id=? LIMIT 1";
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, userId);
             ps.setLong(2, storeId);
@@ -84,6 +83,8 @@ public class UserStoreRoleDAOImpl implements UserStoreRoleDAO {
     @Override
     public boolean delete(long userId, long storeId) throws SQLException {
         String sql = "DELETE FROM user_store_roles WHERE user_id=? AND store_id=?";
+
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, userId);
             ps.setLong(2, storeId);

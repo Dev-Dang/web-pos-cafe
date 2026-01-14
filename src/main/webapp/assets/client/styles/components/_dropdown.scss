@@ -1,88 +1,140 @@
 .store-dropdown {
   width: auto;
-  max-width: 384px;
+  max-width: $size-panel-md;
   min-width: 0;
-  border-radius: 24px;
+  border-radius: $radius-xl;
   border: none;
   background-color: transparent;
   box-shadow: none;
+  display: flex;
+  justify-content: center;
 
   .dropdown-toggle {
-    width: fit-content;
-    max-width: 384px;
+    width: auto;
+    max-width: $size-panel-md;
     min-width: 0;
-    padding: 1.4rem 1.6rem !important;
+    min-height: $btn-size-md-min-height;
+    padding: $spacing-sm $spacing-md !important;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border-radius: 24px;
-    border: 1.5px solid rgba($primary, 0.7);
+    gap: $spacing-md;
+    border-radius: $radius-xl;
+    border: $border-width-md solid rgba($primary, 0.7);
     background-color: $color-white;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    @media (max-width: 767.98px) {
+      width: auto;
+      max-width: none;
+      padding: 0.6rem !important;
+      gap: $spacing-sm;
+      min-height: auto;
+      font-size: $font-size-md;
+    }
 
     &:hover,
     &:focus {
       border-color: $primary;
-      box-shadow: 0 0 0 3px rgba($primary, 0.16);
+      box-shadow: 0 0 0 $border-width-xl rgba($primary, 0.16);
     }
   }
 
   .dropdown-menu {
     width: fit-content;
-    min-width: 384px;
-    max-width: 384px;
-    padding: 1.2rem;
-    margin-top: 1.2rem;
+    min-width: $size-panel-md;
+    max-width: $size-panel-md;
+    padding: $spacing-md;
+    margin-top: 0;
     background-color: $color-white;
-    border-radius: 16px;
-    box-shadow: 0 18px 36px rgba(18, 18, 18, 0.12);
-    border: 1px solid rgba($primary, 0.35) !important;
+    border-radius: $radius-lg;
+    box-shadow: 0 ($spacing-2lg - $spacing-2xs) ($spacing-2xl + $spacing-xs) rgba(18, 18, 18, 0.12);
+    border: $border-width-thin solid rgba($primary, 0.35) !important;
+    top: calc(100% + $spacing-lg) !important;
     left: 50% !important;
     right: auto;
-    transform: translateX(-50%);
+    transform: translateX(-50%) !important;
+
+    @media (max-width: 767.98px) {
+      min-width: calc(100vw - $spacing-2xl);
+      max-width: calc(100vw - $spacing-2xl);
+      left: 50% !important;
+    }
+  }
+
+  // Smooth scale and rotate animation for map icon on hover
+  .dropdown-toggle:hover .icon-base:first-child {
+    animation: iconPulse 0.5s ease-in-out;
+  }
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(8deg);
   }
 }
 
 .store-tool {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: $spacing-md;
   width: 100%;
   justify-content: space-between;
+
+  @media (max-width: 767.98px) {
+    gap: $spacing-sm;
+  }
 
   .icon-base {
     flex-shrink: 0;
     color: $primary;
+
+    @media (max-width: 767.98px) {
+      font-size: $font-size-md;
+    }
   }
 }
 
 .store-pickup {
   display: flex;
-  gap: 0.2rem;
+  gap: $spacing-2xs;
   justify-content: center;
   flex-direction: column;
   flex: 1;
   min-width: 0;
   align-items: center;
+
+  @media (max-width: 767.98px) {
+    gap: $spacing-3xs;
+  }
 }
 
 .store-detail {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: $spacing-2sm;
   min-width: 0;
 }
 
 .store-name {
   margin: 0;
-  font-size: 1.7rem;
-  line-height: 1.35;
+  font-size: $font-size-1_7;
+  line-height: $line-height-snug;
   font-weight: 500;
   color: $color-gray-700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+
+  @media (max-width: 767.98px) {
+    font-size: $font-size-md;
+    line-height: $line-height-snug;
+    font-weight: 600;
+  }
 }
 
 .store-address {
@@ -92,41 +144,49 @@
   overflow: hidden;
   white-space: normal;
   word-break: break-word;
-  font-size: 1.3rem;
-  line-height: 1.4;
+  font-size: $font-size-sm;
+  line-height: $line-height-tight;
   max-width: 100%;
   color: $color-gray-600;
+  margin-bottom: 0;
+
+  @media (max-width: 767.98px) {
+    font-size: $font-size-sm;
+    line-height: $line-height-snug;
+  }
 }
 
 .store-chip {
   &:not(:last-child) {
-    margin-bottom: 1.2rem;
+    margin-bottom: $spacing-md;
   }
 
   .dropdown-item {
     display: block;
-    padding: 1.2rem 1.2rem !important;
-    border-radius: 14px;
-    border: 1px solid transparent;
+    padding: $spacing-md $spacing-md !important;
+    border-radius: $radius-md-lg;
+    border: $border-width-thin solid transparent;
     background-color: $color-white; // force white base to override Bootstrap gray
     transition: background-color 0.2s ease, border-color 0.2s ease,
-      box-shadow 0.2s ease;
+    box-shadow 0.2s ease;
     display: flex;
     align-items: flex-start;
-    gap: 0.8rem;
+    gap: $spacing-sm;
+    justify-content: space-between;
+    position: relative;
 
     &:hover {
       background-color: mix($color-white, $primary, 90%);
       border-color: rgba($primary, 0.35);
-      box-shadow: 0 6px 16px rgba(18, 18, 18, 0.08);
+      box-shadow: 0 $spacing-2sm $spacing-lg rgba(18, 18, 18, 0.08);
     }
 
     &.active {
       background-color: mix($color-white, $primary, 86%);
       border-color: rgba($primary, 0.7);
-      box-shadow: 0 6px 18px rgba(18, 18, 18, 0.1);
-      padding-left: 1.3rem;
-      padding-right: 1.3rem;
+      box-shadow: 0 $spacing-2sm ($spacing-2lg - $spacing-2xs) rgba(18, 18, 18, 0.1);
+      padding-left: $spacing-1_3;
+      padding-right: $spacing-1_3;
 
       .store-name {
         color: $primary;
@@ -135,33 +195,23 @@
 
       .badge {
         background-color: $primary;
-        border-radius: 999px;
-        padding: 0.35rem 1rem;
+        border-radius: $radius-full;
+        padding: $spacing-3xs $spacing-1xl;
       }
 
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 1.2rem;
-        transform: translateY(-50%);
-        width: 2rem;
-        height: 2rem;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='#{ $primary }'%3E%3Cpath d='M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm5.6 9.2-6.1 6.9a1.1 1.1 0 0 1-1.6.05l-3.1-3a1 1 0 1 1 1.4-1.45l2.3 2.24 5.4-6.1a1 1 0 0 1 1.5 1.36Z'/%3E%3C/svg%3E")
-          no-repeat center/contain;
-        pointer-events: none;
+      .store-check {
+        display: inline-flex;
       }
     }
   }
 
   .store-pickup {
     flex-direction: row;
-    gap: 1rem;
+    gap: $spacing-1xl;
   }
 
   .icon-base {
-    font-size: 2rem;
-    margin-inline: 1rem;
+    font-size: $font-size-xl;
     color: $primary;
   }
 
@@ -172,6 +222,14 @@
   .store-address {
     color: $color-gray-500;
   }
+}
+
+.store-check {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: $primary;
+  align-self: center;
 }
 
 .dropdown-item {
@@ -210,7 +268,7 @@
       -webkit-line-clamp: 2;
       white-space: normal;
       word-break: break-word;
-      font-size: 1.3rem;
+      font-size: $font-size-sm;
     }
   }
 }

@@ -25,9 +25,17 @@ public class AdminDAO {
     //Get all products by store
     public List<Product> getAllProductsByStore(int storeId) throws SQLException {
         List<Product> list = new ArrayList<>();
-        String sql = "SELECT mi.*, smi.inventory, c.name as cat_name " + "FROM menu_items mi " + "JOIN store_menu_items smi ON mi.id = smi.menu_item_id " + "LEFT JOIN categories c ON mi.category_id = c.id " + "WHERE smi.store_id = ? " + "ORDER BY mi.id ASC";
+        String sql = "SELECT mi.*, JSON_UNQUOTE(JSON_EXTRACT(mi.name, ?)) as pName ,smi.inventory, JSON_UNQUOTE(JSON_EXTRACT(c.name, ?)) as cat_name "
+                + "FROM menu_items mi "
+                + "JOIN store_menu_items smi ON mi.id = smi.menu_item_id "
+                + "LEFT JOIN categories c ON mi.category_id = c.id "
+                + "WHERE smi.store_id = ? "
+                + "ORDER BY mi.id ASC";
         try (Connection conn = AdminDAO.connection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, storeId);
+            String jsonPath = "$." + "vi";
+            ps.setString(1, jsonPath);
+            ps.setString(2, jsonPath);
+            ps.setInt(3, storeId);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -35,7 +43,7 @@ public class AdminDAO {
 
                     p.setId(rs.getInt("id"));
                     p.setPicUrl(rs.getString("image_url"));
-                    p.setName(rs.getString("name"));
+                    p.setName(rs.getString("pName"));
                     p.setPrice(rs.getInt("base_price"));
                     p.setUnit(rs.getString("unit"));
                     p.setInventory(rs.getDouble("inventory"));
@@ -103,7 +111,7 @@ public class AdminDAO {
 
     //Update product hide status
     public boolean updateProductHideStatus(int id, boolean isActive, long userID) {
-        String sql = "UPDATE menu_items SET is_active = ? WHERE id = ?";
+        String sql = "UPDATE store_menu_items SET in_menu = ? WHERE menu_item_id = ?";
 
         try (Connection conn = AdminDAO.connection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -216,12 +224,15 @@ public class AdminDAO {
 
     public List<Category> getAllCategories() throws SQLException, ClassNotFoundException {
         List<Category> list = new ArrayList<>();
-        String sql = "SELECT id, name FROM categories ORDER BY order_index ASC";
+        String sql = """
+                SELECT id, 
+                       JSON_UNQUOTE(JSON_EXTRACT(name, "$.vi")) as catName 
+                FROM categories ORDER BY order_index ASC """;
         try (Connection conn = AdminDAO.connection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                list.add(new Category(rs.getInt("id"), rs.getString("name")));
+                list.add(new Category(rs.getInt("id"), rs.getString("catName")));
             }
         }
         return list;
@@ -234,16 +245,16 @@ public class AdminDAO {
         int customers = 0;
 
         String sqlRevenue = "SELECT " +
-                            "   COALESCE(SUM(oi.qty * oi.unit_price_snapshot), 0), " +
-                            "   COUNT(DISTINCT o.id) " +
-                            "FROM orders o " +
-                            "JOIN order_items oi ON o.id = oi.order_id " +
-                            "WHERE DATE(o.opened_at) = ? AND o.STATUS = 'paid'";
+                "   COALESCE(SUM(oi.qty * oi.unit_price_snapshot), 0), " +
+                "   COUNT(DISTINCT o.id) " +
+                "FROM orders o " +
+                "JOIN order_items oi ON o.id = oi.order_id " +
+                "WHERE DATE(o.opened_at) = ? AND o.STATUS = 'paid'";
 
         String sqlProduct = "SELECT COALESCE(SUM(oi.qty), 0) " +
-                            "FROM order_items oi " +
-                            "JOIN orders o ON oi.order_id = o.id " +
-                            "WHERE DATE(o.opened_at) = ? AND o.STATUS = 'paid'";
+                "FROM order_items oi " +
+                "JOIN orders o ON oi.order_id = o.id " +
+                "WHERE DATE(o.opened_at) = ? AND o.STATUS = 'paid'";
 
         String sqlCustomer = "SELECT COUNT(id) FROM users WHERE DATE(created_at) = ?";
 
@@ -289,12 +300,12 @@ public class AdminDAO {
         for (int i = 0; i < 12; i++) monthlyRevenue.add(0L);
 
         String sql = "SELECT " +
-                     "   MONTH(o.opened_at) as month, " +
-                     "   COALESCE(SUM(oi.qty * oi.unit_price_snapshot), 0) as total " +
-                     "FROM orders o " +
-                     "JOIN order_items oi ON o.id = oi.order_id " +
-                     "WHERE o.STATUS = 'paid' AND YEAR(o.opened_at) = ? " +
-                     "GROUP BY MONTH(o.opened_at)";
+                "   MONTH(o.opened_at) as month, " +
+                "   COALESCE(SUM(oi.qty * oi.unit_price_snapshot), 0) as total " +
+                "FROM orders o " +
+                "JOIN order_items oi ON o.id = oi.order_id " +
+                "WHERE o.STATUS = 'paid' AND YEAR(o.opened_at) = ? " +
+                "GROUP BY MONTH(o.opened_at)";
 
         try (Connection conn = AdminDAO.connection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -321,15 +332,15 @@ public class AdminDAO {
         List<DashboardHandleOrder> list = new ArrayList<>();
         // SQL này Join bảng orders, tables và order_items để lấy tóm tắt
         String sql = "SELECT o.id, t.table_uid, o.opened_at, o.STATUS, " +
-                     "       SUM(oi.qty * oi.unit_price_snapshot) as total_price, " +
-                     "       GROUP_CONCAT(CONCAT(oi.qty, 'x ', mi.name) SEPARATOR ', ') as summary " +
-                     "FROM orders o " +
-                     "LEFT JOIN tables_ t ON o.table_id = t.id " +
-                     "JOIN order_items oi ON o.id = oi.order_id " +
-                     "JOIN menu_items mi ON oi.menu_item_id = mi.id " +
-                     "WHERE o.STATUS IN ('pending', 'accept') " +
-                     "GROUP BY o.id, t.table_uid, o.opened_at, o.STATUS " +
-                     "ORDER BY o.opened_at DESC";
+                "       SUM(oi.qty * oi.unit_price_snapshot) as total_price, " +
+                "       GROUP_CONCAT(CONCAT(oi.qty, 'x ', mi.name) SEPARATOR ', ') as summary " +
+                "FROM orders o " +
+                "LEFT JOIN tables_ t ON o.table_id = t.id " +
+                "JOIN order_items oi ON o.id = oi.order_id " +
+                "JOIN menu_items mi ON oi.menu_item_id = mi.id " +
+                "WHERE o.STATUS IN ('pending', 'accept') " +
+                "GROUP BY o.id, t.table_uid, o.opened_at, o.STATUS " +
+                "ORDER BY o.opened_at DESC";
 
         try (Connection conn = AdminDAO.connection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -368,10 +379,10 @@ public class AdminDAO {
         }
 
         String sqlDeductInventory = "UPDATE store_menu_items smi " +
-                                    "JOIN order_items oi ON smi.menu_item_id = oi.menu_item_id " +
-                                    "JOIN orders o ON oi.order_id = o.id " +
-                                    "SET smi.inventory = smi.inventory - oi.qty " +
-                                    "WHERE o.id = ? AND smi.store_id = o.store_id";
+                "JOIN order_items oi ON smi.menu_item_id = oi.menu_item_id " +
+                "JOIN orders o ON oi.order_id = o.id " +
+                "SET smi.inventory = smi.inventory - oi.qty " +
+                "WHERE o.id = ? AND smi.store_id = o.store_id";
 
         try {
             conn = AdminDAO.connection();
@@ -428,10 +439,10 @@ public class AdminDAO {
     public List<InventoryAlert> getLowStockProducts(int limit) {
         List<InventoryAlert> list = new ArrayList<>();
         String sql = "SELECT mi.name, mi.id, mi.image_url, smi.inventory " +
-                     "FROM menu_items mi " +
-                     "JOIN store_menu_items smi ON mi.id = smi.menu_item_id " +
-                     "WHERE smi.inventory < 10 AND smi.store_id = 1 " +
-                     "ORDER BY smi.inventory ASC LIMIT ?";
+                "FROM menu_items mi " +
+                "JOIN store_menu_items smi ON mi.id = smi.menu_item_id " +
+                "WHERE smi.inventory < 10 AND smi.store_id = 1 " +
+                "ORDER BY smi.inventory ASC LIMIT ?";
         try (Connection conn = AdminDAO.connection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, limit);
@@ -454,13 +465,13 @@ public class AdminDAO {
     public List<BestSeller> getBestSellers(int limit) {
         List<BestSeller> list = new ArrayList<>();
         String sql = "SELECT mi.name, c.name as cat_name, mi.image_url, SUM(oi.qty) as total_sold " +
-                     "FROM order_items oi " +
-                     "JOIN menu_items mi ON oi.menu_item_id = mi.id " +
-                     "JOIN categories c ON mi.category_id = c.id " +
-                     "JOIN orders o ON oi.order_id = o.id " +
-                     "WHERE o.STATUS = 'paid' " +
-                     "GROUP BY mi.id, mi.name, c.name, mi.image_url " +
-                     "ORDER BY total_sold DESC LIMIT ?";
+                "FROM order_items oi " +
+                "JOIN menu_items mi ON oi.menu_item_id = mi.id " +
+                "JOIN categories c ON mi.category_id = c.id " +
+                "JOIN orders o ON oi.order_id = o.id " +
+                "WHERE o.STATUS = 'paid' " +
+                "GROUP BY mi.id, mi.name, c.name, mi.image_url " +
+                "ORDER BY total_sold DESC LIMIT ?";
         try (Connection conn = AdminDAO.connection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, limit);

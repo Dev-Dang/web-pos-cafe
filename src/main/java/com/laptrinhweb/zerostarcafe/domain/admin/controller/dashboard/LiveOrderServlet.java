@@ -47,7 +47,7 @@ public class LiveOrderServlet extends HttpServlet {
 
         if (sessionObj instanceof AuthUser) {
             AuthUser currentUser = (AuthUser) sessionObj;
-            userId = currentUser.userId();
+            userId = currentUser.getId();
         }
 
         Map<String, Object> result = new HashMap<>();

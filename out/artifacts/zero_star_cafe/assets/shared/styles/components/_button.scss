@@ -1,0 +1,39 @@
+.btn {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+   min-height: 44px;
+
+   &-full {
+      width: 100%;
+   }
+
+   &-primary {
+      color: white;
+
+      &:hover {
+         color: white;
+         border-color: transparent;
+         background-color: #d8662c;
+      }
+
+      &:active {
+         color: white !important;
+      }
+   }
+
+   &-outline-primary {
+      border-color: $color-gray-200;
+      color: $color-gray-900;
+
+      &:hover {
+         border-color: $color-gray-200;
+         background-color: $color-gray-100;
+      }
+
+      &:active {
+         background-color: white !important;
+      }
+   }
+}

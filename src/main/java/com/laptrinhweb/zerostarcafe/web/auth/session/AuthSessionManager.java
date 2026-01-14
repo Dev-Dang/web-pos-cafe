@@ -1,7 +1,8 @@
 package com.laptrinhweb.zerostarcafe.web.auth.session;
 
 import com.laptrinhweb.zerostarcafe.core.security.AppCookie;
-import com.laptrinhweb.zerostarcafe.core.security.CookieUtil;
+import com.laptrinhweb.zerostarcafe.core.security.CookieUtils;
+import com.laptrinhweb.zerostarcafe.core.security.CsrfTokenUtils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.TimeUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
@@ -33,19 +35,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * }</pre>
  *
  * @author Dang Van Trung
- * @version 1.1.1
- * @lastModified 13/12/2025
+ * @version 1.2.0
+ * @lastModified 03/01/2026
  * @since 1.0.0
  */
-
+@RequiredArgsConstructor
 @Getter
 public final class AuthSessionManager {
 
     private final ConcurrentHashMap<Long, HttpSession> userSessions;
-
-    public AuthSessionManager(ConcurrentHashMap<Long, HttpSession> userSessions) {
-        this.userSessions = userSessions;
-    }
 
     /**
      * Builds an AuthContext from the current HttpSession.
@@ -69,6 +67,7 @@ public final class AuthSessionManager {
      * Creates a new session for the authenticated user.
      * The session ID is rotated, the user is stored in the session,
      * and all auth cookies are written to the response.
+     * Also generates a new CSRF token for the authenticated session.
      *
      * @param request  current HTTP request
      * @param response current HTTP response
@@ -94,6 +93,9 @@ public final class AuthSessionManager {
 
         applyContext(session, context);
         writeCookies(response, context);
+
+        // Generate new CSRF token for authenticated session
+        CsrfTokenUtils.getOrCreate(request, response);
     }
 
     /**
@@ -128,6 +130,7 @@ public final class AuthSessionManager {
     /**
      * Ends the active session and removes all authentication cookies.
      * If the user has an active session in memory, it will also be revoked.
+     * Also clears the CSRF token.
      *
      * @param request  current HTTP request
      * @param response current HTTP response
@@ -140,6 +143,7 @@ public final class AuthSessionManager {
 
         if (session == null) {
             clearAuthCookies(request, response);
+            CsrfTokenUtils.removeToken(request, response);
             return;
         }
 
@@ -158,6 +162,9 @@ public final class AuthSessionManager {
         }
 
         clearAuthCookies(request, response);
+
+        // Clear CSRF token on logout
+        CsrfTokenUtils.removeToken(request, response);
     }
 
     /**
@@ -215,7 +222,7 @@ public final class AuthSessionManager {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
-        Map<String, String> cookies = CookieUtil.getAll(request);
+        Map<String, String> cookies = CookieUtils.getAll(request);
         if (cookies.isEmpty())
             return;
 
@@ -223,7 +230,7 @@ public final class AuthSessionManager {
 
         for (String name : cookies.keySet()) {
             if (name != null && name.startsWith(prefix)) {
-                CookieUtil.clear(name, response);
+                CookieUtils.clear(name, response);
             }
         }
     }

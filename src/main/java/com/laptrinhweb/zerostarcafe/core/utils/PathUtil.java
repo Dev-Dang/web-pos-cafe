@@ -1,22 +1,23 @@
 package com.laptrinhweb.zerostarcafe.core.utils;
 
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewArea;
+
 /**
  * <h2>Description:</h2>
  * <p>
- * Utility class providing centralized JSP view paths for all web areas
- * (client, admin, manager, staff). This helps avoid hard-coded strings
- * and keeps view structure consistent across the application.
+ * Utility class providing centralized JSP view path construction for all web areas.
+ * Works with ViewArea enum to build full JSP paths from relative paths.
  * </p>
  *
  * <h2>Example Usage:</h2>
  * <pre>
- * String page = PathUtil.Client.page("home");
- * String layout = PathUtil.Client.layoutMain();
+ * String jspPath = PathUtil.getViewPath(ViewArea.CLIENT, "pages/home");
+ * // Returns: "/WEB-INF/views/client/pages/home.jsp"
  * </pre>
  *
  * @author Dang Van Trung
  * @version 2.1.0
- * @lastModified 23/11/2025
+ * @lastModified 02/01/2026
  * @since 1.0.0
  */
 public final class PathUtil {
@@ -24,50 +25,25 @@ public final class PathUtil {
     private PathUtil() {
     }
 
-    // ============================
-    // Shared Area
-    // ============================
-    public static final class Shared {
-        private static final String BASE = "/WEB-INF/views/shared";
-        private static final String PAGES = BASE + "/pages";
-
-        public static String page(String viewPath) {
-            return PAGES + "/" + viewPath + ".jsp";
-        }
+    /**
+     * Build full JSP path from area and relative path.
+     * 
+     * @param area ViewArea (CLIENT, ADMIN, SHARED)
+     * @param relativePath Relative path like "pages/home" or "forms/_login"
+     * @return Full JSP path like "/WEB-INF/views/client/pages/home.jsp"
+     */
+    public static String getViewPath(ViewArea area, String relativePath) {
+        String normalized = normalize(relativePath);
+        return area.getBasePath() + "/" + normalized + ".jsp";
     }
 
-    // ============================
-    // Client Area
-    // ============================
-    public static final class Client {
-        private static final String BASE = "/WEB-INF/views/client";
-        private static final String PAGES = BASE + "/pages";
-        private static final String LAYOUTS = BASE + "/layouts";
-
-        public static String page(String viewPath) {
-            return PAGES + "/" + viewPath + ".jsp";
+    private static String normalize(String path) {
+        if (path == null || path.isBlank()) {
+            throw new IllegalArgumentException("Path must not be blank");
         }
-
-        public static String layoutMain() {
-            return LAYOUTS + "/main-layout.jsp";
-        }
-    }
-
-    // ============================
-    // Admin Area
-    // ============================
-    public static final class Admin {
-        private static final String BASE = "/WEB-INF/views/admin";
-        private static final String PAGES = BASE + "/pages";
-        private static final String LAYOUTS = BASE + "/layouts";
-
-        public static String page(String viewPath) {
-            return PAGES + "/" + viewPath + ".jsp";
-        }
-
-        public static String layoutMain() {
-            return LAYOUTS + "/admin-layout.jsp";
-        }
+        return path.trim()
+                   .replaceFirst("^/", "")
+                   .replaceFirst("\\.jsp$", "");
     }
 
     // ============================

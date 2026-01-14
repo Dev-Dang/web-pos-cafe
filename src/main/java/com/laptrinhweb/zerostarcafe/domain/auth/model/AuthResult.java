@@ -1,5 +1,6 @@
 package com.laptrinhweb.zerostarcafe.domain.auth.model;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,7 +25,7 @@ import lombok.Getter;
  */
 
 @Getter
-@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AuthResult<S, T> {
     private final boolean success;
     private final S status;

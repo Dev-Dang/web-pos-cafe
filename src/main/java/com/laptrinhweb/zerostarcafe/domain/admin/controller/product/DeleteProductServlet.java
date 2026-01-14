@@ -32,7 +32,7 @@ public class DeleteProductServlet extends HttpServlet {
 
             if (sessionObj instanceof AuthUser) {
                 AuthUser currentUser = (AuthUser) sessionObj;
-                userId = currentUser.userId();
+                userId = currentUser.getId();
             }
 
             int id = Integer.parseInt(request.getParameter("product-id"));

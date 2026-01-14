@@ -6,8 +6,22 @@ $font-family-base: "Inter", sans-serif;
 $font-size-base: 1.6rem;
 $font-size-root: 10px;
 $font-weight-base: 400;
-$body-color: #121212;
+$body-color: #292727;
+$headings-color: #1f1717;
 $line-height-base: 1.5;
+$line-height-snug: 1.35;
+$line-height-tight: 1.4;
+
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
 
 $font-size-sm: 1.2rem;
 
@@ -23,14 +37,18 @@ $btn-line-height: 1.5;
 $btn-font-size: 1.6rem;
 $btn-padding-y: 0.8rem;
 $btn-padding-x: 1.6rem;
-$btn-border-radius: 1.2rem;
+$btn-border-radius: 1.6rem;
 $btn-border-width: 1.5px;
 $btn-focus-width: 1.5px;
 
 $btn-padding-x-lg: 1.6rem;
 $btn-padding-y-lg: 1.2rem;
-$btn-border-radius-lg: 1.6rem;
+$btn-border-radius-lg: 2.4rem;
 $btn-font-size-lg: 1.6rem;
+$btn-label-line-height: 1.6rem;
+$btn-size-sm-min-height: 3.6rem;
+$btn-size-md-min-height: 4.4rem;
+$btn-size-lg-min-height: 5.2rem;
 
 // ModalManager
 $modal-inner-padding: 3.6rem 2.4rem 1.6rem;
@@ -43,12 +61,14 @@ $input-bg: white;
 $input-padding-y: 1.2rem;
 $input-padding-x: 1.2rem;
 $input-line-height: 1;
-$input-border-radius: 8px;
+$input-border-radius: 1.6rem;
+$input-border-color: #e7e5e4;
 
 $form-floating-height: 5.2rem;
 $form-floating-input-padding-t: 2.5rem;
 $form-floating-label-height: 1.25em;
-$form-floating-label-transform: scale(0.75) translateY(-0.75rem) translateX(0.15rem);
+$form-floating-label-transform: scale(0.75) translateY(-0.75rem)
+  translateX(0.15rem);
 
 // Dropdown
 $caret-width: 0;
@@ -69,3 +89,101 @@ $toast-padding-x: 1.6rem;
 $toast-font-size: 1.4rem;
 $toast-border-radius: 8px;
 $toast-spacing: 1.2rem;
+
+// Spacing System
+$spacing-2xs: 0.2rem;
+$spacing-0_5: 0.5rem;
+$spacing-xs: 0.4rem;
+$spacing-3xs: 0.35rem;
+$spacing-2sm: 0.6rem;
+$spacing-sm: 0.8rem;
+$spacing-1xl: 1rem;
+$spacing-md: 1.2rem;
+$spacing-1_3: 1.3rem;
+$spacing-2md: 1.4rem;
+$spacing-lg: 1.6rem;
+$spacing-2lg: 2rem;
+$spacing-xl: 2.4rem;
+$spacing-2xl: 3.2rem;
+$spacing-3xl: 4.8rem;
+$spacing-4xl: 6.4rem;
+$spacing-5xl: 8rem;
+$spacing-6xl: 10rem;
+$spacing-7xl: 12rem;
+$spacing-8xl: 14rem;
+$spacing-9xl: 20rem;
+
+// Typography System
+$font-size-xs: 1.2rem;
+$font-size-sm: 1.3rem;
+$font-size-base: 1.5rem;
+$font-size-md: 1.6rem;
+$font-size-lg: 1.8rem;
+$font-size-1_7: 1.7rem;
+$font-size-1_4: 1.4rem;
+$font-size-xl: 2rem;
+$font-size-2xl: 2.4rem;
+$font-size-3xl: 3.2rem;
+$font-size-4xl: 4rem;
+$font-size-5xl: 4.8rem;
+
+// Line height values (in rem) - Note: $line-height-base is unitless multiplier for Bootstrap
+$line-height-xxs: 1.6rem;
+$line-height-xs: 1.8rem;
+$line-height-sm: 2rem;
+$line-height-sm-md: 2.2rem;
+$line-height-rem-base: 2.25rem;
+$line-height-md: 2.4rem;
+$line-height-lg: 2.8rem;
+$line-height-xl: 3.2rem;
+$line-height-2xl: 4.4rem;
+$line-height-3xl: 5.6rem;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Border Radius
+$radius-xxs: 0.2rem;
+$radius-xs: 0.4rem;
+$radius-sm: 0.8rem;
+$radius-ms: 1rem;
+$radius-md: 1.2rem;
+$radius-md-lg: 1.4rem;
+$radius-lg: 1.6rem;
+$radius-xl: 2.4rem;
+$radius-full: 999px;
+
+// Border Width
+$border-width-thin: 1px;
+$border-width-md: 1.5px;
+$border-width-thick: 2px;
+$border-width-xl: 3px;
+
+// Layout and component sizing
+$layout-max-width: 144rem;
+$layout-content-max-width: 120rem;
+$layout-page-padding: 12rem;
+$layout-page-padding-lg: 6.4rem;
+$size-toast-container: 35.6rem;
+$size-panel-md: 38.4rem;
+$size-modal-width-lg: 90rem;
+$size-category-item-min: 12rem;
+$size-category-item-min-sm: 10.5rem;
+$size-category-image: 6.4rem;
+$size-option-min-width: 7.2rem;
+$size-cart-name-max: 14rem;
+$size-hero-min: 20rem;
+$size-hero-clamp-min: 16rem;
+$size-hero-max: 28.4rem;
+$size-avatar: 4.2rem;
+$size-divider-height: 1rem;
+$size-indicator-width: 4rem;
+$size-indicator-height: 0.4rem;
+$size-modal-stepper-value-min: 3rem;
+$size-toast-hide-offset: 4rem;
+$size-cart-empty-icon: 6.4rem;
+$size-cart-empty-padding: 4rem 2rem;
+$size-cart-panel-padding-mobile: 2rem;
+$size-discount-btn-min-width: 8.8rem;

@@ -1,5 +1,6 @@
 package com.laptrinhweb.zerostarcafe.domain.store.dao;
 
+import com.laptrinhweb.zerostarcafe.core.context.LocaleContext;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreStatus;
 
@@ -12,7 +13,6 @@ import java.util.Optional;
  * <p>
  * Provides database access operations for the {@link Store} entity,
  * which represents a physical cafe location. This DAO exposes
- * JPA-style query method names while using plain JDBC underneath.
  * </p>
  *
  * <h2>Responsibilities:</h2>
@@ -27,23 +27,22 @@ import java.util.Optional;
  * <pre>{@code
  * StoreDAO storeDAO = new StoreDAOImpl(connection);
  *
- * // Validate a store from QR
- * Optional<Store> storeOpt = storeDAO.findByIdAndStatus(1L, "open");
+ * // Get store with current locale (from LocaleContext)
+ * Optional<Store> storeOpt = storeDAO.findById(1L);
  *
- * // Load all open stores with coordinates (for nearest-store logic)
- * List<Store> openStores = storeDAO
- *         .findAllByStatusAndLatitudeIsNotNullAndLongitudeIsNotNull("open");
+ * // Load all open stores with current locale
+ * List<Store> openStores = storeDAO.findAllByStatus(StoreStatus.OPEN);
  * }</pre>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 02/12/2025
+ * @version 1.1.0
+ * @lastModified 05/01/2026
  * @since 1.0.0
  */
 public interface StoreDAO {
 
     /**
-     * Finds a store by its storeId.
+     * Finds a store by its storeId with localized content based on current locale.
      *
      * @param id the store storeId
      * @return an {@link Optional} containing the store if found
@@ -52,7 +51,12 @@ public interface StoreDAO {
     Optional<Store> findById(long id) throws SQLException;
 
     /**
-     * Loads all stores from the database with specified status.
+     * Loads all stores from the database with specified status and localized content.
+     * Language is determined from {@link LocaleContext}.
+     *
+     * @param status the store status to filter by
+     * @return list of stores with localized name and address
+     * @throws SQLException if a database access error occurs
      */
     List<Store> findAllByStatus(StoreStatus status) throws SQLException;
 }

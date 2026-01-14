@@ -1,0 +1,122 @@
+// =====================================================
+// Checkout Page Styles
+// =====================================================
+
+.checkout-section {
+  background-color: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+}
+
+.checkout-title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $text-heading-color;
+  margin: 0;
+}
+
+.checkout-subtitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  margin: 0;
+}
+
+.checkout-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.checkout-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-lg;
+  padding: $spacing-md 0;
+  border-bottom: 1px solid rgba($border-outline-color, 0.5);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.checkout-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.checkout-item__name {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  margin-bottom: $spacing-2xs;
+}
+
+.checkout-item__options {
+  font-size: $font-size-sm;
+  color: $text-muted-color;
+  margin-bottom: $spacing-2xs;
+}
+
+.checkout-item__note {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $text-muted-color;
+  font-style: italic;
+
+  .icon-base {
+    font-size: $font-size-xs;
+  }
+}
+
+.checkout-item__qty {
+  font-size: $font-size-base;
+  color: $text-body-color;
+  flex-shrink: 0;
+  min-width: $spacing-2xl;
+  text-align: center;
+}
+
+.checkout-item__price {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $primary;
+  flex-shrink: 0;
+  min-width: 100px;
+  text-align: right;
+}
+
+.checkout-summary {
+  background-color: rgba($primary, 0.05);
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+}
+
+.checkout-summary__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-xs 0;
+  font-size: $font-size-base;
+  color: $text-body-color;
+
+  &--total {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $text-heading-color;
+    padding-top: $spacing-md;
+    border-top: 1px dashed $border-outline-color;
+    margin-top: $spacing-sm;
+  }
+}
+
+.checkout-total-price {
+  color: $primary;
+  font-size: $font-size-xl;
+}
+
+.checkout-actions {
+  margin-top: $spacing-lg;
+}

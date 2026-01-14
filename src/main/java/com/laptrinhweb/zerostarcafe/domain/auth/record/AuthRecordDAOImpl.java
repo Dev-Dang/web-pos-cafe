@@ -1,5 +1,6 @@
 package com.laptrinhweb.zerostarcafe.domain.auth.record;
 
+import com.laptrinhweb.zerostarcafe.core.context.DBContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.TokenStatus;
 
 import java.sql.*;
@@ -19,12 +20,6 @@ import java.util.Optional;
  */
 public class AuthRecordDAOImpl implements AuthRecordDAO {
 
-    private final Connection conn;
-
-    public AuthRecordDAOImpl(Connection conn) {
-        this.conn = conn;
-    }
-
     // ==========================================================
     // SAVE (Insert or Update)
     // ==========================================================
@@ -41,6 +36,7 @@ public class AuthRecordDAOImpl implements AuthRecordDAO {
                         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                     """;
 
+            Connection conn = DBContext.getOrCreate();
             try (PreparedStatement ps = conn.prepareStatement(sql, new String[]{"id"})) {
                 ps.setLong(1, record.getUserId());
                 ps.setString(2, record.getAuthHash());
@@ -79,6 +75,7 @@ public class AuthRecordDAOImpl implements AuthRecordDAO {
                         WHERE id = ?
                     """;
 
+            Connection conn = DBContext.getOrCreate();
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, record.getAuthHash());
                 ps.setString(2, record.getDeviceId());
@@ -114,6 +111,7 @@ public class AuthRecordDAOImpl implements AuthRecordDAO {
                     LIMIT 1
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, authHash);
             ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
@@ -139,6 +137,7 @@ public class AuthRecordDAOImpl implements AuthRecordDAO {
                       AND status = 'ACTIVE'
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
             ps.setLong(2, userId);
@@ -161,6 +160,7 @@ public class AuthRecordDAOImpl implements AuthRecordDAO {
                       AND status = 'ACTIVE'
                 """;
 
+        Connection conn = DBContext.getOrCreate();
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
             ps.setString(2, authHash);

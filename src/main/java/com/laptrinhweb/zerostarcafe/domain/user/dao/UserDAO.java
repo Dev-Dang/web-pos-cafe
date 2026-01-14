@@ -69,6 +69,15 @@ public interface UserDAO {
     Optional<User> findByUsername(String username) throws SQLException;
 
     /**
+     * Finds a user by their unique email.
+     *
+     * @param email the email to search
+     * @return an {@link Optional} containing the user if found
+     * @throws SQLException if a database access error occurs
+     */
+    Optional<User> findByEmail(String email) throws SQLException;
+
+    /**
      * Retrieves all users ordered by creation date (descending).
      *
      * @return list of {@link User} objects

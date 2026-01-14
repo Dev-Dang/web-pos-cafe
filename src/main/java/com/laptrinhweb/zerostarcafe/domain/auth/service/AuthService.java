@@ -1,10 +1,9 @@
 package com.laptrinhweb.zerostarcafe.domain.auth.service;
 
-import com.laptrinhweb.zerostarcafe.core.database.DBConnection;
 import com.laptrinhweb.zerostarcafe.core.exception.AppException;
-import com.laptrinhweb.zerostarcafe.core.security.PasswordUtil;
+import com.laptrinhweb.zerostarcafe.core.security.PasswordUtils;
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
-import com.laptrinhweb.zerostarcafe.core.security.TokenUtil;
+import com.laptrinhweb.zerostarcafe.core.security.TokenUtils;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RegisterDTO;
@@ -15,12 +14,13 @@ import com.laptrinhweb.zerostarcafe.domain.auth.record.AuthRecordService;
 import com.laptrinhweb.zerostarcafe.domain.user.model.User;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserMapper;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
+import com.laptrinhweb.zerostarcafe.domain.user.model.UserStatus;
 import com.laptrinhweb.zerostarcafe.domain.user.service.UserService;
 import com.laptrinhweb.zerostarcafe.domain.user_role.UserStoreRole;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -53,11 +53,26 @@ import java.util.Optional;
  * }</pre>
  *
  * @author Dang Van Trung
- * @version 1.2.2
- * @lastModified 14/12/2025
+ * @version 1.2.3
+ * @lastModified 18/12/2025
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class AuthService {
+
+    private static final AuthService INSTANCE = new AuthService();
+
+    private final UserService userService = UserService.getInstance();
+    private final AuthRecordService recordService = AuthRecordService.getInstance();
+
+    /**
+     * Gets the singleton instance of AuthService.
+     *
+     * @return AuthService instance
+     */
+    public static AuthService getInstance() {
+        return INSTANCE;
+    }
 
     /**
      * Registers a new user.
@@ -66,26 +81,22 @@ public final class AuthService {
      * @return AuthResult indicating success or failure
      */
     public AuthResult<AuthStatus, Void> register(@NonNull RegisterDTO dto) {
-        try (Connection conn = DBConnection.getConnection()) {
-            UserService userService = new UserService(conn);
-
+        try {
             String email = normalize(dto.getEmail());
-            String username = normalize(dto.getUsername());
+            String username = UsernameGenerator.generate(email);
 
             // Check duplicate
             if (userService.existsByEmail(email))
                 return AuthResult.fail(AuthStatus.EMAIL_EXISTS);
 
-            if (userService.existsByUsername(username))
-                return AuthResult.fail(AuthStatus.USERNAME_EXISTS);
-
             // Create a new user
             User newUser = new User();
             newUser.setEmail(email);
             newUser.setUsername(username);
+            newUser.setStatus(UserStatus.ACTIVE);
 
             // Hash password securely (Argon2)
-            String hashedPassword = PasswordUtil.hash(dto.getPassword());
+            String hashedPassword = PasswordUtils.hash(dto.getPassword());
             newUser.setPasswordHash(hashedPassword);
 
             // Persist user to the database
@@ -95,7 +106,7 @@ public final class AuthService {
                     "New User Registered: " + newUser.getUsername());
             return AuthResult.ok(AuthStatus.REGISTER_SUCCESS);
 
-        } catch (AppException | SQLException e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return AuthResult.fail(AuthStatus.REGISTER_FAILED);
         }
@@ -112,11 +123,9 @@ public final class AuthService {
             @NonNull LoginDTO form,
             @NonNull RequestInfoDTO reqInfo
     ) {
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
-
+        try {
             // Verify credential (username and password)
-            AuthUser authUser = verifyCredential(conn, form);
+            AuthUser authUser = verifyCredential(form);
             if (authUser == null)
                 return AuthResult.fail(AuthStatus.INVALID_CREDENTIALS);
 
@@ -129,7 +138,7 @@ public final class AuthService {
 
             AuthToken authToken = new AuthToken(
                     SecurityKeys.TOKEN_AUTH,
-                    TokenUtil.generateToken(),
+                    TokenUtils.generateToken(),
                     sessionInfo.getExpiredAt()
             );
             tokens.add(authToken);
@@ -137,7 +146,7 @@ public final class AuthService {
             String deviceId = reqInfo.getCookieValue(SecurityKeys.TOKEN_DEVICE_ID);
             AuthToken deviceToken = new AuthToken(
                     SecurityKeys.TOKEN_DEVICE_ID,
-                    deviceId != null ? deviceId : TokenUtil.generateToken(),
+                    deviceId != null ? deviceId : TokenUtils.generateToken(),
                     sessionInfo.getExpiredAt()
             );
             tokens.add(deviceToken);
@@ -146,8 +155,8 @@ public final class AuthService {
             AuthContext context = new AuthContext(authUser, sessionInfo, tokens);
 
             // Save new auth record
-            String authHash = TokenUtil.hashToken(authToken.getValue());
-            String deviceIdHash = TokenUtil.hashToken(deviceToken.getValue());
+            String authHash = TokenUtils.hashToken(authToken.getValue());
+            String deviceIdHash = TokenUtils.hashToken(deviceToken.getValue());
 
             AuthRecord record = new AuthRecord();
             record.setUserId(authUser.getId());
@@ -166,7 +175,7 @@ public final class AuthService {
                     "New Login Record: \n" + record.toString());
             return AuthResult.ok(AuthStatus.LOGIN_SUCCESS, context);
 
-        } catch (AppException | SQLException e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return AuthResult.fail(AuthStatus.LOGIN_FAILED);
         }
@@ -202,7 +211,7 @@ public final class AuthService {
             return false;
 
         // Generate new token
-        String newToken = TokenUtil.generateToken();
+        String newToken = TokenUtils.generateToken();
         AuthToken newAuthToken = new AuthToken(
                 SecurityKeys.TOKEN_AUTH, newToken, session.getExpiredAt());
 
@@ -211,11 +220,10 @@ public final class AuthService {
         context.updateToken(newAuthToken);
 
         // Update auth record
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
+        try {
             recordService.updateByToken(reqInfo, newToken, oldToken);
             return true;
-        } catch (Exception e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return false;
         }
@@ -238,10 +246,7 @@ public final class AuthService {
         if (rawAuthToken == null || rawDeviceId == null)
             return null;
 
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
-            UserService userService = new UserService(conn);
-
+        try {
             // Get the current auth record by token
             Optional<AuthRecord> recordOpt = recordService.findValidByRawToken(rawAuthToken);
             if (recordOpt.isEmpty())
@@ -255,7 +260,7 @@ public final class AuthService {
                 return null;
 
             // Check device ID match
-            String deviceIdHash = TokenUtil.hashToken(rawDeviceId);
+            String deviceIdHash = TokenUtils.hashToken(rawDeviceId);
             if (!deviceIdHash.equals(record.getDeviceId()))
                 return null;
 
@@ -298,7 +303,7 @@ public final class AuthService {
             recordService.save(userId, record);
 
             return context;
-        } catch (Exception e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
             return null;
         }
@@ -310,14 +315,12 @@ public final class AuthService {
      * @param token raw auth token
      */
     public void clearAuthState(String token) {
-        try (Connection conn = DBConnection.getConnection()) {
-            AuthRecordService recordService = new AuthRecordService(conn);
-
+        try {
             if (token == null || token.isBlank())
                 return;
 
             recordService.revokeByRawToken(token);
-        } catch (Exception e) {
+        } catch (AppException e) {
             LoggerUtil.error(AuthService.class, e.getMessage(), e);
         }
     }
@@ -328,15 +331,13 @@ public final class AuthService {
      * @param dto login input
      * @return authenticated AuthUser or null if invalid
      */
-    public AuthUser verifyCredential(Connection conn, LoginDTO dto) {
-        UserService userService = new UserService(conn);
-
-        String username = normalize(dto.getUsername());
-        User user = userService.getActiveByUsername(username);
+    public AuthUser verifyCredential(LoginDTO dto) {
+        String email = normalize(dto.getEmail());
+        User user = userService.getActiveByEmail(email);
         if (user == null)
             return null;
 
-        if (!PasswordUtil.verify(dto.getPassword(), user.getPasswordHash()))
+        if (!PasswordUtils.verify(dto.getPassword(), user.getPasswordHash()))
             return null;
 
         List<UserStoreRole> roles = userService.getRolesOf(user);

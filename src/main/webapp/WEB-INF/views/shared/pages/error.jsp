@@ -55,10 +55,10 @@
         </c:if>
 
         <a href="${area eq 'ADMIN' ? 'admin/dashboard' : 'home'}"
-           class="btn btn-primary px-4">
+           class="btn btn-primary--filled px-4">
             ${i18n.trans("general.button.backToHome")}
         </a>
-        <a href="javascript:history.back()" class="btn btn-outline-secondary px-4 ms-2">
+        <a href="javascript:history.back()" class="btn btn-neutral--outlined px-4 ms-2">
             ${i18n.trans("general.button.backToPreviousPage")}
         </a>
     </div>

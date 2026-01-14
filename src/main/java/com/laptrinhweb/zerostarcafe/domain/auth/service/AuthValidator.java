@@ -22,8 +22,8 @@ import java.util.Map;
  * </pre>
  *
  * @author Dang Van Trung
- * @version 1.0.0
- * @lastModified 28/10/2025
+ * @version 1.0.1
+ * @lastModified 28/12/2025
  * @since 1.0.0
  */
 public final class AuthValidator {
@@ -35,7 +35,7 @@ public final class AuthValidator {
     /**
      * Validate new user registration fields.
      */
-    public static ValidationResult registerCheck(String email, String username, String password) {
+    public static ValidationResult registerCheck(String email, String password) {
         Map<String, String> errors = new LinkedHashMap<>();
 
         String emailErr = Validator.field("email", email)
@@ -43,15 +43,7 @@ public final class AuthValidator {
                 .email()
                 .maxLength(100)
                 .getError();
-        if (emailErr != null) errors.put("regEmail", emailErr);
-
-        String userErr = Validator.field("username", username)
-                .notEmpty()
-                .username()
-                .minLength(3)
-                .maxLength(32)
-                .getError();
-        if (userErr != null) errors.put("regUsername", userErr);
+        if (emailErr != null) errors.put("email", emailErr);
 
         String passErr = Validator.field("password", password)
                 .notEmpty()
@@ -59,7 +51,7 @@ public final class AuthValidator {
                 .minLength(6)
                 .maxLength(32)
                 .getError();
-        if (passErr != null) errors.put("regPassword", passErr);
+        if (passErr != null) errors.put("password", passErr);
 
         return ValidationResult.merge(errors);
     }
@@ -67,20 +59,58 @@ public final class AuthValidator {
     /**
      * Validate login fields (usually only username & password)
      */
-    public static ValidationResult loginCheck(String username, String password) {
+    public static ValidationResult loginCheck(String email, String password) {
         Map<String, String> errors = new LinkedHashMap<>();
 
-        String userErr = Validator.field("username", username)
+        String userErr = Validator.field("email", email)
                 .notEmpty()
-                .username()
+                .email()
                 .getError();
-        if (userErr != null) errors.put("loginUsername", userErr);
+        if (userErr != null) errors.put("email", userErr);
 
         String passErr = Validator.field("password", password)
                 .notEmpty()
-                .minLength(6)
                 .getError();
-        if (passErr != null) errors.put("loginPassword", passErr);
+        if (passErr != null) errors.put("password", passErr);
+
+        return ValidationResult.merge(errors);
+    }
+
+    /**
+     * Validate forgot-password email field.
+     */
+    public static ValidationResult forgotPasswordCheck(String email) {
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        String emailErr = Validator.field("email", email)
+                .notEmpty()
+                .email()
+                .maxLength(100)
+                .getError();
+        if (emailErr != null) errors.put("email", emailErr);
+
+        return ValidationResult.merge(errors);
+    }
+
+    /**
+     * Validate reset-password fields.
+     */
+    public static ValidationResult resetPasswordCheck(String password, String confirmPassword) {
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        String passErr = Validator.field("password", password)
+                .notEmpty()
+                .passwordBasic()
+                .minLength(6)
+                .maxLength(32)
+                .getError();
+        if (passErr != null) errors.put("password", passErr);
+
+        String confirmErr = Validator.field("confirmPassword", confirmPassword)
+                .notEmpty()
+                .equalTo(password)
+                .getError();
+        if (confirmErr != null) errors.put("confirmPassword", confirmErr);
 
         return ValidationResult.merge(errors);
     }

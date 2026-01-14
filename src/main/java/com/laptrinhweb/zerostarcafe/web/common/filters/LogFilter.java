@@ -1,7 +1,8 @@
 package com.laptrinhweb.zerostarcafe.web.common.filters;
 
+import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.LoggerUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.PathUtil;
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,10 +12,11 @@ import java.io.IOException;
 
 /**
  * Logs each dynamic HTTP request with method, URI, status, and response time.
+ * Also logs CSRF token information for debugging state-changing requests.
  *
  * @author Dang Van Trung
- * @version 1.0.2
- * @lastModified 23/11/2025
+ * @version 1.0.5
+ * @lastModified 03/01/2026
  * @since 1.0.0
  */
 @WebFilter(filterName = "LogFilter", urlPatterns = "/*")
@@ -30,12 +32,15 @@ public class LogFilter implements Filter {
         String uri = request.getRequestURI();
         long start = System.currentTimeMillis();
 
-        // Skip static file
-        String path = uri.substring(request.getContextPath().length());
-
-        if (PathUtil.isStatic(path)) {
+        // Skip static files
+        if (RequestUtils.isStaticRequest(request)) {
             chain.doFilter(req, resp);
             return;
+        }
+
+        // Log CSRF token info for state-changing methods
+        if (!"GET".equals(request.getMethod())) {
+            logCsrfDebugInfo(request);
         }
 
         chain.doFilter(req, resp);
@@ -50,5 +55,19 @@ public class LogFilter implements Filter {
                         response.getStatus(),
                         duration)
         );
+    }
+
+    /**
+     * Logs CSRF token information for debugging state-changing requests.
+     */
+    private void logCsrfDebugInfo(HttpServletRequest request) {
+        String headerToken = request.getHeader(SecurityKeys.CSRF_HEADER_NAME);
+        String paramToken = request.getParameter(SecurityKeys.CSRF_PARAM_NAME);
+        
+        LoggerUtil.debug(getClass(),
+            String.format("[CSRF Debug] URI: %s | Header: %s | Param: %s",
+                request.getRequestURI(),
+                headerToken != null ? "✓" : "✗",
+                paramToken != null ? "✓" : "✗"));
     }
 }

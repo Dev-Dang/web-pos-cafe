@@ -44,7 +44,7 @@ public class QuickInventoryServlet extends HttpServlet {
             long userId = 1;
 
             if (sessionObj instanceof AuthUser) {
-                userId = ((AuthUser) sessionObj).userId();
+                userId = ((AuthUser) sessionObj).getId();
             }
 
             AdminDAO dao = new AdminDAO();

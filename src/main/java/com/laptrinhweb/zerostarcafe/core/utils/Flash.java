@@ -43,7 +43,7 @@ public final class Flash {
     }
 
     // ==== Message Types ====
-    private enum MsgType {success, error, warn, info, normal}
+    public enum MsgType {success, error, warn, info, normal}
 
     public record Message(MsgType type, String msgKey) {
     }

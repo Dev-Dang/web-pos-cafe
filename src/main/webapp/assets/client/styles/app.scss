@@ -1,7 +1,18 @@
 @import "../../shared/styles/base/global";
 @import "../../shared/styles/base/variables";
+@import "../../shared/styles/components/scrollbar";
+@import "../../shared/styles/components/button";
 
 @import "components/dropdown";
 @import "components/form";
+@import "components/search";
+@import "components/category";
+@import "components/product";
+@import "components/cart";
+@import "components/payment-modal";
+@import "components/modal/payment-success";
+@import "components/modal";
+@import "components/checkout";
+@import "components/invoice";
 
-@import "pages/menu";
+@import "pages/homepage";

@@ -5,33 +5,25 @@
     <Resource name="jdbc/ZeroStarDB"
               auth="Container"
               type="javax.sql.DataSource"
-              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              factory="com.zaxxer.hikari.HikariJNDIFactory"
 
               driverClassName="com.mysql.cj.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/zerostar_cf?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8"
+              jdbcUrl="jdbc:mysql://localhost:3306/zerostar_cf"
               username="root"
               password=""
 
-              initialSize="5"
-              maxActive="30"
-              minIdle="5"
-              maxIdle="15"
-              maxWaitMillis="30000"
+              maximumPoolSize="30"
+              minimumIdle="5"
+              connectionTimeout="30000"
+              idleTimeout="600000"
+              maxLifetime="1800000"
+              validationTimeout="5000"
+              connectionTestQuery="SELECT 1"
+              leakDetectionThreshold="60000"
+              transactionIsolation="TRANSACTION_REPEATABLE_READ"
 
-              validationQuery="SELECT 1"
-              validationQueryTimeout="5"
-
-              timeBetweenEvictionRunsMillis="600000"
-              testWhileIdle="true"
-
-              removeAbandoned="true"
-              removeAbandonedTimeout="60"
-
-              defaultTransactionIsolation="REPEATABLE_READ"
-              poolPreparedStatements="true"
-              maxOpenPreparedStatements="100"
+              dataSource.cachePrepStmts="true"
+              dataSource.prepStmtCacheSize="100"
+              dataSource.prepStmtCacheSqlLimit="2048"
     />
-
-    <!--    <Manager className="org.redisson.tomcat.RedissonSessionManager"-->
-    <!--             configPath="${catalina.base}/conf/redisson.yaml"/>-->
 </Context>

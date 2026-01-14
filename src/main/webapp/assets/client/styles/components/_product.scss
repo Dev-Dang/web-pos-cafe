@@ -1,0 +1,133 @@
+﻿.product-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: $color-white;
+  border-radius: $radius-lg;
+  height: 100%;
+  cursor: pointer;
+  overflow: hidden;
+
+  // Sold-out state
+  &.is-sold-out {
+    cursor: not-allowed;
+    pointer-events: none;
+
+    // Gray filter on entire card
+    filter: grayscale(0.8);
+    opacity: 0.75;
+
+    // Add gray overlay on image
+    .product-card__media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(245, 245, 244, 0.6);
+      pointer-events: none;
+    }
+  }
+}
+
+.product-card__media {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative; // For sold-out overlay
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.05);
+}
+
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  flex: 1;
+}
+
+.product-card__top {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.product-card__title {
+  font-size: $font-size-xl;
+  line-height: $line-height-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.product-card__desc {
+  display: none; // Not shown in Figma design
+}
+
+.product-card__price {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: flex-end;
+  line-height: 0;
+}
+
+.product-card__price-current {
+  font-size: $font-size-xl;
+  line-height: $line-height-lg;
+  font-weight: $font-weight-bold;
+  color: $primary;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.product-card__price-original {
+  font-size: $font-size-base;
+  line-height: $line-height-rem-base;
+  font-weight: $font-weight-base;
+  color: $text-disabled-color;
+  text-decoration: line-through;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+  white-space: nowrap;
+}
+
+.product-card__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: $primary;
+  padding: $spacing-sm $spacing-md;
+  border-radius: 0 $radius-lg 0 $radius-xl;
+  box-shadow: inset 0 16px 32px -4px rgba(12, 12, 13, 0.1);
+  z-index: 1;
+
+  p {
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    font-weight: $font-weight-semibold;
+    color: $color-white;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+/* Sold-out badge variant */
+.product-card[data-sold-out="true"] .product-card__badge {
+  background-color: $color-stone-500;
+}
