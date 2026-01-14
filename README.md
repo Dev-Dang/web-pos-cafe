@@ -11,7 +11,7 @@ structured authentication system.
 | **Language**           | Java 21+                                     |
 | **Web Container**      | Apache Tomcat 11 (Jakarta EE 10)             |
 | **Database**           | MySQL 8.x                                    |
-| **Connection Pooling** | Apache DBCP2 via Tomcat JNDI                 |
+| **Connection Pooling** | HikariCP via Tomcat JNDI                 |
 | **Logging**            | Logback (daily rolling logs)                 |
 | **UI**                 | JSP, Bootstrap 5, SCSS, shared layout system |
 
@@ -214,7 +214,8 @@ Initializes all authentication-related services and registers them inside `Servl
 ## 9. SCSS Build
 
 ```
-sass ./app.scss ./app.css -w -q
+sass ./src/main/webapp/assets/client/styles/app.scss ./src/main/webapp/assets/client/styles/app.css -w -q
+sass ./src/main/webapp/assets/shared/styles/base.scss ./src/main/webapp/assets/shared/styles/base.css -w -q
 ```
 
 ## 10. Application URL

@@ -23,14 +23,14 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 public final class LoginDTO {
-    private final String username;
+    private final String email;
     private final String password;
 
     public Map<String, String> formState() {
-        return Map.of("loginUsername", username);
+        return Map.of("email", email);
     }
 
     public ValidationResult validate() {
-        return AuthValidator.loginCheck(username, password);
+        return AuthValidator.loginCheck(email, password);
     }
 }

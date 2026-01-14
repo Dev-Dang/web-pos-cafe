@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zero Star Cafe - POS Homepage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    />
+    <link rel="stylesheet" href="assets/shared/styles/base.css" />
+    <link rel="stylesheet" href="assets/client/styles/app.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+  </head>
+  <body class="page">
+    <header class="site-header header">
+      <div class="page-container">
+        <div class="site-header__inner">
+          <a class="site-brand" href="#">ZERO STAR CAFE</a>
+
+          <div class="dropdown store-dropdown">
+            <button
+              class="btn btn-md dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <div class="store-tool">
+                <span class="icon-base text-primary"
+                  ><i class="fi fi-rr-marker"></i
+                ></span>
+                <div class="store-pickup">
+                  <span class="store-name">Chi nhánh DH Nông Lâm</span>
+                  <span class="store-address"
+                    >KP 6, Linh Trung, Thủ Đức, TP.HCM</span
+                  >
+                </div>
+                <span class="icon-base"
+                  ><i class="fi fi-rr-angle-small-down"></i
+                ></span>
+              </div>
+            </button>
+            <ul class="dropdown-menu">
+              <li class="store-chip">
+                <a class="dropdown-item active" href="#">
+                  <div class="store-detail">
+                    <p class="store-name mb-0">Chi nhánh DH Nông Lâm</p>
+                    <p class="store-address mb-0">
+                      KP 6, Linh Trung, Thủ Đức, TP.HCM
+                    </p>
+                  </div>
+                  <span class="store-check icon-base"
+                    ><i class="fi fi-sr-check-circle"></i
+                  ></span>
+                </a>
+              </li>
+              <li class="store-chip">
+                <a class="dropdown-item" href="#">
+                  <div class="store-detail">
+                    <p class="store-name mb-0">Chi nhánh Quận 1</p>
+                    <p class="store-address mb-0">
+                      39 Lê Duẩn, Bến Nghé, Quận 1, TP.HCM
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="site-header__actions">
+            <button class="btn btn-md btn-primary--filled">Đăng nhập</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <div class="page-container">
+        <div class="row g-5">
+          <div class="col-lg-8 col-12">
+            <section class="product-section">
+              <div
+                class="d-flex align-items-center justify-content-end gap-4 flex-wrap"
+              >
+                <div class="search-field search-field--wide">
+                  <input
+                    class="search-field__input"
+                    type="text"
+                    placeholder="Uống gì nè bạn?"
+                  />
+                  <span class="search-field__icon icon-base"
+                    ><i class="fi fi-rr-search"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div
+                id="heroCarousel"
+                class="carousel slide hero"
+                data-bs-ride="carousel"
+                data-bs-interval="5000"
+              >
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img
+                      src="assets/client/img/banner/banner-2.png"
+                      class="d-block w-100"
+                      alt="Banner"
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="assets/client/img/banner/banner-3.png"
+                      class="d-block w-100"
+                      alt="Banner"
+                    />
+                  </div>
+                </div>
+                <div class="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                  ></button>
+                </div>
+              </div>
+
+              <div class="category-slider" data-category-slider>
+                <button
+                  class="category-nav category-nav--prev"
+                  type="button"
+                  data-category-prev
+                >
+                  <span class="icon-base"
+                    ><i class="fi fi-rr-angle-small-left"></i
+                  ></span>
+                </button>
+                <button
+                  class="category-nav category-nav--next"
+                  type="button"
+                  data-category-next
+                >
+                  <span class="icon-base"
+                    ><i class="fi fi-rr-angle-small-right"></i
+                  ></span>
+                </button>
+                <div class="category-track scroll-hidden" data-category-track>
+                  <button
+                    class="category-item is-active"
+                    type="button"
+                    data-category-item
+                    data-category-name="Americano"
+                  >
+                    <img
+                      class="category-image"
+                      src="assets/client/img/categories/americano.png"
+                      alt="Americano"
+                    />
+                    <span class="category-label">Americano</span>
+                  </button>
+                  <button
+                    class="category-item"
+                    type="button"
+                    data-category-item
+                    data-category-name="Cappuccino"
+                  >
+                    <img
+                      class="category-image"
+                      src="assets/client/img/categories/espresso.png"
+                      alt="Cappuccino"
+                    />
+                    <span class="category-label">Cappuccino</span>
+                  </button>
+                  <button
+                    class="category-item"
+                    type="button"
+                    data-category-item
+                    data-category-name="Latte"
+                  >
+                    <img
+                      class="category-image"
+                      src="assets/client/img/categories/latte.png"
+                      alt="Latte"
+                    />
+                    <span class="category-label">Latte</span>
+                  </button>
+                  <button
+                    class="category-item"
+                    type="button"
+                    data-category-item
+                    data-category-name="Trà sữa"
+                  >
+                    <img
+                      class="category-image"
+                      src="assets/client/img/categories/milk-tea.png"
+                      alt="Trà sữa"
+                    />
+                    <span class="category-label">Trà sữa</span>
+                  </button>
+                  <button
+                    class="category-item"
+                    type="button"
+                    data-category-item
+                    data-category-name="Matcha"
+                  >
+                    <img
+                      class="category-image"
+                      src="assets/client/img/categories/matcha.png"
+                      alt="Matcha"
+                    />
+                    <span class="category-label">Matcha</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="section-header">
+                <h5 class="section-title mb-0" data-category-title>
+                  Menu cà phê
+                </h5>
+                <span class="section-meta" data-category-meta>
+                  Dang xem: Menu cà phê
+                </span>
+              </div>
+
+              <div class="product-grid" data-product-grid>
+                <!-- Product 1: Promotion -->
+                <article
+                  class="product-card"
+                  data-product-card
+                  data-menu-item-id="1001"
+                  data-store-menu-item-id="501"
+                  data-category-id="10"
+                  data-availability-status="available"
+                  data-product-name="Cà phê sữa đá"
+                  data-product-desc="Cà phê rang xay đậm đà pha cùng sữa đặc béo mịn, hương vị Việt Nam quen thuộc, ngọt dịu và thơm lâu."
+                  data-product-current-price="26000"
+                  data-product-original-price="32000"
+                  data-product-image="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop"
+                >
+                  <div class="product-card__media">
+                    <img
+                      src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop"
+                      class="product-card__image"
+                      alt="Cà phê sữa đá"
+                    />
+                  </div>
+                  <div class="product-card__info">
+                    <div class="product-card__top">
+                      <p class="product-card__title mb-0">Cà phê sữa đá</p>
+                    </div>
+                    <div class="product-card__price">
+                      <span class="product-card__price-current"></span>
+                      <span class="product-card__price-original"></span>
+                    </div>
+                  </div>
+                  <div class="product-card__badge" style="display: none">
+                    <p></p>
+                  </div>
+                </article>
+
+                <!-- Product 2: Normal -->
+                <article
+                  class="product-card"
+                  data-product-card
+                  data-menu-item-id="1002"
+                  data-store-menu-item-id="501"
+                  data-category-id="10"
+                  data-availability-status="available"
+                  data-product-name="Bạc xỉu"
+                  data-product-desc="Sữa tươi kết hợp cà phê nhẹ, vị béo ngậy, ngọt vừa phải; lựa chọn ưa chuộng cho buổi sáng nhẹ nhàng."
+                  data-product-current-price="29000"
+                  data-product-original-price=""
+                  data-product-image="https://images.unsplash.com/photo-1524350876685-274059332603?q=80&w=800&auto=format&fit=crop"
+                >
+                  <div class="product-card__media">
+                    <img
+                      src="https://images.unsplash.com/photo-1524350876685-274059332603?q=80&w=800&auto=format&fit=crop"
+                      class="product-card__image"
+                      alt="Bạc xỉu"
+                    />
+                  </div>
+                  <div class="product-card__info">
+                    <div class="product-card__top">
+                      <p class="product-card__title mb-0">Bạc xỉu</p>
+                    </div>
+                    <div class="product-card__price">
+                      <span class="product-card__price-current"></span>
+                      <span class="product-card__price-original"></span>
+                    </div>
+                  </div>
+                  <div class="product-card__badge" style="display: none">
+                    <p></p>
+                  </div>
+                </article>
+
+                <!-- Product 3: Sold Out -->
+                <article
+                  class="product-card"
+                  data-product-card
+                  data-menu-item-id="1003"
+                  data-store-menu-item-id="501"
+                  data-category-id="12"
+                  data-availability-status="sold_out"
+                  data-sold-out="true"
+                  aria-disabled="true"
+                  style="
+                    opacity: 0.6;
+                    filter: grayscale(1);
+                    cursor: not-allowed;
+                    pointer-events: none;
+                  "
+                  data-product-name="Trà đào cam sả"
+                  data-product-desc="Trà đen hảo hạng kết hợp đào thơm và cam sả tươi mát, vị ngọt dịu, chua nhẹ; giải khát tuyệt vời."
+                  data-product-current-price="39000"
+                  data-product-original-price=""
+                  data-product-image="https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=800&auto=format&fit=crop"
+                >
+                  <div class="product-card__media" style="position: relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=800&auto=format&fit=crop"
+                      class="product-card__image"
+                      alt="Trà đào cam sả"
+                    />
+                    <div
+                      class="product-card__overlay"
+                      style="
+                        position: absolute;
+                        inset: 0;
+                        background: rgba(245, 245, 244, 0.7);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 600;
+                        color: #222;
+                      "
+                    >
+                      Hết hàng
+                    </div>
+                  </div>
+                  <div class="product-card__info">
+                    <div class="product-card__top">
+                      <p class="product-card__title mb-0">Trà đào cam sả</p>
+                    </div>
+                    <div class="product-card__price">
+                      <span class="product-card__price-current"></span>
+                      <span class="product-card__price-original"></span>
+                    </div>
+                  </div>
+                  <div class="product-card__badge">
+                    <p></p>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          <!-- Sidebar Cart -->
+          <div class="col-lg-4 col-12 d-none d-lg-block">
+            <aside class="cart-panel">
+              <h5 class="cart-title mb-3">
+                Giỏ hàng <span class="cart-count" data-cart-count>0</span>
+              </h5>
+              <div class="cart-list" data-cart-list>
+                <!-- Cart items loaded from localStorage -->
+              </div>
+              <div class="cart-summary">
+                <div class="cart-summary__row total">
+                  <span>Tổng cộng</span>
+                  <span data-cart-total>0 Đ</span>
+                </div>
+              </div>
+              <button
+                class="btn btn-lg btn-primary--filled w-100"
+                data-view-cart
+              >
+                Xem giỏ hàng
+              </button>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="page-container">
+        <h5 class="site-footer__title mb-4">
+          Công ty TNHH OALL Coffee Việt Nam
+        </h5>
+        <div>
+          <div class="site-footer__row">
+            <span class="icon-base text-primary">
+              <i class="fi fi-rr-id-card"></i>
+            </span>
+            <span>Giấy phép kinh doanh số: 0123456789</span>
+          </div>
+          <div class="site-footer__row">
+            <span class="icon-base text-primary">
+              <i class="fi fi-rr-marker"></i>
+            </span>
+            <span>
+              Văn phòng: Tòa MPlaza - 39 Lê Duẩn, Bến Nghé, Quận 1, TP.HCM
+            </span>
+          </div>
+          <div class="site-footer__row">
+            <span class="icon-base text-primary">
+              <i class="fi fi-rr-envelope"></i>
+            </span>
+            <span>Email: cskh@oall-coffee.vn</span>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span class="text-muted mb-0">
+            Bản quyền &copy; 2025 thuộc về Công ty TNHH Coffee Việt Nam
+          </span>
+          <button class="btn btn-md btn-neutral--outlined">
+            <span class="icon-base"><i class="fi fi-rr-globe"></i></span>
+            <span>Tiếng Việt</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav d-lg-none">
+      <a href="#" class="bottom-nav__item active">
+        <span class="bottom-nav__icon"><i class="fi fi-rr-home"></i></span>
+        <span class="bottom-nav__label">Trang chủ</span>
+      </a>
+      <a href="#" class="bottom-nav__item">
+        <span class="bottom-nav__icon"><i class="fi fi-rr-search"></i></span>
+        <span class="bottom-nav__label">Tìm kiếm</span>
+      </a>
+      <a
+        href="#"
+        class="bottom-nav__item bottom-nav__item--cart"
+        data-cart-toggle
+      >
+        <span class="bottom-nav__icon">
+          <i class="fi fi-rr-shopping-cart"></i>
+          <span class="bottom-nav__badge" data-cart-count>0</span>
+        </span>
+        <span class="bottom-nav__label">Giỏ hàng</span>
+      </a>
+      <a href="#" class="bottom-nav__item">
+        <span class="bottom-nav__icon"><i class="fi fi-rr-user"></i></span>
+        <span class="bottom-nav__label">Tài khoản</span>
+      </a>
+    </nav>
+
+    <!-- Mobile Cart Drawer -->
+    <div class="mobile-cart-drawer" data-mobile-cart>
+      <div class="mobile-cart-drawer__backdrop" data-cart-close></div>
+      <div class="mobile-cart-drawer__panel">
+        <div class="mobile-cart-drawer__header">
+          <h5 class="mb-0">Giỏ hàng <span class="cart-count"></span></h5>
+          <button class="btn-close" data-cart-close></button>
+        </div>
+        <div class="mobile-cart-drawer__body">
+          <div class="cart-list" data-cart-list>
+            <!-- Cart items synced from localStorage -->
+          </div>
+        </div>
+        <div class="mobile-cart-drawer__footer">
+          <div class="cart-summary">
+            <div class="cart-summary__row total">
+              <span>Tổng cộng</span>
+              <span data-cart-total>0 Đ</span>
+            </div>
+          </div>
+          <button class="btn btn-lg btn-primary--filled w-100" data-view-cart>
+            Xem giỏ hàng
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Container & Templates -->
+    <div id="modal-container"></div>
+    <div id="modal-template" class="d-none">
+      <script type="text/template" id="tpl-modal-product">
+        <div class="modal product-modal" tabindex="-1">
+          <div class="modal-dialog modal-lg product-modal__dialog">
+            <div class="modal-content">
+              <button class="product-modal__close" type="button" data-bs-dismiss="modal">
+                <span class="icon-base"><i class="fi fi-rr-cross-small"></i></span>
+              </button>
+
+              <div class="row g-3 product-modal__panel">
+                <!-- Column 1: Product Info -->
+                <div class="col-lg-4 col-md-6 col-12 product-modal__col product-modal__col-1">
+                  <div class="product-modal__info">
+                    <div class="product-modal__top">
+                      <div class="d-flex align-items-start justify-content-between gap-2 w-100">
+                        <p class="product-modal__title flex-grow-1 mb-0" data-modal-name>
+                          Tên sản phẩm
+                        </p>
+                        <div class="product-modal__badge">
+                          <p class="mb-0"></p>
+                        </div>
+                      </div>
+                      <p class="product-modal__desc mb-0" data-modal-desc>
+                        Mô tả sản phẩm
+                      </p>
+                    </div>
+                    <div class="product-modal__price d-flex flex-wrap align-items-end gap-2">
+                      <span class="product-modal__price-current" data-modal-price>0đ</span>
+                      <span class="product-modal__price-old" data-modal-old-price></span>
+                    </div>
+                  </div>
+                  <div class="product-modal__image-wrapper">
+                    <img
+                      src="assets/client/img/product/soda-dao.png"
+                      class="product-modal__image"
+                      alt="Sản phẩm"
+                      data-modal-image
+                    />
+                  </div>
+                </div>
+
+                <!-- Column 2: Single Choice Options -->
+                <div class="col-lg-4 col-md-6 col-12 product-modal__col product-modal__col-2">
+                  <div class="product-modal__body product-modal__body-single">
+                    <div class="product-modal__section">
+                      <div class="product-modal__section-header">
+                        <span>Chọn Size</span>
+                        <span class="product-modal__section-sub">(Bắt buộc)</span>
+                      </div>
+                      <div class="option-group">
+                        <button class="option-card" type="button" data-option-item data-option-group="size" data-option-type="single" data-option-value="S" data-option-price="0">
+                          S
+                        </button>
+                        <button class="option-card" type="button" data-option-item data-option-group="size" data-option-type="single" data-option-value="M" data-option-price="5000">
+                          M + 5,000đ
+                        </button>
+                        <button class="option-card is-active" type="button" data-option-item data-option-group="size" data-option-type="single" data-option-value="XL" data-option-price="10000">
+                          XL + 10,000đ
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="product-modal__section">
+                      <div class="product-modal__section-header">
+                        <span>Mức Đá</span>
+                        <span class="product-modal__section-sub">(Bắt buộc)</span>
+                      </div>
+                      <div class="option-group">
+                        <button class="option-card" type="button" data-option-item data-option-group="ice" data-option-type="single" data-option-value="Không đá" data-option-price="0">
+                          Không đá
+                        </button>
+                        <button class="option-card is-active" type="button" data-option-item data-option-group="ice" data-option-type="single" data-option-value="Đá riêng" data-option-price="0">
+                          Đá riêng
+                        </button>
+                        <button class="option-card" type="button" data-option-item data-option-group="ice" data-option-type="single" data-option-value="Ít đá" data-option-price="0">
+                          Ít đá
+                        </button>
+                        <button class="option-card" type="button" data-option-item data-option-group="ice" data-option-type="single" data-option-value="Bình thường" data-option-price="0">
+                          Bình thường
+                        </button>
+                        <button class="option-card" type="button" data-option-item data-option-group="ice" data-option-type="single" data-option-value="Nhiều đá" data-option-price="0">
+                          Nhiều đá
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="product-modal__section">
+                      <div class="product-modal__section-header">
+                        <span>Độ ngọt</span>
+                        <span class="product-modal__section-sub">(Bắt buộc)</span>
+                      </div>
+                      <div class="option-group">
+                        <button class="option-card" type="button" data-option-item data-option-group="sweetness" data-option-type="single" data-option-value="0%" data-option-price="0">
+                          0%
+                        </button>
+                        <button class="option-card" type="button" data-option-item data-option-group="sweetness" data-option-type="single" data-option-value="30%" data-option-price="0">
+                          30%
+                        </button>
+                        <button class="option-card" type="button" data-option-item data-option-group="sweetness" data-option-type="single" data-option-value="50%" data-option-price="0">
+                          50%
+                        </button>
+                        <button class="option-card" type="button" data-option-item data-option-group="sweetness" data-option-type="single" data-option-value="70%" data-option-price="0">
+                          70%
+                        </button>
+                        <button class="option-card is-active" type="button" data-option-item data-option-group="sweetness" data-option-type="single" data-option-value="100%" data-option-price="0">
+                          100%
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Column 3: Multi Choice Options & Actions -->
+                <div class="col-lg-4 col-12 product-modal__col product-modal__col-3">
+                  <div class="product-modal__body product-modal__body-multi">
+
+                    <div class="product-modal__section">
+                      <div class="product-modal__section-header">
+                        <span>Topping</span>
+                        <span class="product-modal__section-sub">(Tối đa 4)</span>
+                      </div>
+                      <div class="option-list">
+                        <div class="option-row is-active" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Trân châu đen" data-option-price="5000">
+                          <span class="option-row__check is-active"><i class="fi fi-sr-check"></i></span>
+                          <span>Trân châu đen (+ 5,000đ)</span>
+                        </div>
+                        <div class="option-row" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Trân châu trắng" data-option-price="5000">
+                          <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
+                          <span>Trân châu trắng (+ 5,000đ)</span>
+                        </div>
+                        <div class="option-row" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Sương sáo" data-option-price="3000">
+                          <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
+                          <span>Sương sáo (+ 3,000đ)</span>
+                        </div>
+                        <div class="option-row" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Thạch dừa" data-option-price="5000">
+                          <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
+                          <span>Thạch dừa (+ 5,000đ)</span>
+                        </div>
+                        <div class="option-row" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Thạch rau câu" data-option-price="3000">
+                          <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
+                          <span>Thạch rau câu (+ 3,000đ)</span>
+                        </div>
+                        <div class="option-row" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Pudding" data-option-price="5000">
+                          <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
+                          <span>Pudding (+ 5,000đ)</span>
+                        </div>
+                        <div class="option-row" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Kem cheese" data-option-price="8000">
+                          <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
+                          <span>Kem cheese (+ 8,000đ)</span>
+                        </div>
+                        <div class="option-row" data-option-item data-option-group="topping" data-option-type="multi" data-option-value="Trân châu hoàng kim" data-option-price="7000">
+                          <span class="option-row__check"><i class="fi fi-sr-check"></i></span>
+                          <span>Trân châu hoàng kim (+ 7,000đ)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="product-modal__footer">
+                    <div class="product-modal__note-field">
+                      <label class="product-modal__note-label">Ghi chú</label>
+                      <textarea
+                        class="product-modal__note-input"
+                        data-modal-note
+                        placeholder="Thêm ghi chú cho món này..."
+                        rows="2"
+                        maxlength="200"
+                      ></textarea>
+                    </div>
+                    <div class="product-modal__qty-row">
+                      <span>Số lượng</span>
+                      <div class="modal-stepper" data-modal-stepper>
+                        <button class="modal-stepper__btn" type="button" data-modal-minus>
+                          <i class="fi fi-rr-minus"></i>
+                        </button>
+                        <span class="modal-stepper__value" data-modal-qty>1</span>
+                        <button class="modal-stepper__btn" type="button" data-modal-plus>
+                          <i class="fi fi-rr-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <button class="product-modal__cta" data-modal-action>
+                      <span>Thêm vào giỏ</span>
+                      <span class="product-modal__cta-dot"></span>
+                      <span data-modal-total>23,000đ</span>
+                    </button>
+                  </div>
+                </div><!-- .col-lg-4 -->
+              </div><!-- .row -->
+            </div><!-- .modal-content -->
+          </div><!-- .modal-dialog -->
+        </div><!-- .modal -->
+      </script>
+    </div>
+
+    <script>
+      window.__APP_MODE__ = "development";
+    </script>
+    <script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/shared/js/vendor/validate.min.js"></script>
+    <script type="module" src="assets/shared/js/base.js"></script>
+    <script type="module" src="assets/client/js/modules/mobile-nav.js"></script>
+    <script type="module" src="assets/client/js/main.js"></script>
+  </body>
+</html>

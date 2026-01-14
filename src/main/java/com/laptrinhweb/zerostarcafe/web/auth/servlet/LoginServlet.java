@@ -2,7 +2,6 @@ package com.laptrinhweb.zerostarcafe.web.auth.servlet;
 
 import com.laptrinhweb.zerostarcafe.core.security.SecurityKeys;
 import com.laptrinhweb.zerostarcafe.core.utils.ContextUtil;
-import com.laptrinhweb.zerostarcafe.core.utils.Flash;
 import com.laptrinhweb.zerostarcafe.core.validation.ValidationResult;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.LoginDTO;
 import com.laptrinhweb.zerostarcafe.domain.auth.dto.RequestInfoDTO;
@@ -13,7 +12,13 @@ import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthService;
 import com.laptrinhweb.zerostarcafe.domain.user.model.UserRole;
 import com.laptrinhweb.zerostarcafe.web.auth.mapper.AuthWebMapper;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
+import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
+import com.laptrinhweb.zerostarcafe.web.common.response.Message;
+import com.laptrinhweb.zerostarcafe.web.common.response.RespContext;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
+import com.laptrinhweb.zerostarcafe.web.common.view.View;
+import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -23,21 +28,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Handles user login: validate → authenticate → create session → issue cookies.
  *
  * @author Dang Van Trung
- * @version 1.0.2
- * @lastModified 13/12/2025
+ * @version 1.0.1
+ * @lastModified 02/01/2026
  * @since 1.0.0
  */
-@WebServlet(name = "LoginServlet", urlPatterns = "/auth/login")
+@WebServlet(name = "LoginServlet", urlPatterns = {RouteMap.LOGIN})
 public class LoginServlet extends HttpServlet {
 
     private AuthSessionManager sessionManager;
-    private final AuthService authService = new AuthService();
+    private final AuthService authService = AuthService.getInstance();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -49,19 +55,31 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        // Set auto-open modal flag in response context
+        RespContext.from(req).setData(
+                WebConstants.Flag.RE_OPEN_MODAL,
+                WebConstants.Auth.LOGIN_MODAL
+        );
+
+        // Forward to home page to render full page with modal
+        AppRoute.forward(RouteMap.HOME, req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         // Read login form data
-        String username = req.getParameter("loginUsername");
-        String password = req.getParameter("loginPassword");
-
-        LoginDTO form = new LoginDTO(username, password);
+        LoginDTO form = AuthWebMapper.toLoginDTO(req);
 
         // Validate input
         ValidationResult validation = form.validate();
         if (!validation.valid()) {
-            failedLogin(req, resp, form);
+            Message.error(req, "message.validation_failed");
+            failedLogin(form, validation.fieldErrors(), req, resp);
             return;
         }
 
@@ -73,58 +91,69 @@ public class LoginServlet extends HttpServlet {
                 authService.authenticate(form, reqInfo);
 
         AuthContext context = result.getData();
-        if (context == null || !result.isSuccess()) {
-            failedLogin(req, resp, form);
+        if (result.isSuccess() && context != null) {
+            // Authentication successful → create session and redirect
+            Message.success(req, "message.login_success");
+            successLogin(context, req, resp);
             return;
         }
 
-        // Authentication successful → create session and redirect
-        successLogin(req, resp, context);
+        // Handle known authentication errors
+        Map<String, String> fieldErrors = new HashMap<>();
+        if (result.getStatus() == AuthStatus.INVALID_CREDENTIALS) {
+            Message.error(req, "message.invalid_credentials");
+            fieldErrors.put("email", "form.invalid_credentials");
+            failedLogin(form, fieldErrors, req, resp);
+            return;
+        }
+
+        // Handle unknown errors
+        Message.error(req, "message.login_failed");
+        failedLogin(form, fieldErrors, req, resp);
     }
 
-    private void successLogin(HttpServletRequest req,
-                              HttpServletResponse resp,
-                              AuthContext context) throws IOException {
+    private void successLogin(AuthContext context,
+                              HttpServletRequest req,
+                              HttpServletResponse resp) throws IOException {
 
         // Create session and persist authentication context
         sessionManager.startSession(req, resp, context);
 
-        // Show success message
-        Flash flash = new Flash(req);
-        flash.success("message.login_success").send();
+        // Set flag to trigger cart merge on next page load
+        req.getSession().setAttribute(WebConstants.Attribute.NEED_CART_MERGE, Boolean.TRUE);
 
         // Redirect user to appropriate page
-        String fallback = AppRoute.HOME.getUrl(req);
-        String target = getRedirectPath(context, req, fallback);
-        resp.sendRedirect(target);
+        String redirectPath = getRedirectPath(context);
+        AppRoute.redirect(redirectPath, req, resp);
     }
 
-    private void failedLogin(HttpServletRequest req,
-                             HttpServletResponse resp,
-                             LoginDTO form) throws IOException {
-        // Show fail message
-        Flash flash = new Flash(req);
-        flash.error("message.login_failed")
-                .formResponse(form.formState(), Map.of())
-                .set("openModal", "login")
-                .send();
+    private void failedLogin(LoginDTO form,
+                             Map<String, String> fieldErrors,
+                             HttpServletRequest req,
+                             HttpServletResponse resp) throws IOException, ServletException {
 
-        // Always redirect to the client home page for safe
-        AppRoute.HOME.redirect(req, resp);
+        // Add form data for refill (only email)
+        req.setAttribute(WebConstants.Attribute.FORM_DATA, form.formState());
+
+        // Add validation errors
+        if (fieldErrors != null && !fieldErrors.isEmpty()) {
+            req.setAttribute(WebConstants.Attribute.FORM_ERRORS, fieldErrors);
+        }
+
+        // Return updated form with errors (422 status)
+        resp.setStatus(HttpServletResponse.SC_UNPROCESSABLE_CONTENT);
+        View.render(ViewMap.Client.LOGIN_FORM, req, resp);
     }
 
-    private String getRedirectPath(AuthContext ctx,
-                                   HttpServletRequest req,
-                                   String fallback) {
-
+    private String getRedirectPath(AuthContext ctx) {
         if (ctx == null || ctx.getAuthUser() == null)
-            return fallback;
+            return RouteMap.HOME;
 
         var user = ctx.getAuthUser();
         if (user.hasRole(UserRole.SUPER_ADMIN) || user.hasRole(UserRole.STORE_MANAGER))
-            return AppRoute.DASHBOARD.getUrl(req);
+            return RouteMap.DASHBOARD;
 
         // Normal user
-        return fallback;
+        return RouteMap.HOME;
     }
 }

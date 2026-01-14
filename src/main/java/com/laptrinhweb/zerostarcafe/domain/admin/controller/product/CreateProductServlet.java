@@ -39,7 +39,7 @@ public class CreateProductServlet extends HttpServlet {
 
             if (sessionObj instanceof AuthUser) {
                 AuthUser currentUser = (AuthUser) sessionObj;
-                userId = currentUser.userId();
+                userId = currentUser.getId();
             }
 
             String name = request.getParameter("name");

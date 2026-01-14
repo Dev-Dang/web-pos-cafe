@@ -8,8 +8,9 @@ import com.laptrinhweb.zerostarcafe.domain.user.model.UserStatus;
 import com.laptrinhweb.zerostarcafe.domain.user_role.UserStoreRole;
 import com.laptrinhweb.zerostarcafe.domain.user_role.UserStoreRoleDAO;
 import com.laptrinhweb.zerostarcafe.domain.user_role.UserStoreRoleDAOImpl;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -35,15 +36,22 @@ import java.util.Optional;
  * @lastModified 29/11/2025
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserService {
 
-    private final UserDAO userDAO;
-    private final UserStoreRoleDAO roleDAO;
+    private static final UserService INSTANCE = new UserService();
 
-    public UserService(Connection conn) {
-        this.userDAO = new UserDAOImpl(conn);
-        this.roleDAO = new UserStoreRoleDAOImpl(conn);
+    /**
+     * Returns the singleton instance of UserService.
+     *
+     * @return the UserService instance
+     */
+    public static UserService getInstance() {
+        return INSTANCE;
     }
+
+    private final UserDAO userDAO = new UserDAOImpl();
+    private final UserStoreRoleDAO roleDAO = new UserStoreRoleDAOImpl();
 
     /**
      * Saves a user to the database.
@@ -91,16 +99,16 @@ public class UserService {
     }
 
     /**
-     * Loads an active user by username.
+     * Loads an active user by email.
      * Only users with ACTIVE status are returned.
      *
-     * @param username the username to search
+     * @param email the username to search
      * @return the active user, or null if not found or not active
      * @throws AppException if a SQL error occurs
      */
-    public User getActiveByUsername(String username) {
+    public User getActiveByEmail(String email) {
         try {
-            Optional<User> userOpt = userDAO.findByUsername(username);
+            Optional<User> userOpt = userDAO.findByEmail(email);
             if (userOpt.isEmpty())
                 return null;
 
@@ -111,7 +119,7 @@ public class UserService {
 
             return user;
         } catch (SQLException e) {
-            throw new AppException("Fail to get active user by username=" + username, e);
+            throw new AppException("Fail to get active user by email=" + email, e);
         }
     }
 

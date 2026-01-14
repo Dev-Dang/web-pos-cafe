@@ -1,11 +1,20 @@
 package com.laptrinhweb.zerostarcafe.web.client.servlet;
 
+import com.laptrinhweb.zerostarcafe.domain.cart.dto.CartDTO;
+import com.laptrinhweb.zerostarcafe.domain.cart.service.CartService;
 import com.laptrinhweb.zerostarcafe.domain.category.Category;
 import com.laptrinhweb.zerostarcafe.domain.category.CategoryService;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.LoyaltyPointsDTO;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.dto.RedeemCalcDTO;
+import com.laptrinhweb.zerostarcafe.domain.loyalty.service.LoyaltyService;
+import com.laptrinhweb.zerostarcafe.domain.product.dto.ProductCardDTO;
+import com.laptrinhweb.zerostarcafe.domain.product.service.ProductService;
 import com.laptrinhweb.zerostarcafe.domain.store.model.Store;
 import com.laptrinhweb.zerostarcafe.domain.store.model.StoreConstants;
-import com.laptrinhweb.zerostarcafe.domain.store.model.StoreContext;
 import com.laptrinhweb.zerostarcafe.domain.store.service.StoreService;
+import com.laptrinhweb.zerostarcafe.web.common.WebConstants;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
+import com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils;
 import com.laptrinhweb.zerostarcafe.web.common.view.View;
 import com.laptrinhweb.zerostarcafe.web.common.view.ViewMap;
 import jakarta.servlet.ServletException;
@@ -19,44 +28,88 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <h2>Description:</h2>
- * <p>
- * \
- * </p>
- *
- * <h2>Example Usage:</h2>
- * <pre>
- * {@code
- * ... code here
- * }
- * </pre>
+ * Render the client home page with store, categories, and featured products.
+ * Enhanced to support slug-based category selection with pagination for performance.
  *
  * @author Dang Van Trung
  * @version 1.0.0
- * @lastModified 11/12/2025
+ * @lastModified 07/01/2026
  * @since 1.0.0
  */
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
+@WebServlet(name = "HomeServlet", urlPatterns = {RouteMap.HOME})
 public class HomeServlet extends HttpServlet {
 
-    private static final StoreService storeService = new StoreService();
-    private static final CategoryService categoryService = new CategoryService();
+    // Services
+    private static final StoreService storeService = StoreService.getInstance();
+    private static final CategoryService categoryService = CategoryService.getInstance();
+    private static final ProductService productService = ProductService.getInstance();
+    private static final CartService cartService = CartService.getInstance();
+    private static final LoyaltyService loyaltyService = LoyaltyService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        // Load all active stores for store selector (localized via LocaleContext)
         List<Store> stores = storeService.getAllActiveStores();
-        req.setAttribute(StoreConstants.Request.STORE_LIST, stores);
+        req.setAttribute(StoreConstants.Attribute.STORE_LIST, stores);
 
-        HttpSession session = req.getSession();
-        StoreContext storeCtx = (StoreContext) session.getAttribute(StoreConstants.Session.CURRENT_STORE_CTX);
-        Store currentStore = storeService.getActiveStoreById(storeCtx.getStoreId());
-        req.setAttribute(StoreConstants.Request.CURRENT_STORE, currentStore);
+        // Get current store from session context
+        Long currentStoreId = RequestUtils.getStoreIdFromSession(req);
+        Store currentStore = null;
+        for (Store store : stores) {
+            if (store.getId() == currentStoreId)
+                currentStore = store;
+        }
+        req.setAttribute(StoreConstants.Attribute.CURRENT_STORE, currentStore);
 
+        // Load active categories for navigation
         List<Category> categories = categoryService.loadActiveCategories();
-        req.setAttribute(StoreConstants.Request.CATEGORIES, categories);
+        req.setAttribute(StoreConstants.Attribute.CATEGORIES, categories);
 
+        // Load product cards
+        @SuppressWarnings("unchecked")
+        List<ProductCardDTO> productCards = (List<ProductCardDTO>)
+                req.getAttribute(WebConstants.Attribute.PRODUCT_CARDS);
+
+        if (productCards == null || productCards.isEmpty()) {
+            loadDefaultProducts(req, currentStoreId, categories);
+        }
+
+        // Load current cart if user logged in
+        Long userId = RequestUtils.getUserIdFromSession(req);
+        if (userId != null && currentStoreId != null) {
+            CartDTO cartDTO = cartService.getCurrentCart(userId, currentStoreId);
+            req.setAttribute(WebConstants.Cart.CART, cartDTO);
+
+            // Load loyalty points for user
+            HttpSession session = req.getSession();
+            LoyaltyPointsDTO loyaltyPoints = RequestUtils.getLoyaltyPointsFromSession(req);
+            if (loyaltyPoints == null) {
+                loyaltyPoints = loyaltyService.getUserPoints(userId);
+                session.setAttribute(WebConstants.Loyalty.POINTS, loyaltyPoints);
+            }
+
+            // Calculate redemption if cart not empty
+            if (cartDTO != null && !cartDTO.getItems().isEmpty()) {
+                boolean applyPoints = RequestUtils.getApplyLoyaltyFromSession(req);
+
+                RedeemCalcDTO redemption = loyaltyService.calculateRedemption(
+                        userId, cartDTO.getTotal(), applyPoints
+                );
+                req.setAttribute(WebConstants.Loyalty.REDEMPTION, redemption);
+            }
+        }
+
+        // Render the home view
         View.render(ViewMap.Client.HOME, req, resp);
+    }
+
+    private void loadDefaultProducts(HttpServletRequest req, Long storeId, List<Category> categories) {
+        Category defaultCategory = categories.getFirst();
+        List<ProductCardDTO> productCards = productService
+                .getProductsByCategoryId(defaultCategory.getId(), storeId);
+        req.setAttribute(WebConstants.Attribute.PRODUCT_CARDS, productCards);
+        req.setAttribute(WebConstants.Attribute.SELECTED_CATEGORY, defaultCategory.getSlug());
     }
 }

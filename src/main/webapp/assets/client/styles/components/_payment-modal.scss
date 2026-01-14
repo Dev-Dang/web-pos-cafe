@@ -1,0 +1,279 @@
+// ============================================
+// Payment Modal Styles
+// ============================================
+
+.payment-modal {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+
+  // Store Info Section
+  &__store-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__store-name {
+    font-family: $font-family-base;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-lg;
+    line-height: $line-height-md;
+    color: $text-heading-color;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  &__store-address {
+    font-family: $font-family-base;
+    font-weight: $font-weight-normal;
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+    color: $text-label-color;
+    margin: 0;
+  }
+
+  // Order List Section
+  &__order-list {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-lg 0 $spacing-md;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    @include custom-scrollbar;
+  }
+
+  &__section-title {
+    font-family: $font-family-base;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-md;
+    line-height: $line-height-md;
+    color: $text-label-color;
+    text-transform: capitalize;
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    padding-right: $spacing-md;
+  }
+
+  &__item {
+    display: flex;
+    gap: $spacing-lg;
+    padding: $spacing-sm 0 $spacing-lg;
+    border-bottom: 1px dashed $border-outline-color;
+    width: 100%;
+  }
+
+  &__item-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  &__item-name {
+    font-family: $font-family-base;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-base;
+    line-height: $line-height-sm-md;
+    color: $text-heading-color;
+    max-width: $size-cart-name-max;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__item-options {
+    font-family: $font-family-base;
+    font-weight: $font-weight-normal;
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+    color: $text-muted-color;
+    
+    p {
+      margin: 0;
+    }
+  }
+
+  &__item-note {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: $text-label-color;
+    font-style: italic;
+
+    i {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__item-right {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    align-items: flex-end;
+  }
+
+  &__item-price {
+    font-family: $font-family-base;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-base;
+    line-height: $line-height-sm;
+    color: $text-heading-color;
+    white-space: nowrap;
+  }
+
+  &__item-qty {
+    font-family: $font-family-base;
+    font-weight: $font-weight-normal;
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+    color: $text-body-color;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  // Payment Details Section
+  &__payment-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__details-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    width: 100%;
+  }
+
+  &__detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-lg;
+    font-family: $font-family-base;
+    font-weight: $font-weight-normal;
+    font-size: $font-size-base;
+    line-height: $line-height-sm-md;
+    color: $text-heading-color;
+    white-space: nowrap;
+
+    &--discount {
+      color: $text-label-color;
+    }
+
+    &--total {
+      border-top: 1px dashed $border-outline-color;
+      padding-top: $spacing-md;
+      margin-top: 0;
+    }
+  }
+
+  &__final-amount {
+    font-family: $font-family-base;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    line-height: $line-height-sm;
+    color: $primary;
+  }
+
+  // Payment Type Selection
+  &__payment-types {
+    display: flex;
+    gap: $spacing-lg;
+    width: 100%;
+
+    > * {
+      flex: 1;
+      min-width: 0;
+    }
+
+    form {
+      display: flex;
+    }
+  }
+
+  &__type-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-md 0;
+    border: $border-width-md solid $border-outline-color;
+    border-radius: $radius-lg;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+
+    &:hover {
+      border-color: $primary;
+      background: rgba($primary, 0.05);
+    }
+
+    &:active,
+    &.active {
+      border-color: $primary;
+      background: rgba($primary, 0.1);
+    }
+  }
+
+  &__type-icon {
+    width: 4.8rem;
+    height: 4.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon-base {
+      font-size: 4.8rem;
+      color: $text-label-color;
+    }
+  }
+
+  &__type-img {
+    width: 4.8rem;
+    height: 4.8rem;
+    object-fit: contain;
+  }
+
+  &__type-label {
+    font-family: $font-family-base;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-base;
+    line-height: $line-height-sm;
+    color: $text-label-color;
+    white-space: nowrap;
+  }
+}
+
+// Unpoly modal size adjustments
+[up-layer="modal"] {
+  &.payment-modal-layer {
+    max-width: 40rem;
+  }
+}
+

@@ -1,0 +1,331 @@
+﻿.page {
+  background-color: $body-bg;
+  color: $text-body-color;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.page-container {
+  max-width: $layout-max-width;
+  margin: 0 auto;
+  padding-left: $layout-page-padding;
+  padding-right: $layout-page-padding;
+}
+
+.page-main {
+  padding: $spacing-xl 0 $spacing-5xl;
+}
+
+// Bootstrap grid handles layout now
+// Removed .page-grid custom grid
+
+.product-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+}
+
+.section-title {
+  font-size: $font-size-lg;
+  line-height: $line-height-md;
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  margin: 0;
+}
+
+.section-meta {
+  font-size: $font-size-base;
+  line-height: $line-height-sm-md;
+  color: $text-muted-color;
+}
+
+.table-status {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.countdown {
+  background-color: $primary;
+  color: $color-white;
+  border-radius: $radius-md;
+  padding: $spacing-xs $spacing-sm;
+  text-align: center;
+}
+
+.countdown__label {
+  font-size: $font-size-sm;
+  line-height: $line-height-sm;
+}
+
+.countdown__time {
+  font-size: $font-size-base;
+  line-height: $line-height-sm;
+  font-weight: $font-weight-bold;
+}
+
+.table-status__title {
+  font-size: $font-size-lg;
+  line-height: $line-height-md;
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  margin: 0;
+}
+
+.table-status__subtitle {
+  font-size: $font-size-sm;
+  line-height: $line-height-sm;
+  color: $text-muted-color;
+  margin: 0;
+}
+
+.hero {
+  background-color: $hero-placeholder-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  width: 100%;
+  min-height: $size-hero-min;
+  height: clamp($size-hero-clamp-min, 20vw, $size-hero-max);
+  position: relative;
+}
+
+.hero .carousel-inner,
+.hero .carousel-item {
+  height: 100%;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.hero .carousel-indicators {
+  margin-bottom: $spacing-lg;
+
+  [data-bs-target] {
+    width: $size-indicator-width;
+    height: $size-indicator-height;
+    border-radius: $radius-xxs;
+    background-color: rgba($color-white, 0.5);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: $color-white;
+      opacity: 1;
+    }
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $spacing-xl;
+}
+
+@media (max-width: 1199.98px) {
+  .page-container {
+    padding-left: $layout-page-padding-lg;
+    padding-right: $layout-page-padding-lg;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .page-container {
+    padding-left: $spacing-2xl;
+    padding-right: $spacing-2xl;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .page-container {
+    padding-left: $spacing-xl;
+    padding-right: $spacing-xl;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $spacing-md;
+  }
+
+  .page-main {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 575.98px) {
+  .page-container {
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+  }
+}
+
+// iOS-style Bottom Navigation
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 4px 8px;
+  text-decoration: none;
+  color: #8e8e93;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.active {
+    color: $primary;
+
+    .bottom-nav__icon i {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.bottom-nav__icon {
+  font-size: 24px;
+  margin-bottom: 2px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+
+  i {
+    transition: transform 0.2s ease;
+  }
+}
+
+.bottom-nav__badge {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  background: #ff3b30;
+  color: white;
+  border-radius: 10px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0 4px;
+  box-shadow: 0 2px 4px rgba(255, 59, 48, 0.3);
+}
+
+.bottom-nav__label {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+// Mobile Cart Drawer
+.mobile-cart-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    pointer-events: auto;
+    opacity: 1;
+
+    .mobile-cart-drawer__panel {
+      transform: translateY(0);
+    }
+
+    .mobile-cart-drawer__backdrop {
+      opacity: 1;
+    }
+  }
+}
+
+.mobile-cart-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-cart-drawer__panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-cart-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg $spacing-xl;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.mobile-cart-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-lg $spacing-xl;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-cart-drawer__footer {
+  padding: $spacing-lg $spacing-xl
+    calc($spacing-lg + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background: white;
+  flex-shrink: 0;
+}

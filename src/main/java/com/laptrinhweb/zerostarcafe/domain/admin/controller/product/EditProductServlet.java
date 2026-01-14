@@ -38,7 +38,7 @@ public class EditProductServlet extends HttpServlet {
 
             if (sessionObj instanceof AuthUser) {
                 AuthUser currentUser = (AuthUser) sessionObj;
-                userId = currentUser.userId();
+                userId = currentUser.getId();
             }
 
             int id = Integer.parseInt(request.getParameter("product-id"));
@@ -90,7 +90,7 @@ public class EditProductServlet extends HttpServlet {
 
             Product product = new Product();
             product.setId(id);
-            product.setName(name);
+            product.setName(name); // {"vi": "xxx"}
             product.setCategoryId(categoryId);
             product.setPrice(price);
             product.setInventory(inventory);

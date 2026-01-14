@@ -48,8 +48,7 @@
                         <c:set var="imageUrl" value="${p.picUrl}"/>
                     </c:when>
                     <c:otherwise>
-                        <c:set var="imageUrl"
-                               value="${pageContext.request.contextPath}/assets/client/img/product/${p.picUrl}"/>
+                        <c:set var="imageUrl" value="${p.picUrl}"/>
                     </c:otherwise>
                 </c:choose>
 

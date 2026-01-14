@@ -62,7 +62,7 @@ export function setupLogging() {
     const original = Object.assign({}, console);
 
     if (!isDev) {
-        // Production mode → disable all console outputs.
+        // Production mode - disable all console outputs.
         console.log = console.info = console.warn = console.debug = () => {
         };
         console.error = () => {
@@ -111,33 +111,92 @@ export function setupLogging() {
  * Reads SSR-rendered flash messages from the DOM and displays them as toasts.
  * - If the message type is supported by the Toast system, it is displayed.
  * - Otherwise, a generic "normal" toast is shown.
- * - The container is removed after processing.
  *
+ * @param {Element|Document} root - The root element to search for flash messages
  * @returns {void}
  */
-export function getFlashMessages() {
-    const container = document.querySelector('.toast-container');
-    if (!container) return;
+export function getFlashMessages(root = document) {
+    const scope = root instanceof Element ? root : document;
+    const flashContainers = new Set();
 
-    container.querySelectorAll('p[data-type][data-message]').forEach(p => {
-        const type = p.dataset.type;
-        const msg = p.dataset.message;
-        if (Toast[type]) Toast[type](msg);
-        else Toast.normal('', msg);
+    // If the root itself has [up-flashes], process it
+    if (scope.hasAttribute && scope.hasAttribute('up-flashes')) {
+        flashContainers.add(scope);
+    }
+    
+    // Also search for [up-flashes] within the scope
+    scope.querySelectorAll('[up-flashes]').forEach(node => {
+        flashContainers.add(node);
     });
-    container.remove();
+    
+    // Also check for legacy #flash-data
+    if (scope.id === 'flash-data') {
+        flashContainers.add(scope);
+    } else {
+        scope.querySelectorAll('#flash-data').forEach(node => {
+            flashContainers.add(node);
+        });
+    }
+    
+    if (flashContainers.size === 0) {
+        return;
+    }
+
+    flashContainers.forEach((container) => {
+        const messages = container.querySelectorAll('p[data-type][data-message]');
+        
+        messages.forEach((p) => {
+            const type = p.dataset.type;
+            const msg = p.dataset.message;
+            
+            if (Toast[type]) {
+                Toast[type](msg);
+            } else {
+                Toast.normal('', msg);
+            }
+            
+            // Remove the message element after showing
+            p.remove();
+        });
+    });
 }
 
 /**
- * Reads SSR-rendered metadata from the DOM to determine
- * which modal (if any) should be reopened automatically.
+ * Refills form fields with values from server flash data.
+ * Used to restore form state when modal reopens after failed submission.
+ * Should be called AFTER modal HTML is rendered in the DOM.
  *
- * @returns {string|null} The modal name to reopen, or null if none found.
+ * @returns {void}
  */
-export function getReopenModal() {
-    const container = document.querySelector('#modal-template');
-    if (!container) return null;
+export function refillFormData() {
+    const flashData = document.querySelector('#flash-data');
+    if (!flashData) {
+        return;
+    }
 
-    const marker = container.querySelector('p[data-open-modal]');
-    return marker ? marker.dataset.openModal : null;
+    // Get all hidden inputs with form data
+    const inputs = flashData.querySelectorAll('input[type="hidden"][name]');
+
+    inputs.forEach(input => {
+        const fieldName = input.name;
+        const fieldValue = input.value;
+
+
+        // Find form field in all forms and set value
+        // Try by: name attribute, id, or constructed id pattern
+        const selectors = [
+            `input[name="${fieldName}"]`,
+            `textarea[name="${fieldName}"]`,
+            `select[name="${fieldName}"]`,
+            `#${fieldName}`,
+        ];
+
+        selectors.forEach(selector => {
+            const field = document.querySelector(selector);
+            if (field && !field.closest('#flash-data')) {
+                field.value = fieldValue;
+            }
+        });
+    });
 }
+

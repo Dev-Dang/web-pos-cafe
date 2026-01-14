@@ -6,6 +6,7 @@ import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthContext;
 import com.laptrinhweb.zerostarcafe.domain.auth.service.AuthService;
 import com.laptrinhweb.zerostarcafe.web.auth.session.AuthSessionManager;
 import com.laptrinhweb.zerostarcafe.web.common.routing.AppRoute;
+import com.laptrinhweb.zerostarcafe.web.common.routing.RouteMap;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -28,7 +29,7 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
 
     private AuthSessionManager sessionManager;
-    private final AuthService authService = new AuthService();
+    private final AuthService authService = AuthService.getInstance();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -46,7 +47,7 @@ public class LogoutServlet extends HttpServlet {
         // Read current auth context from HttpSession (if present)
         AuthContext context = sessionManager.getContext(req);
 
-        // If a token exists, revoke/clear auth state on server side
+        // Clear server-side auth state
         if (context != null && context.isValid()) {
             String authToken = context.getTokenValue(SecurityKeys.TOKEN_AUTH);
             if (authToken != null && !authToken.isBlank()) {
@@ -58,6 +59,6 @@ public class LogoutServlet extends HttpServlet {
         sessionManager.endSession(req, resp);
 
         // Redirect user to safe default page
-        AppRoute.HOME.redirect(req, resp);
+        AppRoute.redirect(RouteMap.HOME, req, resp);
     }
 }

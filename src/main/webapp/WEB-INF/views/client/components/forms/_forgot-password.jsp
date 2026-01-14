@@ -1,0 +1,99 @@
+<%--
+Description: Forgot password modal adapted for unpoly modal layer  
+Author: Dang Van Trung
+LastModified: 04/01/2026
+--%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
+
+<%-- ========= FORGOT PASSWORD FORM FOR UNPOLY MODAL ========= --%>
+<div class="auth-modal__content" up-main="modal">
+    <%-- Mobile Header --%>
+    <div class="modal-mobile-header">
+        <button
+                type="button"
+                class="modal-mobile-header__back"
+                up-dismiss
+                aria-label="Close"
+        >
+            <i class="fi fi-rr-angle-small-left"></i>
+        </button>
+        <h3 class="modal-mobile-header__title"></h3>
+        <div class="modal-mobile-header__spacer"></div>
+    </div>
+
+    <div class="modal-body auth-modal__body">
+        <%-- Header Section --%>
+        <div class="auth-modal__header-section">
+            <div class="auth-modal__header">
+                <h2 class="auth-modal__title" id="forgotPasswordModalLabel">
+                    ${i18n.trans("form.title.forgotPassword")}
+                </h2>
+                <p class="auth-modal__subtitle">
+                    ${i18n.trans("form.forgotPassword.desc")}
+                </p>
+            </div>
+        </div>
+
+        <%-- Forgot Password Form --%>
+        <form
+                id="forgotPasswordForm"
+                class="auth-modal__form"
+                novalidate
+                method="post"
+                action="auth/forgot-password"
+                up-submit
+                up-disable
+                up-fail-target="[up-main~=modal]"
+        >
+            <%-- CSRF Token --%>
+            <app:csrf/>
+
+            <div class="auth-modal__fields">
+                <div class="form-floating">
+                    <input type="email" id="forgotEmail" name="email"
+                           autocomplete="email"
+                           class="form-control <c:if test="${not empty formErrors.email}">is-invalid</c:if>"
+                           placeholder="${i18n.trans("form.email")}"
+                           value="${formData.email}" required/>
+                    <label for="forgotEmail"> ${i18n.trans("form.email")} </label>
+                    <div class="invalid-feedback">
+                        <c:if test="${not empty formErrors.email}">
+                            ${i18n.trans(formErrors.email)}
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-modal__actions">
+                <button
+                        type="submit"
+                        class="btn btn-lg btn-primary--filled btn-full"
+                >
+                    ${i18n.trans("form.button.sendResetLink")}
+                </button>
+            </div>
+        </form>
+
+        <%-- Footer Section --%>
+        <div class="auth-modal__footer">
+            <span class="auth-modal__footer-text">
+                ${i18n.trans("form.rememberPassword")}
+            </span>
+            <button
+                    type="button"
+                    class="auth-modal__footer-link"
+                    up-follow
+                    up-href="partial/login-form"
+                    up-layer="current"
+                    up-transition="cross-fade"
+                    up-target="[up-main~=modal]"
+                    up-history="false"
+                    up-cache="false"
+            >
+                ${i18n.trans("form.button.backToLogin")}
+            </button>
+        </div>
+    </div>
+</div>
+</div>

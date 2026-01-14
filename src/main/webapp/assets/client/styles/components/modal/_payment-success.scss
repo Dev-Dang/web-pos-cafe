@@ -1,0 +1,183 @@
+// =============================================
+// Payment Success Modal (Hybrid: Figma + Enhanced UX)
+// Orange theme matching Figma design
+// =============================================
+
+.payment-modal--success {
+    padding: 2.4rem 2rem;  // Reduced padding for more space
+    text-align: center;
+    background: $color-white;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.payment-success {
+    max-width: 48rem;
+    margin: 0 auto;
+
+    // Orange success icon (Figma style)
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 8.1rem;
+        height: 8.1rem;
+        margin: 0 auto 1.6rem;  // Reduced bottom margin
+        border-radius: 50%;
+        background: $color-orange-600; // #F87938
+        animation: scaleIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+        i {
+            font-size: 4.8rem;  // Adjusted icon size
+            color: $color-white;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkmark 0.5s ease-in-out 0.2s both;
+        }
+    }
+
+    // Header with title and subtitle
+    &__header {
+        margin-bottom: 0.8rem;  // Reduced margin
+        animation: slideUp 0.4s ease-out 0.15s both;
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: $text-heading-color;
+        line-height: 2.8rem;
+        letter-spacing: -0.6px;
+        margin-bottom: 0.8rem;  // Reduced margin
+    }
+
+    &__subtitle {
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: $text-label-color;
+        line-height: 2rem;
+        margin: 0;
+    }
+
+    // Points earned (prominent, orange)
+    &__points {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: $color-orange-600;
+        line-height: 2.4rem;
+        margin: 0.8rem 0 1.6rem;  // Reduced margins
+        text-transform: capitalize;
+        animation: slideUp 0.4s ease-out 0.25s both;
+    }
+
+    // Details card (Figma style)
+    &__details {
+        background: $color-stone-50;
+        border-radius: 0.8rem;
+        padding: 0.4rem 1.2rem;  // Reduced padding
+        margin: 0 0 1.6rem;  // Reduced margin
+        animation: slideUp 0.4s ease-out 0.35s both;
+    }
+
+    &__detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 0;  // Reduced padding
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $border-outline-color;
+        }
+    }
+
+    &__label {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: $text-heading-color;
+        line-height: 2.25rem;
+    }
+
+    &__value {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: $text-heading-color;
+        line-height: 2.25rem;
+
+        &--amount {
+            color: $text-label-color;
+        }
+    }
+
+    // Button uses project's btn classes, just add animation and margin
+    .btn {
+        margin-bottom: 1.2rem;  // Space above countdown
+        animation: slideUp 0.4s ease-out 0.45s both;
+    }
+
+    // Auto-close countdown
+    &__auto-close {
+        font-size: 1.3rem;
+        color: $text-muted-color;
+        margin: 0;  // No extra margin
+        animation: fadeIn 0.8s ease-in 0.8s both;
+    }
+
+    &__countdown {
+        font-weight: 600;
+        color: $color-orange-600;
+    }
+}
+
+// =============================================
+// Animations (Subtle, Professional)
+// =============================================
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(1.5rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0) rotate(-15deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}

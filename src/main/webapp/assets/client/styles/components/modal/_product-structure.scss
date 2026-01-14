@@ -1,0 +1,492 @@
+// Product Modal - 2 Column Layout (Optimized Size)
+.product-modal__dialog {
+  margin: 0 auto;
+  width: 94vw;
+  max-width: 1000px; // Reduced from 1100px
+  max-height: 90vh;
+  height: auto;
+}
+
+.product-modal__content {
+  width: 100%;
+  height: auto;
+  max-height: 90vh;
+  padding: $spacing-xl;
+  border-radius: $radius-lg;
+  background: linear-gradient(180deg, #fff1e7 0%, #ffffff 50.48%);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+  border: none;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: $spacing-2xl;
+  }
+}
+
+// Unpoly Modal Specific Overrides for Product Modal
+up-modal {
+  .product-modal {
+    position: static !important;
+    display: block !important;
+
+    .product-modal__dialog {
+      // Override any legacy positioning for Unpoly integration
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+    }
+  }
+}
+
+.modal-backdrop.show {
+  opacity: 0.6;
+}
+
+// Mobile Header - Shows only on mobile (< 768px)
+.product-modal__mobile-header {
+  display: none;
+
+  @media (max-width: 767.98px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 5.6rem;
+    padding: $spacing-lg $spacing-xl;
+    background: transparent;
+    border-bottom: 1px solid rgba($border-outline-color, 0.1);
+    margin-bottom: $spacing-lg;
+  }
+
+  &__back {
+    border: none;
+    background: transparent;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-body-color;
+    cursor: pointer;
+
+    i {
+      font-size: 2.4rem;
+    }
+
+    &:hover {
+      background: rgba($primary, 0.1);
+      border-radius: $radius-sm;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    text-align: center;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    margin: 0;
+    color: $text-heading-color;
+  }
+
+  &__spacer {
+    width: 4rem; // Balance the back button
+  }
+}
+
+.modal-mobile-header__back {
+  position: absolute;
+  left: $spacing-lg;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: $spacing-xs;
+  color: $text-body-color;
+  font-size: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 3.6rem;
+  height: 3.6rem;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.modal-mobile-header__title {
+  font-size: 1.6rem;
+  font-weight: $font-weight-semibold;
+  color: $text-body-color;
+  margin: 0;
+  text-align: center;
+}
+
+.modal-mobile-header__spacer {
+  display: none;
+}
+
+.product-modal__close {
+  position: absolute;
+  top: $spacing-xl;
+  right: $spacing-xl;
+  border: none;
+  background: transparent;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 0;
+  cursor: pointer;
+
+  .icon-base {
+    color: $text-body-color;
+    font-size: $font-size-xl;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 767.98px) {
+    display: none;
+  }
+}
+
+// Product Modal Panel - Responsive Layout
+.product-modal__panel {
+  // Mobile: single scrollable area with sticky footer
+  @media (max-width: 767.98px) {
+    display: flex;
+    flex-direction: column;
+    min-height: 0; // Important for flexbox
+
+    // Make the panel itself scrollable
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(90vh - 5.6rem - #{$spacing-xl} * 2);
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba($border-outline-color, 0.15);
+      border-radius: $radius-xs;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($primary, 0.5);
+      border-radius: $radius-xs;
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba($primary, 0.5) rgba($border-outline-color, 0.15);
+
+    // Ensure columns stack naturally
+    .product-modal__col {
+      flex-shrink: 0;
+    }
+
+    // Footer sticky on mobile when scrolling
+    .product-modal__footer {
+      position: sticky;
+      bottom: 0;
+      background: $color-white;
+      padding-top: $spacing-xl;
+      margin-top: $spacing-lg;
+      z-index: 10;
+      flex-shrink: 0;
+      border-top: 1px solid rgba($border-outline-color, 0.3);
+    }
+  }
+
+  // Desktop & Tablet: fixed height for layout
+  @media (min-width: 768px) {
+    max-height: calc(90vh - #{$spacing-2xl} * 2);
+  }
+}
+
+// Remove old simple layout variant
+.product-modal__panel--simple {
+  display: none; // Not used anymore
+}
+
+// Layout variant: Compact (0-1 option) - image left, content right
+.product-modal__panel--compact {
+  @media (min-width: 768px) {
+    .product-modal__col-1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-modal__col-2 {
+      display: flex;
+      flex-direction: column;
+      max-height: 85vh;
+
+      .product-modal__info {
+        flex-shrink: 0;
+      }
+
+      .product-modal__options-wrapper {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: $spacing-sm;
+
+        // Custom scrollbar
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba($border-outline-color, 0.15);
+          border-radius: $radius-xs;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba($primary, 0.5);
+          border-radius: $radius-xs;
+          transition: background 0.2s ease;
+
+          &:hover {
+            background: rgba($primary, 0.7);
+          }
+        }
+
+        scrollbar-width: thin;
+        scrollbar-color: rgba($primary, 0.5) rgba($border-outline-color, 0.15);
+      }
+
+      .product-modal__footer {
+        flex-shrink: 0;
+        position: sticky;
+        bottom: 0;
+        background: $color-white;
+        padding-top: $spacing-xl;
+        margin-top: auto;
+        z-index: 10;
+      }
+    }
+  }
+}
+
+// Layout variant: Full (2+ options) - info+image left, options right
+.product-modal__panel--full {
+  @media (min-width: 768px) {
+    .product-modal__col-1 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-modal__col-2 {
+      display: flex;
+      flex-direction: column;
+      max-height: 85vh;
+
+      // Single scrollable wrapper for all options
+      .product-modal__options-wrapper {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: $spacing-sm;
+
+        // Custom scrollbar
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba($border-outline-color, 0.15);
+          border-radius: $radius-xs;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba($primary, 0.5);
+          border-radius: $radius-xs;
+          transition: background 0.2s ease;
+
+          &:hover {
+            background: rgba($primary, 0.7);
+          }
+        }
+
+        scrollbar-width: thin;
+        scrollbar-color: rgba($primary, 0.5) rgba($border-outline-color, 0.15);
+      }
+
+      .product-modal__footer {
+        flex-shrink: 0;
+        position: sticky;
+        bottom: 0;
+        background: $color-white;
+        padding-top: $spacing-xl;
+        margin-top: auto;
+        z-index: 10;
+      }
+    }
+  }
+}
+
+// Options wrapper - contains all option sections
+.product-modal__options-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+}
+
+// Column base styles
+.product-modal__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+// Column 1: Product Info + Image (Left 50%)
+.product-modal__col-1 {
+  gap: $spacing-lg;
+  overflow: visible; // No scroll needed
+
+  @media (max-width: 767.98px) {
+    padding-top: 0;
+  }
+}
+
+// Column 2: ALL Options (Single + Multi) + Actions (Right 50%)
+.product-modal__col-2 {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  min-width: 0;
+
+  // Mobile: remove gap, let layout variants handle styling
+  @media (max-width: 767.98px) {
+    gap: $spacing-lg;
+  }
+}
+
+// Column 3: Not used in 2-column layout
+.product-modal__col-3 {
+  display: none;
+}
+
+.product-modal__image-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.product-modal__image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
+  border-radius: 0;
+}
+
+.product-modal__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+                  90deg,
+                  $badge-gradient-start 0%,
+                  $badge-gradient-mid 50%,
+                  $primary 100%
+  );
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-sm;
+  box-shadow: 0 0 $spacing-0_5 rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+
+  p {
+    font-size: $font-size-sm;
+    line-height: 1;
+    font-weight: $font-weight-bold;
+    color: $color-white;
+    white-space: nowrap;
+  }
+}
+
+.product-modal__info {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.product-modal__top {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.product-modal__title {
+  font-size: $font-size-4xl;
+  line-height: $line-height-3xl;
+  font-weight: $font-weight-semibold;
+  color: $text-heading-color;
+  letter-spacing: -1.2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-modal__desc {
+  font-size: $font-size-base;
+  line-height: $line-height-sm-md;
+  color: $text-body-color;
+  font-weight: $font-weight-base;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-modal__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: $spacing-sm;
+  margin-top: 0;
+  line-height: 0;
+}
+
+.product-modal__price-current {
+  font-size: $font-size-3xl;
+  line-height: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $primary;
+  letter-spacing: -0.96px;
+  white-space: nowrap;
+}
+
+.product-modal__price-old {
+  font-size: $font-size-lg;
+  line-height: $line-height-md;
+  color: $text-disabled-color;
+  text-decoration: line-through;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+  white-space: nowrap;
+  font-weight: $font-weight-base;
+  text-transform: capitalize;
+}
+

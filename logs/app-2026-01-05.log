@@ -1,0 +1,885 @@
+[2026-01-05 10:24:09] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:485)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:342)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnectionTest.getConnection_returnsValidConnection(DBConnectionTest.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:66)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:66)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+[2026-01-05 10:24:45] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:485)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:342)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnectionTest.getConnection_returnsValidConnection(DBConnectionTest.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:66)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:66)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+[2026-01-05 10:25:01] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:485)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:342)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnectionTest.getConnection_returnsValidConnection(DBConnectionTest.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:66)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:66)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+[2026-01-05 10:25:32] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:485)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:342)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnectionTest.getConnection_returnsValidConnection(DBConnectionTest.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:66)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:66)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+[2026-01-05 10:29:45] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:485)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:342)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnectionTest.getConnection_returnsValidConnection(DBConnectionTest.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:787)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$4(TestMethodTestDescriptor.java:221)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:217)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:159)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:157)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:161)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:147)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:101)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:230)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:204)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:172)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:101)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:64)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:150)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:63)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:109)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:91)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:66)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:66)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+[2026-01-05 10:34:19] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-05 10:34:19] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 10:34:19] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 10:34:19] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 10:34:19] ERROR c.l.z.core.database.DBConnection Failed to lookup DataSource: java:comp/env/jdbc/ZeroStarDB
+javax.naming.NamingException: Could not load resource factory class
+	at org.apache.naming.factory.FactoryBase.getObjectInstance(FactoryBase.java:65)
+	at java.naming/com.sun.naming.internal.NamingManagerHelper.getObjectInstance(NamingManagerHelper.java:76)
+	at java.naming/javax.naming.spi.NamingManager.getObjectInstance(NamingManager.java:207)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:510)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:147)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:496)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:147)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:496)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:147)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:496)
+	at org.apache.naming.NamingContext.lookup(NamingContext.java:153)
+	at org.apache.naming.SelectorContext.lookup(SelectorContext.java:140)
+	at java.naming/javax.naming.InitialContext.lookup(InitialContext.java:409)
+	at com.laptrinhweb.zerostarcafe.core.database.DBConnection.<clinit>(DBConnection.java:46)
+	at com.laptrinhweb.zerostarcafe.domain.store.service.StoreService.getActiveStoreById(StoreService.java:51)
+	at com.laptrinhweb.zerostarcafe.domain.store.service.StoreService.resolveDefaultStore(StoreService.java:89)
+	at com.laptrinhweb.zerostarcafe.domain.store.service.StoreService.resolveStoreByReqIp(StoreService.java:75)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.resolveFromGeoIp(StoreIDFilter.java:117)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:59)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.ClassNotFoundException: com.zaxxer.hikari.HikariJNDIFactory
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1228)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1059)
+	at org.apache.naming.factory.FactoryBase.getObjectInstance(FactoryBase.java:60)
+	... 38 common frames omitted
+[2026-01-05 10:42:22] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-05 10:42:37] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-05 10:51:34] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-05 11:25:16] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Starting...
+[2026-01-05 11:25:16] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@648945fa
+[2026-01-05 11:25:16] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Start completed.
+[2026-01-05 11:25:16] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-05 11:25:30] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 11:25:32] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1824 ms
+[2026-01-05 11:28:29] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/cold-brew | 400 |    3 ms
+[2026-01-05 11:28:29] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/tra-trai-cay | 400 |    3 ms
+[2026-01-05 11:28:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/banh-ngot | 400 |   18 ms
+[2026-01-05 11:29:12] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Starting...
+[2026-01-05 11:29:12] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3f7179a9
+[2026-01-05 11:29:12] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Start completed.
+[2026-01-05 11:29:12] INFO  c.l.z.w.c.l.AppShutdownListener 🚀 Zero Star Cafe application is ready !
+[2026-01-05 11:29:33] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 11:29:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1493 ms
+[2026-01-05 11:29:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  370 ms
+[2026-01-05 11:29:49] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=173, userId=9, authHash=14f4ab05d8c9cc3ff7e75f11ec47fe6dd1754d7c49bedcd02bda5e00c73f0c3e, deviceId=9059619f4b8e31ea55efe7ef3087d6d15db424a6981605119f30387042206997, status=ACTIVE, createdAt=2026-01-05T11:29:49.219273800, expiredAt=2026-01-12T11:29:49.196800800, lastRotatedAt=2026-01-05T11:29:49.219273800, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-05 11:29:49] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 | 1059 ms
+[2026-01-05 11:29:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   87 ms
+[2026-01-05 11:29:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    8 ms
+[2026-01-05 11:29:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-05 11:40:13] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 11:40:14] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26ab6073
+[2026-01-05 11:40:14] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 11:40:14] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 11:40:14] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 11:40:14] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 11:40:14] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 11:40:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   14 ms
+[2026-01-05 11:40:14] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 11:40:14] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 11:40:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    1 ms
+[2026-01-05 11:40:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1973 ms
+[2026-01-05 11:40:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  411 ms
+[2026-01-05 11:40:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/espresso | 404 |    2 ms
+[2026-01-05 11:40:25] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/latte | 404 |    2 ms
+[2026-01-05 11:40:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/mon-nong | 404 |    1 ms
+[2026-01-05 11:40:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/topping | 404 |    2 ms
+[2026-01-05 11:40:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/category/banh-ngot | 404 |    1 ms
+[2026-01-05 11:40:29] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/api/products/a-me-classic | 404 |    2 ms
+[2026-01-05 11:49:33] ERROR c.l.z.web.common.filters.ErrorFilter Unhandled exception
+java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" because "defaultValue" is null
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:87)
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:101)
+	at com.laptrinhweb.zerostarcafe.web.client.mapper.StoreCtxMapper.toStoreContext(StoreCtxMapper.java:33)
+	at com.laptrinhweb.zerostarcafe.web.client.servlet.StoreCheckInServlet.doGet(StoreCheckInServlet.java:36)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:75)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-05 11:57:21] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown initiated...
+[2026-01-05 11:57:21] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown completed.
+[2026-01-05 12:02:02] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 12:02:02] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@a92220
+[2026-01-05 12:02:02] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 12:02:03] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 12:02:03] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:02:03] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:02:03] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 12:02:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   13 ms
+[2026-01-05 12:02:03] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:02:03] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:02:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 12:02:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 2362 ms
+[2026-01-05 12:02:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  718 ms
+[2026-01-05 12:02:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   92 ms
+[2026-01-05 12:20:22] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 12:20:22] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3570f610
+[2026-01-05 12:20:22] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 12:20:23] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 12:20:23] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:20:23] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:20:23] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 12:20:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   16 ms
+[2026-01-05 12:20:23] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:20:23] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:20:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 404 |   14 ms
+[2026-01-05 12:20:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 12:20:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 404 |   23 ms
+[2026-01-05 12:21:18] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Starting...
+[2026-01-05 12:21:18] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@57411927
+[2026-01-05 12:21:18] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Start completed.
+[2026-01-05 12:21:22] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 12:21:24] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:21:34] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:22:09] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:23:05] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Starting...
+[2026-01-05 12:23:06] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@be10efc
+[2026-01-05 12:23:06] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Start completed.
+[2026-01-05 12:23:09] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 12:23:10] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:23:19] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:25:15] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-4 - Starting...
+[2026-01-05 12:25:15] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4cbd5c6b
+[2026-01-05 12:25:15] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-4 - Start completed.
+[2026-01-05 12:25:20] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 12:25:22] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:35:00] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 12:35:01] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5181b32b
+[2026-01-05 12:35:01] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 12:35:01] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 12:35:01] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:35:01] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:35:01] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 12:35:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   18 ms
+[2026-01-05 12:35:02] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:35:02] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:35:03] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:35:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    1 ms
+[2026-01-05 12:35:04] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:35:22] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:47:00] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 12:47:00] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@69dbc998
+[2026-01-05 12:47:00] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 12:47:01] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 12:47:01] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:47:01] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:47:01] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 12:47:01] INFO  c.l.z.w.common.filters.LocaleFilter Country: VN
+[2026-01-05 12:47:01] INFO  c.l.z.w.common.filters.LocaleFilter Lang: vi
+[2026-01-05 12:47:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   12 ms
+[2026-01-05 12:47:01] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 12:47:01] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 12:47:01] INFO  c.l.z.w.common.filters.LocaleFilter Country: VN
+[2026-01-05 12:47:01] INFO  c.l.z.w.common.filters.LocaleFilter Lang: vi
+[2026-01-05 12:47:02] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 12:47:02] INFO  c.l.z.w.common.filters.LocaleFilter Country: VN
+[2026-01-05 12:47:02] INFO  c.l.z.w.common.filters.LocaleFilter Lang: vi
+[2026-01-05 12:47:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 12:47:02] INFO  c.l.z.w.common.filters.LocaleFilter Country: VN
+[2026-01-05 12:47:02] INFO  c.l.z.w.common.filters.LocaleFilter Lang: vi
+[2026-01-05 12:47:02] WARN  c.l.z.web.common.filters.ErrorFilter Response already committed.
+[2026-01-05 22:04:42] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 22:04:42] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@c459cbe
+[2026-01-05 22:04:42] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 22:04:42] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-05 22:04:42] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 22:04:42] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:04:42] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:04:42] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 22:04:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   19 ms
+[2026-01-05 22:04:43] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:04:43] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:04:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1847 ms
+[2026-01-05 22:04:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 22:04:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   18 ms
+[2026-01-05 22:04:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 22:04:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   74 ms
+[2026-01-05 22:05:01] ERROR c.l.z.web.common.filters.ErrorFilter Unhandled exception
+java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" because "defaultValue" is null
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:88)
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:102)
+	at com.laptrinhweb.zerostarcafe.web.client.mapper.StoreCtxMapper.toStoreContext(StoreCtxMapper.java:33)
+	at com.laptrinhweb.zerostarcafe.web.client.servlet.StoreCheckInServlet.doGet(StoreCheckInServlet.java:36)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:85)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-05 22:32:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   80 ms
+[2026-01-05 22:32:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 22:32:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    8 ms
+[2026-01-05 22:32:26] ERROR c.l.z.web.common.filters.ErrorFilter Unhandled exception
+java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" because "defaultValue" is null
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:88)
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:102)
+	at com.laptrinhweb.zerostarcafe.web.client.mapper.StoreCtxMapper.toStoreContext(StoreCtxMapper.java:33)
+	at com.laptrinhweb.zerostarcafe.web.client.servlet.StoreCheckInServlet.doGet(StoreCheckInServlet.java:36)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:85)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-05 22:34:56] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:34:56] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:34:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 22:34:56] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:34:56] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:34:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   97 ms
+[2026-01-05 22:42:08] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 22:42:08] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5be0c691
+[2026-01-05 22:42:08] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 22:42:08] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-05 22:42:09] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 22:42:09] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:42:09] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:42:09] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 22:42:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   19 ms
+[2026-01-05 22:42:09] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:42:09] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:42:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 1770 ms
+[2026-01-05 22:42:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 22:42:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   17 ms
+[2026-01-05 22:42:14] ERROR c.l.z.web.common.filters.ErrorFilter Unhandled exception
+java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" because "defaultValue" is null
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:91)
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:105)
+	at com.laptrinhweb.zerostarcafe.web.client.mapper.StoreCtxMapper.toStoreContext(StoreCtxMapper.java:33)
+	at com.laptrinhweb.zerostarcafe.web.client.servlet.StoreCheckInServlet.doGet(StoreCheckInServlet.java:36)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:85)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-05 22:44:06] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-05 22:44:06] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@69761b1c
+[2026-01-05 22:44:06] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-05 22:44:06] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-05 22:44:06] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-05 22:44:06] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:44:06] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:44:06] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 22:44:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   13 ms
+[2026-01-05 22:44:06] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:44:06] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:44:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 4030 ms
+[2026-01-05 22:44:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 22:44:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   82 ms
+[2026-01-05 22:44:14] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:44:14] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:44:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-05 22:44:14] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-05 22:44:14] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-05 22:44:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   17 ms
+[2026-01-05 22:44:15] ERROR c.l.z.web.common.filters.ErrorFilter Unhandled exception
+java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" because "defaultValue" is null
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:91)
+	at com.laptrinhweb.zerostarcafe.web.common.utils.RequestUtils.getLongParam(RequestUtils.java:105)
+	at com.laptrinhweb.zerostarcafe.web.client.mapper.StoreCtxMapper.toStoreContext(StoreCtxMapper.java:33)
+	at com.laptrinhweb.zerostarcafe.web.client.servlet.StoreCheckInServlet.doGet(StoreCheckInServlet.java:36)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:85)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-05 22:47:11] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-05 22:47:13] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Starting...
+[2026-01-05 22:47:13] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@168df79f
+[2026-01-05 22:47:13] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Start completed.
+[2026-01-05 22:47:13] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-05 22:47:34] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-05 22:47:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   27 ms
+[2026-01-05 22:47:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 2533 ms
+[2026-01-05 22:47:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |   11 ms
+[2026-01-05 22:47:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   13 ms
+[2026-01-05 22:47:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    4 ms
+[2026-01-05 22:47:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   60 ms
+[2026-01-05 22:47:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    3 ms
+[2026-01-05 22:47:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   27 ms
+[2026-01-05 22:47:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    3 ms
+[2026-01-05 22:47:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    9 ms
+[2026-01-05 22:47:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    4 ms
+[2026-01-05 22:47:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   56 ms
+[2026-01-05 22:47:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    4 ms
+[2026-01-05 22:47:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   20 ms
+[2026-01-05 22:47:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    4 ms
+[2026-01-05 22:47:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |    1 ms
+[2026-01-05 22:47:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    4 ms
+[2026-01-05 22:47:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   73 ms

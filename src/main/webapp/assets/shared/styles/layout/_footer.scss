@@ -1,9 +1,68 @@
 .footer {
-   background-color: white;
-   &-top {
-      padding-top: 5.6rem;
-   }
-   &-end {
-      padding: 2.4rem 0;
-   }
+  background-color: $color-white;
+  border-top: $border-width-thin solid $border-footer-color;
+  &-top {
+    padding-top: $spacing-2xl + $spacing-xl;
+  }
+  &-end {
+    padding: $spacing-xl 0;
+  }
+}
+
+.site-footer {
+  background-color: $color-white;
+  border-top: $border-width-thin solid $border-footer-color;
+  padding: $spacing-2xl 0 $spacing-xl;
+
+  @media (max-width: 991.98px) {
+    padding: $spacing-xl 0;
+    margin-bottom: 70px; // Clearance for mobile bottom nav
+  }
+}
+
+.site-footer__title {
+  font-size: $font-size-xl;
+  line-height: $line-height-lg;
+  font-weight: 600;
+  color: $text-heading-color;
+  margin-bottom: $spacing-lg;
+
+  @media (max-width: 767.98px) {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.site-footer__row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $font-size-base;
+  line-height: $line-height-sm-md;
+  color: $text-muted-color;
+  margin-bottom: $spacing-sm;
+
+  @media (max-width: 767.98px) {
+    font-size: $font-size-sm;
+    align-items: flex-start;
+  }
+}
+
+.site-footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-xl;
+  padding-top: $spacing-xl;
+
+  @media (max-width: 767.98px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding-top: $spacing-md;
+
+    .text-muted {
+      font-size: $font-size-sm;
+    }
+  }
 }

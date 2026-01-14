@@ -1,6 +1,5 @@
 .toast-container {
-  width: 356px;
-  background-color: red !important;
+  width: $size-toast-container;
   position: fixed;
   z-index: 9999;
 
@@ -8,7 +7,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 1.6rem;
+    margin-top: $spacing-lg;
 
     & .toast {
       top: 0;
@@ -19,8 +18,8 @@
   &.bottom-right {
     bottom: 0;
     right: 0;
-    margin-right: 3.2rem;
-    margin-bottom: 3.2rem;
+    margin-right: $spacing-2xl;
+    margin-bottom: $spacing-2xl;
 
     & .toast {
       bottom: 0;
@@ -37,7 +36,7 @@
   right: 0;
 
   width: 100% !important;
-  border-radius: 0.8rem;
+  border-radius: $radius-sm;
   will-change: transform, opacity;
   transform: translateY(var(--dy)) scale(1);
   opacity: 1;
@@ -46,7 +45,7 @@
 
   &.toast-hide {
     opacity: 0;
-    transform: translateY(calc(var(--dy) - 40px)) scale(0.95);
+    transform: translateY(calc(var(--dy) - $size-toast-hide-offset)) scale(0.95);
   }
 
   &:not(:last-child) {
@@ -72,31 +71,31 @@
   // =============== COLORS ===============
   &-normal {
     background-color: $color-gray-50;
-    border: 1px solid $color-gray-100;
+    border: $border-width-thin solid $color-gray-100;
     color: $color-gray-800;
   }
 
   &-success {
     background-color: $color-green-50;
-    border: 1px solid $color-green-100;
+    border: $border-width-thin solid $color-green-100;
     color: $color-green-800;
   }
 
   &-error {
     background-color: $color-red-50;
-    border: 1px solid $color-red-100;
+    border: $border-width-thin solid $color-red-100;
     color: $color-red-800;
   }
 
   &-warning {
     background-color: $color-yellow-50;
-    border: 1px solid $color-yellow-100;
+    border: $border-width-thin solid $color-yellow-100;
     color: $color-yellow-800;
   }
 
   &-info {
     background-color: $color-blue-50;
-    border: 1px solid $color-blue-100;
+    border: $border-width-thin solid $color-blue-100;
     color: $color-blue-800;
   }
 

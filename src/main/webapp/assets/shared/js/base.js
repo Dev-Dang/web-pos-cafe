@@ -1,15 +1,15 @@
-import {Modal} from './modules/modal.js';
-import {getFlashMessages, getReopenModal, setupLogging} from './modules/utils.js';
+window.__APP_MODE__ = "development";
 
-// ==== Config logging system for client side ====
-setupLogging();
+// Enable Unpoly logging
+if (typeof up !== 'undefined') {
+    up.log.enable();
+}
 
-// ==== Flash from SSR ====
-getFlashMessages();
+import {initUnpoly} from "./modules/unpoly.js";
+import {initPasswordToggle} from "./modules/form.js";
 
-// ==== Modal System ====
-await Modal.init();
+// ==== Global Unpoly workflow (includes form validation) ====
+initUnpoly();
 
-// ==== Reopen modal if SSR required ====
-const reopen = getReopenModal();
-if (reopen) Modal.open(reopen);
+// ==== Form utilities ====
+initPasswordToggle();
