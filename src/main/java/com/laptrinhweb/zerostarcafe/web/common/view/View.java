@@ -34,7 +34,7 @@ import java.io.IOException;
  * @lastModified 02/01/2026
  * @since 1.0.0
  */
-public record View(
+public record   View(
         ViewArea area,
         String titleKey,
         String viewPath

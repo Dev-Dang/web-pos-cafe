@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <base href="${pageContext.request.contextPath}/">
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -27,13 +28,16 @@
     <link rel='stylesheet' href='assets/shared/styles/base.css'>
     <link rel="stylesheet" href="assets/admin/styles/admin.css">
 </head>
-<body class="scroll-hidden">
-    <%--  Main content  --%>
+<body class="scroll-hidden" data-page="${pageId}">
+<jsp:include page="/WEB-INF/views/admin/pages/sidebar.jsp"/>
+<%--  Main content  --%>
+<div class="main-content">
     <jsp:include page="${requestScope.pageContent}"/>
 
     <%-- Flash message --%>
     <c:if test="${not empty requestScope.messages}">
-        <div class="toast-container" hidden>
+        <div class=" toast-container
+" hidden>
             <c:forEach var="msg" items="${requestScope.messages}">
                 <p data-type="${msg.type}"
                    data-message="${sessionScope.i18n.trans(msg.msgKey)}">
@@ -41,14 +45,13 @@
             </c:forEach>
         </div>
     </c:if>
-
-    <%-- Script --%>
-    <script>
-        window.__APP_MODE__ = "${initParam.APP_MODE}";
-    </script>
-    <script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/shared/js/vendor/validate.min.js"></script>
-    <script type="module" src="assets/shared/js/base.js"></script>
-    <script src="assets/admin/js/admin.js"></script>
+</div>
+<%-- Script --%>
+<script>
+    window.__APP_MODE__ = "${initParam.APP_MODE}";
+</script>
+<script src="assets/shared/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="assets/shared/js/base.js"></script>
+<script src="assets/admin/js/admin.js"></script>
 </body>
 </html>
