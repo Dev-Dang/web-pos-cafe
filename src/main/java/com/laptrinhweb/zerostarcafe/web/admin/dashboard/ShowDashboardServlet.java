@@ -1,4 +1,4 @@
-package com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard;
+package com.laptrinhweb.zerostarcafe.web.admin.dashboard;
 
 import com.google.gson.Gson;
 import com.laptrinhweb.zerostarcafe.domain.admin.dao.AdminDAO;
@@ -43,7 +43,6 @@ public class ShowDashboardServlet extends HttpServlet {
         }
 
         request.setAttribute("pageContent", "/WEB-INF/views/admin/pages/products.jsp");
-        request.getRequestDispatcher("/WEB-INF/views/admin/layouts/admin-layout.jsp")
-                .forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/layouts/admin-layout.jsp").forward(request, response);
     }
 }

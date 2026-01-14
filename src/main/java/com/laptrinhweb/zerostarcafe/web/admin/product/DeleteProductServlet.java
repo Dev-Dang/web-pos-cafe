@@ -1,4 +1,4 @@
-package com.laptrinhweb.zerostarcafe.domain.admin.controller.product;
+package com.laptrinhweb.zerostarcafe.web.admin.product;
 
 import com.laptrinhweb.zerostarcafe.domain.admin.dao.AdminDAO;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;

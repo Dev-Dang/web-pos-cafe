@@ -299,7 +299,7 @@ function renderLowStock(items) {
 
     items.forEach(item => {
         const typeClass = item.stock <= 3 ? 'critical' : 'low';
-        const img = item.imageUrl ? ('assets/client/img/product/' + item.imageUrl) : 'https://via.placeholder.com/50';
+        const img = item.imageUrl ? (ctx + '/' + item.imageUrl) : 'https://via.placeholder.com/50';
 
         const html = `
             <li class="inventory-item ${typeClass}">
@@ -328,7 +328,7 @@ function renderBestSellers(items) {
     }
 
     items.forEach(item => {
-        const img = item.imageUrl ? ('assets/client/img/product/' + item.imageUrl) : 'https://via.placeholder.com/50';
+        const img = item.imageUrl ? (ctx + '/' + item.imageUrl) : 'https://via.placeholder.com/50';
         const html = `
             <li class="product-item" data-sales="${item.totalSold}">
                 <img src="${img}" alt="Product" onerror="this.src='https://via.placeholder.com/50'">
@@ -708,6 +708,48 @@ $(function () {
     // 4. PAGE: ORDERS
     if ($('#order').length) {
         setupDynamicSearch('#order-search-input', '#order .data-table tbody', [0, 1]);
+
+        setupModalTrigger('#order', '.btn-viewdetail');
+
+        $('#order-detail-modal').on('modal:fillData', function (e, data) {
+            const orderId = data.id;
+            const $tbody = $('#modal-order-items-body');
+
+            // Hiển thị loading
+            $tbody.html('<tr><td colspan="5" class="text-center">Đang tải chi tiết món ăn...</td></tr>');
+
+            $.ajax({
+                url: 'admin/api/order-details',
+                method: 'GET',
+                data: {id: orderId},
+                dataType: 'json',
+                success: function (items) {
+                    let html = '';
+                    if (!items || items.length === 0) {
+                        html = '<tr><td colspan="5" class="text-center">Đơn hàng trống.</td></tr>';
+                    } else {
+                        items.forEach(item => {
+                            const price = formatCurrency(item.price);
+                            const total = formatCurrency(item.price * item.quantity);
+
+                            html += `
+                            <tr>
+                                <td>${item.productName}</td>
+                                <td class="text-center">${item.quantity}</td>
+                                <td>${price}</td>
+                                <td style="font-weight:bold;">${total}</td>
+                                <td style="font-style:italic; color:#666;">${item.note || ''}</td>
+                            </tr>
+                        `;
+                        });
+                    }
+                    $tbody.html(html);
+                },
+                error: function () {
+                    $tbody.html('<tr><td colspan="5" class="text-center text-danger">Không thể tải dữ liệu!</td></tr>');
+                }
+            });
+        });
     }
 
     // 5. PAGE: ACCOUNTS
@@ -722,4 +764,26 @@ $(function () {
         setupModalTrigger('#staff', '.btn-delete');
         initDateStaffWork('#createStaffJoinDate');
     }
-});
+
+    // . PAGE: LOG
+    if ($('#log').length) {
+        if (typeof calculateTimeAgo === 'function') {
+            $('.log-timestamp').each(function () {
+                const rawTime = $(this).data('time');
+                if (rawTime) {
+                    $(this).text(calculateTimeAgo(rawTime));
+                    $(this).attr('title', rawTime);
+                }
+            });
+        }
+
+        $('#log-search-input').on('keyup', function () {
+                let value = $(this).val().toLowerCase();
+                $('.log-entry').filter(function () {
+                    $(this).toggle($(this).data('search').toLowerCase().indexOf(value) > -1)
+                });
+            }
+        );
+    }
+})
+;

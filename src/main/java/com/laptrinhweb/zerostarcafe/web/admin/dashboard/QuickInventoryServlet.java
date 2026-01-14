@@ -1,4 +1,4 @@
-package com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard;
+package com.laptrinhweb.zerostarcafe.web.admin.dashboard;
 
 import com.google.gson.Gson;
 import com.laptrinhweb.zerostarcafe.domain.admin.dao.AdminDAO;

@@ -43,12 +43,6 @@
                     <span>Tài khoản</span>
                 </a>
             </li>
-            <li class="${pageId == 'staff' ? 'active' : ''}">
-                <a href="${pageContext.request.contextPath}/admin/staffs">
-                    <i class="fas fa-users-cog"></i>
-                    <span>Nhân viên</span>
-                </a>
-            </li>
             <li class="${pageId == 'log' ? 'active' : ''}">
                 <a href="${pageContext.request.contextPath}/admin/logs">
                     <i class="fas fa-clipboard-list"></i>

@@ -9,7 +9,7 @@ public class LogDAO {
         new Thread(() -> {
             String sql = "INSERT INTO activity_logs (user_id, action, target_type, target_id, description) VALUES (?, ?, ?, ?, ?)";
 
-            try (Connection conn = AdminDAO.connection();
+            try (Connection conn = AdminDAO.getConnection();
                  PreparedStatement ps = conn.prepareStatement(sql)) {
 
                 if (userId != null) ps.setLong(1, userId);

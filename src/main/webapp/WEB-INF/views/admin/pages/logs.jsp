@@ -1,40 +1,62 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-    <!-- Log -->
-    <div id="log" class="page-content">
-        <header>
-            <h1>Nhật Ký Hệ Thống</h1>
-            <input type="text" class="search-bar" placeholder="Tìm kiếm hành động, người dùng...">
-        </header>
-        <div class="data-table-container">
-            <div class="log-entry">
-                <div class="log-icon log-info"><i class="fas fa-user-edit"></i></div>
+
+<div id="log" class="page-content">
+    <header>
+        <h1>Nhật Ký Hệ Thống</h1>
+        <input type="text" class="search-bar" id="log-search-input"
+               placeholder="Tìm kiếm hành động, người dùng...">
+    </header>
+
+    <div class="data-table-container">
+        <c:forEach var="log" items="${logsList}">
+            <div class="log-entry" data-search="${log.userName} ${log.description} ${log.action}">
+
+                <c:choose>
+                    <c:when test="${log.level == 'ERROR'}">
+                        <div class="log-icon log-error">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                    </c:when>
+                    <c:when test="${log.level == 'WARNING'}">
+                        <div class="log-icon log-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="log-icon log-info">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
                 <div class="log-message">
-                    <strong>Nguyễn Văn An</strong> đã cập nhật sản phẩm <strong>Áo Hoodie Nỉ Bông (#SP001)</strong>.
+                    <strong>${log.userName}</strong>
+                    <span style="color: #666; font-size: 0.9em;">[${log.action}]</span>:
+                        ${log.description}
+                    <c:if test="${not empty log.ipAddress}">
+                        <span style="font-size: 0.8em; color: #999;">(IP: ${log.ipAddress})</span>
+                    </c:if>
                 </div>
-                <div class="log-timestamp">5 phút trước</div>
-            </div>
-            <div class="log-entry">
-                <div class="log-icon log-success"><i class="fas fa-plus-circle"></i></div>
-                <div class="log-message">
-                    <strong>Hệ thống</strong> đã thêm đơn hàng mới <strong>#DH-1710</strong>.
+
+                <div class="log-timestamp" data-time="${log.createdAt}">
+                    <fmt:formatDate value="${log.createdAt}" pattern="dd/MM/yyyy HH:mm"/>
                 </div>
-                <div class="log-timestamp">1 giờ trước</div>
             </div>
-            <div class="log-entry">
-                <div class="log-icon log-warning"><i class="fas fa-exclamation-triangle"></i></div>
-                <div class="log-message">
-                    Đăng nhập không thành công từ IP <strong>203.162.1.47</strong>.
-                </div>
-                <div class="log-timestamp">3 giờ trước</div>
+        </c:forEach>
+
+        <c:if test="${empty logsList}">
+            <div style="padding: 20px; text-align: center; color: #888;">
+                Chưa có nhật ký hoạt động nào.
             </div>
-            <div class="log-entry">
-                <div class="log-icon log-info"><i class="fas fa-sign-in-alt"></i></div>
-                <div class="log-message">
-                    <strong>Lê Minh Anh</strong> đã đăng nhập vào hệ thống.
-                </div>
-                <div class="log-timestamp">8 giờ trước</div>
-            </div>
-        </div>
+        </c:if>
     </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // 1. Chuyển đổi thời gian sang dạng "X phút trước"
+        // Kiểm tra xem hàm calculateTimeAgo (từ dashboard.js) có tồn tại không
+
+</script>

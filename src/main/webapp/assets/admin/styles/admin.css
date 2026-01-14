@@ -1146,3 +1146,68 @@ tr.hidden-row td {
         opacity: 1;
     }
 }
+
+/* --- Activity Log Styles --- */
+.log-entry {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.log-entry:hover {
+    background-color: #f9f9f9;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+/* Icon Styles */
+.log-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* Level Colors */
+.log-info {
+    background-color: #e3f2fd;
+    color: #2196f3;
+}
+
+.log-warning {
+    background-color: #fff3e0;
+    color: #ff9800;
+}
+
+.log-error {
+    background-color: #ffebee;
+    color: #f44336;
+}
+
+.log-message {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+.log-message strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.log-timestamp {
+    font-size: 0.85rem;
+    color: #888;
+    margin-left: 15px;
+    white-space: nowrap;
+}

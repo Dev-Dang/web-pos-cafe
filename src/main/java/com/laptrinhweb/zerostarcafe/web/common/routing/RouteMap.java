@@ -40,5 +40,5 @@ public final class RouteMap {
     // ============================================
     // ADMIN ROUTES
     // ============================================
-    public static final String DASHBOARD = "/admin/api/dashboard-overview";
+    public static final String DASHBOARD = "/admin/dashboard";
 }
