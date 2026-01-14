@@ -39,9 +39,6 @@ public final class ViewMap {
 
         // Pages
         public static final View HOME = page("pages/home");
-        public static final View CART = page("pages/cart");
-        public static final View CHECKOUT = page("pages/checkout");
-        public static final View INVOICE = page("pages/invoice");
 
         // Partials - Forms
         public static final View LOGIN_FORM = partial("forms/_login");
@@ -51,7 +48,6 @@ public final class ViewMap {
 
         // Partials - Product
         public static final View PRODUCT_SECTION = partial("product/_product-section");
-        public static final View PRODUCT_CARDS = partial("product/_product-card");
         public static final View PRODUCT_MODAL = partial("product/modal/_product-details");
 
         // Partials - Cart
@@ -63,12 +59,6 @@ public final class ViewMap {
 
         // Partials - Order History
         public static final View ORDER_HISTORY_MODAL = partial("order/_order-history-modal");
-
-        // Partials - Search
-        public static final View SEARCH_SECTION = partial("search/_search-section");
-
-        // Partials - Sliders
-        public static final View CATEGORY_SLIDER = partial("slider/category-slider");
 
         private static View page(String path) {
             return View.page(

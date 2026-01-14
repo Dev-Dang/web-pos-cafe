@@ -1226,3 +1226,626 @@ AuthRecord(id=228, userId=9, authHash=dbc6a2bb4ac285931392afcc4d84928caba3cbe19d
 [2026-01-10 08:34:42] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/forgot-password     | 303 | 2385 ms
 [2026-01-10 08:34:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   30 ms
 [2026-01-10 08:34:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/reset-password      | 200 |   25 ms
+[2026-01-10 08:35:11] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/reset-password      | 302 |  191 ms
+[2026-01-10 08:35:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   40 ms
+[2026-01-10 08:35:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-10 08:35:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-10 08:35:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    9 ms
+[2026-01-10 08:39:55] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-10 08:39:55] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13b6708f
+[2026-01-10 08:39:55] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-10 08:39:55] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-10 08:39:56] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-10 08:39:56] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-10 08:39:56] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-10 08:39:56] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-10 08:39:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    8 ms
+[2026-01-10 08:39:56] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-10 08:39:56] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 2457 ms
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  448 ms
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  663 ms
+[2026-01-10 08:39:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  173 ms
+[2026-01-10 08:40:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 |  264 ms
+[2026-01-10 08:40:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   28 ms
+[2026-01-10 08:40:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 |    8 ms
+[2026-01-10 08:40:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   11 ms
+[2026-01-10 08:40:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   30 ms
+[2026-01-10 08:40:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/americano-nong  | 200 |   12 ms
+[2026-01-10 08:40:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   39 ms
+[2026-01-10 08:40:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/americano-nong  | 200 |   14 ms
+[2026-01-10 08:40:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   37 ms
+[2026-01-10 08:40:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-10 08:40:33] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=229, userId=9, authHash=a389defac4e5fbeae4eb038edc923f7356178dbb84045ce8ed5ed0ff0c5ecd99, deviceId=f0e80985793fbf50ba73cea1247bc4bd9fdb7c28a9e005615d39caa6c5f85e2e, status=ACTIVE, createdAt=2026-01-10T08:40:33.070154400, expiredAt=2026-01-17T08:40:33.054100600, lastRotatedAt=2026-01-10T08:40:33.070154400, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36, revokedAt=null, revokedReason=null)
+[2026-01-10 08:40:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  292 ms
+[2026-01-10 08:40:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   48 ms
+[2026-01-10 08:40:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 |   15 ms
+[2026-01-10 08:40:36] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/add                 | 200 |   97 ms
+[2026-01-10 08:40:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-yuzu       | 200 |   12 ms
+[2026-01-10 08:40:46] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/add                 | 200 |   18 ms
+[2026-01-10 08:40:48] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/toggle-loyalty      | 200 |    5 ms
+[2026-01-10 08:40:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/payment/select-method    | 200 |   89 ms
+[2026-01-10 08:40:51] INFO  c.l.z.d.order.service.OrderService Created order ID=38 for user=9, store=3
+[2026-01-10 08:40:51] INFO  c.l.z.d.l.service.LoyaltyService Redeemed 12960 points (-12.960 VND) for userId=9, new balance=20668
+[2026-01-10 08:40:51] INFO  c.l.z.d.l.service.LoyaltyService Awarded 95 points to userId=9 for order amount=95040
+[2026-01-10 08:40:51] INFO  c.l.z.d.i.service.InvoiceService Generated invoice HD-20260110-00016 for order ID=38
+[2026-01-10 08:40:51] INFO  c.l.z.d.i.service.InvoiceService Saved invoice ID=36, number=HD-20260110-00016
+[2026-01-10 08:40:51] INFO  c.l.z.d.order.service.OrderService Marked order ID=38 as PAID and closed
+[2026-01-10 08:40:51] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/payment/process-cash     | 200 |  124 ms
+[2026-01-10 08:40:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   33 ms
+[2026-01-10 08:40:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  106 ms
+[2026-01-10 08:41:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   34 ms
+[2026-01-10 08:41:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   28 ms
+[2026-01-10 08:41:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   33 ms
+[2026-01-10 08:41:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   13 ms
+[2026-01-10 08:41:26] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/user/orders/clone        | 200 |   32 ms
+[2026-01-10 08:41:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    4 ms
+[2026-01-10 08:41:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   33 ms
+[2026-01-10 08:41:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    7 ms
+[2026-01-10 08:41:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   11 ms
+[2026-01-14 09:15:55] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Starting...
+[2026-01-14 09:15:56] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1406c5fe
+[2026-01-14 09:15:56] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Start completed.
+[2026-01-14 09:15:56] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 09:20:47] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 09:20:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    4 ms
+[2026-01-14 09:20:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 4305 ms
+[2026-01-14 09:20:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  278 ms
+[2026-01-14 09:22:48] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=232, userId=1, authHash=08e1697476abe0279dbf4e8ee489c8d4db676e14d2c3dd4ce58e4cabed810b9d, deviceId=0cbd6152b1eb07420c4de138295e88f8886db04f85ce1d16937ccc42bc25a883, status=ACTIVE, createdAt=2026-01-14T09:22:48.517346200, expiredAt=2026-01-14T09:52:48.498385700, lastRotatedAt=2026-01-14T09:22:48.517346200, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-14 09:22:48] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  742 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |   12 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    5 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    5 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    2 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:33:38] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 09:33:40] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Starting...
+[2026-01-14 09:33:40] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20be00a1
+[2026-01-14 09:33:40] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Start completed.
+[2026-01-14 09:33:40] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 09:33:54] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 09:33:55] INFO  c.l.z.d.l.service.LoyaltyService Created new loyalty account for userId=1
+[2026-01-14 09:33:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 2217 ms
+[2026-01-14 09:34:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    9 ms
+[2026-01-14 09:34:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   82 ms
+[2026-01-14 09:34:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  286 ms
+[2026-01-14 09:34:47] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=233, userId=1, authHash=91847bbe03f722289370bfd2aa43f48c705ae022d6b4c872b10f825e0ff07e1d, deviceId=67e71442e58a5fe8bd1de9a99d108cc08f2c3e4d931110f8c431a7babf945bc0, status=ACTIVE, createdAt=2026-01-14T09:34:47.552885300, expiredAt=2026-01-14T10:04:47.552885300, lastRotatedAt=2026-01-14T09:34:47.552885300, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-14 09:34:47] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  669 ms
+[2026-01-14 09:34:48] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+jakarta.servlet.ServletException: Servlet execution threw an exception
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:135)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1228)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1059)
+	... 41 common frames omitted
+[2026-01-14 09:35:59] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+jakarta.servlet.ServletException: Servlet execution threw an exception
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:135)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
+	... 41 common frames omitted
+[2026-01-14 09:36:37] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 09:36:41] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-4 - Starting...
+[2026-01-14 09:36:41] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ca56d3e
+[2026-01-14 09:36:41] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-4 - Start completed.
+[2026-01-14 09:36:41] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 09:36:52] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 09:36:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |  605 ms
+[2026-01-10 08:35:11] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/reset-password      | 302 |  191 ms
+[2026-01-10 08:35:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   40 ms
+[2026-01-10 08:35:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    3 ms
+[2026-01-10 08:35:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/forgot-password-form | 200 |    1 ms
+[2026-01-10 08:35:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    9 ms
+[2026-01-10 08:39:55] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2026-01-10 08:39:55] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13b6708f
+[2026-01-10 08:39:55] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2026-01-10 08:39:55] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-10 08:39:56] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-10 08:39:56] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-10 08:39:56] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-10 08:39:56] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-10 08:39:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    8 ms
+[2026-01-10 08:39:56] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-10 08:39:56] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 2457 ms
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  448 ms
+[2026-01-10 08:39:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  663 ms
+[2026-01-10 08:39:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  173 ms
+[2026-01-10 08:40:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 |  264 ms
+[2026-01-10 08:40:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   28 ms
+[2026-01-10 08:40:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 |    8 ms
+[2026-01-10 08:40:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   11 ms
+[2026-01-10 08:40:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   30 ms
+[2026-01-10 08:40:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/americano-nong  | 200 |   12 ms
+[2026-01-10 08:40:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   39 ms
+[2026-01-10 08:40:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/americano-nong  | 200 |   14 ms
+[2026-01-10 08:40:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   37 ms
+[2026-01-10 08:40:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |    4 ms
+[2026-01-10 08:40:33] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=229, userId=9, authHash=a389defac4e5fbeae4eb038edc923f7356178dbb84045ce8ed5ed0ff0c5ecd99, deviceId=f0e80985793fbf50ba73cea1247bc4bd9fdb7c28a9e005615d39caa6c5f85e2e, status=ACTIVE, createdAt=2026-01-10T08:40:33.070154400, expiredAt=2026-01-17T08:40:33.054100600, lastRotatedAt=2026-01-10T08:40:33.070154400, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36, revokedAt=null, revokedReason=null)
+[2026-01-10 08:40:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  292 ms
+[2026-01-10 08:40:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   48 ms
+[2026-01-10 08:40:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 |   15 ms
+[2026-01-10 08:40:36] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/add                 | 200 |   97 ms
+[2026-01-10 08:40:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-yuzu       | 200 |   12 ms
+[2026-01-10 08:40:46] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/add                 | 200 |   18 ms
+[2026-01-10 08:40:48] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/toggle-loyalty      | 200 |    5 ms
+[2026-01-10 08:40:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/payment/select-method    | 200 |   89 ms
+[2026-01-10 08:40:51] INFO  c.l.z.d.order.service.OrderService Created order ID=38 for user=9, store=3
+[2026-01-10 08:40:51] INFO  c.l.z.d.l.service.LoyaltyService Redeemed 12960 points (-12.960 VND) for userId=9, new balance=20668
+[2026-01-10 08:40:51] INFO  c.l.z.d.l.service.LoyaltyService Awarded 95 points to userId=9 for order amount=95040
+[2026-01-10 08:40:51] INFO  c.l.z.d.i.service.InvoiceService Generated invoice HD-20260110-00016 for order ID=38
+[2026-01-10 08:40:51] INFO  c.l.z.d.i.service.InvoiceService Saved invoice ID=36, number=HD-20260110-00016
+[2026-01-10 08:40:51] INFO  c.l.z.d.order.service.OrderService Marked order ID=38 as PAID and closed
+[2026-01-10 08:40:51] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/payment/process-cash     | 200 |  124 ms
+[2026-01-10 08:40:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   33 ms
+[2026-01-10 08:40:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  106 ms
+[2026-01-10 08:41:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   34 ms
+[2026-01-10 08:41:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   28 ms
+[2026-01-10 08:41:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   33 ms
+[2026-01-10 08:41:14] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   13 ms
+[2026-01-10 08:41:26] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/user/orders/clone        | 200 |   32 ms
+[2026-01-10 08:41:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    4 ms
+[2026-01-10 08:41:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   33 ms
+[2026-01-10 08:41:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    7 ms
+[2026-01-10 08:41:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   11 ms
+[2026-01-14 09:15:55] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Starting...
+[2026-01-14 09:15:56] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1406c5fe
+[2026-01-14 09:15:56] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-2 - Start completed.
+[2026-01-14 09:15:56] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 09:20:47] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 09:20:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    4 ms
+[2026-01-14 09:20:52] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 4305 ms
+[2026-01-14 09:20:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  278 ms
+[2026-01-14 09:22:48] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=232, userId=1, authHash=08e1697476abe0279dbf4e8ee489c8d4db676e14d2c3dd4ce58e4cabed810b9d, deviceId=0cbd6152b1eb07420c4de138295e88f8886db04f85ce1d16937ccc42bc25a883, status=ACTIVE, createdAt=2026-01-14T09:22:48.517346200, expiredAt=2026-01-14T09:52:48.498385700, lastRotatedAt=2026-01-14T09:22:48.517346200, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-14 09:22:48] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  742 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |   12 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    5 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    5 ms
+[2026-01-14 09:22:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:22:55] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    2 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:23:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    1 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:24:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |    0 ms
+[2026-01-14 09:33:38] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 09:33:40] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Starting...
+[2026-01-14 09:33:40] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20be00a1
+[2026-01-14 09:33:40] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-3 - Start completed.
+[2026-01-14 09:33:40] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 09:33:54] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 09:33:55] INFO  c.l.z.d.l.service.LoyaltyService Created new loyalty account for userId=1
+[2026-01-14 09:33:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 2217 ms
+[2026-01-14 09:34:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    9 ms
+[2026-01-14 09:34:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   82 ms
+[2026-01-14 09:34:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  286 ms
+[2026-01-14 09:34:47] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=233, userId=1, authHash=91847bbe03f722289370bfd2aa43f48c705ae022d6b4c872b10f825e0ff07e1d, deviceId=67e71442e58a5fe8bd1de9a99d108cc08f2c3e4d931110f8c431a7babf945bc0, status=ACTIVE, createdAt=2026-01-14T09:34:47.552885300, expiredAt=2026-01-14T10:04:47.552885300, lastRotatedAt=2026-01-14T09:34:47.552885300, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-14 09:34:47] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  669 ms
+[2026-01-14 09:34:48] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+jakarta.servlet.ServletException: Servlet execution threw an exception
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:135)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1228)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1059)
+	... 41 common frames omitted
+[2026-01-14 09:35:59] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+jakarta.servlet.ServletException: Servlet execution threw an exception
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:135)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
+	... 41 common frames omitted
+[2026-01-14 09:36:37] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 09:36:41] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-4 - Starting...
+[2026-01-14 09:36:41] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ca56d3e
+[2026-01-14 09:36:41] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-4 - Start completed.
+[2026-01-14 09:36:41] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 09:36:52] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 09:36:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |  605 ms
+[2026-01-14 09:48:36] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |   31 ms
+[2026-01-14 09:48:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |   16 ms
+[2026-01-14 09:49:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1007 ms
+[2026-01-14 09:49:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |   43 ms
+[2026-01-14 09:49:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |   18 ms
