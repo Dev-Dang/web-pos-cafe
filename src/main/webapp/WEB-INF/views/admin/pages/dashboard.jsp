@@ -16,28 +16,28 @@
             <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
             <div class="card-info">
                 <p class="card-title">Tổng Doanh Thu</p>
-                <p class="card-value">1,250,000,000 ₫</p>
+                <p class="card-value" id="val-revenue">Loading...</p>
             </div>
         </div>
         <div class="card orders">
             <div class="card-icon"><i class="fas fa-shopping-bag"></i></div>
             <div class="card-info">
                 <p class="card-title">Tổng Đơn Hàng</p>
-                <p class="card-value">1,480</p>
+                <p class="card-value" id="val-orders">Loading...</p>
             </div>
         </div>
         <div class="card products">
             <div class="card-icon"><i class="fas fa-box"></i></div>
             <div class="card-info">
                 <p class="card-title">Sản Phẩm Đã Bán</p>
-                <p class="card-value">3,250</p>
+                <p class="card-value" id="val-products">Loading...</p>
             </div>
         </div>
         <div class="card users">
             <div class="card-icon"><i class="fas fa-users"></i></div>
             <div class="card-info">
                 <p class="card-title">Khách Hàng Mới</p>
-                <p class="card-value">85</p>
+                <p class="card-value" id="val-customers">Loading...</p>
             </div>
         </div>
     </div>
@@ -51,62 +51,47 @@
         <div class="detail-card live-orders">
             <h2>Đơn Hàng Mới (Đang Chờ)</h2>
             <ul class="order-list">
-
-                <li class="order-item status-new">
-                    <div class="order-table">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Bàn 12</span>
-                    </div>
-                    <div class="order-details">
-                        <p class="order-id">#DH-10583
-                            <span class="order-time">1 phút trước</span>
-                        </p>
-                        <p class="order-summary">2x Coca-Cola, 1x Bò Bít Tết (Medium)</p>
-                    </div>
-                    <p class="order-total">350,000 ₫</p>
-                    <div class="order-actions">
-                        <button class="btn btn-confirm"><i class="fas fa-check"></i> Xác nhận</button>
-                        <button class="btn btn-cancel"><i class="fas fa-times"></i> Hủy</button>
-                    </div>
+                <li class="empty-state-text">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
                 </li>
-
-                <li class="order-item status-processing">
-                    <div class="order-table">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Bàn 05</span>
-                    </div>
-                    <div class="order-details">
-                        <p class="order-id">#DH-10582
-                            <span class="order-time">10 phút trước</span>
-                        </p>
-                        <p class="order-summary">1x Set Lẩu Thái, 2x Bia Tiger</p>
-                    </div>
-                    <p class="order-total">580,000 ₫</p>
-                    <div class="order-actions">
-                        <button class="btn btn-payment"><i class="fa-solid fa-money-check"></i> Thanh toán
-                        </button>
-                    </div>
-                </li>
-
-                <li class="order-item status-new">
-                    <div class="order-table">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Bàn 02</span>
-                    </div>
-                    <div class="order-details">
-                        <p class="order-id">#DH-10584
-                            <span class="order-time">15 giây trước</span>
-                        </p>
-                        <p class="order-summary">1x Nước cam ép</p>
-                    </div>
-                    <p class="order-total">55,000 ₫</p>
-                    <div class="order-actions">
-                        <button class="btn btn-confirm"><i class="fas fa-check"></i> Xác nhận</button>
-                        <button class="btn btn-cancel"><i class="fas fa-times"></i> Hủy</button>
-                    </div>
-                </li>
-
             </ul>
+        </div>
+        <div id="payment-modal" class="modal">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2 class="modal-title">Xác Nhận Thanh Toán</h2>
+                    <button class="close-btn">&times;</button>
+                </header>
+
+                <div class="modal-body">
+                    <div class="payment-info-center">
+                        <h3 id="payment-table-name">Bàn ...</h3>
+                        <p class="payment-order-ref">Mã đơn: <strong id="payment-order-id">...</strong></p>
+                    </div>
+
+                    <div class="payment-summary">
+                        <p class="payment-total-row">
+                            <span>Tổng tiền:</span>
+                            <span id="payment-total">0 ₫</span>
+                        </p>
+                    </div>
+
+                    <div class="form-group cancel-reason-group">
+                        <label for="cancel-note">Ghi chú hủy (nếu chọn hủy):</label>
+                        <input type="text" id="cancel-note" placeholder="Lý do hủy..." class="form-control">
+                    </div>
+                </div>
+
+                <footer class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btn-confirm-cancel-order">
+                        <i class="fas fa-times"></i> Hủy Đơn Hàng
+                    </button>
+
+                    <button type="button" class="btn btn-success" id="btn-confirm-payment">
+                        <i class="fas fa-check-circle"></i> Xác Nhận Đã Thu Tiền
+                    </button>
+                </footer>
+            </div>
         </div>
         <div class="detail-card inventory-status">
             <h2>Cảnh Báo Tồn Kho</h2>
@@ -250,5 +235,6 @@
 
     </div>
 </div>
+
 <!-- Chart(Biểu đồ doanh thu) -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

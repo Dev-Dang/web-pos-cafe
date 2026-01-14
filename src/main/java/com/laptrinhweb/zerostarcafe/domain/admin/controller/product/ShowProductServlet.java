@@ -1,4 +1,4 @@
-package com.laptrinhweb.zerostarcafe.domain.admin.controller;
+package com.laptrinhweb.zerostarcafe.domain.admin.controller.product;
 
 import com.laptrinhweb.zerostarcafe.domain.admin.dao.AdminDAO;
 import com.laptrinhweb.zerostarcafe.domain.admin.dto.Category;
