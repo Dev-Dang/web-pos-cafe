@@ -1,5 +1,6 @@
-package com.laptrinhweb.zerostarcafe.domain.admin.controller.product;
+package com.laptrinhweb.zerostarcafe.web.admin.product;
 
+import com.laptrinhweb.zerostarcafe.core.utils.SlugUtil;
 import com.laptrinhweb.zerostarcafe.domain.admin.dao.AdminDAO;
 import com.laptrinhweb.zerostarcafe.domain.admin.dto.Product;
 import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
@@ -14,13 +15,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-@WebServlet(name = "EditProductServlet", value = "/admin/edit-product")
+@WebServlet(name = "CreateProductServlet", value = "/admin/api/create-product")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 2,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 50
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10,      // 10MB
+        maxRequestSize = 1024 * 1024 * 50    // 50MB
 )
-public class EditProductServlet extends HttpServlet {
+public class CreateProductServlet extends HttpServlet {
+
+    private static final String RELATIVE_IMAGE_DIR = "assets/client/img/product";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +34,7 @@ public class EditProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
         try {
             HttpSession session = request.getSession();
             Object sessionObj = session.getAttribute("AUTH_USER");
@@ -41,71 +45,76 @@ public class EditProductServlet extends HttpServlet {
                 userId = currentUser.getId();
             }
 
-            int id = Integer.parseInt(request.getParameter("product-id"));
-            String name = request.getParameter("name");
+            String rawName = request.getParameter("name");
+
+            String productSlug = SlugUtil.toSlug(rawName);
+
+            String safeName = rawName.replace("\"", "\\\"");
+            String jsonName = "{\"vi\": \"" + safeName + "\", \"en\": \"" + safeName + "\"}";
+
+            String rawDesc = request.getParameter("description");
+            if (rawDesc == null) rawDesc = "";
+            String safeDesc = rawDesc.replace("\"", "\\\"").replace("\n", " ").replace("\r", " ");
+            String jsonDesc = "{\"vi\": \"" + safeDesc + "\", \"en\": \"" + safeDesc + "\"}";
+
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             double price = Double.parseDouble(request.getParameter("price"));
             double inventory = Double.parseDouble(request.getParameter("inventory"));
             String unit = request.getParameter("unit");
 
-            boolean isActive = request.getParameter("active") != null;
-
-            String finalImageName;
+            String dbImageUrl = "";
             Part filePart = request.getPart("new_image");
 
             if (filePart != null && filePart.getSize() > 0 && filePart.getSubmittedFileName() != null && !filePart.getSubmittedFileName().isEmpty()) {
 
-                System.out.println("DEBUG: Đã nhận được file upload: " + filePart.getSubmittedFileName());
                 String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                finalImageName = "product_" + System.currentTimeMillis() + "_" + originalFileName;
+                String fileExtension = "";
+                int dotIndex = originalFileName.lastIndexOf(".");
+                if (dotIndex >= 0) {
+                    fileExtension = originalFileName.substring(dotIndex);
+                } else {
+                    fileExtension = ".png";
+                }
 
-                String buildPath = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "client" + File.separator + "img" + File.separator + "product";
+                String newFileName = productSlug + fileExtension;
 
+                String buildPath = getServletContext().getRealPath("") + File.separator + RELATIVE_IMAGE_DIR;
                 File buildDir = new File(buildPath);
                 if (!buildDir.exists()) buildDir.mkdirs();
 
-                filePart.write(buildPath + File.separator + finalImageName);
+                filePart.write(buildPath + File.separator + newFileName);
 
-                String sourcePath = "D:\\For University\\University\\Year4Semester7\\Web-Programming\\Project\\web-pos-cafe\\src\\main\\webapp\\assets\\client\\img\\product";
-
+                String sourcePath = "D:\\For University\\University\\Year4Semester7\\Web-Programming\\Project\\web-pos-cafe\\src\\main\\webapp\\" + RELATIVE_IMAGE_DIR;
                 File sourceDir = new File(sourcePath);
                 if (!sourceDir.exists()) sourceDir.mkdirs();
 
-                File fileInBuild = new File(buildPath + File.separator + finalImageName);
-                File fileInSource = new File(sourcePath + File.separator + finalImageName);
-
+                File fileInBuild = new File(buildPath + File.separator + newFileName);
+                File fileInSource = new File(sourcePath + File.separator + newFileName);
                 Files.copy(fileInBuild.toPath(), fileInSource.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                System.out.println("DEBUG: Đã backup file sang thư mục Source: " + fileInSource.getAbsolutePath());
+                System.out.println("DEBUG CREATE: Đã lưu ảnh: " + newFileName);
 
-            } else {
-                String oldUrl = request.getParameter("old_image");
-
-                if (oldUrl != null && oldUrl.contains("/")) {
-                    finalImageName = oldUrl.substring(oldUrl.lastIndexOf("/") + 1);
-                } else {
-                    finalImageName = oldUrl;
-                }
+                dbImageUrl = "assets/client/img/product/" + newFileName;
             }
 
             Product product = new Product();
-            product.setId(id);
-            product.setName(name); // {"vi": "xxx"}
+            product.setName(jsonName);
+            product.setDescription(jsonDesc);
             product.setCategoryId(categoryId);
-            product.setPrice(price);
+            product.setPrice((int) price);
             product.setInventory(inventory);
             product.setUnit(unit);
-            product.setPicUrl(finalImageName);
-            product.setActive(isActive);
+            product.setPicUrl(dbImageUrl);
+            product.setActive(true);
 
             AdminDAO dao = new AdminDAO();
-            boolean success = dao.updateProduct(product, 1, userId);
+            boolean success = dao.createProduct(product, userId);
 
             if (success) {
-                request.getSession().setAttribute("message", "Cập nhật sản phẩm thành công!");
+                request.getSession().setAttribute("message", "Thêm sản phẩm <strong>" + rawName + "</strong> thành công!");
                 request.getSession().setAttribute("messageType", "success");
             } else {
-                request.getSession().setAttribute("message", "Cập nhật thất bại!");
+                request.getSession().setAttribute("message", "Thêm mới thất bại! Vui lòng thử lại.");
                 request.getSession().setAttribute("messageType", "error");
             }
 

@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-
-    <!--  Declare DataSource  -->
     <Resource name="jdbc/ZeroStarDB"
               auth="Container"
               type="javax.sql.DataSource"
-              factory="com.zaxxer.hikari.HikariJNDIFactory"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
 
               driverClassName="com.mysql.cj.jdbc.Driver"
-              jdbcUrl="jdbc:mysql://localhost:3306/zerostar_cf"
+              url="jdbc:mysql://localhost:3306/zerostar_cf?characterEncoding=UTF-8"
+
               username="root"
               password=""
 
-              maximumPoolSize="30"
-              minimumIdle="5"
-              connectionTimeout="30000"
-              idleTimeout="600000"
-              maxLifetime="1800000"
-              validationTimeout="5000"
-              connectionTestQuery="SELECT 1"
-              leakDetectionThreshold="60000"
-              transactionIsolation="TRANSACTION_REPEATABLE_READ"
+              initialSize="5"
+              maxActive="30"
+              minIdle="5"
+              maxWaitMillis="10000"
 
-              dataSource.cachePrepStmts="true"
-              dataSource.prepStmtCacheSize="100"
-              dataSource.prepStmtCacheSqlLimit="2048"
+              validationQuery="SELECT 1"
+              testOnBorrow="true"
+              validationQueryTimeout="3"
     />
 </Context>

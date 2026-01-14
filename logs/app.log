@@ -1471,7 +1471,7 @@ jakarta.servlet.ServletException: Servlet execution threw an exception
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
 Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
@@ -1521,7 +1521,7 @@ jakarta.servlet.ServletException: Servlet execution threw an exception
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
 Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
@@ -1780,7 +1780,7 @@ jakarta.servlet.ServletException: Servlet execution threw an exception
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
 Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
@@ -1830,7 +1830,7 @@ jakarta.servlet.ServletException: Servlet execution threw an exception
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
 Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:34)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
@@ -1895,7 +1895,7 @@ AuthRecord(id=235, userId=1, authHash=424d977e482cdafb4f9f0f16a5020e6a2cd0c824b2
 [2026-01-14 10:27:22] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
 java.lang.IllegalStateException: Cannot forward after response has been committed
 	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
@@ -1975,7 +1975,7 @@ AuthRecord(id=236, userId=1, authHash=2c8b414b284d83c52100a80e61f6c13192aa5f7187
 [2026-01-14 10:48:15] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
 java.lang.IllegalStateException: Cannot forward after response has been committed
 	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
@@ -2064,7 +2064,7 @@ AuthRecord(id=237, userId=1, authHash=c132b20806c73fb0b78d70cc2e94cc4cf752b9964e
 [2026-01-14 11:01:53] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
 java.lang.IllegalStateException: Cannot forward after response has been committed
 	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
@@ -2135,7 +2135,7 @@ java.lang.IllegalStateException: Cannot forward after response has been committe
 [2026-01-14 11:13:52] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
 java.lang.IllegalStateException: Cannot forward after response has been committed
 	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
-	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at com.laptrinhweb.zerostarcafe.web.admin.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)

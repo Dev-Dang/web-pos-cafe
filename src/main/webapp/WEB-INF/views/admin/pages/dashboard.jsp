@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<script>
+    const ctx = "${pageContext.request.contextPath}";
+</script>
+<script src="<c:url value='/assets/admin/js/dashboard.js'/>"></script>
 <!-- Dashboard (Chứa Tổng quan doanh thu, đơn hàng, sản phẩm đã bán,)-->
 <div id="dashboard" class="page-content">
     <header>
@@ -96,29 +100,8 @@
         <div class="detail-card inventory-status">
             <h2>Cảnh Báo Tồn Kho</h2>
             <ul class="inventory-list">
-                <li class="inventory-item critical">
-                    <img src="https://picsum.photos/id/40/50/50" alt="Product">
-                    <div class="product-details">
-                        <p class="product-name">Quần Jeans Rách Gối</p>
-                        <p class="product-sku">SKU: QJ-002</p>
-                    </div>
-                    <p class="product-stock">Còn 3 sp</p>
-                </li>
-                <li class="inventory-item low">
-                    <img src="https://picsum.photos/id/1025/50/50" alt="Product">
-                    <div class="product-details">
-                        <p class="product-name">Áo Hoodie Nỉ Bông</p>
-                        <p class="product-sku">SKU: HD-001</p>
-                    </div>
-                    <p class="product-stock">Còn 8 sp</p>
-                </li>
-                <li class="inventory-item low">
-                    <img src="https://picsum.photos/id/305/50/50" alt="Product">
-                    <div class="product-details">
-                        <p class="product-name">Tai Nghe Bluetooth Pro</p>
-                        <p class="product-sku">SKU: BT-003</p>
-                    </div>
-                    <p class="product-stock">Còn 12 sp</p>
+                <li class="text-center p-3 text-muted">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
                 </li>
             </ul>
         </div>
@@ -134,37 +117,8 @@
                 </div>
             </div>
             <ul id="bestseller-list">
-                <li class="product-item" data-sales="1200">
-                    <img src="https://picsum.photos/id/1025/50/50" alt="Product">
-                    <div class="product-details">
-                        <p class="product-name">Áo Hoodie Nỉ Bông</p>
-                        <p class="product-category">Thời trang Nam</p>
-                    </div>
-                    <p class="product-sales">1,200 sp</p>
-                </li>
-                <li class="product-item" data-sales="750">
-                    <img src="https://picsum.photos/id/305/50/50" alt="Product">
-                    <div class="product-details">
-                        <p class="product-name">Tai Nghe Bluetooth Pro</p>
-                        <p class="product-category">Phụ kiện điện tử</p>
-                    </div>
-                    <p class="product-sales">750 sp</p>
-                </li>
-                <li class="product-item" data-sales="980">
-                    <img src="https://picsum.photos/id/201/50/50" alt="Product">
-                    <div class="product-details">
-                        <p class="product-name">Giày Sneaker Trắng</p>
-                        <p class="product-category">Giày dép</p>
-                    </div>
-                    <p class="product-sales">980 sp</p>
-                </li>
-                <li class="product-item" data-sales="420">
-                    <img src="https://picsum.photos/id/500/50/50" alt="Product">
-                    <div class="product-details">
-                        <p class="product-name">Bình Giữ Nhiệt Inox</p>
-                        <p class="product-category">Đồ gia dụng</p>
-                    </div>
-                    <p class="product-sales">420 sp</p>
+                <li class="text-center p-3 text-muted">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
                 </li>
             </ul>
         </div>
@@ -172,41 +126,8 @@
         <div class="detail-card today-activity">
             <h2>Hoạt Động Hôm Nay</h2>
             <ul class="activity-feed">
-                <li class="activity-item">
-                    <div class="activity-icon order">
-                        <i class="fas fa-receipt"></i>
-                    </div>
-                    <div class="activity-details">
-                        <p>Đơn hàng mới <strong>#DH-10582</strong> vừa được đặt.</p>
-                        <span class="activity-time">5 phút trước</span>
-                    </div>
-                </li>
-                <li class="activity-item">
-                    <div class="activity-icon user">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <div class="activity-details">
-                        <p><strong>nguyenvana@gmail.com</strong> vừa đăng ký tài khoản.</p>
-                        <span class="activity-time">20 phút trước</span>
-                    </div>
-                </li>
-                <li class="activity-item">
-                    <div class="activity-icon inventory">
-                        <i class="fas fa-boxes"></i>
-                    </div>
-                    <div class="activity-details">
-                        <p>Đã cập nhật tồn kho cho <strong>Áo Hoodie Nỉ Bông</strong> (Còn 8 sp).</p>
-                        <span class="activity-time">1 giờ trước</span>
-                    </div>
-                </li>
-                <li class="activity-item">
-                    <div class="activity-icon order">
-                        <i class="fas fa-receipt"></i>
-                    </div>
-                    <div class="activity-details">
-                        <p>Đơn hàng <strong>#DH-10581</strong> đã được giao thành công.</p>
-                        <span class="activity-time">2 giờ trước</span>
-                    </div>
+                <li class="text-center p-3 text-muted">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải hoạt động...
                 </li>
             </ul>
         </div>
