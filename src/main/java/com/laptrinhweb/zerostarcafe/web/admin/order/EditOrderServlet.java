@@ -1,9 +1,8 @@
-package com.laptrinhweb.zerostarcafe.web.admin.account;
+package com.laptrinhweb.zerostarcafe.web.admin.order;
 
 import com.google.gson.Gson;
 import com.laptrinhweb.zerostarcafe.domain.admin.dao.AdminDAO;
 import com.laptrinhweb.zerostarcafe.domain.admin.dto.User;
-import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,33 +14,29 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "EditAccountServlet", value = "/admin/api/edit-account")
-public class EditAccountServlet extends HttpServlet {
+@WebServlet(name = "EditOrderServlet", value = "/admin/api/edit-order")
+public class EditOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json; charset=UTF-8");
         Map<String, Object> result = new HashMap<>();
-        try {
-            User user = new User();
-            user.setId(Long.parseLong(request.getParameter("id")));
-            user.setUsername(request.getParameter("username"));
-            user.setEmail(request.getParameter("email"));
 
-            String role = request.getParameter("role");
-            user.setSuperAdmin("admin".equals(role));
+        try {
             HttpSession session = request.getSession();
-            Object sessionObj = session.getAttribute("AUTH_USER");
-            long adminId = 1;
-            if (sessionObj instanceof AuthUser) {
-                adminId = ((AuthUser) sessionObj).getId();
-            }
+            User admin = (User) session.getAttribute("AUTH_USER");
+            long adminId = (admin != null) ? admin.getId() : 0;
+
+            long orderId = Long.parseLong(request.getParameter("id"));
+            String status = request.getParameter("status");
+            long tableId = Long.parseLong(request.getParameter("tableId"));
+
             AdminDAO dao = new AdminDAO();
-            if (dao.updateAccount(user, adminId)) {
+            if (dao.updateOrderInfo(orderId, status, tableId, adminId)) {
                 result.put("success", true);
-                result.put("message", "Cập nhật thành công!");
+                result.put("message", "Cập nhật đơn hàng thành công!");
             } else {
                 result.put("success", false);
-                result.put("message", "Cập nhật thất bại.");
+                result.put("message", "Lỗi cập nhật.");
             }
         } catch (Exception e) {
             result.put("success", false);

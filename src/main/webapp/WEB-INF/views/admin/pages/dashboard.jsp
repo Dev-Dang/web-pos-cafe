@@ -1,10 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<script>
-    const ctx = "${pageContext.request.contextPath}";
-</script>
-<script src="<c:url value='/assets/admin/js/dashboard.js'/>"></script>
 <!-- Dashboard (Chứa Tổng quan doanh thu, đơn hàng, sản phẩm đã bán,)-->
 <div id="dashboard" class="page-content">
     <header>

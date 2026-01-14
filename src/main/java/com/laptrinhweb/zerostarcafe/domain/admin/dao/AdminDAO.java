@@ -736,42 +736,72 @@ public class AdminDAO {
         return list;
     }
 
-    public boolean createAccount(User user) {
+    public boolean createAccount(User user, long currentAdminId) {
         String sql = "INSERT INTO users (username, email, password_hash, is_super_admin, status) VALUES (?, ?, ?, ?, 'active')";
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPasswordHash());
             ps.setBoolean(4, user.isSuperAdmin());
-            return ps.executeUpdate() > 0;
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        long newUserId = generatedKeys.getLong(1);
+                        LogDAO.log(currentAdminId, "CREATE_USER", "USER", newUserId,
+                                "Tạo tài khoản mới: " + user.getUsername() + " (" + user.getEmail() + ")");
+                    }
+                }
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public boolean updateAccount(User user) {
+    public boolean updateAccount(User user, long currentAdminId) {
         String sql = "UPDATE users SET username = ?, email = ?, is_super_admin = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getEmail());
             ps.setBoolean(3, user.isSuperAdmin());
             ps.setLong(4, user.getId());
-            return ps.executeUpdate() > 0;
+
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                LogDAO.log(currentAdminId, "UPDATE_USER", "USER", user.getId(),
+                        "Cập nhật thông tin tài khoản ID: " + user.getId());
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public boolean deleteAccount(long id) {
+    public boolean deleteAccount(long id, long currentAdminId) {
         String sql = "DELETE FROM users WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setLong(1, id);
-            return ps.executeUpdate() > 0;
+
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                LogDAO.log(currentAdminId, "DELETE_USER", "USER", id,
+                        "Xóa tài khoản ID: " + id);
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -827,6 +857,119 @@ public class AdminDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public boolean deleteOrder(long orderId, long adminId) {
+        String sqlItems = "DELETE FROM order_items WHERE order_id = ?";
+        String sqlOrder = "DELETE FROM orders WHERE id = ?";
+
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlItems)) {
+                ps.setLong(1, orderId);
+                ps.executeUpdate();
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlOrder)) {
+                ps.setLong(1, orderId);
+                int rows = ps.executeUpdate();
+
+                if (rows > 0) {
+                    LogDAO.log(adminId, "DELETE_ORDER", "ORDER", orderId, "Xóa đơn hàng #" + orderId);
+                    conn.commit();
+                    return true;
+                }
+            }
+            conn.rollback();
+            return false;
+        } catch (Exception e) {
+            if (conn != null) try {
+                conn.rollback();
+            } catch (SQLException ex) {
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ex) {
+            }
+        }
+    }
+
+    public boolean createOrder(long tableId, String source, long adminId) {
+        String sql = "INSERT INTO orders (store_id, table_id, status, opened_at, source) VALUES (1, ?, 'pending', NOW(), ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+
+            if (tableId == 0) {
+                ps.setNull(1, java.sql.Types.BIGINT);
+            } else {
+                ps.setLong(1, tableId);
+            }
+            ps.setString(2, source);
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        long newOrderId = rs.getLong(1);
+                        LogDAO.log(adminId, "CREATE_ORDER", "ORDER", newOrderId,
+                                "Tạo đơn hàng thủ công (Bàn: " + (tableId == 0 ? "Mang đi" : tableId) + ")");
+                    }
+                }
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateOrderInfo(long orderId, String status, long tableId, long adminId) {
+        String sql = "UPDATE orders SET status = ?, table_id = ? WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, status);
+            if (tableId == 0) ps.setNull(2, java.sql.Types.BIGINT);
+            else ps.setLong(2, tableId);
+
+            ps.setLong(3, orderId);
+
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                LogDAO.log(adminId, "UPDATE_ORDER", "ORDER", orderId, "Cập nhật thông tin đơn hàng #" + orderId);
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean addOrderItem(long orderId, int productId, int quantity) {
+        String sql = "INSERT INTO order_items (order_id, menu_item_id, qty, unit_price_snapshot, item_name_snapshot) " +
+                     "SELECT ?, id, ?, base_price, name " +
+                     "FROM menu_items WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setLong(1, orderId);
+            ps.setInt(2, quantity);
+            ps.setInt(3, productId);
+
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static void main(String[] args) throws SQLException {

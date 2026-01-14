@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "ShowOrderServlet", value = "/admin/orders")
@@ -21,6 +22,11 @@ public class ShowOrderServlet extends HttpServlet {
         request.setAttribute("ordersList", orders);
         request.setAttribute("pageId", "order");
         request.setAttribute("pageContent", "/WEB-INF/views/admin/pages/orders.jsp");
+        try {
+            request.setAttribute("productsList", dao.getAllProductsByStore(1));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         request.getRequestDispatcher("/WEB-INF/views/admin/layouts/admin-layout.jsp").forward(request, response);
     }
 }

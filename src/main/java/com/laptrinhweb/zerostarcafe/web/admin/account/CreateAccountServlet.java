@@ -3,11 +3,13 @@ package com.laptrinhweb.zerostarcafe.web.admin.account;
 import com.google.gson.Gson;
 import com.laptrinhweb.zerostarcafe.domain.admin.dao.AdminDAO;
 import com.laptrinhweb.zerostarcafe.domain.admin.dto.User;
+import com.laptrinhweb.zerostarcafe.domain.auth.model.AuthUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,16 +23,21 @@ public class CreateAccountServlet extends HttpServlet {
         Map<String, Object> result = new HashMap<>();
         try {
             User user = new User();
-            user.setUsername(request.getParameter("fullname")); // Lưu ý name bên JSP là fullname
+            user.setUsername(request.getParameter("fullname"));
             user.setEmail(request.getParameter("email"));
-            user.setPasswordHash(request.getParameter("password")); // Thực tế nên hash password
+            user.setPasswordHash(request.getParameter("password"));
 
-            // Xử lý role: nếu value là 'admin' -> true, còn lại -> false
             String role = request.getParameter("role");
             user.setSuperAdmin("admin".equals(role));
 
             AdminDAO dao = new AdminDAO();
-            if (dao.createAccount(user)) {
+            HttpSession session = request.getSession();
+            Object sessionObj = session.getAttribute("AUTH_USER");
+            long adminId = 1;
+            if (sessionObj instanceof AuthUser) {
+                adminId = ((AuthUser) sessionObj).getId();
+            }
+            if (dao.createAccount(user, adminId)) {
                 result.put("success", true);
                 result.put("message", "Tạo tài khoản thành công!");
             } else {
