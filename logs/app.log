@@ -1849,3 +1849,477 @@ Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
 [2026-01-14 09:49:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1007 ms
 [2026-01-14 09:49:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |   43 ms
 [2026-01-14 09:49:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |   18 ms
+[2026-01-14 10:03:45] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:06:33] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:06:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   17 ms
+[2026-01-14 10:06:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  434 ms
+[2026-01-14 10:06:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   43 ms
+[2026-01-14 10:11:15] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-5 - Starting...
+[2026-01-14 10:11:15] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@23da65c3
+[2026-01-14 10:11:15] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-5 - Start completed.
+[2026-01-14 10:11:15] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:11:27] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:11:32] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 4352 ms
+[2026-01-14 10:11:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  479 ms
+[2026-01-14 10:11:47] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=234, userId=1, authHash=b460d88b97309cec689767b3b9c0cf2dad2372eff3c0a8b2cc100571b5ea670f, deviceId=140e9123255dc931c386c1f12048f5b2a16bb7e9c78bc5ff8c3a1845bfbbf465, status=ACTIVE, createdAt=2026-01-14T10:11:47.016759400, expiredAt=2026-01-14T10:41:47.000664100, lastRotatedAt=2026-01-14T10:11:47.016759400, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-14 10:11:47] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 | 1069 ms
+[2026-01-14 10:11:47] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |  271 ms
+[2026-01-14 10:13:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  660 ms
+[2026-01-14 10:14:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |   19 ms
+[2026-01-14 10:14:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/api/dashboard-overview | 200 |   12 ms
+[2026-01-14 10:18:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |    0 ms
+[2026-01-14 10:18:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  146 ms
+[2026-01-14 10:18:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |    8 ms
+[2026-01-14 10:18:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   38 ms
+[2026-01-14 10:18:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |   15 ms
+[2026-01-14 10:18:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |  214 ms
+[2026-01-14 10:19:15] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:19:16] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-6 - Starting...
+[2026-01-14 10:19:16] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3de6c87d
+[2026-01-14 10:19:16] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-6 - Start completed.
+[2026-01-14 10:19:16] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:19:23] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:26:52] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:26:53] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-7 - Starting...
+[2026-01-14 10:26:53] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31382b5f
+[2026-01-14 10:26:53] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-7 - Start completed.
+[2026-01-14 10:26:53] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:26:59] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:27:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 4391 ms
+[2026-01-14 10:27:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  108 ms
+[2026-01-14 10:27:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  380 ms
+[2026-01-14 10:27:21] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=235, userId=1, authHash=424d977e482cdafb4f9f0f16a5020e6a2cd0c824b20597843124fea1d8cf0c0e, deviceId=89e2803be7d939c1b5911b6dbf54603613ec7aa7bc325e270b3859651a62c401, status=ACTIVE, createdAt=2026-01-14T10:27:21.573183200, expiredAt=2026-01-14T10:57:21.548350, lastRotatedAt=2026-01-14T10:27:21.573183200, ipLast=0:0:0:0:0:0:0:1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0, revokedAt=null, revokedReason=null)
+[2026-01-14 10:27:21] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 | 1064 ms
+[2026-01-14 10:27:22] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+java.lang.IllegalStateException: Cannot forward after response has been committed
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-14 10:27:35] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  585 ms
+[2026-01-14 10:31:54] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:31:56] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-8 - Starting...
+[2026-01-14 10:31:56] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-8 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5d328bb4
+[2026-01-14 10:31:56] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-8 - Start completed.
+[2026-01-14 10:31:56] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:32:00] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:32:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1228 ms
+[2026-01-14 10:33:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  140 ms
+[2026-01-14 10:38:34] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:38:41] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-9 - Starting...
+[2026-01-14 10:38:41] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-9 - Added connection com.mysql.cj.jdbc.ConnectionImpl@161ee4fd
+[2026-01-14 10:38:41] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-9 - Start completed.
+[2026-01-14 10:38:41] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:38:43] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:38:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1301 ms
+[2026-01-14 10:42:15] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:42:16] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-10 - Starting...
+[2026-01-14 10:42:17] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-10 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7700487c
+[2026-01-14 10:42:17] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-10 - Start completed.
+[2026-01-14 10:42:17] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:42:23] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:42:25] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1272 ms
+[2026-01-14 10:44:33] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:44:34] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-11 - Starting...
+[2026-01-14 10:44:34] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-11 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4f627fe4
+[2026-01-14 10:44:34] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-11 - Start completed.
+[2026-01-14 10:44:34] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:44:36] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:44:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1149 ms
+[2026-01-14 10:47:58] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   13 ms
+[2026-01-14 10:48:02] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 3432 ms
+[2026-01-14 10:48:05] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  315 ms
+[2026-01-14 10:48:14] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=236, userId=1, authHash=2c8b414b284d83c52100a80e61f6c13192aa5f7187e7e8eda3a45da14bdc762b, deviceId=a93233bec75b75759e2b7293192cec30063ef904b5f7fa077decff87b7d5d67a, status=ACTIVE, createdAt=2026-01-14T10:48:14.813473300, expiredAt=2026-01-14T11:18:14.812476300, lastRotatedAt=2026-01-14T10:48:14.813473300, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-14 10:48:14] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  973 ms
+[2026-01-14 10:48:15] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+java.lang.IllegalStateException: Cannot forward after response has been committed
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-14 10:48:21] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |   70 ms
+[2026-01-14 10:52:33] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:52:34] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-12 - Starting...
+[2026-01-14 10:52:34] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-12 - Added connection com.mysql.cj.jdbc.ConnectionImpl@32566833
+[2026-01-14 10:52:34] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-12 - Start completed.
+[2026-01-14 10:52:35] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:52:38] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:52:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1220 ms
+[2026-01-14 10:52:53] INFO  c.l.z.core.location.GeoIpUtil GeoIP database loaded from: /geo/GeoLite2-City.mmdb
+[2026-01-14 10:52:53] WARN  c.l.z.core.location.GeoIpUtil GeoIP lookup failed for ip=127.0.0.1: The address 127.0.0.1 is not in the database.
+[2026-01-14 10:52:53] WARN  c.l.z.d.store.service.StoreService GeoIP failed for IP=127.0.0.1, using default.
+[2026-01-14 10:52:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  951 ms
+[2026-01-14 10:53:03] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:53:04] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-13 - Starting...
+[2026-01-14 10:53:05] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-13 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f6493f
+[2026-01-14 10:53:05] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-13 - Start completed.
+[2026-01-14 10:53:05] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:53:08] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:53:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  943 ms
+[2026-01-14 10:53:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  135 ms
+[2026-01-14 10:53:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  109 ms
+[2026-01-14 10:53:50] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:53:55] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-14 - Starting...
+[2026-01-14 10:53:56] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-14 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6689cad9
+[2026-01-14 10:53:56] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-14 - Start completed.
+[2026-01-14 10:53:56] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:54:06] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:54:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1146 ms
+[2026-01-14 10:55:07] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 10:55:09] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-15 - Starting...
+[2026-01-14 10:55:09] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-15 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51b4f4b9
+[2026-01-14 10:55:09] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-15 - Start completed.
+[2026-01-14 10:55:10] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 10:55:14] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 10:55:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1099 ms
+[2026-01-14 10:55:34] WARN  c.l.z.web.common.filters.CsrfFilter CSRF validation failed - Method: POST, URI: /admin/edit-product, IP: 127.0.0.1
+[2026-01-14 10:59:43] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  143 ms
+[2026-01-14 11:00:11] WARN  c.l.z.web.common.filters.CsrfFilter CSRF validation failed - Method: POST, URI: /admin/edit-product, IP: 127.0.0.1
+[2026-01-14 11:00:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 3964 ms
+[2026-01-14 11:01:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  156 ms
+[2026-01-14 11:01:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  118 ms
+[2026-01-14 11:01:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  363 ms
+[2026-01-14 11:01:52] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=237, userId=1, authHash=c132b20806c73fb0b78d70cc2e94cc4cf752b9964e220d4939cf7b00b045b511, deviceId=2c9a92823e2c4b08e6c542e164efe61ffccc7b3d444f7d51a41aa6de4a815f8b, status=ACTIVE, createdAt=2026-01-14T11:01:52.193325700, expiredAt=2026-01-14T11:31:52.191337600, lastRotatedAt=2026-01-14T11:01:52.193325700, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-14 11:01:52] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 | 1199 ms
+[2026-01-14 11:01:53] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+java.lang.IllegalStateException: Cannot forward after response has been committed
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.CsrfFilter.doFilter(CsrfFilter.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-14 11:02:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |   88 ms
+[2026-01-14 11:02:30] WARN  c.l.z.web.common.filters.CsrfFilter CSRF validation failed - Method: POST, URI: /admin/edit-product, IP: 127.0.0.1
+[2026-01-14 11:03:35] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 11:03:36] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-16 - Starting...
+[2026-01-14 11:03:36] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17e9f611
+[2026-01-14 11:03:36] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-16 - Start completed.
+[2026-01-14 11:03:36] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 11:03:43] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 11:03:45] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1310 ms
+[2026-01-14 11:03:54] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/edit-product       | 302 |   70 ms
+[2026-01-14 11:03:54] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  184 ms
+[2026-01-14 11:04:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  116 ms
+[2026-01-14 11:04:40] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |   79 ms
+[2026-01-14 11:08:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   15 ms
+[2026-01-14 11:09:08] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   11 ms
+[2026-01-14 11:09:21] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/delete-product | 302 |   18 ms
+[2026-01-14 11:09:21] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |   93 ms
+[2026-01-14 11:11:37] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   18 ms
+[2026-01-14 11:11:55] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   10 ms
+[2026-01-14 11:12:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |   84 ms
+[2026-01-14 11:13:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/orders             | 200 |  236 ms
+[2026-01-14 11:13:24] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/revenue            | 200 |  202 ms
+[2026-01-14 11:13:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/accounts           | 200 |  129 ms
+[2026-01-14 11:13:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/staffs             | 200 |  206 ms
+[2026-01-14 11:13:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/logs               | 200 |  152 ms
+[2026-01-14 11:13:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |   93 ms
+[2026-01-14 11:13:51] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/dashboard          | 302 |   14 ms
+[2026-01-14 11:13:52] ERROR c.l.z.web.common.filters.ErrorFilter Response already committed for unknown error.
+java.lang.IllegalStateException: Cannot forward after response has been committed
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:206)
+	at com.laptrinhweb.zerostarcafe.domain.admin.controller.dashboard.ShowDashboardServlet.doGet(ShowDashboardServlet.java:47)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:130)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LogFilter.doFilter(LogFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.LocaleFilter.doFilter(LocaleFilter.java:82)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ErrorFilter.doFilter(ErrorFilter.java:35)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.client.filters.StoreIDFilter.doFilter(StoreIDFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.RoleFilter.doFilter(RoleFilter.java:88)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.auth.filter.AuthFilter.doFilter(AuthFilter.java:95)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.ResourceCleanupFilter.doFilter(ResourceCleanupFilter.java:38)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at com.laptrinhweb.zerostarcafe.web.common.filters.TransactionFilter.doFilter(TransactionFilter.java:39)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:109)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:79)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:666)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1780)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:948)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:482)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-01-14 11:15:38] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 3753 ms
+[2026-01-14 11:15:41] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |   13 ms
+[2026-01-14 11:15:42] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  142 ms
+[2026-01-14 11:15:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |   12 ms
+[2026-01-14 11:15:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  142 ms
+[2026-01-14 11:17:21] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 11:17:22] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-17 - Starting...
+[2026-01-14 11:17:22] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-17 - Added connection com.mysql.cj.jdbc.ConnectionImpl@40f6e7f5
+[2026-01-14 11:17:22] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-17 - Start completed.
+[2026-01-14 11:17:22] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 11:17:31] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 11:17:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1239 ms
+[2026-01-14 11:17:46] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   26 ms
+[2026-01-14 11:17:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 4033 ms
+[2026-01-14 11:18:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |    8 ms
+[2026-01-14 11:18:01] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  100 ms
+[2026-01-14 11:18:48] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 500 |   35 ms
+[2026-01-14 11:18:58] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 500 |   10 ms
+[2026-01-14 11:19:00] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  644 ms
+[2026-01-14 11:19:03] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 500 |    3 ms
+[2026-01-14 11:19:31] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 500 |   19 ms
+[2026-01-14 11:22:18] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 11:22:20] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-18 - Starting...
+[2026-01-14 11:22:20] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-18 - Added connection com.mysql.cj.jdbc.ConnectionImpl@505f779d
+[2026-01-14 11:22:20] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-18 - Start completed.
+[2026-01-14 11:22:20] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 11:22:25] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 11:22:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1322 ms
+[2026-01-14 11:22:33] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 500 |   18 ms
+[2026-01-14 11:23:05] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 11:23:06] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-19 - Starting...
+[2026-01-14 11:23:07] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-19 - Added connection com.mysql.cj.jdbc.ConnectionImpl@289ddfc1
+[2026-01-14 11:23:07] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-19 - Start completed.
+[2026-01-14 11:23:07] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 11:23:09] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 11:23:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1443 ms
+[2026-01-14 11:23:13] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   27 ms
+[2026-01-14 11:24:09] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 11:24:10] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-20 - Starting...
+[2026-01-14 11:24:11] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-20 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4e8e9745
+[2026-01-14 11:24:11] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-20 - Start completed.
+[2026-01-14 11:24:11] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 11:24:14] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 11:24:16] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1555 ms
+[2026-01-14 11:24:39] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter destroyed
+[2026-01-14 11:24:45] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-21 - Starting...
+[2026-01-14 11:24:45] INFO  com.zaxxer.hikari.pool.HikariPool HikariPool-21 - Added connection com.mysql.cj.jdbc.ConnectionImpl@a5f17de
+[2026-01-14 11:24:45] INFO  com.zaxxer.hikari.HikariDataSource HikariPool-21 - Start completed.
+[2026-01-14 11:24:46] INFO  c.l.z.w.c.f.ResourceCleanupFilter ResourceCleanupFilter initialized.
+[2026-01-14 11:24:46] INFO  c.l.z.core.database.DBConnection Datasource loaded.
+[2026-01-14 11:24:48] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 | 1226 ms
+[2026-01-14 11:24:50] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   41 ms
+[2026-01-14 11:24:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 | 4155 ms
+[2026-01-14 11:25:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  177 ms
+[2026-01-14 11:25:21] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   22 ms
+[2026-01-14 11:25:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  102 ms
+[2026-01-14 11:25:27] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/admin/api/product-status | 200 |   15 ms
+[2026-01-14 11:26:06] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/revenue            | 200 |  230 ms
+[2026-01-14 11:26:09] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  127 ms
+[2026-01-14 11:26:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/orders             | 200 |  177 ms
+[2026-01-14 11:26:20] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/revenue            | 200 |    8 ms
+[2026-01-14 11:26:21] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/accounts           | 200 |  171 ms
+[2026-01-14 11:26:22] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/staffs             | 200 |  143 ms
+[2026-01-14 11:26:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/accounts           | 200 |    3 ms
+[2026-01-14 11:26:25] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/revenue            | 200 |    6 ms
+[2026-01-14 11:26:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/orders             | 200 |   17 ms
+[2026-01-14 11:26:28] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/admin/products           | 200 |  160 ms
+[2026-01-14 11:27:19] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 | 1076 ms
+[2026-01-14 11:29:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/store/check-in           | 302 |   17 ms
+[2026-01-14 11:29:03] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  125 ms
+[2026-01-14 11:29:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |   10 ms
+[2026-01-14 11:29:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |   35 ms
+[2026-01-14 11:29:10] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/partial/login-form       | 200 |  458 ms
+[2026-01-14 11:29:12] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/register            | 200 |  142 ms
+[2026-01-14 11:29:25] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/register            | 422 |  129 ms
+[2026-01-14 11:29:34] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/login               | 200 |  148 ms
+[2026-01-14 11:29:38] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 422 | 1166 ms
+[2026-01-14 11:29:42] INFO  c.l.z.d.auth.service.AuthService New Login Record: 
+AuthRecord(id=238, userId=9, authHash=fe00d139046bfc3cc852c5838694f52e8b20bd20a01f0e04bef3253a48c8ff57, deviceId=6a5de136b05640391c369e27780c38688db54d7f9088258d2c2de2b9ecc59543, status=ACTIVE, createdAt=2026-01-14T11:29:42.969469100, expiredAt=2026-01-21T11:29:42.968953, lastRotatedAt=2026-01-14T11:29:42.969469100, ipLast=127.0.0.1, userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0, revokedAt=null, revokedReason=null)
+[2026-01-14 11:29:43] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/auth/login               | 303 |  683 ms
+[2026-01-14 11:29:44] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  474 ms
+[2026-01-14 11:29:49] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/categories/ice-blended   | 200 |   67 ms
+[2026-01-14 11:29:50] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/floaty-bac-xiu  | 200 |   65 ms
+[2026-01-14 11:29:52] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/add                 | 200 |  118 ms
+[2026-01-14 11:29:53] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/cart/edit                | 200 |   23 ms
+[2026-01-14 11:29:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update-item         | 200 |   69 ms
+[2026-01-14 11:30:00] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/toggle-loyalty      | 200 |   22 ms
+[2026-01-14 11:30:04] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/payment/select-method    | 200 |  314 ms
+[2026-01-14 11:30:08] INFO  c.l.z.d.order.service.OrderService Created order ID=39 for user=9, store=2
+[2026-01-14 11:30:08] INFO  c.l.z.d.l.service.LoyaltyService Redeemed 20763 points (-20.763 VND) for userId=9, new balance=0
+[2026-01-14 11:30:08] INFO  c.l.z.d.l.service.LoyaltyService Awarded 378 points to userId=9 for order amount=378237
+[2026-01-14 11:30:08] INFO  c.l.z.d.i.service.InvoiceService Generated invoice HD-20260114-00001 for order ID=39
+[2026-01-14 11:30:08] INFO  c.l.z.d.i.service.InvoiceService Saved invoice ID=37, number=HD-20260114-00001
+[2026-01-14 11:30:08] INFO  c.l.z.d.order.service.OrderService Marked order ID=39 as PAID and closed
+[2026-01-14 11:30:08] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/payment/process-cash     | 200 |  437 ms
+[2026-01-14 11:30:13] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  156 ms
+[2026-01-14 11:30:23] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  323 ms
+[2026-01-14 11:30:25] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  152 ms
+[2026-01-14 11:30:28] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  132 ms
+[2026-01-14 11:30:28] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  125 ms
+[2026-01-14 11:30:29] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   86 ms
+[2026-01-14 11:30:33] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  138 ms
+[2026-01-14 11:30:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |  144 ms
+[2026-01-14 11:30:39] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/user/orders              | 200 |   69 ms
+[2026-01-14 11:30:50] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/user/orders/clone        | 200 |  143 ms
+[2026-01-14 11:30:52] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   11 ms
+[2026-01-14 11:30:52] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   18 ms
+[2026-01-14 11:30:53] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   17 ms
+[2026-01-14 11:30:53] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   20 ms
+[2026-01-14 11:30:53] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   14 ms
+[2026-01-14 11:30:53] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   16 ms
+[2026-01-14 11:30:54] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/toggle-loyalty      | 200 |   10 ms
+[2026-01-14 11:30:54] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/toggle-loyalty      | 200 |   16 ms
+[2026-01-14 11:30:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/                         | 302 |   16 ms
+[2026-01-14 11:30:56] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  247 ms
+[2026-01-14 11:30:59] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-mo         | 200 |   57 ms
+[2026-01-14 11:31:07] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/categories/cold-brew     | 200 |   62 ms
+[2026-01-14 11:31:08] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/categories/milk-tea      | 200 |   17 ms
+[2026-01-14 11:31:10] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/toggle-loyalty      | 200 |   32 ms
+[2026-01-14 11:31:11] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/toggle-loyalty      | 200 |   18 ms
+[2026-01-14 11:31:36] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   56 ms
+[2026-01-14 11:31:37] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   15 ms
+[2026-01-14 11:31:37] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   17 ms
+[2026-01-14 11:31:40] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   19 ms
+[2026-01-14 11:31:41] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   49 ms
+[2026-01-14 11:31:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   51 ms
+[2026-01-14 11:31:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   14 ms
+[2026-01-14 11:31:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   20 ms
+[2026-01-14 11:31:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   23 ms
+[2026-01-14 11:31:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   21 ms
+[2026-01-14 11:31:57] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   18 ms
+[2026-01-14 11:31:58] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   21 ms
+[2026-01-14 11:31:59] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   20 ms
+[2026-01-14 11:31:59] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   15 ms
+[2026-01-14 11:31:59] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   23 ms
+[2026-01-14 11:31:59] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/update              | 200 |   13 ms
+[2026-01-14 11:31:59] INFO  c.l.z.web.common.filters.LogFilter POST /zero_star_cafe/cart/remove              | 200 |   21 ms
+[2026-01-14 11:32:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/auth/logout              | 302 |   14 ms
+[2026-01-14 11:32:11] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  130 ms
+[2026-01-14 11:32:15] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/categories/matcha        | 200 |   11 ms
+[2026-01-14 11:32:17] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/search                   | 200 |   82 ms
+[2026-01-14 11:32:18] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/search                   | 200 |   18 ms
+[2026-01-14 11:32:19] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/search                   | 200 |   17 ms
+[2026-01-14 11:32:21] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/search                   | 200 |   44 ms
+[2026-01-14 11:32:26] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/categories/milk-tea      | 200 |   60 ms
+[2026-01-14 11:32:27] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/tra-den-macchiato | 200 |   66 ms
+[2026-01-14 11:32:30] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/categories/americano     | 200 |   39 ms
+[2026-01-14 11:32:31] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/products/a-me-classic    | 200 |   66 ms
+[2026-01-14 11:32:37] INFO  c.l.z.web.common.filters.LogFilter GET  /zero_star_cafe/home                     | 200 |  174 ms

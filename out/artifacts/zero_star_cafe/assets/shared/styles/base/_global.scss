@@ -1,0 +1,71 @@
+$primary: #f87938;
+$body-bg: #f5f5f4;
+
+// Typography
+$font-family-base: "Inter", sans-serif;
+$font-size-base: 1.6rem;
+$font-size-root: 10px;
+$font-weight-base: 400;
+$body-color: #121212;
+$line-height-base: 1.5;
+
+$font-size-sm: 1.2rem;
+
+$h1-font-size: 4.8rem;
+$h2-font-size: 4rem;
+$h3-font-size: 2.8rem;
+$h4-font-size: 2.4rem;
+$h5-font-size: 1.8rem;
+
+// Button
+$btn-line-height: 1.5;
+
+$btn-font-size: 1.6rem;
+$btn-padding-y: 0.8rem;
+$btn-padding-x: 1.6rem;
+$btn-border-radius: 1.2rem;
+$btn-border-width: 1.5px;
+$btn-focus-width: 1.5px;
+
+$btn-padding-x-lg: 1.6rem;
+$btn-padding-y-lg: 1.2rem;
+$btn-border-radius-lg: 1.6rem;
+$btn-font-size-lg: 1.6rem;
+
+// ModalManager
+$modal-inner-padding: 3.6rem 2.4rem 1.6rem;
+$modal-content-bg: white;
+$modal-content-border-radius: 1.6rem;
+$modal-sm: 324px;
+
+// Form
+$input-bg: white;
+$input-padding-y: 1.2rem;
+$input-padding-x: 1.2rem;
+$input-line-height: 1;
+$input-border-radius: 8px;
+
+$form-floating-height: 5.2rem;
+$form-floating-input-padding-t: 2.5rem;
+$form-floating-label-height: 1.25em;
+$form-floating-label-transform: scale(0.75) translateY(-0.75rem) translateX(0.15rem);
+
+// Dropdown
+$caret-width: 0;
+$dropdown-border-radius: 12px;
+$dropdown-padding-x: 0;
+$dropdown-padding-y: 0;
+$dropdown-divider-margin-y: 0;
+$dropdown-item-padding-y: 1rem;
+$dropdown-item-padding-x: 1.6rem;
+
+// Navbar
+$navbar-padding-y: 2rem;
+$navbar-brand-font-size: 2.4rem;
+
+// ToastNotifier
+$toast-max-width: 350px;
+$toast-padding-x: 1.6rem;
+$toast-font-size: 1.4rem;
+$toast-border-radius: 8px;
+$toast-spacing: 1.2rem;

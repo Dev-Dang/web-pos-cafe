@@ -1,0 +1,110 @@
+.toast-container {
+  width: 356px;
+  background-color: red !important;
+  position: fixed;
+  z-index: 9999;
+
+  &.top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 1.6rem;
+
+    & .toast {
+      top: 0;
+      --direction: 1;
+    }
+  }
+
+  &.bottom-right {
+    bottom: 0;
+    right: 0;
+    margin-right: 3.2rem;
+    margin-bottom: 3.2rem;
+
+    & .toast {
+      bottom: 0;
+      --direction: -1;
+    }
+  }
+}
+
+.toast {
+  --offset: -100%;
+  --dy: calc(var(--offset) * var(--direction));
+
+  position: absolute;
+  right: 0;
+
+  width: 100% !important;
+  border-radius: 0.8rem;
+  will-change: transform, opacity;
+  transform: translateY(var(--dy)) scale(1);
+  opacity: 1;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  pointer-events: auto;
+
+  &.toast-hide {
+    opacity: 0;
+    transform: translateY(calc(var(--dy) - 40px)) scale(0.95);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 0 !important;
+  }
+
+  &:not(show) {
+    display: inline-block !important;
+  }
+
+  &:nth-child(1) {
+    z-index: 30;
+  }
+
+  &:nth-child(2) {
+    z-index: 20;
+  }
+
+  &:nth-child(3) {
+    z-index: 10;
+  }
+
+  // =============== COLORS ===============
+  &-normal {
+    background-color: $color-gray-50;
+    border: 1px solid $color-gray-100;
+    color: $color-gray-800;
+  }
+
+  &-success {
+    background-color: $color-green-50;
+    border: 1px solid $color-green-100;
+    color: $color-green-800;
+  }
+
+  &-error {
+    background-color: $color-red-50;
+    border: 1px solid $color-red-100;
+    color: $color-red-800;
+  }
+
+  &-warning {
+    background-color: $color-yellow-50;
+    border: 1px solid $color-yellow-100;
+    color: $color-yellow-800;
+  }
+
+  &-info {
+    background-color: $color-blue-50;
+    border: 1px solid $color-blue-100;
+    color: $color-blue-800;
+  }
+
+  &-body {
+    flex: 1;
+  }
+
+  &-desc {
+    white-space: pre-line;
+  }
+}

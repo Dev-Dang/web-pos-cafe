@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <!--  Context Params  -->
+    <context-param>
+        <param-name>APP_MODE</param-name>
+        <param-value>development</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>i18n.bundles</param-name>
+        <param-value>form,message,general</param-value>
+    </context-param>
+
+    <!--  Declare Datasource  -->
+    <resource-ref>
+        <description>DataSource for the database of zero_star_cf</description>
+        <res-ref-name>jdbc/ZeroStarDB</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+    <!--  Change default session id cookie name  -->
+    <session-config>
+        <cookie-config>
+            <name>zrc_ssid</name>
+            <http-only>true</http-only>
+            <secure>true</secure>
+        </cookie-config>
+    </session-config>
+
+    <!--  Errors Page Configuration  -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error</location>
+    </error-page>
+</web-app>

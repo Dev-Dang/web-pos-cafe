@@ -1,0 +1,92 @@
+// Define custom spacing values (for i >= 10)
+$custom-spacings: (
+        10: 4.8rem,
+        11: 6.4rem,
+        12: 9.6rem
+);
+
+// Define a map of utility prefixes and their corresponding CSS properties
+$utility-prefixes: (
+  // Margin utilities
+        m: (margin),
+        mt: (margin-top),
+        mb: (margin-bottom),
+        ml: (margin-left),
+        mr: (margin-right),
+        mx: (margin-left, margin-right), // Horizontal margin
+        my: (margin-top, margin-bottom), // Vertical margin
+  // Padding utilities
+        p: (padding),
+        pt: (padding-top),
+        pb: (padding-bottom),
+        pl: (padding-left),
+        pr: (padding-right),
+        px: (padding-left, padding-right), // Horizontal padding
+        py: (padding-top, padding-bottom) // Vertical padding
+);
+
+// Loop through all prefixes and all indices (0 to 12)
+@each $prefix, $properties in $utility-prefixes {
+  @for $i from 0 through 12 {
+    $value: null;
+
+    // --- Logic to determine the CSS value based on index ---
+    @if $i <= 9 {
+      // Rule 1: 0-9 -> i * 4px
+      $value: $i * 0.4rem;
+    } @else {
+      // Rule 2: 10-12 -> Get custom rem value from the map
+      // map-get is safe here as $i is 10, 11, or 12
+      $value: map-get($custom-spacings, $i);
+    }
+
+    // --- Generate the CSS class (e.g., .mt-10) ---
+    .#{$prefix}-#{$i} {
+      // Apply the calculated value to all corresponding properties
+      @each $prop in $properties {
+        #{$prop}: $value !important;
+      }
+    }
+  }
+}
+
+.icon-base {
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-sm {
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-muted {
+  color: $color-gray-500 !important;
+}
+
+@for $x from 1 through 12 {
+  .text-truncate-#{$x} {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $x;
+    overflow: hidden;
+  }
+}
+
+.scroll-hidden {
+  overflow: auto;
+  -ms-overflow-style: none; /* IE, Edge legacy */
+}
+
+/* Chrome, Safari, Edge Chromium */
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}

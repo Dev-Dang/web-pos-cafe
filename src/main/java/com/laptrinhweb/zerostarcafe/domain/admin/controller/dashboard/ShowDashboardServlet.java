@@ -41,5 +41,9 @@ public class ShowDashboardServlet extends HttpServlet {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+
+        request.setAttribute("pageContent", "/WEB-INF/views/admin/pages/products.jsp");
+        request.getRequestDispatcher("/WEB-INF/views/admin/layouts/admin-layout.jsp")
+                .forward(request, response);
     }
 }

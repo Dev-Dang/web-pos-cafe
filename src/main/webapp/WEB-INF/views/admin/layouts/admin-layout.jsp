@@ -45,6 +45,7 @@
             </div>
         </c:if>
     </div>
+    
     <%-- Script --%>
     <script>
         window.__APP_MODE__ = "${initParam.APP_MODE}";
