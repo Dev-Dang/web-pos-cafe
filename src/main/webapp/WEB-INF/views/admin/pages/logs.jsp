@@ -53,10 +53,3 @@
         </c:if>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        // 1. Chuyển đổi thời gian sang dạng "X phút trước"
-        // Kiểm tra xem hàm calculateTimeAgo (từ dashboard.js) có tồn tại không
-
-</script>
