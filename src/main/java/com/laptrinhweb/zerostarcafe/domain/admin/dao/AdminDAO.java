@@ -714,6 +714,121 @@ public class AdminDAO {
         return list;
     }
 
+    public List<User> getAllAccounts() {
+        List<User> list = new ArrayList<>();
+        String sql = "SELECT id, username, email, status, is_super_admin, created_at FROM users ORDER BY id DESC";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                list.add(new User(
+                        rs.getLong("id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("status"),
+                        rs.getBoolean("is_super_admin"),
+                        rs.getTimestamp("created_at")
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public boolean createAccount(User user) {
+        String sql = "INSERT INTO users (username, email, password_hash, is_super_admin, status) VALUES (?, ?, ?, ?, 'active')";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPasswordHash());
+            ps.setBoolean(4, user.isSuperAdmin());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateAccount(User user) {
+        String sql = "UPDATE users SET username = ?, email = ?, is_super_admin = ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
+            ps.setBoolean(3, user.isSuperAdmin());
+            ps.setLong(4, user.getId());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteAccount(long id) {
+        String sql = "DELETE FROM users WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public List<Revenue> getMonthlyRevenue(int storeId) {
+        List<Revenue> list = new ArrayList<>();
+
+        String sql = "SELECT " +
+                     "   YEAR(o.opened_at) as y, " +
+                     "   MONTH(o.opened_at) as m, " +
+                     "   COUNT(DISTINCT o.id) as total_orders, " +
+                     "   COALESCE(SUM(oi.qty), 0) as total_products, " + // MỚI
+                     "   COALESCE(SUM(oi.qty * oi.unit_price_snapshot), 0) as revenue " +
+                     "FROM orders o " +
+                     "JOIN order_items oi ON o.id = oi.order_id " +
+                     "WHERE o.store_id = ? AND o.status = 'paid' " +
+                     "GROUP BY y, m " +
+                     "ORDER BY y DESC, m DESC";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, storeId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Revenue(
+                            rs.getInt("m"),
+                            rs.getInt("y"),
+                            rs.getInt("total_orders"),
+                            rs.getLong("revenue"),
+                            rs.getInt("total_products") // MỚI
+                    ));
+                }
+            }
+
+            for (int i = 0; i < list.size() - 1; i++) {
+                Revenue current = list.get(i);
+                Revenue prev = list.get(i + 1);
+
+                if (prev.getTotalRevenue() > 0) {
+                    double growth = ((double) (current.getTotalRevenue() - prev.getTotalRevenue()) / prev.getTotalRevenue()) * 100;
+                    current.setGrowth(growth);
+                } else {
+                    current.setGrowth(100);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public static void main(String[] args) throws SQLException {
         AdminDAO dao = new AdminDAO();
         List<Product> list = dao.getAllProductsByStore(1);

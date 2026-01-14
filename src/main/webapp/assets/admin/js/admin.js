@@ -16,8 +16,7 @@ function calculateTimeAgo(timestampStr) {
 // Hàm format tiền tệ VNĐ
 function formatCurrency(amount) {
     return new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
+        style: 'currency', currency: 'VND'
     }).format(amount);
 }
 
@@ -50,10 +49,7 @@ function loadLiveOrders() {
     if (!$container.length) return;
 
     $.ajax({
-        url: 'admin/api/live-orders',
-        method: 'GET',
-        dataType: 'json',
-        success: function (orders) {
+        url: 'admin/api/live-orders', method: 'GET', dataType: 'json', success: function (orders) {
             $container.empty();
 
             if (!orders || orders.length === 0) {
@@ -123,18 +119,14 @@ function updateOrderStatus(id, action) {
     }
 
     $.ajax({
-        url: 'admin/api/live-orders',
-        method: 'POST',
-        data: {id: id, action: action},
-        success: function (res) {
+        url: 'admin/api/live-orders', method: 'POST', data: {id: id, action: action}, success: function (res) {
             if (res.success) {
                 showNotification(res.message, 'success');
                 loadLiveOrders();
             } else {
                 showNotification(res.message, 'error');
             }
-        },
-        error: function () {
+        }, error: function () {
             showNotification("Lỗi kết nối server!", 'error');
         }
     });
@@ -187,18 +179,10 @@ function setupRevenueChart() {
     if ($ctx.length === 0) return;
 
     $.ajax({
-        url: 'admin/api/chart-data',
-        method: 'GET',
-        dataType: 'json',
-        success: function (serverData) {
+        url: 'admin/api/chart-data', method: 'GET', dataType: 'json', success: function (serverData) {
             new Chart($ctx[0], {
-                type: 'line',
-                data: {
-                    labels: [
-                        'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4',
-                        'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8',
-                        'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
-                    ],
+                type: 'line', data: {
+                    labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
                     datasets: [{
                         label: 'Doanh Thu (VNĐ)',
                         data: serverData,
@@ -210,13 +194,9 @@ function setupRevenueChart() {
                         pointRadius: 4,
                         pointHoverRadius: 6
                     }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {position: 'top'},
-                        tooltip: {
+                }, options: {
+                    responsive: true, maintainAspectRatio: false, plugins: {
+                        legend: {position: 'top'}, tooltip: {
                             callbacks: {
                                 label: function (context) {
                                     let label = context.dataset.label || '';
@@ -228,11 +208,9 @@ function setupRevenueChart() {
                                 }
                             }
                         }
-                    },
-                    scales: {
+                    }, scales: {
                         y: {
-                            beginAtZero: true,
-                            ticks: {
+                            beginAtZero: true, ticks: {
                                 callback: function (value) {
                                     return new Intl.NumberFormat('vi-VN').format(value);
                                 }
@@ -241,8 +219,7 @@ function setupRevenueChart() {
                     }
                 }
             });
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.error("Lỗi tải biểu đồ:", err);
         }
     });
@@ -276,10 +253,7 @@ function loadDashboardExtraData() {
     if (!$('.inventory-status').length) return;
 
     $.ajax({
-        url: 'admin/api/dashboard-extra',
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
+        url: 'admin/api/dashboard-extra', method: 'GET', dataType: 'json', success: function (data) {
             renderLowStock(data.lowStock);
             renderBestSellers(data.bestSellers);
             renderActivities(data.activities);
@@ -420,14 +394,9 @@ function handleQuickAction(type) {
     }
 
     $.ajax({
-        url: 'admin/api/quick-inventory',
-        method: 'POST',
-        data: {
-            product: productVal,
-            quantity: qtyVal,
-            type: type
-        },
-        success: function (res) {
+        url: 'admin/api/quick-inventory', method: 'POST', data: {
+            product: productVal, quantity: qtyVal, type: type
+        }, success: function (res) {
             if (res.success) {
                 showNotification(res.message, 'success');
                 $('#product-select').val('');
@@ -437,8 +406,7 @@ function handleQuickAction(type) {
             } else {
                 showNotification(res.message, 'error');
             }
-        },
-        error: function () {
+        }, error: function () {
             showNotification('Lỗi kết nối server', 'error');
         }
     });
@@ -754,8 +722,67 @@ $(function () {
 
     // 5. PAGE: ACCOUNTS
     if ($('#account').length) {
-        setupModalTrigger('#account', '.btn-edit');
-        setupModalTrigger('#account', '.btn-delete');
+        if (typeof setupModalTrigger === 'function') {
+            setupModalTrigger('#account', '.btn-edit');
+            setupModalTrigger('#account', '.btn-delete');
+        }
+
+        // Xử lý đóng modal
+        $('.close-btn').click(function () {
+            $('.modal').hide();
+        });
+
+        // 2. Ajax Create
+        $('#btn-submit-create').click(function () {
+            $.ajax({
+                url: ctx + '/admin/api/create-account',
+                method: 'POST',
+                data: $('#create-account-form').serialize(),
+                dataType: 'json',
+                success: function (res) {
+                    alert(res.message);
+                    if (res.success) location.reload();
+                },
+                error: function () {
+                    alert("Lỗi kết nối server");
+                }
+            });
+        });
+
+        // 3. Ajax Edit
+        $('#btn-submit-edit').click(function () {
+            $.ajax({
+                url: ctx + '/admin/api/edit-account',
+                method: 'POST',
+                data: $('#edit-account-form').serialize(),
+                dataType: 'json',
+                success: function (res) {
+                    alert(res.message);
+                    if (res.success) location.reload();
+                },
+                error: function () {
+                    alert("Lỗi kết nối server");
+                }
+            });
+        });
+
+        // 4. Ajax Delete
+        $('#btn-submit-delete').click(function () {
+            const id = $('#delete-id').val();
+            $.ajax({
+                url: ctx + '/admin/api/delete-account',
+                method: 'POST',
+                data: {id: id},
+                dataType: 'json',
+                success: function (res) {
+                    alert(res.message);
+                    if (res.success) location.reload();
+                },
+                error: function () {
+                    alert("Lỗi kết nối server");
+                }
+            });
+        });
     }
 
     // 6. PAGE: STAFF
@@ -778,12 +805,10 @@ $(function () {
         }
 
         $('#log-search-input').on('keyup', function () {
-                let value = $(this).val().toLowerCase();
-                $('.log-entry').filter(function () {
-                    $(this).toggle($(this).data('search').toLowerCase().indexOf(value) > -1)
-                });
-            }
-        );
+            let value = $(this).val().toLowerCase();
+            $('.log-entry').filter(function () {
+                $(this).toggle($(this).data('search').toLowerCase().indexOf(value) > -1)
+            });
+        });
     }
-})
-;
+});
